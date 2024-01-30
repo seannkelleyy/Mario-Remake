@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using Sprint0.Interfaces;
+using Mario.Interfaces;
 using System.Collections.Generic;
 
-namespace Sprint0.Input
+namespace Mario.Input
 {
     public class KeyboardController : IController
     {

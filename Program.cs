@@ -1,3 +1,3 @@
 ﻿
-using var game = new GreenGame.Mario();
+using var game = new Mario.MarioRemake();
 game.Run();

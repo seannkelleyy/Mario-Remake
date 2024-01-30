@@ -1,17 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint0.Interfaces;
+using Mario.Interfaces;
 
-namespace Sprint0.Sprites
+namespace Mario.Sprites
 {
     // These classes are an implementationof the state design pattern from from Gang of four book page 305.
     public abstract class SpriteState
     {
-        protected Game1 Game;
+        protected MarioRemake Game;
         protected SpriteBatch SpriteBatch;
         protected ISprite Sprite;
 
-        public SpriteState(Game1 game, SpriteBatch spriteBatch, ISprite sprite)
+        public SpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite)
         {
             this.Game = game;
             this.SpriteBatch = spriteBatch;
@@ -24,7 +24,7 @@ namespace Sprint0.Sprites
 
     public class StillSpriteState : SpriteState
     {
-        public StillSpriteState(Game1 game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
+        public StillSpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
 
         public override void Update(GameTime gameTime)
         {
@@ -39,7 +39,7 @@ namespace Sprint0.Sprites
 
     public class MovingStillSpriteState : SpriteState
     {
-        public MovingStillSpriteState(Game1 game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
+        public MovingStillSpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
 
         public override void Update(GameTime gameTime)
         {
@@ -54,7 +54,7 @@ namespace Sprint0.Sprites
 
     public class AnimatedSpriteState : SpriteState
     {
-        public AnimatedSpriteState(Game1 game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
+        public AnimatedSpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
 
         public override void Update(GameTime gameTime)
         {
@@ -69,7 +69,7 @@ namespace Sprint0.Sprites
 
     public class MovingAnimatedSpriteState : SpriteState
     {
-        public MovingAnimatedSpriteState(Game1 game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
+        public MovingAnimatedSpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite) : base(game, spriteBatch, sprite) { }
 
         public override void Update(GameTime gameTime)
         {

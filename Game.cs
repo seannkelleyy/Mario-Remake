@@ -1,17 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint0.Input;
-using Sprint0.Interfaces;
-using Sprint0.Sprites;
+using Mario.Input;
+using Mario.Interfaces;
+using Mario.Sprites;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
-using ICommand = Sprint0.Interfaces.ICommand;
+using ICommand = Mario.Interfaces.ICommand;
 
-namespace Sprint0
+namespace Mario
 {
-    public class Game1 : Game
+    public class MarioRemake : Game
     {
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
@@ -28,7 +28,7 @@ namespace Sprint0
         // This uses the state design pattern. 
         public SpriteState CurrentSprite { get; set; }
 
-        public Game1()
+        public MarioRemake()
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

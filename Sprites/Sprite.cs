@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Sprint0.Interfaces;
+using Mario.Interfaces;
 
-namespace Sprint0.Sprites
+namespace Mario.Sprites
 {
     // Class for sprites. Can either be an animated sprite or non animated sprite.
     public class Sprite : ISprite

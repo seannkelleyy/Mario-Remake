@@ -1,13 +1,13 @@
-﻿using Sprint0.Interfaces;
+﻿using Mario.Interfaces;
 
-namespace Sprint0.Sprites
+namespace Mario.Sprites
 {
     public class DisplaySpriteCommand : ICommand
     {
         private SpriteState State;
-        private Game1 Game;
+        private MarioRemake Game;
 
-        public DisplaySpriteCommand(SpriteState state, Game1 game)
+        public DisplaySpriteCommand(SpriteState state, MarioRemake game)
         {
             State = state;
             Game = game;

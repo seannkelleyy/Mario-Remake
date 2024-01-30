@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint0.Interfaces
+namespace Mario.Interfaces
 {
     public interface ISprite
     {

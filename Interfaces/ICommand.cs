@@ -1,4 +1,4 @@
-﻿namespace Sprint0.Interfaces
+﻿namespace Mario.Interfaces
 {
     public interface ICommand
     {

@@ -1,12 +1,12 @@
-﻿using Sprint0.Interfaces;
+﻿using Mario.Interfaces;
 
-namespace Sprint0.Input
+namespace Mario.Input
 {
     public class QuitCommand : ICommand
     {
-        private Game1 Game;
+        private MarioRemake Game;
 
-        public QuitCommand(Game1 game)
+        public QuitCommand(MarioRemake game)
         {
             Game = game;
         }
