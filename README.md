@@ -1,6 +1,7 @@
-# Welcome to the The-Legend-Of-Zelda-Remake wiki!
+# Mario-Remake 
 
 ## Authors: 
+TriangleUnix Team:
 Dominic Artman (@DomArtman), Jinyi Ge (@), Ian Hood (@hood276), Sean Kelley (@seannkelleyy), Joseph Liette (@jliet359) and Timothy Marek (@Soul279)
 
 ## About
