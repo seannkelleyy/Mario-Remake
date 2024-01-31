@@ -1,12 +1,10 @@
 ﻿using System;
+using Mario.Interfaces;
+
 namespace GreenGame.Interfaces
 {
-	public interface IBlock
-	{
-		public void Update();
-
-		public void Draw();
-
+	public interface IBlock : ISprite
+    {
 		public void Hit();
 	}
 }

@@ -1,11 +1,26 @@
-﻿using System;
+﻿using Mario.Interfaces;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 namespace GreenGame.Interfaces
 {
-	public class IEnemy
-	{
-		public IEnemy()
-		{
-		}
-	}
+	public interface IEnemy : ISprite
+    {
+        public void GetRectangle();
+
+        // Movement
+        public void WalkLeft();
+
+        public void WalkRight();
+
+        public void Jump();
+
+        public void Crouch();
+
+        // Actions
+        // This will be a generic attack command. We could get what kind of attack
+        // Based upon the state of the Enemy.
+        public void Attack();
+    }
 }
 
