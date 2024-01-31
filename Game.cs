@@ -5,8 +5,6 @@ using Mario.Input;
 using Mario.Interfaces;
 using Mario.Sprites;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml;
 using ICommand = Mario.Interfaces.ICommand;
 
 namespace Mario
@@ -15,8 +13,8 @@ namespace Mario
     {
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
-        private KeyboardController KeyboardController;
-        private MouseController MouseController;
+        private IController KeyboardController;
+        private IController MouseController;
         private Dictionary<Keys, ICommand> KeyCommands;
         private Dictionary<string, ICommand> MouseCommands;
         private SpriteFont Font;

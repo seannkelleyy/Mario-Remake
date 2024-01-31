@@ -5,8 +5,8 @@ namespace Mario.Interfaces
 {
     public interface ISprite
     {
-        void Draw(SpriteBatch spriteBatch, Vector2 position);
-
         void Update(GameTime gameTime);
+
+        void Draw(SpriteBatch spriteBatch, Vector2 position);
     }
 }
