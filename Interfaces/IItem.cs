@@ -1,7 +1,5 @@
-﻿using System;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenGame.Interfaces
 {
@@ -9,7 +7,7 @@ namespace GreenGame.Interfaces
 	{
 		public Rectangle GetRectangle();
 
-		public void DeleteItem();
+		public void DeleteItem(Game game);
 	}
 }
 

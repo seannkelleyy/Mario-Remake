@@ -10,7 +10,7 @@ namespace Mario.Sprites
         public Texture2D Texture { get; set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
-        private int CurrentFrame;
+        private int CurrentFrame = 0;
         private int TotalFrames;
         private int YDistance;
         private int MaxYDistance;
@@ -24,7 +24,6 @@ namespace Mario.Sprites
             Texture = texture;
             Rows = rows;
             Columns = columns;
-            CurrentFrame = 0;
             TotalFrames = Rows * Columns;
             MaxYDistance = yDistance;
             MaxXDistance = xDistance;

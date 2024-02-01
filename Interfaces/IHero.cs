@@ -1,7 +1,5 @@
-﻿using System;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenGame.Interfaces
 {
@@ -14,6 +12,7 @@ namespace GreenGame.Interfaces
 
 		public void WalkRight();
 
+
 		public void Jump();
 
 		public void Crouch();
@@ -21,7 +20,7 @@ namespace GreenGame.Interfaces
 		// Actions
 		// This will be a generic attack command. We could get what kind of attack
 		// Based upon the state of the Hero.
-		public void Attack();
+		public void Attack(Game game);
 	}
 }
 

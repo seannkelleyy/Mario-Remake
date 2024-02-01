@@ -13,9 +13,9 @@ namespace Mario.Sprites
 
         public SpriteState(MarioRemake game, SpriteBatch spriteBatch, ISprite sprite)
         {
-            this.Game = game;
-            this.SpriteBatch = spriteBatch;
-            this.Sprite = sprite;
+            Game = game;
+            SpriteBatch = spriteBatch;
+            Sprite = sprite;
         }
 
         public abstract void Update(GameTime gameTime);
