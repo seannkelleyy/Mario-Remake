@@ -7,7 +7,6 @@ namespace GreenGame.Interfaces
     {
         public void GetRectangle();
 
-        // Movement
         public void WalkLeft();
 
         public void WalkRight();

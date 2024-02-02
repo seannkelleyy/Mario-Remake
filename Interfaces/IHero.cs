@@ -12,7 +12,6 @@ namespace GreenGame.Interfaces
 
 		public void WalkRight();
 
-
 		public void Jump();
 
 		public void Crouch();
