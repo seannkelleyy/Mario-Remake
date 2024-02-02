@@ -5,8 +5,7 @@ namespace GreenGame.Interfaces
 {
 	public interface IEnemy : ISprite
     {
-        public void GetRectangle();
-
+        // Movement
         public void WalkLeft();
 
         public void WalkRight();

@@ -5,7 +5,7 @@ namespace GreenGame.Interfaces
 {
 	public interface IBlock : ISprite
     {
-		public void Hit(Game game);
+        public void Hit(Game game);
 	}
 }
 

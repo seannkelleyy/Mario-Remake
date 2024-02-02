@@ -5,8 +5,6 @@ namespace GreenGame.Interfaces
 {
 	public interface IHero : ISprite
     {
-		public void GetRectangle();
-
 		// Movement
 		public void WalkLeft();
 
@@ -14,6 +12,7 @@ namespace GreenGame.Interfaces
 
 		public void Jump();
 
+		// Only for 'big' hereos. Implementation could change with state.
 		public void Crouch();
 
 		// Actions

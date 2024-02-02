@@ -5,9 +5,7 @@ namespace GreenGame.Interfaces
 {
 	public interface IItem : ISprite
 	{
-		public Rectangle GetRectangle();
-
-		public void DeleteItem(Game game);
+        public void DeleteItem(Game game);
 	}
 }
 
