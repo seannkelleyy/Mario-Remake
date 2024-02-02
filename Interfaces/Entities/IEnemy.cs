@@ -12,6 +12,9 @@ namespace GreenGame.Interfaces
 
         public void Jump();
 
+        // Function to handle when Enemu takes damage
+        void TakeDamage();
+
         // Actions
         // This will be a generic attack command. We could get what kind of attack
         // Based upon the state of the Enemy.

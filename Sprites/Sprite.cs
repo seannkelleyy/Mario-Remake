@@ -30,6 +30,10 @@ namespace Mario.Sprites
 
         }
 
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(Texture.Height, Texture.Width);
+        }
 
         public void Update(GameTime gameTime)
         {

@@ -4,8 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Mario.Interfaces
 {
     public interface ISprite
-    {
-        // Returns size of sprite
+    { 
         public Rectangle GetRectangle();
 
         void Update(GameTime gameTime);
