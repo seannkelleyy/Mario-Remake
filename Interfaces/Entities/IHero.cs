@@ -15,9 +15,6 @@ namespace GreenGame.Interfaces
 		// Only for 'big' hereos. Implementation could change with state.
 		public void Crouch();
 
-        // Function to stop Hero's movement
-        void Stop();
-
         // Function for Hero to collect an item
         void Collect(IItem item);
 
