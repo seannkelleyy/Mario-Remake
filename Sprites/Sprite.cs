@@ -30,11 +30,6 @@ namespace Mario.Sprites
 
         }
 
-        public Rectangle GetRectangle()
-        {
-            return new Rectangle(Texture.Height, Texture.Width);
-        }
-
         public void Update(GameTime gameTime)
         {
             // Update the sprite every 1/30th of a second
