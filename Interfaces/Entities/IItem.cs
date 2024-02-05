@@ -6,7 +6,9 @@ namespace GreenGame.Interfaces
 	public interface IItem : ISprite
 	{
 		// Cycles through to next sprite when moving
-		public void CycleItem();
+		public void CycleItemNext();
+
+		public void CycleItemPrev();
 
         public void DeleteItem(Game game);
 	}
