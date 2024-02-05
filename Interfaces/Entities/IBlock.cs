@@ -7,8 +7,6 @@ namespace GreenGame.Interfaces
     {
         // Changes block sprite when it is hit etc.
         public void CycleBlock();
-
-        public void Hit(Game game);
 	}
 }
 
