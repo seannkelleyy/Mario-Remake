@@ -1,5 +1,4 @@
 ﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
 
 namespace GreenGame.Interfaces
 {
@@ -9,8 +8,6 @@ namespace GreenGame.Interfaces
 		public void CycleItemNext();
 
 		public void CycleItemPrev();
-
-        public void DeleteItem(Game game);
 	}
 }
 
