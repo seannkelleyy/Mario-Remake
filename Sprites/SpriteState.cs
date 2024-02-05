@@ -4,7 +4,7 @@ using Mario.Interfaces;
 
 namespace Mario.Sprites
 {
-    // These classes are an implementationof the state design pattern from from Gang of four book page 305.
+    // These classes are an implementation of the state design pattern from from Gang of Four book page 305.
     public abstract class SpriteState
     {
         protected MarioRemake Game;

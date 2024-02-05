@@ -10,8 +10,6 @@ namespace GreenGame.Interfaces
 
         public void WalkRight();
 
-        public void Jump();
-
         // Function to handle when Enemu takes damage
         void TakeDamage();
 

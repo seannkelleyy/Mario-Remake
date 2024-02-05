@@ -8,4 +8,3 @@ namespace GreenGame.Interfaces.Entities
 		public void DeleteProjectile();
 	}
 }
-
