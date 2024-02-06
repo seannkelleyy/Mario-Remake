@@ -54,7 +54,7 @@ namespace Mario.Sprites
             }
         }
 
-        // Helper function to update the distance, since the code for either distnace was pretty much the same.
+        // Helper function to update the distance, since the code for either distance was pretty much the same.
         // I pass the values by ref so that it updates the original value.
         private void UpdateDistanceAndDirection(ref int distance, ref bool direction, int maxDistance)
         {
