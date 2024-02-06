@@ -26,7 +26,7 @@ namespace Mario
         private ISprite StillSpriteAttacking;
         private ISprite StillSpriteMoving;
         private ISprite MovingAnimatedSprite;
-        private IItem[] ItemSprites;
+        private IItem ItemSprite;
         // This uses the state design pattern. 
         public SpriteState CurrentSprite { get; set; }
 
@@ -80,7 +80,7 @@ namespace Mario
             ICommand DisplayStillSpriteCrouchCommand = new DisplaySpriteCommand(stillStateCrouch, this);
             ICommand DisplayStillSpriteAttackingCommand = new DisplaySpriteCommand(stillStateAttacking, this);
             ICommand DisplayRunningCommand = new DisplaySpriteCommand(movingRunningState, this);
-            ICommand CycleNextItemCommand
+            ICommand CycleNextItemCommand = ItemSprite.CycleNextItem();
 
             KeyCommands[Keys.Q] = new QuitCommand(this);
             KeyCommands[Keys.R] = new RestartCommand(this);
