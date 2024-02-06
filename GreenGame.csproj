@@ -13,6 +13,8 @@
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
+    <None Remove="Interfaces\Patterns\" />
+    <None Remove="Interfaces\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -25,6 +27,8 @@
   <ItemGroup>
     <Folder Include=".github\" />
     <Folder Include=".github\ISSUE_TEMPLATE\" />
+    <Folder Include="Interfaces\Patterns\" />
+    <Folder Include="Interfaces\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />
