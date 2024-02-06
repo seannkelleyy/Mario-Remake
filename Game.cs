@@ -5,8 +5,6 @@ using Mario.Input;
 using Mario.Interfaces;
 using Mario.Sprites;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml;
 using ICommand = Mario.Interfaces.ICommand;
 
 namespace Mario
@@ -15,8 +13,8 @@ namespace Mario
     {
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
-        private KeyboardController KeyboardController;
-        private MouseController MouseController;
+        private IController KeyboardController;
+        private IController MouseController;
         private Dictionary<Keys, ICommand> KeyCommands;
         private Dictionary<string, ICommand> MouseCommands;
         private SpriteFont Font;
@@ -25,7 +23,6 @@ namespace Mario
         private ISprite MovingStillSprite;
         private ISprite StillAnimatedSprite;
         private ISprite MovingAnimatedSprite;
-        // This uses the state design pattern. 
         public SpriteState CurrentSprite { get; set; }
 
         public MarioRemake()
@@ -105,12 +102,6 @@ namespace Mario
             SpriteBatch.Begin();
 
             CurrentSprite.Draw(Position / 2);
-
-            SpriteBatch.DrawString(Font, "Credits", new Vector2(Position.X / 4, 400), Color.Black);
-            SpriteBatch.DrawString(Font, "Program Made By: Sean Kelley", new Vector2(Position.X / 4, 420), Color.Black);
-            SpriteBatch.DrawString(Font, "Sprites from: ", new Vector2(Position.X / 4, 440), Color.Black);
-            SpriteBatch.DrawString(Font, "https://www.mariomayhem.com/downloads/sprites/super_mario_bros_sprites.php", new Vector2(Position.X / 4, 460), Color.Black);
-
 
             SpriteBatch.End();
 
