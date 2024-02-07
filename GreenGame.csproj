@@ -25,7 +25,6 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include=".github\" />
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
     <Folder Include="Interfaces\Entities\" />
