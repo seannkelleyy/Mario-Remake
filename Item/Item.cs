@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenGame.Sprites
 {
-    internal class Item : Interfaces.IItem
+    public class Item : Interfaces.IItem
     {
         // Fields
         private ISprite[] Items;
