@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Input;
 using Mario.Interfaces;
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Input
 {
@@ -17,6 +19,15 @@ namespace Mario.Input
             Commands = commands;
             MouseState = new MouseState();
             Viewport = viewport;
+        }
+        public void Add(Keys key, ICommand command)
+        {
+            // Implement when needed
+        }
+
+        public void LoadCommands(MarioRemake game, ContentManager content, SpriteBatch spriteBatch)
+        {
+            // Implement when needed
         }
         public void Update()
         {
@@ -39,7 +50,6 @@ namespace Mario.Input
                 }
             }
         }
-
 
         private string GetQuadrant(bool isTopHalf, bool isRightHalf)
         {
