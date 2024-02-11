@@ -34,10 +34,6 @@ namespace Mario
         {
             Position = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-            MouseCommands = new Dictionary<string, ICommand>();
-
-            MouseController = new MouseController(MouseCommands, Position);
-
             base.Initialize();
         }
 
@@ -46,16 +42,10 @@ namespace Mario
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             KeyboardController = new KeyboardController();
 
-            Font = Content.Load<SpriteFont>("font");
-
             StillSpriteRight = new Sprite(Content.Load<Texture2D>("sprites/mario"));
 
             SpriteState stillStateRight = new StillSpriteState(this, SpriteBatch, StillSpriteRight);
 
-            //MouseCommands["TopLeft"] = DisplayStillSpriteLeftCommand;
-            //MouseCommands["TopRight"] = DisplayRunningCommand;
-            //MouseCommands["BottomLeft"] = DisplayStillJumpSpriteCommand;
-            //MouseCommands["BottomRight"] = DisplayMovingAnimatedCommand;
             KeyboardController.LoadCommands(this, Content, SpriteBatch);
 
             CurrentSprite = stillStateRight; // Set the initial sprite state

@@ -1,6 +1,7 @@
-﻿using Mario.Interfaces;
+﻿using Mario;
+using Mario.Interfaces;
 
-namespace Mario.Sprites
+namespace GreenGame.CycleCommands
 {
     public class CycleBlockNextCommand : ICommand
     {
