@@ -6,6 +6,7 @@ using Mario.Interfaces;
 using Mario.Sprites;
 using System.Collections.Generic;
 using ICommand = Mario.Interfaces.ICommand;
+using GreenGame.Interfaces;
 
 namespace Mario
 {
@@ -15,14 +16,11 @@ namespace Mario
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
         private IController MouseController;
-        private Dictionary<Keys, ICommand> KeyCommands;
         private Dictionary<string, ICommand> MouseCommands;
         private SpriteFont Font;
         private Vector2 Position;
-        private ISprite StillSprite;
-        private ISprite MovingStillSprite;
-        private ISprite StillAnimatedSprite;
-        private ISprite MovingAnimatedSprite;
+        private ISprite StillSpriteRight;
+        // This uses the state design pattern. 
         public SpriteState CurrentSprite { get; set; }
 
         public MarioRemake()
@@ -36,48 +34,21 @@ namespace Mario
         {
             Position = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-            KeyCommands = new Dictionary<Keys, ICommand>();
-            MouseCommands = new Dictionary<string, ICommand>();
-
-            KeyboardController = new KeyboardController(KeyCommands);
-            MouseController = new MouseController(MouseCommands, Position);
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+            KeyboardController = new KeyboardController();
 
-            Font = Content.Load<SpriteFont>("font");
+            StillSpriteRight = new Sprite(Content.Load<Texture2D>("sprites/mario"));
 
-            StillSprite = new Sprite(Content.Load<Texture2D>("sprites/mario"));
-            MovingStillSprite = new Sprite(Content.Load<Texture2D>("sprites/fallingMario"), yDistance: 50);
-            StillAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6);
-            MovingAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6, xDistance: 100);
+            SpriteState stillStateRight = new StillSpriteState(this, SpriteBatch, StillSpriteRight);
 
-            SpriteState stillState = new StillSpriteState(this, SpriteBatch, StillSprite);
-            SpriteState movingStillState = new MovingStillSpriteState(this, SpriteBatch, MovingStillSprite);
-            SpriteState animatedState = new AnimatedSpriteState(this, SpriteBatch, StillAnimatedSprite);
-            SpriteState movingAnimatedState = new MovingAnimatedSpriteState(this, SpriteBatch, MovingAnimatedSprite);
+            KeyboardController.LoadCommands(this, Content, SpriteBatch);
 
-            ICommand DisplayStillSpriteCommand = new DisplaySpriteCommand(stillState, this);
-            ICommand DisplayMovingStillSpriteCommand = new DisplaySpriteCommand(movingStillState, this);
-            ICommand DisplayAnimatedCommand = new DisplaySpriteCommand(animatedState, this);
-            ICommand DisplayMovingAnimatedCommand = new DisplaySpriteCommand(movingAnimatedState, this);
-
-            KeyCommands[Keys.NumPad0] = new QuitCommand(this);
-            KeyCommands[Keys.NumPad1] = DisplayStillSpriteCommand;
-            KeyCommands[Keys.NumPad2] = DisplayAnimatedCommand;
-            KeyCommands[Keys.NumPad3] = DisplayMovingStillSpriteCommand;
-            KeyCommands[Keys.NumPad4] = DisplayMovingAnimatedCommand;
-
-            MouseCommands["TopLeft"] = DisplayStillSpriteCommand;
-            MouseCommands["TopRight"] = DisplayAnimatedCommand;
-            MouseCommands["BottomLeft"] = DisplayMovingStillSpriteCommand;
-            MouseCommands["BottomRight"] = DisplayMovingAnimatedCommand;
-
-            CurrentSprite = stillState; // Set the initial sprite state
+            CurrentSprite = stillStateRight; // Set the initial sprite state
 
             base.LoadContent();
         }
