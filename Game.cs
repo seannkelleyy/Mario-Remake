@@ -3,10 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Mario.Input;
 using Mario.Interfaces;
-using Mario.Sprites;
-using System.Collections.Generic;
-using ICommand = Mario.Interfaces.ICommand;
-using GreenGame.Interfaces;
 
 namespace Mario
 {
@@ -15,13 +11,6 @@ namespace Mario
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
-        private IController MouseController;
-        private Dictionary<string, ICommand> MouseCommands;
-        private SpriteFont Font;
-        private Vector2 Position;
-        private ISprite StillSpriteRight;
-        // This uses the state design pattern. 
-        public SpriteState CurrentSprite { get; set; }
 
         public MarioRemake()
         {
@@ -32,8 +21,6 @@ namespace Mario
 
         protected override void Initialize()
         {
-            Position = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
             base.Initialize();
         }
 
@@ -42,13 +29,7 @@ namespace Mario
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             KeyboardController = new KeyboardController();
 
-            StillSpriteRight = new Sprite(Content.Load<Texture2D>("sprites/mario"));
-
-            SpriteState stillStateRight = new StillSpriteState(this, SpriteBatch, StillSpriteRight);
-
             KeyboardController.LoadCommands(this, Content, SpriteBatch);
-
-            CurrentSprite = stillStateRight; // Set the initial sprite state
 
             base.LoadContent();
         }
@@ -59,9 +40,6 @@ namespace Mario
                 Exit();
 
             KeyboardController.Update();
-            MouseController.Update();
-
-            CurrentSprite.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -72,7 +50,7 @@ namespace Mario
 
             SpriteBatch.Begin();
 
-            CurrentSprite.Draw(Position / 2);
+            // Draws will go here
 
             SpriteBatch.End();
 
