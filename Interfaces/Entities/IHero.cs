@@ -12,8 +12,8 @@ namespace GreenGame.Interfaces
 
 		public void Jump();
 
-		// Only for 'big' hereos. Implementation could change with state.
-		public void Crouch();
+        // Only for 'big' hereos. Implementation could change with state.
+        public void Crouch();
 
         // Function for Hero to collect an item
         void Collect(IItem item);
