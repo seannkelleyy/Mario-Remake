@@ -1,87 +1,66 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Mario.Interfaces;
 using GreenGame.Interfaces;
-using Mario.Sprites;
-using System.Net.Mime;
 using Microsoft.Xna.Framework.Content;
+using System;
 
 namespace Mario.Input
 {
     public class KeyboardController : IController
     {
-        private Dictionary<Keys, ICommand> Commands;
-        private Keys[] KeysPressed;
-        private ISprite StillSpriteCrouch;
-        private ISprite StillAnimatedSprite;
-        private ISprite StillSpriteAttacking;
-        private ISprite StillSpriteMoving;
-        private ISprite MovingAnimatedSprite;
+        private Dictionary<Keys, Action> Commands;
+
+        // We will probably just instantiate these here for Spint 2 purposes,
+        // but they will be gone after that.
         private IItem ItemSprite;
         private IBlock BlockSprite;
-        private IEnemy EnemySprite;
+        private delegate void NewGame(MarioRemake game);
+        // private IEnemy EnemySprite;
 
 
-        public KeyboardController() {
-            Commands = new Dictionary<Keys, ICommand>();
-        }
-
-        public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch) {
-
-            StillSpriteCrouch = new Sprite(Content.Load<Texture2D>("sprites/crouchMario"));
-            StillSpriteAttacking = new Sprite(Content.Load<Texture2D>("sprites/attackMario"));
-            StillAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6);
-            StillSpriteMoving = new Sprite(Content.Load<Texture2D>("sprites/jumpingMario"), yDistance: 50);
-            MovingAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6, xDistance: 100);
-
-            SpriteState stillStateCrouch = new StillSpriteState(game, spriteBatch, StillSpriteCrouch);
-            SpriteState stillStateAttacking = new StillSpriteState(game, spriteBatch, StillSpriteAttacking);
-            SpriteState stillStateJump = new MovingStillSpriteState(game, spriteBatch, StillSpriteMoving);
-            SpriteState movingRunningRightState = new AnimatedSpriteState(game, spriteBatch, MovingAnimatedSprite);
-            SpriteState movingRunningLeftState = new AnimatedSpriteState(game, spriteBatch, MovingAnimatedSprite);
-
-            ICommand DisplayStillJumpSpriteCommand = new DisplaySpriteCommand(stillStateJump, game);
-            ICommand DisplayStillSpriteCrouchCommand = new DisplaySpriteCommand(stillStateCrouch, game);
-            ICommand DisplayStillSpriteAttackingCommand = new DisplaySpriteCommand(stillStateAttacking, game);
-            ICommand DisplayRunningRightCommand = new DisplaySpriteCommand(movingRunningRightState, game);
-            ICommand DisplayRunningLeftCommand = new DisplaySpriteCommand(movingRunningLeftState, game);
-            ICommand CycleNextItemCommand = ItemSprite.CycleNextItem();
-            ICommand CyclePrevItemCommand = ItemSprite.CyclePrevItem();
-            ICommand CycleNextBlockCommand = BlockSprite.CycleNextBlock();
-            ICommand CyclePrevBlockCommand = BlockSprite.CyclePrevBlock();
-            ICommand CycleNextEnemyCommand = EnemySprite.CycleNextEnemy();
-            ICommand CyclePrevEnemyCommand = EnemySprite.CyclePrevEnemy();
-
-            Commands.Add(Keys.Q, new QuitCommand(game));
-            Commands.Add(Keys.R, new RestartCommand(game));
-            Commands.Add(Keys.W, DisplayStillJumpSpriteCommand);
-            Commands.Add(Keys.A, DisplayRunningLeftCommand);
-            Commands.Add(Keys.S, DisplayStillSpriteCrouchCommand);
-            Commands.Add(Keys.D, DisplayRunningRightCommand);
-            Commands.Add(Keys.E, DisplayStillSpriteAttackingCommand);
-            Commands.Add(Keys.I, CycleNextItemCommand);
-            Commands.Add(Keys.U, CyclePrevItemCommand);
-            Commands.Add(Keys.T, CyclePrevBlockCommand);
-            Commands.Add(Keys.Y, CycleNextBlockCommand);
-            Commands.Add(Keys.O, CyclePrevEnemyCommand);
-            Commands.Add(Keys.P, CycleNextEnemyCommand);
-
-        }
-
-        public void Add(Keys key, ICommand command)
+        public KeyboardController()
         {
-            Commands.Add(key, command); 
+            Commands = new Dictionary<Keys, Action>();
         }
 
-        public void Update() {
+        // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
+        // to assign the functions to call when keys are pressed.
+        public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
+        {
+            Commands.Add(Keys.Q, new Action(game.Exit));
+            Commands.Add(Keys.R, new Action(game.Run));
+
+            //Commands.Add(Keys.W, );
+            //Commands.Add(Keys.A, );
+            //Commands.Add(Keys.S, );
+            //Commands.Add(Keys.D, );
+            //Commands.Add(Keys.E, );
+
+            Commands.Add(Keys.I, new Action(ItemSprite.CycleItemNext));
+            Commands.Add(Keys.U, new Action(ItemSprite.CycleItemPrev));
+            Commands.Add(Keys.T, new Action(BlockSprite.CycleBlockNext));
+            Commands.Add(Keys.Y, new Action(BlockSprite.CycleBlockPrev));
+
+            // These will be added in enemy ticket.
+            // Commands.Add(Keys.O, new RelayCommand(new Action(EnemySprite.CycleEnemyNext)));
+            // Commands.Add(Keys.P, new RelayCommand(new Action(EnemySprite.CycleEnemyPrev)));
+        }
+
+        public void Add(Keys key, Action action)
+        {
+            Commands.Add(key, action);
+        }
+
+        public void Update()
+        {
             KeyboardState state = Keyboard.GetState();
             foreach (Keys key in Commands.Keys)
             {
                 if (state.IsKeyDown(key))
                 {
-                    Commands[key].Execute();
+                    Commands[key].Invoke();
                 }
             }
         }

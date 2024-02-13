@@ -6,12 +6,10 @@ namespace GreenGame.Sprites
 {
     public class Block : Interfaces.IBlock
     {
-        // Fields
         private ISprite[] Blocks;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
 
-        // Constructor
         public Block(ISprite[] blocks)
         {
             Blocks = blocks;
@@ -27,6 +25,8 @@ namespace GreenGame.Sprites
         {
             currentSprite.Update(gameTime);
         }
+
+        // NOTE: These methods will go bye bye after Sprint 2.
 
         // Changes the current sprite to be handled to the next block in the list
         public void CycleBlockNext()
