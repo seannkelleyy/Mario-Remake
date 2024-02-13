@@ -11,7 +11,6 @@ using GreenGame.Interfaces;
 
 namespace Mario.Character
 {
-
     public class Mario : IHero
     {
         private SpriteStates spriteStates;
