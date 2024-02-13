@@ -2,13 +2,13 @@
 using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 
-public class Goomba : IEnemy
+public class Koopa : IEnemy
 {
     public IEnemyState state;
 
-    public Goomba()
+    public Koopa()
     {
-        state = new LeftMovingGoombaState(this);
+        state = new LeftMovingKoopaState(this);
     }
 
     public void ChangeDirection()
@@ -29,29 +29,29 @@ public class Goomba : IEnemy
     // Draw and other methods omitted
 }
 
-public class LeftMovingGoombaState : IEnemyState
+public class LeftMovingKoopaState : IGoombaState
 {
-    private Goomba goomba;
+    private Koopa koopa;
 
-    public LeftMovingGoombaState(Goomba goomba)
+    public LeftMovingKoopaState(Koopa koopa)
     {
-        this.goomba = goomba;
-        // construct goomba's sprite here too
+        this.koopa = koopa;
+        // construct koopa's sprite here too
     }
 
     public void ChangeDirection()
     {
-        goomba.state = new RightMovingGoombaState(goomba);
+        koopa.state = new RightMovingKoopaState(koopa);
     }
 
     public void BeStomped()
     {
-        goomba.state = new StompedGoombaState(goomba);
+        koopa.state = new StompedKoopaState(koopa);
     }
 
     public void BeFlipped()
     {
-        goomba.state = new FlippedGoombaState(goomba);
+        koopa.state = new FlippedKoopaState(koopa);
     }
 
     public void Update()
@@ -60,29 +60,29 @@ public class LeftMovingGoombaState : IEnemyState
     }
 }
 
-public class RightMovingGoombaState : IEnemyState
+public class RightMovingKoopaState : IEnemyState
 {
-    private Goomba goomba;
+    private Koopa koopa;
 
-    public RightMovingGoombaState(Goomba goomba)
+    public RightMovingKoopaState(Koopa koopa)
     {
-        this.goomba = goomba;
+        this.koopa = koopa;
         // construct goomba's sprite here too
     }
 
     public void ChangeDirection()
     {
-        goomba.state = new LeftMovingGoombaState(goomba);
+        koopa.state = new LeftMovingKoopaState(koopa);
     }
 
     public void BeStomped()
     {
-        goomba.state = new StompedGoombaState(goomba);
+        koopa.state = new StompedKoopaState(koopa);
     }
 
     public void BeFlipped()
     {
-        goomba.state = new FlippedGoombaState(goomba);
+        koopa.state = new FlippedKoopaState(koopa);
     }
 
     public void Update()
@@ -91,13 +91,13 @@ public class RightMovingGoombaState : IEnemyState
     }
 }
 
-public class StompedGoombaState : IEnemyState
+public class StompedKoopaState : IEnemyState
 {
-    private Goomba goomba;
+    private Koopa koopa;
 
-    public StompedGoombaState(Goomba goomba)
+    public StompedKoopaState(Koopa koopa)
     {
-        this.goomba = goomba;
+        this.koopa = koopa;
         // construct goomba's sprite here too
     }
 
@@ -124,13 +124,13 @@ public class StompedGoombaState : IEnemyState
     }
 }
 
-public class FlippedGoombaState : IEnemyState
+public class FlippedKoopaState : IEnemyState
 {
-    private Goomba goomba;
+    private Koopa koopa;
 
-    public FlippedGoombaState(Goomba goomba)
+    public FlippedKoopaState(Koopa koopa)
     {
-        this.goomba = goomba;
+        this.koopa = koopa;
         // construct goomba's sprite here too
     }
 
