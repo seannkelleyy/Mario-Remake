@@ -1,11 +1,15 @@
 ﻿using Mario.Interfaces;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace GreenGame.Interfaces
+namespace Mario.Interfaces
 {
-	public interface IItem : ISprite
+	public interface IItem
 	{
-		// Cycles through to next sprite when moving
-		public void CycleItemNext();
+        void Update(GameTime gameTime);
+        void Draw(SpriteBatch spriteBatch);
+        // Cycles through to next sprite when moving
+        public void CycleItemNext();
 
 		public void CycleItemPrev();
 	}

@@ -1,7 +1,7 @@
 ﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GreenGame.Interfaces
+namespace Mario.Interfaces
 {
 	public interface IHero : ISprite
     {

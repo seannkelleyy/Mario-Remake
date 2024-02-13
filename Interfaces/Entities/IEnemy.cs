@@ -1,6 +1,6 @@
 ﻿using Mario.Interfaces;
 
-namespace GreenGame.Interfaces
+namespace Mario.Interfaces
 {
 	public interface IEnemy : ISprite
     {
