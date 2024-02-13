@@ -27,7 +27,9 @@ namespace Mario
 
         protected override void LoadContent()
         {
+            SpriteFactory.Instance.LoadAllTextures(Content);
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
 
             base.LoadContent();
         }
