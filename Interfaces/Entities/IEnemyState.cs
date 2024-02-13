@@ -2,10 +2,10 @@
 using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GreenGame.Interfaces
+namespace GreenGame.Interfaces.Entities
 {
-	public interface IEnemyState : IEnemy
-	{
+    public interface IEnemyState : IEnemy
+    {
         void ChangeDirection();
         void BeStomped();
         void BeFlipped();
