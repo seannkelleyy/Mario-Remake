@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Koopa 
 {
-    public IEnemy state;
+    public IEnemyState state;
 
     public Koopa()
     {
@@ -28,15 +28,6 @@ public class Koopa
         state.BeFlipped();
     }
 
-    public void Update(GameTime gameTime)
-    {
-        state.Update(gameTime);
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
-    {
-
-    }
 }
 
 
