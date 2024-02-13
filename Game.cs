@@ -10,6 +10,20 @@ namespace Mario
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
+<<<<<<< Updated upstream
+=======
+        private IController MouseController;
+        private Texture2D texture;
+        private Dictionary<Keys, ICommand> KeyCommands;
+        private Dictionary<string, ICommand> MouseCommands;
+        private SpriteFont Font;
+        private Vector2 Position;
+        private ISprite StillSprite;
+        private ISprite MovingStillSprite;
+        private ISprite StillAnimatedSprite;
+        private ISprite MovingAnimatedSprite;
+        public SpriteState CurrentSprite { get; set; }
+>>>>>>> Stashed changes
 
         public MarioRemake()
         {
