@@ -12,17 +12,17 @@ namespace Mario.Sprites
         private int CurrentFrame = 0;
         private int TotalFrames;
         private  int size;
-        private int startingX;
-        private int startingY;
+        private int SpriteSheetStartingX;
+        private int SpriteSheetStartingY;
         private int width;
         private int height;
         
 
-        public Sprite(Texture2D texture, ref int[] spriteParams)
+        public Sprite(Texture2D texture, int[] spriteParams)
         {
             Texture = texture;
-            startingX = spriteParams[0];
-            startingY = spriteParams[1];
+            SpriteSheetStartingX = spriteParams[0];
+            SpriteSheetStartingY = spriteParams[1];
             width = spriteParams[2];
             height = spriteParams[3];    
             TotalFrames = spriteParams[4];
@@ -43,7 +43,7 @@ namespace Mario.Sprites
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(startingX+width*CurrentFrame, startingY, width, height);
+            Rectangle sourceRectangle = new Rectangle(SpriteSheetStartingX + width*CurrentFrame, SpriteSheetStartingY, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)(location.Y), width*size, height*size);
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
         }

@@ -47,14 +47,13 @@ namespace Mario
 
         protected override void LoadContent()
         {
+            SpriteFactory.Instance.LoadAllTextures(Content);
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Font = Content.Load<SpriteFont>("font");
-
-            StillSprite = new Sprite(Content.Load<Texture2D>("sprites/mario"));
-            MovingStillSprite = new Sprite(Content.Load<Texture2D>("sprites/fallingMario"), yDistance: 50);
-            StillAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6);
-            MovingAnimatedSprite = new Sprite(Content.Load<Texture2D>("sprites/animatedMario"), 2, 6, xDistance: 100);
+            StillSprite = SpriteFactory.Instance.CreateSprite("rightStandMario");
+            MovingStillSprite = SpriteFactory.Instance.CreateSprite("rightJumpMario");
+            StillAnimatedSprite = SpriteFactory.Instance.CreateSprite("rightRunMario");
+            MovingAnimatedSprite = SpriteFactory.Instance.CreateSprite("rightRunMario");
 
             SpriteState stillState = new StillSpriteState(this, SpriteBatch, StillSprite);
             SpriteState movingStillState = new MovingStillSpriteState(this, SpriteBatch, MovingStillSprite);
