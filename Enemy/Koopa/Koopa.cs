@@ -4,7 +4,7 @@ using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Koopa
+public class Koopa 
 {
     public IEnemy state;
 

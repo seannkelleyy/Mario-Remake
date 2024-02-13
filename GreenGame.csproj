@@ -26,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
-    <Folder Include="Enemy\Goomba\" />
     <Folder Include="Interfaces\Patterns\" />
   </ItemGroup>
   <ItemGroup>
