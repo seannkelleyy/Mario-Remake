@@ -9,7 +9,8 @@ namespace GreenGame.Interfaces
         public void ChangeDirection();
 
         // Function to handle when Enemu takes damage
-        void TakeDamage();
+        void BeStomped();
+        void BeFlipped();
     }
 }
 
