@@ -6,12 +6,10 @@ namespace GreenGame.Sprites
 {
     public class Item : Interfaces.IItem
     {
-        // Fields
         private ISprite[] Items;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
 
-        // Constructor
         public Item(ISprite[] items)
         {
             Items = items;
@@ -27,6 +25,8 @@ namespace GreenGame.Sprites
         {
             currentSprite.Update(gameTime);
         }
+
+        // NOTE: These methods will go bye bye after Sprint 2.
 
         // Changes the current sprite to be drawn to the next item in the list
         public void CycleItemNext()
