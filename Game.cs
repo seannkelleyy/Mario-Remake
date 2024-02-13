@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Mario.Input;
 using Mario.Interfaces;
-using System.Collections.Generic;
-using ICommand = Mario.Interfaces.ICommand;
 
 namespace Mario
 {
@@ -13,7 +10,6 @@ namespace Mario
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
-        private Vector2 Position;
 
         public MarioRemake()
         {
@@ -24,9 +20,6 @@ namespace Mario
 
         protected override void Initialize()
         {
-            Position = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
-
             KeyboardController = new KeyboardController();
 
             base.Initialize();

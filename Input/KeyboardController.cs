@@ -25,13 +25,12 @@ namespace Mario.Input
             Commands = new Dictionary<Keys, Action>();
         }
 
-
         // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
         // to assign the functions to call when keys are pressed.
         public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
         {
             Commands.Add(Keys.Q, new Action(game.Exit));
-            Commands.Add(Keys.R, new Action());
+            Commands.Add(Keys.R, new Action(game.Run));
 
             //Commands.Add(Keys.W, );
             //Commands.Add(Keys.A, );
@@ -49,9 +48,9 @@ namespace Mario.Input
             // Commands.Add(Keys.P, new RelayCommand(new Action(EnemySprite.CycleEnemyPrev)));
         }
 
-        public void Add(Keys key, Action command)
+        public void Add(Keys key, Action action)
         {
-            Commands.Add(key, command);
+            Commands.Add(key, action);
         }
 
         public void Update()
