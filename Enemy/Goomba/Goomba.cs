@@ -5,7 +5,7 @@ using GreenGame.Interfaces;
 
 public class Goomba
 {
-    public IEnemy state;
+    public IEnemyState state;
 
     public Goomba()
     {

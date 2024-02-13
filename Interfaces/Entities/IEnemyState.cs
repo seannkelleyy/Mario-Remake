@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GreenGame.Interfaces
 {
-	public interface IEnemy : ISprite
+	public interface IEnemyState
     {
         // Movement
         public void ChangeDirection();
@@ -11,6 +11,8 @@ namespace GreenGame.Interfaces
         // Function to handle when Enemu takes damage
         void BeStomped();
         void BeFlipped();
+
+        void Update(GameTime gameTime);
     }
 }
 

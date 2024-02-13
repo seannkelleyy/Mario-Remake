@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class StompedKoopaState : IEnemy
+    public class StompedKoopaState : IEnemyState
     {
         private Koopa koopa;
 
@@ -38,12 +38,7 @@ using System.Threading.Tasks;
 
         public void Update(GameTime gameTime)
         {
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-
-        }
+        // call something like koopa.Stomp()
     }
+}
 

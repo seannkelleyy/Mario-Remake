@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class LeftMovingGoombaState : IEnemy
+public class LeftMovingGoombaState : IEnemyState
 {
     private Goomba goomba;
 
@@ -32,18 +32,9 @@ public class LeftMovingGoombaState : IEnemy
         goomba.state = new FlippedGoombaState(goomba);
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         // call something like goomba.MoveLeft() or goomba.Move(-x,0);
     }
 
-    public void Update(GameTime gameTime)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
-    {
-        throw new NotImplementedException();
-    }
 }

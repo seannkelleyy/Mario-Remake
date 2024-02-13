@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    public class FlippedKoopaState : IEnemy
+    public class FlippedKoopaState : IEnemyState
     {
         private Koopa koopa;
 
@@ -34,18 +34,8 @@ using System.Threading.Tasks;
             // if stomped, do not respond to being attacked by star mario (assumed but not tested behavior)
         }
 
-        public void Update()
-        {
-            // call something like goomba.Flip()
-        }
-
         public void Update(GameTime gameTime)
         {
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-
+            // call something like koopa.Flip()
         }
     }

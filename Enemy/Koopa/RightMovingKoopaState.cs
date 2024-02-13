@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class RightMovingKoopaState : IEnemy
+    public class RightMovingKoopaState : IEnemyState
     {
         private Koopa koopa;
 
@@ -33,18 +33,8 @@ using System.Threading.Tasks;
             koopa.state = new FlippedKoopaState(koopa);
         }
 
-        public void Update()
-        {
-            // call something like goomba.MoveLeft() or goomba.Move(-x,0);
-        }
-
         public void Update(GameTime gameTime)
         {
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-
+            // call something like koopa.MoveRight()
         }
     }

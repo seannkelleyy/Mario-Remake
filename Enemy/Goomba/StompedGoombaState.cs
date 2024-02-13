@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class StompedGoombaState : IEnemy
+public class StompedGoombaState : IEnemyState
 {
     private Goomba goomba;
 
@@ -34,18 +34,8 @@ public class StompedGoombaState : IEnemy
         // if stomped, do not respond to being attacked by star mario (assumed but not tested behavior)
     }
 
-    public void Update()
-    {
-        // call something like goomba.Stomp();
-    }
-
     public void Update(GameTime gameTime)
     {
-        throw new NotImplementedException();
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
-    {
-        throw new NotImplementedException();
+        // call something like goomba.Stomp();
     }
 }
