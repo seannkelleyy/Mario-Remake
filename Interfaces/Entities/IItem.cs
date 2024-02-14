@@ -6,7 +6,7 @@ namespace Mario.Interfaces
 {
 	public interface IItem
 	{
-        void Update(GameTime gameTime);
+        	void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
         // Cycles through to next sprite when moving
         public void CycleItemNext();
