@@ -9,7 +9,7 @@ namespace Mario.Interfaces
         	void Update(GameTime gameTime);
         	void Draw(SpriteBatch spriteBatch);
         	// Cycles through to next sprite when moving
-        public void CycleItemNext();
+        	public void CycleItemNext();
 
 		public void CycleItemPrev();
 	}
