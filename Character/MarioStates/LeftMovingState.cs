@@ -1,5 +1,5 @@
 ﻿using GreenGame.Interfaces;
-using GreenGame.Interfaces.Entities;
+using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -8,36 +8,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mario.Character
+namespace GreenGame.Character.MarioStates
 {
-    public class MarioStandingState : IHeroState
+    public class LeftMovingState : IHeroState
     {
         private Mario mario;
         //true be left, false be right
         private bool direction;
 
 
-        public MarioStandingState(Mario mario, bool direction)
+        public LeftMovingState(Mario mario, ISprite sprite = SpriteFactory.Instance.CreateSprite("marioStandLeft"))
         {
             this.mario = mario;
-            this.direction = direction;
-            // construct goomba's sprite here too
         }
 
 
         public void ChangeDirection()
         {
-            if (this.direction)//turn left
+            if (direction)//turn left
             {
-                this.direction = false;
-                mario.state = new MarioStandingState(this.mario, this.direction);
-            } else
+                direction = false;
+                mario.currentState = new LeftMovingState(mario, direction);
+            }
+            else
             {
-                this.direction = true;
-                mario.state = new MarioStandingState(this.mario, this.direction);
+                direction = true;
+                mario.currentState = new LeftMovingState(mario, direction);
             }
         }
-
+                
         public void Update(GameTime gameTime)
         {
             // call something like goomba.MoveLeft() or goomba.Move(-x,0);

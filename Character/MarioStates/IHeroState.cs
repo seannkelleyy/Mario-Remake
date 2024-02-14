@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace GreenGame.Interfaces.Entities
+namespace GreenGame.Character.MarioStates
 {
     public interface IHeroState
     {
         // Movement
-        public void ChangeDirection();
-
-        void Update(GameTime gameTime);
+        public abstract void Update(GameTime gameTime);
+        public abstract void Draw(SpriteBatch spriteBatch, Vector2 position);
     }
 }
 

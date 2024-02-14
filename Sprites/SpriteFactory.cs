@@ -24,7 +24,6 @@ public class SpriteFactory
     }
     public void LoadAllTextures(ContentManager content)
     {
-
         spriteSheets = new Texture2D[] {
             content.Load<Texture2D>("itemSpriteSheet"),
             content.Load<Texture2D>("tileSpriteSheet"),
