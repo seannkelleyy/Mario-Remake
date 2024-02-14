@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GreenGame.Sprites
+namespace Mario.Sprites
 {
     public class Block : Interfaces.IBlock
     {

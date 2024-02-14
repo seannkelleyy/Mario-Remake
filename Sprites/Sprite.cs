@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Mario.Interfaces;
 using System.Data.Common;
+using System;
 
 namespace Mario.Sprites
 {
@@ -16,7 +17,9 @@ namespace Mario.Sprites
         private int SpriteSheetStartingY;
         private int width;
         private int height;
-        
+        float updateInterval;
+        float elapsedSeconds;
+
 
         public Sprite(Texture2D texture, int[] spriteParams)
         {
@@ -27,17 +30,18 @@ namespace Mario.Sprites
             height = spriteParams[3];    
             TotalFrames = spriteParams[4];
             this.size = spriteParams[5];
+            updateInterval = .2f;
+            elapsedSeconds = 0;
         }
 
         public void Update(GameTime gameTime)
         {
             // Update the sprite every 1/30th of a second
-            float updateInterval = 1.0f / 30.0f;
-            float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (elapsedSeconds >= updateInterval)
             {
                 CurrentFrame = (CurrentFrame + 1) % TotalFrames;
+                elapsedSeconds = 0;
             }
         }
 

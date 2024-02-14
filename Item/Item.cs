@@ -2,21 +2,23 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GreenGame.Sprites
+namespace Mario.Sprites
 {
     public class Item : Interfaces.IItem
     {
         private ISprite[] Items;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
+        private Vector2 position;
 
-        public Item(ISprite[] items)
+        public Item(ISprite[] items, Vector2 itemPosition)
         {
             Items = items;
             currentSprite = items[indexOfCurrentSprite];
+            position = itemPosition;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
             currentSprite.Draw(spriteBatch, position);
         }
