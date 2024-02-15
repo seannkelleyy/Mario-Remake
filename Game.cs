@@ -2,16 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
-using Mario.Sprites;
+using Mario.Singletons;
 namespace Mario
 {
     public class MarioRemake : Game
     {
         private GraphicsDeviceManager Graphics;
+        private GameContentManager GameContentManager;
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
-        private ISprite[] itemSprites;
-        private IItem itemDisplay; 
         public MarioRemake()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -22,22 +21,15 @@ namespace Mario
         protected override void Initialize()
         {
             KeyboardController = new KeyboardController();
+            GameContentManager = new GameContentManager(this);
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            SpriteFactory.Instance.LoadAllTextures(Content);
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            //Displays the item Sprites for sprint 2
-            itemSprites = new ISprite[] { 
-                SpriteFactory.Instance.CreateSprite("fireFlower"), 
-                SpriteFactory.Instance.CreateSprite("coin"), 
-                SpriteFactory.Instance.CreateSprite("mushroom"), 
-                SpriteFactory.Instance.CreateSprite("star") 
-            };
-            itemDisplay = new Item(itemSprites, new Vector2(100,100));
+            GameContentManager.Load(Content);
             base.LoadContent();
         }
 
@@ -45,7 +37,6 @@ namespace Mario
         {
             KeyboardController.Update();
             base.Update(gameTime);
-            itemDisplay.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -53,8 +44,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             SpriteBatch.Begin();
-            itemDisplay.Draw(SpriteBatch);
-
+            GameContentManager.Draw(SpriteBatch);
             SpriteBatch.End();
 
             base.Draw(gameTime);
