@@ -1,8 +1,7 @@
-﻿using GreenGame.Interfaces;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GreenGame.Character
+namespace Mario.Interfaces
 {
     public interface IHero
     {
