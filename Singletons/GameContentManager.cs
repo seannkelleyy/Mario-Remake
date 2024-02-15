@@ -10,28 +10,33 @@ namespace Mario.Singletons
 	public class GameContentManager
 	{
 		private MarioRemake _game;
-        private SpriteBatch SpriteBatch;
+		private SpriteFactory spriteFactory;
 		private ISprite[] itemSprites;
         private IItem itemDisplay; 
-
-
+		// Eventually we will have Mario and Enemies here as well
 
 		public GameContentManager(MarioRemake game)
 		{
 			_game = game;
 		}
 
+		public void Initialize()
+		{
+			spriteFactory = SpriteFactory.Instance;
+		}
+
 		public void Load(ContentManager content)
 		{
-            SpriteFactory.Instance.LoadAllTextures(content);
+            spriteFactory.LoadAllTextures(content);
 
             //Displays the item Sprites for sprint 2
 			itemSprites = new ISprite[] { 
-                SpriteFactory.Instance.CreateSprite("fireFlower"), 
-                SpriteFactory.Instance.CreateSprite("coin"), 
-                SpriteFactory.Instance.CreateSprite("mushroom"), 
-                SpriteFactory.Instance.CreateSprite("star") 
+                spriteFactory.CreateSprite("fireFlower"), 
+                spriteFactory.CreateSprite("coin"), 
+                spriteFactory.CreateSprite("mushroom"), 
+                spriteFactory.CreateSprite("star") 
             };
+			
             itemDisplay = new Item(itemSprites, new Vector2(100,100));
 		}
 
@@ -42,7 +47,7 @@ namespace Mario.Singletons
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-            itemDisplay.Draw(SpriteBatch);
+            itemDisplay.Draw(spriteBatch);
 		}
 	}
 }
