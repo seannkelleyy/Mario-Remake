@@ -14,15 +14,12 @@ namespace Mario.Character
         private ISprite currentSprite;
         protected SpriteBatch SpriteBatch;
         public MarioState currentState { get; set; }
-        private bool direction;
 
-        public Mario(ContentManager content)
+        public Mario()
         {
-            // Load all textures first
-            SpriteFactory.Instance.LoadAllTextures(content);
             currentSprite = SpriteFactory.Instance.CreateSprite("marioStandLeft");
             currentState = new StandingState(SpriteBatch, currentSprite); // Default state
-            health = 1;
+            this.health = 1;
             this.currentItem = null;
         }
 
