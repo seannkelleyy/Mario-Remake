@@ -21,7 +21,8 @@ namespace Mario
         protected override void Initialize()
         {
             KeyboardController = new KeyboardController();
-            GameContentManager = new GameContentManager(this);
+            GameContentManager = new GameContentManager();
+            GameContentManager.Initialize();
 
             base.Initialize();
         }

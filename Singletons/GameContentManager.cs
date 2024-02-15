@@ -9,15 +9,13 @@ namespace Mario.Singletons
 {
 	public class GameContentManager
 	{
-		private MarioRemake _game;
 		private SpriteFactory spriteFactory;
 		private ISprite[] itemSprites;
         private IItem itemDisplay; 
 		// Eventually we will have Mario and Enemies here as well
 
-		public GameContentManager(MarioRemake game)
+		public GameContentManager()
 		{
-			_game = game;
 		}
 
 		public void Initialize()
@@ -36,7 +34,7 @@ namespace Mario.Singletons
                 spriteFactory.CreateSprite("mushroom"), 
                 spriteFactory.CreateSprite("star") 
             };
-			
+
             itemDisplay = new Item(itemSprites, new Vector2(100,100));
 		}
 
