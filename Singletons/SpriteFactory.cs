@@ -31,7 +31,7 @@ namespace Mario.Sprites
             spriteSheets = new Texture2D[] {
                 content.Load<Texture2D>("itemSpriteSheet"),
                 content.Load<Texture2D>("tileSpriteSheet"),
-                content.Load<Texture2D>("EnemySpriteSheet"),
+                content.Load<Texture2D>("enemySpriteSheet"),
                 content.Load<Texture2D>("marioSpriteSheet")
             };
         }
