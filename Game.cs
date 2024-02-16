@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
-using Mario.Sprites;
+
 namespace Mario
 {
     public class MarioRemake : Game
@@ -10,8 +10,21 @@ namespace Mario
         private GraphicsDeviceManager Graphics;
         private SpriteBatch SpriteBatch;
         private IController KeyboardController;
-        private ISprite[] itemSprites;
-        private IItem itemDisplay; 
+<<<<<<< Updated upstream
+=======
+        private IController MouseController;
+        private Texture2D texture;
+        private Dictionary<Keys, ICommand> KeyCommands;
+        private Dictionary<string, ICommand> MouseCommands;
+        private SpriteFont Font;
+        private Vector2 Position;
+        private ISprite StillSprite;
+        private ISprite MovingStillSprite;
+        private ISprite StillAnimatedSprite;
+        private ISprite MovingAnimatedSprite;
+        public SpriteState CurrentSprite { get; set; }
+>>>>>>> Stashed changes
+
         public MarioRemake()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -30,14 +43,8 @@ namespace Mario
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            //Displays the item Sprites for sprint 2
-            itemSprites = new ISprite[] { 
-                SpriteFactory.Instance.CreateSprite("fireFlower"), 
-                SpriteFactory.Instance.CreateSprite("coin"), 
-                SpriteFactory.Instance.CreateSprite("mushroom"), 
-                SpriteFactory.Instance.CreateSprite("star") 
-            };
-            itemDisplay = new Item(itemSprites, new Vector2(100,100));
+
+
             base.LoadContent();
         }
 
@@ -45,7 +52,6 @@ namespace Mario
         {
             KeyboardController.Update();
             base.Update(gameTime);
-            itemDisplay.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -53,7 +59,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             SpriteBatch.Begin();
-            itemDisplay.Draw(SpriteBatch);
+
 
             SpriteBatch.End();
 
