@@ -34,6 +34,6 @@ using System.Threading.Tasks;
 
         public void Update(GameTime gameTime)
         {
-            // call something like koopa.MoveLeft()
+            koopa.MoveLeft()
         }
     }
