@@ -2,13 +2,16 @@
 
 namespace Mario.Interfaces
 {
-	public interface IEnemy : ISprite
+	public interface IEnemyState
     {
         // Movement
         public void ChangeDirection();
 
         // Function to handle when Enemu takes damage
-        void TakeDamage();
+        void BeStomped();
+        void BeFlipped();
+
+        void Update(GameTime gameTime);
     }
 }
 
