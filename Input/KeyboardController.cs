@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Mario.Interfaces;
-using GreenGame.Interfaces;
 using Microsoft.Xna.Framework.Content;
 using System;
 
