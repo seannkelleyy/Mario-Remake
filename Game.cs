@@ -30,7 +30,7 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            GameContentManager.Load(Content);
+            GameContentManager.Load(Content, SpriteBatch);
             base.LoadContent();
         }
 

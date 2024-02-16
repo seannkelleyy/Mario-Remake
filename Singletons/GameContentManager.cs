@@ -1,5 +1,7 @@
 ﻿using System;
+using Mario.Character;
 using Mario.Interfaces;
+using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -7,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Singletons
 {
-	public class GameContentManager
+    public class GameContentManager
 	{
 		private SpriteFactory spriteFactory;
 		private ISprite[] itemSprites;
@@ -27,7 +29,7 @@ namespace Mario.Singletons
 			spriteFactory = SpriteFactory.Instance;
 		}
 
-		public void Load(ContentManager content)
+		public void Load(ContentManager content, SpriteBatch spriteBatch)
 		{
             spriteFactory.LoadAllTextures(content);
 
@@ -50,10 +52,13 @@ namespace Mario.Singletons
 
             itemDisplay = new Item(itemSprites, new Vector2(100,100));
 			blockDisplay = new Block(blockSprites);
+
+			Mario = new Hero(content, spriteBatch, new Vector2(200, 300));
 		}
 
 		public void Update(GameTime gameTime)
 		{
+			Mario.Update(gameTime);
             itemDisplay.Update(gameTime);
 			blockDisplay.Update(gameTime);
 		
@@ -63,6 +68,7 @@ namespace Mario.Singletons
 		{
             itemDisplay.Draw(spriteBatch);
 			blockDisplay.Draw(spriteBatch, new Vector2(200, 200));
+			Mario.Draw();
 		}
 	}
 }

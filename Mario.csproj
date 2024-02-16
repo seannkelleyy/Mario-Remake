@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
-    <Folder Include="Interfaces\Entities\" />
     <Folder Include="Singletons\" />
   </ItemGroup>
   <ItemGroup>

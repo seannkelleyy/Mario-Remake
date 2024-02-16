@@ -15,6 +15,7 @@ namespace Mario.Input
         // but they will be gone after that.
         private IItem ItemSprite;
         private IBlock BlockSprite;
+        private Keys[] KeysPressed;
         private delegate void NewGame(MarioRemake game);
         // private IEnemy EnemySprite;
 
@@ -54,10 +55,10 @@ namespace Mario.Input
 
         public void Update()
         {
-            KeyboardState state = Keyboard.GetState();
-            foreach (Keys key in Commands.Keys)
+            KeysPressed = Keyboard.GetState().GetPressedKeys();
+            foreach (Keys key in KeysPressed)
             {
-                if (state.IsKeyDown(key))
+                if (Commands.ContainsKey(key))
                 {
                     Commands[key].Invoke();
                 }

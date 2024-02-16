@@ -30,7 +30,7 @@ namespace Mario.Sprites
             height = spriteParams[3];    
             TotalFrames = spriteParams[4];
             this.size = spriteParams[5];
-            updateInterval = .2f;
+            updateInterval = .1f;
             elapsedSeconds = 0;
         }
 

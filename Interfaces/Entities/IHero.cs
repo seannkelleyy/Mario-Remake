@@ -1,7 +1,6 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace Mario.Interfaces
+namespace Mario.Interfaces.Entities
 {
     public interface IHero
     {
@@ -34,6 +33,8 @@ namespace Mario.Interfaces
         public void Die();
 
         void Update(GameTime gameTime);
+
+        public void Draw(); 
     }
 }
 
