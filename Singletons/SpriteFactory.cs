@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Mario.Sprites;
 using Mario.Interfaces;
-using System.Reflection.Metadata;
 
 
 namespace Mario.Sprites
@@ -37,8 +34,8 @@ namespace Mario.Sprites
         }
         public ISprite CreateSprite(string type)
         {
-            int[] spriteParameteres = spriteNumbers[type];
-            return new Sprite(spriteSheets[spriteParameteres[6]], spriteParameteres);
+            int[] spriteParameters = spriteNumbers[type];
+            return new Sprite(spriteSheets[spriteParameters[6]], spriteParameters);
         }
     }
 }

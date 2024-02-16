@@ -11,7 +11,11 @@ namespace Mario.Singletons
 	{
 		private SpriteFactory spriteFactory;
 		private ISprite[] itemSprites;
+		private ISprite[] blockSprites;
+		private IHero Mario;
+		private IEnemy[] enemy;
         private IItem itemDisplay; 
+		private IBlock blockDisplay;
 		// Eventually we will have Mario and Enemies here as well
 
 		public GameContentManager()
@@ -35,17 +39,30 @@ namespace Mario.Singletons
                 spriteFactory.CreateSprite("star") 
             };
 
+			blockSprites = new ISprite[]
+			{
+                spriteFactory.CreateSprite("brickTile"), 
+                spriteFactory.CreateSprite("emptyTile"), 
+                spriteFactory.CreateSprite("rockTile"), 
+                spriteFactory.CreateSprite("stoneTile"),
+				spriteFactory.CreateSprite("pipeTile"),
+            };	
+
             itemDisplay = new Item(itemSprites, new Vector2(100,100));
+			blockDisplay = new Block(blockSprites);
 		}
 
 		public void Update(GameTime gameTime)
 		{
             itemDisplay.Update(gameTime);
+			blockDisplay.Update(gameTime);
+		
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
             itemDisplay.Draw(spriteBatch);
+			blockDisplay.Draw(spriteBatch, new Vector2(200, 200));
 		}
 	}
 }

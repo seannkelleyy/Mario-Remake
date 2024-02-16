@@ -37,6 +37,7 @@ namespace Mario
         protected override void Update(GameTime gameTime)
         {
             KeyboardController.Update();
+            GameContentManager.Update(gameTime);
             base.Update(gameTime);
         }
 
