@@ -7,10 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 public class Koopa 
 {
     public IEnemyState state;
+    private Vector2 position;
 
-    public Koopa()
+    public Koopa(Vector2 pos)
     {
         state = new LeftMovingKoopaState(this);
+        position = pos;
     }
 
     public void ChangeDirection()
