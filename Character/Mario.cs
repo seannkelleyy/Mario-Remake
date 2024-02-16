@@ -3,25 +3,28 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Mario.Character.MarioStates;
 using Microsoft.Xna.Framework.Graphics;
+using Mario.Sprites;
 
 namespace Mario.Character
 {
     public class Mario : IHero
     {
+        SpriteFactory _spriteFactory;
+        protected SpriteBatch _spriteBatch;
         private int health;
         private IItem currentItem;
         private Vector2 position;
         private ISprite currentSprite;
-        protected SpriteBatch SpriteBatch;
         public MarioState currentState { get; set; }
         private bool direction;
 
-        public Mario(ContentManager content)
+        public Mario(ContentManager content, SpriteFactory spriteFactory, SpriteBatch spriteBatch)
         {
             // Load all textures first
-            SpriteFactory.Instance.LoadAllTextures(content);
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioStandLeft");
-            currentState = new StandingState(SpriteBatch, currentSprite); // Default state
+            _spriteFactory = spriteFactory;
+            _spriteBatch = spriteBatch;
+            currentSprite = _spriteFactory.CreateSprite("marioStandLeft");
+            currentState = new StandingState(_spriteBatch, currentSprite); // Default state
             health = 1;
             this.currentItem = null;
         }
@@ -37,58 +40,71 @@ namespace Mario.Character
         // Implementing IPlayer interface methods, these methods are called by commands
         public void WalkLeft()
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioWalkLeft");
-            currentState = new LeftMovingState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioWalkLeft");
+            currentState = new LeftMovingState(_spriteBatch, currentSprite);
             position.X -= 2; // Move left
         }
 
         public void WalkRight()
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioWalkLeft");
-            currentState = new RightMovingState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioWalkLeft");
+            currentState = new RightMovingState(_spriteBatch, currentSprite);
             position.X += 2; // Move right
         }
 
         public void Jump()
         {
             // Jump logic here
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioJump");
-            currentState = new JumpState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioJump");
+            currentState = new JumpState(_spriteBatch, currentSprite);
         }
 
         public void Crouch()
         {
             // Crouch logic here
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioStandLeft");
-            currentState = new CrouchState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioStandLeft");
+            currentState = new CrouchState(_spriteBatch, currentSprite);
         }
 
         void IHero.Collect(IItem item)
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioCrouch");
-            currentState = new ClollectState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioCrouch");
+            currentState = new ClollectState(_spriteBatch, currentSprite);
             this.currentItem = item;
         }
 
         void IHero.PowerUp()
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioPowerUp");
-            currentState = new PowerUpState(SpriteBatch, currentSprite);
-            this.health++;
+            currentSprite = _spriteFactory.CreateSprite("marioPowerUp");
+            currentState = new PowerUpState(_spriteBatch, currentSprite);
+            if (this.health < 3){
+                this.health++;
+            }
         }
 
         void IHero.TakeDamage()
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioTakeDamage");
-            currentState = new TakeDamageState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioTakeDamage");
+            currentState = new TakeDamageState(_spriteBatch, currentSprite);
             this.health--;
+            if (this.health == 0)
+            {
+                this.Die();
+            }
         }
 
         void IHero.Attack(Game game)
         {
-            currentSprite = SpriteFactory.Instance.CreateSprite("marioAttack");
-            currentState = new AttackState(SpriteBatch, currentSprite);
+            currentSprite = _spriteFactory.CreateSprite("marioAttack");
+            currentState = new AttackState(_spriteBatch, currentSprite);
         }
 
+        
+        public void Die()
+        {
+            // This sprite will need to be added to the spriteFactory
+            currentSprite = _spriteFactory.CreateSprite("marioDie");
+            currentState = new DeadState(_spriteBatch, currentSprite);
+        }
     }
 }

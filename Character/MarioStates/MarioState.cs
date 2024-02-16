@@ -155,5 +155,20 @@ namespace Mario.Character.MarioStates
             Sprite.Draw(SpriteBatch, position);
         }
     }
+
+    public class DeadState : MarioState
+    {
+        public DeadState(SpriteBatch spriteBatch, ISprite sprite) : base(spriteBatch, sprite) { }
+
+        public override void Update(GameTime gameTime)
+        {
+            Sprite.Update(gameTime);
+        }
+
+        public override void Draw(Vector2 position)
+        {
+            Sprite.Draw(SpriteBatch, position);
+        }
+    }
 }
 

@@ -30,6 +30,9 @@ namespace Mario.Interfaces
         // Based upon the state of the Hero.
         public void Attack(Game game);
 
+        // Function to handle when Hero dies
+        public void Die();
+
         void Update(GameTime gameTime);
     }
 }
