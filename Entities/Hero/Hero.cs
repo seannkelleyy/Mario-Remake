@@ -1,11 +1,11 @@
 using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Mario.Character.MarioStates;
 using Microsoft.Xna.Framework.Graphics;
 using Mario.Interfaces.Entities;
+using Mario.Entities.Character.HeroStates;
 
-namespace Mario.Character
+namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
@@ -17,7 +17,7 @@ namespace Mario.Character
         public Hero(ContentManager content, SpriteBatch spriteBatch, Vector2 position)
         {
             _spriteBatch = spriteBatch;
-            currentState = new StandingState(_spriteBatch); 
+            currentState = new StandingState(_spriteBatch);
             this.position = position;
         }
 
@@ -26,7 +26,7 @@ namespace Mario.Character
             currentState.Update(gameTime);
             // Additional game logic here (e.g., physics, collisions)
         }
-        
+
         public void Draw()
         {
             currentState.Draw(_spriteBatch, position);
@@ -64,18 +64,19 @@ namespace Mario.Character
         void IHero.PowerUp()
         {
             currentState = new PowerUpState(_spriteBatch);
-            if (this.health < 3){
-                this.health++;
+            if (health < 3)
+            {
+                health++;
             }
         }
 
         void IHero.TakeDamage()
         {
             currentState = new TakeDamageState(_spriteBatch);
-            this.health--;
-            if (this.health == 0)
+            health--;
+            if (health == 0)
             {
-                this.Die();
+                Die();
             }
         }
 
@@ -84,7 +85,7 @@ namespace Mario.Character
             currentState = new AttackState(_spriteBatch);
         }
 
-        
+
         public void Die()
         {
             currentState = new DeadState(_spriteBatch);

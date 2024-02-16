@@ -44,8 +44,8 @@ namespace Mario.Input
             Commands.Add(Keys.Y, new Action(BlockSprite.CycleBlockPrev));
 
             // These will be added in enemy ticket.
-            // Commands.Add(Keys.O, new RelayCommand(new Action(EnemySprite.CycleEnemyNext)));
-            // Commands.Add(Keys.P, new RelayCommand(new Action(EnemySprite.CycleEnemyPrev)));
+            // Commands.Add(Keys.O, new Action(EnemySprite.CycleEnemyNext));
+            // Commands.Add(Keys.P, new Action(EnemySprite.CycleEnemyPrev));
         }
 
         public void Add(Keys key, Action action)

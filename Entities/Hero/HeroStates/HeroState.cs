@@ -3,7 +3,7 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Character.MarioStates
+namespace Mario.Entities.Character.HeroStates
 {
     public abstract class HeroState
     {
