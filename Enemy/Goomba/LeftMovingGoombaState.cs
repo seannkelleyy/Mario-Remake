@@ -34,7 +34,7 @@ public class LeftMovingGoombaState : IEnemyState
 
     public void Update(GameTime gameTime)
     {
-        // call something like goomba.MoveLeft() or goomba.Move(-x,0);
+           goomba.MoveLeft();
     }
 
 }
