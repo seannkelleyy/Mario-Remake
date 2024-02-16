@@ -8,9 +8,10 @@ public class Goomba
     public IEnemyState state;
     private Vector2 position;
 
-    public Goomba()
+    public Goomba(Vector2 pos)
     {
         state = new LeftMovingGoombaState(this);
+        position = pos;
     }
 
     public void ChangeDirection()
