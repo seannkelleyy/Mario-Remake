@@ -1,16 +1,14 @@
-﻿using System;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using GreenGame.Interfaces;
 
-public class Goomba
+public class Koopa 
 {
     public IEnemyState state;
     private Vector2 position;
 
-    public Goomba(Vector2 pos)
+    public Koopa(Vector2 pos)
     {
-        state = new LeftMovingGoombaState(this);
+        state = new LeftMovingKoopaState(this);
         position = pos;
     }
 
@@ -29,7 +27,6 @@ public class Goomba
         state.BeFlipped();
     }
 
-    // Draw and other methods omitted
     public void MoveLeft(){
         if(position.X == 0){
             ChangeDirection();
@@ -44,6 +41,7 @@ public class Goomba
         }
         position.X = position.X + 2;
     }
-    
+
 }
+
 

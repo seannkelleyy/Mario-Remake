@@ -1,25 +1,19 @@
-﻿using GreenGame.Interfaces;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-    public class LeftMovingKoopaState : IEnemyState
+    public class RightMovingKoopaState : IEnemyState
     {
         private Koopa koopa;
 
-        public LeftMovingKoopaState(Koopa koopa)
+        public RightMovingKoopaState(Koopa koopa)
         {
             this.koopa = koopa;
-            // construct koopa's sprite here too
+            // construct goomba's sprite here too
         }
 
         public void ChangeDirection()
         {
-            koopa.state = new RightMovingKoopaState(koopa);
+            koopa.state = new LeftMovingKoopaState(koopa);
         }
 
         public void BeStomped()
@@ -34,6 +28,6 @@ using System.Threading.Tasks;
 
         public void Update(GameTime gameTime)
         {
-            koopa.MoveLeft();
+            koopa.MoveRight();
         }
     }

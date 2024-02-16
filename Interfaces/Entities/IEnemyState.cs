@@ -1,4 +1,4 @@
-﻿using Mario.Interfaces;
+﻿using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces
 {
