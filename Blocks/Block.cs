@@ -4,21 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Sprites
 {
-    public class Item : Interfaces.IItem
+    public class Block : Interfaces.IBlock
     {
-        private ISprite[] Items;
+        private ISprite[] Blocks;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
-        private Vector2 position;
 
-        public Item(ISprite[] items, Vector2 itemPosition)
+        public Block(ISprite[] blocks)
         {
-            Items = items;
-            currentSprite = items[indexOfCurrentSprite];
-            position = itemPosition;
+            Blocks = blocks;
+            currentSprite = blocks[indexOfCurrentSprite];
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             currentSprite.Draw(spriteBatch, position);
         }
@@ -30,10 +28,10 @@ namespace Mario.Sprites
 
         // NOTE: These methods will go bye bye after Sprint 2.
 
-        // Changes the current sprite to be drawn to the next item in the list
-        public void CycleItemNext()
+        // Changes the current sprite to be handled to the next block in the list
+        public void CycleBlockNext()
         {
-            if (indexOfCurrentSprite == Items.Length - 1)
+            if (indexOfCurrentSprite == Blocks.Length - 1)
             {
                 indexOfCurrentSprite = 0;
             }
@@ -41,21 +39,21 @@ namespace Mario.Sprites
             {
                 indexOfCurrentSprite++;
             }
-            currentSprite = Items[indexOfCurrentSprite];
+            currentSprite = Blocks[indexOfCurrentSprite];
         }
 
-        // Changes the current sprite to be drawn to the previous item in the list
-        public void CycleItemPrev()
+        // Changes the current sprite to be handled to the previous block in the list
+        public void CycleBlockPrev()
         {
             if (indexOfCurrentSprite == 0)
             {
-                indexOfCurrentSprite = Items.Length - 1;
+                indexOfCurrentSprite = Blocks.Length - 1;
             }
             else
             {
                 indexOfCurrentSprite--;
             }
-            currentSprite = Items[indexOfCurrentSprite];
+            currentSprite = Blocks[indexOfCurrentSprite];
         }
     }
 }

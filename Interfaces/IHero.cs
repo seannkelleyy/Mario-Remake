@@ -1,19 +1,19 @@
 ﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace GreenGame.Interfaces
+namespace Mario.Interfaces
 {
-	public interface IHero : ISprite
+    public interface IHero
     {
-		// Movement
-		public void WalkLeft();
+        // Movement
+        public void WalkLeft();
 
-		public void WalkRight();
+        public void WalkRight();
 
-		public void Jump();
+        public void Jump();
 
-		// Only for 'big' hereos. Implementation could change with state.
-		public void Crouch();
+        // Only for 'big' hereos. Implementation could change with state.
+        public void Crouch();
 
         // Function for Hero to collect an item
         void Collect(IItem item);
@@ -29,6 +29,8 @@ namespace GreenGame.Interfaces
         // This will be a generic attack command. We could get what kind of attack
         // Based upon the state of the Hero.
         public void Attack(Game game);
-	}
+
+        void Update(GameTime gameTime);
+    }
 }
 

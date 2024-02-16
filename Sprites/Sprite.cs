@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Mario.Interfaces;
+using System.Data.Common;
+using System;
 
 namespace Mario.Sprites
 {
@@ -8,81 +10,45 @@ namespace Mario.Sprites
     public class Sprite : ISprite
     {
         public Texture2D Texture { get; set; }
-        public int Rows { get; set; }
-        public int Columns { get; set; }
         private int CurrentFrame = 0;
         private int TotalFrames;
-        private int YDistance;
-        private int MaxYDistance;
-        private bool YDirection = true;
-        private int XDistance;
-        private int MaxXDistance;
-        private bool XDirection = true;
+        private  int size;
+        private int SpriteSheetStartingX;
+        private int SpriteSheetStartingY;
+        private int width;
+        private int height;
+        float updateInterval;
+        float elapsedSeconds;
 
-        public Sprite(Texture2D texture, int rows = 1, int columns = 1, int yDistance = 0, int xDistance = 0)
+
+        public Sprite(Texture2D texture, int[] spriteParams)
         {
             Texture = texture;
-            Rows = rows;
-            Columns = columns;
-            TotalFrames = Rows * Columns;
-            MaxYDistance = yDistance;
-            MaxXDistance = xDistance;
-
+            SpriteSheetStartingX = spriteParams[0];
+            SpriteSheetStartingY = spriteParams[1];
+            width = spriteParams[2];
+            height = spriteParams[3];    
+            TotalFrames = spriteParams[4];
+            this.size = spriteParams[5];
+            updateInterval = .2f;
+            elapsedSeconds = 0;
         }
 
         public void Update(GameTime gameTime)
         {
             // Update the sprite every 1/30th of a second
-            float updateInterval = 1.0f / 30.0f;
-            float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (elapsedSeconds >= updateInterval)
             {
                 CurrentFrame = (CurrentFrame + 1) % TotalFrames;
-
-                if (MaxYDistance > 0)
-                {
-                    UpdateDistanceAndDirection(ref YDistance, ref YDirection, MaxYDistance);
-                }
-
-                if (MaxXDistance > 0)
-                {
-                    UpdateDistanceAndDirection(ref XDistance, ref XDirection, MaxXDistance);
-                }
-            }
-        }
-
-        // Helper function to update the distance, since the code for either distnace was pretty much the same.
-        // I pass the values by ref so that it updates the original value.
-        private void UpdateDistanceAndDirection(ref int distance, ref bool direction, int maxDistance)
-        {
-            if (direction)
-            {
-                distance++;
-                if (distance == maxDistance)
-                {
-                    direction = false;
-                }
-            }
-            else
-            {
-                distance--;
-                if (distance == 0)
-                {
-                    direction = true;
-                }
+                elapsedSeconds = 0;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            int width = Texture.Width / Columns;
-            int height = Texture.Height / Rows;
-            int row = CurrentFrame / Columns;
-            int column = CurrentFrame % Columns;
-
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X + XDistance, (int)(location.Y + YDistance), width, height);
+            Rectangle sourceRectangle = new Rectangle(SpriteSheetStartingX + width*CurrentFrame, SpriteSheetStartingY, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)(location.Y), width*size, height*size);
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
