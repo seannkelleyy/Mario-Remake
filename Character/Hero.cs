@@ -3,18 +3,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Mario.Character.MarioStates;
 using Microsoft.Xna.Framework.Graphics;
-using Mario.Sprites;
 using Mario.Interfaces.Entities;
 
 namespace Mario.Character
 {
     public class Hero : IHero
     {
-        private SpriteBatch _spriteBatch;
-        private int health = 1;
-        private Vector2 position;
         public HeroState currentState { get; set; }
-        private bool direction;
+        private SpriteBatch _spriteBatch;
+        private Vector2 position;
+        private int health = 1;
 
         public Hero(ContentManager content, SpriteBatch spriteBatch, Vector2 position)
         {
@@ -25,8 +23,6 @@ namespace Mario.Character
 
         public void Update(GameTime gameTime)
         {
-            // Update Mario's state based on the current command executed
-            // This could involve changing spriteStates and currentSprite based on the action
             currentState.Update(gameTime);
             // Additional game logic here (e.g., physics, collisions)
         }
@@ -36,7 +32,6 @@ namespace Mario.Character
             currentState.Draw(_spriteBatch, position);
         }
 
-        // Implementing IPlayer interface methods, these methods are called by commands
         public void WalkLeft()
         {
             currentState = new LeftMovingState(_spriteBatch);

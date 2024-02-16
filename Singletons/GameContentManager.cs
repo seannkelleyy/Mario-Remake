@@ -1,5 +1,4 @@
-﻿using System;
-using Mario.Character;
+﻿using Mario.Character;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;

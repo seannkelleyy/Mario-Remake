@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Mario.Interfaces;
-using System.Data.Common;
-using System;
 
 namespace Mario.Sprites
 {
