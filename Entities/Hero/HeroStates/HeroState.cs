@@ -30,7 +30,8 @@ namespace Mario.Entities.Character.HeroStates
     // These will be used for transitions 
     public class StandingLeftState : HeroState
     {
-        public StandingLeftState() : base() {
+        public StandingLeftState() : base()
+        {
             sprite = spriteFactory.CreateSprite("leftStandMario");
         }
     }
@@ -45,21 +46,24 @@ namespace Mario.Entities.Character.HeroStates
 
     public class LeftMovingState : HeroState
     {
-        public LeftMovingState() : base() {
+        public LeftMovingState() : base()
+        {
             sprite = spriteFactory.CreateSprite("leftRunMario");
         }
     }
 
     public class RightMovingState : HeroState
     {
-        public RightMovingState() : base() {
+        public RightMovingState() : base()
+        {
             sprite = spriteFactory.CreateSprite("rightRunMario");
         }
     }
 
     public class JumpStateRight : HeroState
     {
-        public JumpStateRight() : base() {
+        public JumpStateRight() : base()
+        {
             sprite = spriteFactory.CreateSprite("rightJumpMario");
         }
     }
@@ -74,7 +78,8 @@ namespace Mario.Entities.Character.HeroStates
 
     public class CrouchState : HeroState
     {
-        public CrouchState() : base() {
+        public CrouchState() : base()
+        {
             // Need to add crouching sprite
             // sprite = spriteFactory.CreateSprite("crouchingMario");
         }
@@ -82,14 +87,16 @@ namespace Mario.Entities.Character.HeroStates
 
     public class CollectState : HeroState
     {
-        public CollectState() : base() {
+        public CollectState() : base()
+        {
             // add collect sprite
         }
     }
 
     public class DeadState : HeroState
     {
-        public DeadState() : base() {
+        public DeadState() : base()
+        {
             // add dead sprite
         }
     }

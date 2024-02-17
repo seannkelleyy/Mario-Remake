@@ -7,7 +7,6 @@ using System;
 public class Koopa : IEnemy
 {
     public KoopaState currentState;
-    private SpriteBatch spriteBatch;
     private Vector2 position;
     // Right is true, left is false
     private Boolean direction = true;
@@ -25,7 +24,6 @@ public class Koopa : IEnemy
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
         this.position = position;
-        this.spriteBatch = spriteBatch;
         currentState.Draw(spriteBatch, position);
     }
 

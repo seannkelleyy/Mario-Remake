@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Entities.EnemyCycle
 {
+    // GONE AFTER SPRINT 2
     public class EnemyCycle : IEnemyCycle
     {
         private ISprite[] Enemies;
@@ -27,8 +28,6 @@ namespace Mario.Entities.EnemyCycle
         {
             currentSprite.Update(gameTime);
         }
-
-        // NOTE: These methods will go bye bye after Sprint 2.
 
         // Changes the current sprite to be drawn to the next enemy in the list
         public void CycleEnemyNext()

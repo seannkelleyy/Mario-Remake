@@ -1,5 +1,4 @@
-﻿using Mario.Entities.Enemy;
-using Mario.Entities.Enemy.Goomba;
+﻿using Mario.Entities.Enemy.Goomba;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +7,6 @@ using System;
 public class Goomba : IEnemy
 {
     public GoombaState currentState;
-    private SpriteBatch spriteBatch;
     private Vector2 position;
     // Right is true, left is false
     private Boolean direction = true;
@@ -26,7 +24,6 @@ public class Goomba : IEnemy
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
         this.position = position;
-        this.spriteBatch = spriteBatch;
         currentState.Draw(spriteBatch, position);
     }
 
@@ -44,22 +41,26 @@ public class Goomba : IEnemy
     {
         currentState = new FlippedGoombaState();
     }
-    
+
     // These will need edited later
-    public void MoveLeft(){
-        if(position.X == 0){
+    public void MoveLeft()
+    {
+        if (position.X == 0)
+        {
             ChangeDirection();
         }
         position.X = position.X - 2;
     }
 
-    public void MoveRight(){
+    public void MoveRight()
+    {
         //Edit value to whatever the edge of the screen is
-        if(position.X == 0){
+        if (position.X == 0)
+        {
             ChangeDirection();
         }
         position.X = position.X + 2;
     }
-    
+
 }
 

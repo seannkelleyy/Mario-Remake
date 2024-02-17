@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using Mario.Interfaces;
 using System;
@@ -56,7 +59,7 @@ namespace Mario.Input
 
             // Moving entity Cycle Commands
             Commands.Add(Keys.O, new Action(enemy.CycleEnemyNext));
-            Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));            
+            Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));
         }
 
         public void Add(Keys key, Action action)
