@@ -7,37 +7,38 @@ namespace Mario
 {
     public class MarioRemake : Game
     {
-        private GraphicsDeviceManager Graphics;
-        private GameContentManager GameContentManager;
-        private SpriteBatch SpriteBatch;
-        private IController KeyboardController;
+        private GraphicsDeviceManager graphics;
+        private GameContentManager gameContentManager;
+        private SpriteBatch spriteBatch;
+        private IController keyboardController;
         public MarioRemake()
         {
-            Graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            KeyboardController = new KeyboardController();
-            GameContentManager = new GameContentManager();
-            GameContentManager.Initialize();
+            keyboardController = new KeyboardController();
+            gameContentManager = new GameContentManager();
+            gameContentManager.Initialize();
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
-            GameContentManager.Load(Content, SpriteBatch);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            keyboardController.LoadCommands(this, Content, spriteBatch);
+            gameContentManager.Load(Content, spriteBatch);
             base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardController.Update();
-            GameContentManager.Update(gameTime);
+            keyboardController.Update();
+            gameContentManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -45,9 +46,9 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin();
-            GameContentManager.Draw(SpriteBatch);
-            SpriteBatch.End();
+            spriteBatch.Begin();
+            gameContentManager.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

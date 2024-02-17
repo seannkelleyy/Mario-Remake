@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Sprites
 {
-    public class Block : Interfaces.IBlock
+    public class Block : IBlock
     {
         private ISprite[] Blocks;
         private ISprite currentSprite;

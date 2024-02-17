@@ -1,40 +1,17 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Mario.Interfaces.Entities
+﻿namespace Mario.Interfaces.Entities
 {
-    public interface IHero
+    public interface IHero : IBase
     {
-        // Movement
         public void WalkLeft();
-
         public void WalkRight();
-
         public void Jump();
-
         // Only for 'big' hereos. Implementation could change with state.
         public void Crouch();
-
-        // Function for Hero to collect an item
         void Collect(IItem item);
-
         // Function to power up Hero. i.e.make big, firepower...
-        // Probably needs a param
-        void PowerUp();
-
-        // Function to handle when Hero takes damage
         void TakeDamage();
-
-        // Actions
-        // This will be a generic attack command. We could get what kind of attack
-        // Based upon the state of the Hero.
-        public void Attack(Game game);
-
-        // Function to handle when Hero dies
+        public void Attack();
         public void Die();
-
-        void Update(GameTime gameTime);
-
-        public void Draw(); 
     }
 }
 

@@ -13,11 +13,9 @@ namespace Mario.Entities.Character
         private Vector2 position;
         private int health = 1;
 
-        public Hero(SpriteBatch spriteBatch, Vector2 position)
+        public Hero()
         {
-            this.spriteBatch = spriteBatch;
             currentState = new StandingState(spriteBatch);
-            this.position = position;
         }
 
         public void Update(GameTime gameTime)
@@ -25,8 +23,10 @@ namespace Mario.Entities.Character
             currentState.Update(gameTime);
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
+            this.position = position;
+            this.spriteBatch = spriteBatch;
             currentState.Draw(spriteBatch, position);
         }
 
@@ -55,11 +55,6 @@ namespace Mario.Entities.Character
         void IHero.Collect(IItem item)
         {
             currentState = new ClollectState(spriteBatch);
-        }
-
-        void IHero.PowerUp()
-        {
-            currentState = new PowerUpState(spriteBatch);
             if (health < 3)
             {
                 health++;
@@ -76,7 +71,7 @@ namespace Mario.Entities.Character
             }
         }
 
-        void IHero.Attack(Game game)
+        void IHero.Attack()
         {
             currentState = new AttackState(spriteBatch);
         }

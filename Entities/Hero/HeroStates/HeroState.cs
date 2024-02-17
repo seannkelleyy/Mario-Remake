@@ -15,7 +15,6 @@ namespace Mario.Entities.Character.HeroStates
         public HeroState(SpriteBatch spriteBatch)
         {
             _spriteFactory = SpriteFactory.Instance;
-
             _spriteBatch = spriteBatch;
             _sprite = _spriteFactory.CreateSprite("leftRunMario");
         }
@@ -103,21 +102,6 @@ namespace Mario.Entities.Character.HeroStates
     public class ClollectState : HeroState
     {
         public ClollectState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
-        }
-    }
-
-    public class PowerUpState : HeroState
-    {
-        public PowerUpState(SpriteBatch spriteBatch) : base(spriteBatch) { }
 
         public override void Update(GameTime gameTime)
         {

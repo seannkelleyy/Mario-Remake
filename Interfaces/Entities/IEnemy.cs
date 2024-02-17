@@ -1,8 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Mario.Interfaces.Entities
+﻿namespace Mario.Interfaces.Entities
 {
-    public interface IEnemy
+    public interface IEnemy : IBase
     {
         // Movement
         public void ChangeDirection();
@@ -10,9 +8,5 @@ namespace Mario.Interfaces.Entities
         // Function to handle when Enemu takes damage
         public void Stomp();
         public void Flip();
-
-        public void Update(GameTime gameTime);
-
-        public void Draw();
     }
 }

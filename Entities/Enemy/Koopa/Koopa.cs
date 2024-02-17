@@ -1,4 +1,4 @@
-﻿using Mario.Entities.Enemy;
+﻿using Mario.Entities.Enemy.Koopa;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,17 +6,15 @@ using System;
 
 public class Koopa : IEnemy
 {
-    public EnemyState currentState;
+    public KoopaState currentState;
     private SpriteBatch spriteBatch;
     private Vector2 position;
     // Right is true, left is false
     private Boolean direction = true;
 
-    public Koopa(SpriteBatch spriteBatch, Vector2 position)
+    public Koopa()
     {
-        this.spriteBatch = spriteBatch;
-        currentState = new LeftMovingKoopaState(spriteBatch);
-        this.position = position;
+        currentState = new LeftMovingKoopaState();
     }
 
     public void Update(GameTime gameTime)
@@ -24,8 +22,10 @@ public class Koopa : IEnemy
         currentState.Update(gameTime);
     }
 
-    public void Draw()
+    public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
+        this.position = position;
+        this.spriteBatch = spriteBatch;
         currentState.Draw(spriteBatch, position);
     }
 
@@ -36,12 +36,12 @@ public class Koopa : IEnemy
 
     public void Stomp()
     {
-        currentState = new StompedKoopaState(spriteBatch);
+        currentState = new StompedKoopaState();
     }
 
     public void Flip()
     {
-        currentState = new FlippedKoopaState(spriteBatch);
+        currentState = new FlippedKoopaState();
     }
 
     // These will need edited later

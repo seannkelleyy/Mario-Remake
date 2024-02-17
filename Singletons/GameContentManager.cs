@@ -1,4 +1,5 @@
 ﻿using Mario.Entities.Character;
+using Mario.Entities.EnemyCycle;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
@@ -20,11 +21,8 @@ namespace Mario.Singletons
 		private IEnemyCycle koopaDisplay;
         private IItem itemDisplay; 
 		private IBlock blockDisplay;
-		// Eventually we will have Mario and Enemies here as well
 
-		public GameContentManager()
-		{
-		}
+		public GameContentManager() { }
 
 		public void Initialize()
 		{
@@ -65,10 +63,9 @@ namespace Mario.Singletons
 
             itemDisplay = new Item(itemSprites);
 			blockDisplay = new Block(blockSprites);
-			goombaDisplay = new EnemyCycle(goombaSprites, new Vector2(400, 100));
-			koopaDisplay = new EnemyCycle(koopaSprites, new Vector2(500, 100));
-			
-			marioDisplay = new Hero(spriteBatch, new Vector2(300, 100));
+			goombaDisplay = new EnemyCycle(goombaSprites);
+			koopaDisplay = new EnemyCycle(koopaSprites);
+			marioDisplay = new Hero();
 		}
 
 		public void Update(GameTime gameTime)
@@ -84,9 +81,9 @@ namespace Mario.Singletons
 		{
             itemDisplay.Draw(spriteBatch, new Vector2(100, 100));
 			blockDisplay.Draw(spriteBatch, new Vector2(200, 100));
-			marioDisplay.Draw();
-			goombaDisplay.Draw(spriteBatch);
-			koopaDisplay.Draw(spriteBatch);
+			marioDisplay.Draw(spriteBatch, new Vector2(300, 100));
+			goombaDisplay.Draw(spriteBatch, new Vector2(400, 100));
+			koopaDisplay.Draw(spriteBatch, new Vector2(500, 100));
 		}
 	}
 }

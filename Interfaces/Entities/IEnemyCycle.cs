@@ -1,14 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Interfaces.Entities;
 
 namespace Mario.Interfaces
 {
     // This interface is just here for Sprint2, it will be deleted after
-    public interface IEnemyCycle
+    public interface IEnemyCycle : IBase
     {
-        public void Update(GameTime gameTime);
-        public void Draw(SpriteBatch spriteBatch);
-
         public void CycleEnemyNext();
 
         public void CycleEnemyPrev();

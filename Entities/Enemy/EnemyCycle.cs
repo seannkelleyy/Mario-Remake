@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Sprites
+namespace Mario.Entities.EnemyCycle
 {
     public class EnemyCycle : IEnemyCycle
     {
@@ -11,15 +11,15 @@ namespace Mario.Sprites
         private int indexOfCurrentSprite = 0;
         private Vector2 position;
 
-        public EnemyCycle(ISprite[] enemies, Vector2 itemPosition)
+        public EnemyCycle(ISprite[] enemies)
         {
             Enemies = enemies;
             currentSprite = enemies[indexOfCurrentSprite];
-            position = itemPosition;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
+            this.position = position;
             currentSprite.Draw(spriteBatch, position);
         }
 
