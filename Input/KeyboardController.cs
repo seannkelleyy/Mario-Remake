@@ -36,7 +36,7 @@ namespace Mario.Input
 
             // System commands
             Commands.Add(Keys.Q, new Action(game.Exit));
-            Commands.Add(Keys.R, new Action(game.Run));
+            Commands.Add(Keys.R, new Action(game.Restart));
 
             // Hero/Player Commands
             Commands.Add(Keys.W, new Action(mario.Jump));
@@ -53,7 +53,7 @@ namespace Mario.Input
 
             // Moving entity Cycle Commands
             Commands.Add(Keys.O, new Action(enemy.CycleEnemyNext));
-            Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));
+            Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));            
         }
 
         public void Add(Keys key, Action action)

@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
 using Mario.Singletons;
+using System;
+using System.Diagnostics;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
 
@@ -64,6 +66,14 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        // Restarts the game
+        public void Restart()
+        {
+            String currentApplication = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(currentApplication);
+            Environment.Exit(0);
         }
     }
 }
