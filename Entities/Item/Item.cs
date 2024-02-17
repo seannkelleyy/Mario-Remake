@@ -4,18 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Sprites
 {
-    public class EnemyCycle : IEnemyCycle
+    public class Item : IItem
     {
-        private ISprite[] Enemies;
+        private ISprite[] Items;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
         private Vector2 position;
 
-        public EnemyCycle(ISprite[] enemies, Vector2 itemPosition)
+        public Item(ISprite[] items, Vector2 position)
         {
-            Enemies = enemies;
-            currentSprite = enemies[indexOfCurrentSprite];
-            position = itemPosition;
+            this.position = position;
+            Items = items;
+            currentSprite = items[indexOfCurrentSprite];
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -30,10 +30,10 @@ namespace Mario.Sprites
 
         // NOTE: These methods will go bye bye after Sprint 2.
 
-        // Changes the current sprite to be drawn to the next enemy in the list
-        public void CycleEnemyNext()
+        // Changes the current sprite to be drawn to the next item in the list
+        public void CycleItemNext()
         {
-            if (indexOfCurrentSprite == Enemies.Length - 1)
+            if (indexOfCurrentSprite == Items.Length - 1)
             {
                 indexOfCurrentSprite = 0;
             }
@@ -41,21 +41,21 @@ namespace Mario.Sprites
             {
                 indexOfCurrentSprite++;
             }
-            currentSprite = Enemies[indexOfCurrentSprite];
+            currentSprite = Items[indexOfCurrentSprite];
         }
 
-        // Changes the current sprite to be drawn to the previous enemy in the list
-        public void CycleEnemyPrev()
+        // Changes the current sprite to be drawn to the previous item in the list
+        public void CycleItemPrev()
         {
             if (indexOfCurrentSprite == 0)
             {
-                indexOfCurrentSprite = Enemies.Length - 1;
+                indexOfCurrentSprite = Items.Length - 1;
             }
             else
             {
                 indexOfCurrentSprite--;
             }
-            currentSprite = Enemies[indexOfCurrentSprite];
+            currentSprite = Items[indexOfCurrentSprite];
         }
     }
 }

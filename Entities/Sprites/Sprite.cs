@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Mario.Interfaces;
-using System.Data.Common;
-using System;
 
 namespace Mario.Sprites
 {
@@ -12,7 +10,7 @@ namespace Mario.Sprites
         public Texture2D Texture { get; set; }
         private int CurrentFrame = 0;
         private int TotalFrames;
-        private  int size;
+        private int size;
         private int SpriteSheetStartingX;
         private int SpriteSheetStartingY;
         private int width;
@@ -30,7 +28,7 @@ namespace Mario.Sprites
             height = spriteParams[3];    
             TotalFrames = spriteParams[4];
             this.size = spriteParams[5];
-            updateInterval = .2f;
+            updateInterval = .1f;
             elapsedSeconds = 0;
         }
 

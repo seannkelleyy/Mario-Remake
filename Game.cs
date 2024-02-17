@@ -1,27 +1,34 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Mario.Input;
+﻿using Mario.Input;
 using Mario.Interfaces;
+using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Mario.Sprites;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Diagnostics;
+
 namespace Mario
 {
     public class MarioRemake : Game
     {
-        private GraphicsDeviceManager Graphics;
-        private SpriteBatch SpriteBatch;
-        private IController KeyboardController;
-        private ISprite[] itemSprites;
-        private IItem itemDisplay; 
+        private GraphicsDeviceManager graphics;
+        private GameContentManager gameContentManager;
+        private SpriteBatch spriteBatch;
+        private IController keyboardController;
+        private IEntityBase[] entities;
         public MarioRemake()
         {
-            Graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            KeyboardController = new KeyboardController();
+            keyboardController = new KeyboardController();
+            gameContentManager = GameContentManager.Instance;
+            gameContentManager.Initialize();
 
             base.Initialize();
         }
@@ -29,35 +36,44 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
-            //Displays the item Sprites for sprint 2
-            itemSprites = new ISprite[] { 
-                SpriteFactory.Instance.CreateSprite("fireFlower"), 
-                SpriteFactory.Instance.CreateSprite("coin"), 
-                SpriteFactory.Instance.CreateSprite("mushroom"), 
-                SpriteFactory.Instance.CreateSprite("star") 
-            };
-            itemDisplay = new Item(itemSprites, new Vector2(100,100));
+            gameContentManager.Load();
+            entities = gameContentManager.GetEntities();
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            keyboardController.LoadCommands(this, entities);
             base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardController.Update();
+            foreach (IEntityBase entity in entities)
+            {
+                // This will eventually check if the entity needs to be updated
+                if (entity != null)
+                {
+                    entity.Update(gameTime);
+                }
+            }
+            keyboardController.Update(gameTime);
             base.Update(gameTime);
-            itemDisplay.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin();
-            itemDisplay.Draw(SpriteBatch);
-
-            SpriteBatch.End();
+            spriteBatch.Begin();
+            gameContentManager.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        // Restarts the game
+        public void Restart()
+        {
+            String currentApplication = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(currentApplication);
+            Environment.Exit(0);
         }
     }
 }
