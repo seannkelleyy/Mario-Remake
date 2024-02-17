@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
+using Microsoft.VisualBasic;
 
 namespace Mario
 {
@@ -44,16 +45,16 @@ namespace Mario
         }
 
         protected override void Update(GameTime gameTime)
-        {
+        { 
             foreach (IEntityBase entity in entities)
             {
-                // This will eventually check if the entity needs to be updated
+                    // This will eventually check if the entity needs to be updated
                 if (entity != null)
                 {
-                    entity.Update(gameTime);
+                        entity.Update(gameTime);
                 }
             }   
-            keyboardController.Update();
+            keyboardController.Update(gameTime);
             base.Update(gameTime);
         }
 

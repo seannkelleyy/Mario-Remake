@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mario.Interfaces;
 using System;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Input
 {
@@ -17,6 +18,8 @@ namespace Mario.Input
         private IHero mario;
         private IEnemyCycle enemy;
         private Keys[] keysPressed;
+        float updateInterval = 0.1f;
+        float elapsedSeconds = 0;
 
 
         public KeyboardController()
@@ -61,15 +64,20 @@ namespace Mario.Input
             Commands.Add(key, action);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            keysPressed = Keyboard.GetState().GetPressedKeys();
-            foreach (Keys key in keysPressed)
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= updateInterval)
             {
-                if (Commands.ContainsKey(key))
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                foreach (Keys key in keysPressed)
                 {
-                    Commands[key].Invoke();
-                }
+                    if (Commands.ContainsKey(key))
+                    {
+                        Commands[key].Invoke();
+                    }
+                } 
             }
         }
     }
