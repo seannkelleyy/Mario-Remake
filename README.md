@@ -7,6 +7,7 @@ Dominic Artman (@DomArtman), Jinyi Ge (@), Ian Hood (@hood276), Sean Kelley (@se
 ## About
 This is a project we created in CSE-3902 at The Ohio State University.
 We were tasked with creating a video game remake using Monogame.
+For our project we chose to make a Mario clone.
 
 This project was completed in sprints that were completely designed and completed by the members in our group.
 ## Technical Details
@@ -18,5 +19,4 @@ Languages and Frameworks Used:
 
 To being, you must clone the repository and run it in Visual Studio.
 
-
-More to come...
+To run Sprint-2 either go to the Sprint 2 release and download the zip file OR simply open the 'Sprint-2-Release' branch.
