@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework.Content;
-using Mario.Interfaces;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 
 namespace Mario.Sprites
@@ -11,6 +11,9 @@ namespace Mario.Sprites
         private Dictionary<string, int[]> spriteNumbers;
         private Texture2D[] spriteSheets;
         private static SpriteFactory instance = new SpriteFactory();
+
+        // This code follows the singleton pattern
+        // When you need a SpriteFactory, you call SpriteFactory.Instance
         public static SpriteFactory Instance
         {
             get
@@ -18,7 +21,8 @@ namespace Mario.Sprites
                 return instance;
             }
         }
-        public SpriteFactory()
+        // This is a private constructor, so no one can create a new SpriteFactory
+        private SpriteFactory()
         {
             spriteNumbers = GlobalVariables.spriteNumbers;
         }

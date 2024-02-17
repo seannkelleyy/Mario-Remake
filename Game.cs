@@ -1,13 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Mario.Input;
+﻿using Mario.Input;
 using Mario.Interfaces;
+using Mario.Interfaces.Entities;
 using Mario.Singletons;
+using Mario.Sprites;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
-using Mario.Interfaces.Entities;
-using Mario.Sprites;
-using Microsoft.VisualBasic;
 
 namespace Mario
 {
@@ -28,7 +27,7 @@ namespace Mario
         protected override void Initialize()
         {
             keyboardController = new KeyboardController();
-            gameContentManager = new GameContentManager();
+            gameContentManager = GameContentManager.Instance;
             gameContentManager.Initialize();
 
             base.Initialize();
@@ -45,15 +44,15 @@ namespace Mario
         }
 
         protected override void Update(GameTime gameTime)
-        { 
+        {
             foreach (IEntityBase entity in entities)
             {
-                    // This will eventually check if the entity needs to be updated
+                // This will eventually check if the entity needs to be updated
                 if (entity != null)
                 {
-                        entity.Update(gameTime);
+                    entity.Update(gameTime);
                 }
-            }   
+            }
             keyboardController.Update(gameTime);
             base.Update(gameTime);
         }

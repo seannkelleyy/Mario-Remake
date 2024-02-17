@@ -42,9 +42,44 @@ namespace Mario.Input
             Commands.Add(Keys.R, new Action(game.Restart));
 
             // Hero/Player Commands
-            Commands.Add(Keys.W, new Action(mario.Jump));
+            Commands.Add(Keys.W, new Action(() =>
+            {
+                // This allows for mario to move up and to the left or right
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    mario.Jump();
+                    mario.WalkLeft();
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    mario.Jump();
+                    mario.WalkRight();
+                }
+                else
+                {
+                    mario.Jump();
+                }
+            }));
             Commands.Add(Keys.A, new Action(mario.WalkLeft));
-            Commands.Add(Keys.S, new Action(mario.Crouch));
+            Commands.Add(Keys.S, new Action(() =>
+            {
+                // This will change after sprint 2, we just wanted to be able to move mario around
+                // This allows for mario to move down and to the left or right
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    mario.Crouch();
+                    mario.WalkLeft();
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    mario.Crouch();
+                    mario.WalkRight();
+                }
+                else
+                {
+                    mario.Crouch();
+                }
+            }));
             Commands.Add(Keys.D, new Action(mario.WalkRight));
             Commands.Add(Keys.E, new Action(mario.TakeDamage));
 

@@ -18,8 +18,20 @@ namespace Mario.Singletons
         private IEnemyCycle enemy;
         private IItem item;
         private IBlock block;
+        private static GameContentManager instance = new GameContentManager();
 
-        public GameContentManager() { }
+        // This code follows the singleton pattern
+        // When you need a GCM, you call GameContentManager.Instance
+        public static GameContentManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
+        // This is a private constructor, so no one can create a new GameContentManager
+        private GameContentManager() { }
 
         public void Initialize()
         {

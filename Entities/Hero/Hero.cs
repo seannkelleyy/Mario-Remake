@@ -35,14 +35,22 @@ namespace Mario.Entities.Character
 
         public void WalkLeft()
         {
+            if (currentState is LeftMovingState)
+            {
+                position.X -= 3;
+                return;
+            }
             currentState = new LeftMovingState();
-            position.X -= 2;
         }
 
         public void WalkRight()
         {
+            if (currentState is RightMovingState)
+            {
+                position.X += 3;
+                return;
+            }
             currentState = new RightMovingState();
-            position.X += 2;
         }
 
         public void Jump()
@@ -51,7 +59,7 @@ namespace Mario.Entities.Character
             {
                 return;
             }
-            position.Y += 5;
+            position.Y -= 5;
 
             if (direction)
             {
@@ -65,6 +73,14 @@ namespace Mario.Entities.Character
 
         public void Crouch()
         {
+            // If mario is already crouching, move him down
+            // This is just for sprint 2 to be able to move mario around more
+            // In sprint 3, we will have a crouch sprite and he will actually crouch
+            if (currentState is CrouchState)
+            {
+                return;
+            }
+            position.Y += 5;
             currentState = new CrouchState();
         }
 
