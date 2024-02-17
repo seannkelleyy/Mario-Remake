@@ -1,35 +1,50 @@
-﻿using System;
-using Mario.Interfaces;
+﻿using Mario.Entities.Enemy;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
-using Mario.Interfaces;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
-public class Goomba
+public class Goomba : IEnemy
 {
-    public IEnemyState state;
+    public EnemyState currentState;
+    private SpriteBatch spriteBatch;
     private Vector2 position;
+    // Right is true, left is false
+    private Boolean direction = true;
 
-    public Goomba(Vector2 pos)
+    public Goomba(SpriteBatch spriteBatch, Vector2 position)
     {
-        state = new LeftMovingGoombaState(this);
-        position = pos;
+        this.spriteBatch = spriteBatch;
+        currentState = new LeftMovingGoombaState(spriteBatch);
+        this.position = position;
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        currentState.Update(gameTime);
+    }
+
+    public void Draw()
+    {
+        currentState.Draw(spriteBatch, position);
     }
 
     public void ChangeDirection()
     {
-        state.ChangeDirection();
+        direction = !direction;
     }
 
-    public void BeStomped()
+    public void Stomp()
     {
-        state.BeStomped();
+        currentState = new StompedGoombaState(spriteBatch);
     }
 
-    public void BeFlipped()
+    public void Flip()
     {
-        state.BeFlipped();
+        currentState = new FlippedGoombaState(spriteBatch);
     }
-
-    // Draw and other methods omitted
+    
+    // These will need edited later
     public void MoveLeft(){
         if(position.X == 0){
             ChangeDirection();

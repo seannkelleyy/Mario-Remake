@@ -1,4 +1,4 @@
-﻿using Mario.Character;
+﻿using Mario.Entities.Character;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
@@ -52,7 +52,7 @@ namespace Mario.Singletons
             itemDisplay = new Item(itemSprites, new Vector2(100,100));
 			blockDisplay = new Block(blockSprites);
 
-			Mario = new Hero(content, spriteBatch, new Vector2(200, 300));
+			Mario = new Hero(spriteBatch, new Vector2(200, 300));
 		}
 
 		public void Update(GameTime gameTime)

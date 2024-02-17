@@ -1,34 +1,18 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Enemy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-public class LeftMovingGoombaState : IEnemyState
+public class LeftMovingGoombaState : EnemyState
 {
-    private Goomba goomba;
+    public LeftMovingGoombaState(SpriteBatch spriteBatch) : base(spriteBatch) { }
 
-    public LeftMovingGoombaState(Goomba goomba)
+    public override void Update(GameTime gameTime)
     {
-        this.goomba = goomba;
-        // construct goomba's sprite here too
+        _sprite.Update(gameTime);
     }
 
-    public void ChangeDirection()
+    public override void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        goomba.state = new RightMovingGoombaState(goomba);
+        _sprite.Draw(spriteBatch, position);
     }
-
-    public void BeStomped()
-    {
-        goomba.state = new StompedGoombaState(goomba);
-    }
-
-    public void BeFlipped()
-    {
-        goomba.state = new FlippedGoombaState(goomba);
-    }
-
-    public void Update(GameTime gameTime)
-    {
-           goomba.MoveLeft();
-    }
-
 }

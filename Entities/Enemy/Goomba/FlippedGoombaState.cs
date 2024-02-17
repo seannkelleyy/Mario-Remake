@@ -1,35 +1,18 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Enemy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-public class FlippedGoombaState : IEnemyState
+public class FlippedGoombaState : EnemyState
 {
-    private Goomba goomba;
+    public FlippedGoombaState(SpriteBatch spriteBatch) : base(spriteBatch) { }
 
-    public FlippedGoombaState(Goomba goomba)
+    public override void Update(GameTime gameTime)
     {
-        this.goomba = goomba;
-        // construct goomba's sprite here too
+        _sprite.Update(gameTime);
     }
 
-    public void ChangeDirection()
+    public override void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        //NO-OP
-    }
-
-    public void BeStomped()
-    {
-        // NO-OP
-        // already stomped, do nothing
-    }
-
-    public void BeFlipped()
-    {
-        // NO-OP
-        // if stomped, do not respond to being attacked by star mario (assumed but not tested behavior)
-    }
-
-    public void Update(GameTime gameTime)
-    {
-        // call something like goomba.Flip()
+        _sprite.Draw(spriteBatch, position);
     }
 }

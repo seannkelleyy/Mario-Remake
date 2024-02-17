@@ -1,37 +1,18 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Enemy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-    public class StompedKoopaState : IEnemyState
+public class StompedKoopaState : EnemyState
+{
+    public StompedKoopaState(SpriteBatch spriteBatch) : base(spriteBatch) { }
+
+    public override void Update(GameTime gameTime)
     {
-        private Koopa koopa;
+        _sprite.Update(gameTime);
+    }
 
-        public StompedKoopaState(Koopa koopa)
-        {
-            this.koopa = koopa;
-            // construct goomba's sprite here too
-        }
-
-        public void ChangeDirection()
-        {
-            //NO-OP
-        }
-
-        public void BeStomped()
-        {
-            // NO-OP
-            // already stomped, do nothing
-        }
-
-        public void BeFlipped()
-        {
-            // NO-OP
-            // if stomped, do not respond to being attacked by star mario (assumed but not tested behavior)
-        }
-
-
-        public void Update(GameTime gameTime)
-        {
-        // call something like koopa.Stomp()
+    public override void Draw(SpriteBatch spriteBatch, Vector2 position)
+    {
+        _sprite.Draw(spriteBatch, position);
     }
 }
-

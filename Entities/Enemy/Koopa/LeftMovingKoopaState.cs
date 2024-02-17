@@ -1,33 +1,18 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Enemy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-    public class LeftMovingKoopaState : IEnemyState
+public class LeftMovingKoopaState : EnemyState
+{
+    public LeftMovingKoopaState(SpriteBatch spriteBatch) : base(spriteBatch) { }
+
+    public override void Update(GameTime gameTime)
     {
-        private Koopa koopa;
-
-        public LeftMovingKoopaState(Koopa koopa)
-        {
-            this.koopa = koopa;
-            // construct koopa's sprite here too
-        }
-
-        public void ChangeDirection()
-        {
-            koopa.state = new RightMovingKoopaState(koopa);
-        }
-
-        public void BeStomped()
-        {
-            koopa.state = new StompedKoopaState(koopa);
-        }
-
-        public void BeFlipped()
-        {
-            koopa.state = new FlippedKoopaState(koopa);
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            koopa.MoveLeft();
-        }
+        _sprite.Update(gameTime);
     }
+
+    public override void Draw(SpriteBatch spriteBatch, Vector2 position)
+    {
+        _sprite.Draw(spriteBatch, position);
+    }
+}
