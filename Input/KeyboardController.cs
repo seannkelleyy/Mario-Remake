@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Mario.Interfaces;
 using Microsoft.Xna.Framework.Content;
 using System;
+using Mario.Interfaces.Entities;
 
 namespace Mario.Input
 {
@@ -15,9 +16,9 @@ namespace Mario.Input
         // but they will be gone after that.
         private IItem ItemSprite;
         private IBlock BlockSprite;
+        private IHero HeroSprite;
+        private IEnemyCycle EnemySprite;
         private Keys[] KeysPressed;
-        private delegate void NewGame(MarioRemake game);
-        // private IEnemy EnemySprite;
 
 
         public KeyboardController()
@@ -29,23 +30,26 @@ namespace Mario.Input
         // to assign the functions to call when keys are pressed.
         public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
         {
+            // System commands
             Commands.Add(Keys.Q, new Action(game.Exit));
             Commands.Add(Keys.R, new Action(game.Run));
 
-            //Commands.Add(Keys.W, );
-            //Commands.Add(Keys.A, );
-            //Commands.Add(Keys.S, );
-            //Commands.Add(Keys.D, );
-            //Commands.Add(Keys.E, );
+            // Hero/Player Commands
+            Commands.Add(Keys.W, new Action(HeroSprite.Jump));
+            Commands.Add(Keys.A, new Action(HeroSprite.WalkLeft));
+            Commands.Add(Keys.S, new Action(HeroSprite.Crouch));
+            Commands.Add(Keys.D, new Action(HeroSprite.WalkRight));
+            Commands.Add(Keys.E, new Action(HeroSprite.TakeDamage));
 
+            // Non-moving entity Cycle Commands
             Commands.Add(Keys.I, new Action(ItemSprite.CycleItemNext));
             Commands.Add(Keys.U, new Action(ItemSprite.CycleItemPrev));
             Commands.Add(Keys.T, new Action(BlockSprite.CycleBlockNext));
             Commands.Add(Keys.Y, new Action(BlockSprite.CycleBlockPrev));
 
-            // These will be added in enemy ticket.
-            // Commands.Add(Keys.O, new Action(EnemySprite.CycleEnemyNext));
-            // Commands.Add(Keys.P, new Action(EnemySprite.CycleEnemyPrev));
+            // Moving entity Cycle Commands
+            Commands.Add(Keys.O, new Action(EnemySprite.CycleEnemyNext));
+            Commands.Add(Keys.P, new Action(EnemySprite.CycleEnemyPrev));
         }
 
         public void Add(Keys key, Action action)

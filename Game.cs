@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
 using Mario.Singletons;
+
 namespace Mario
 {
     public class MarioRemake : Game
@@ -31,6 +32,7 @@ namespace Mario
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             GameContentManager.Load(Content, SpriteBatch);
+            KeyboardController.LoadCommands(this, Content, SpriteBatch);
             base.LoadContent();
         }
 
