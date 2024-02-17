@@ -1,6 +1,6 @@
-﻿using System;
-using Mario.Interfaces.Entities;
+﻿using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Mario.Interfaces
 {

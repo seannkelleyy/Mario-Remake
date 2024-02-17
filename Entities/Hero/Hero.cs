@@ -1,8 +1,8 @@
+using Mario.Entities.Character.HeroStates;
 using Mario.Interfaces;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Mario.Interfaces.Entities;
-using Mario.Entities.Character.HeroStates;
 using System;
 
 namespace Mario.Entities.Character
@@ -36,13 +36,13 @@ namespace Mario.Entities.Character
         public void WalkLeft()
         {
             currentState = new LeftMovingState();
-            position.X -= 2; 
+            position.X -= 2;
         }
 
         public void WalkRight()
         {
             currentState = new RightMovingState();
-            position.X += 2; 
+            position.X += 2;
         }
 
         public void Jump()
@@ -54,7 +54,8 @@ namespace Mario.Entities.Character
             if (direction)
             {
                 currentState = new JumpStateRight();
-            } else
+            }
+            else
             {
                 currentState = new JumpStateLeft();
             }

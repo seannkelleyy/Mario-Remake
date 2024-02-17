@@ -10,7 +10,7 @@ namespace Mario.Sprites
         public Texture2D Texture { get; set; }
         private int CurrentFrame = 0;
         private int TotalFrames;
-        private  int size;
+        private int size;
         private int SpriteSheetStartingX;
         private int SpriteSheetStartingY;
         private int width;
