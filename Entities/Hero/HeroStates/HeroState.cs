@@ -57,17 +57,26 @@ namespace Mario.Entities.Character.HeroStates
         }
     }
 
-    public class JumpState : HeroState
+    public class JumpStateRight : HeroState
     {
-        public JumpState() : base() {
-            sprite = spriteFactory.CreateSprite("jumpingMario");
+        public JumpStateRight() : base() {
+            sprite = spriteFactory.CreateSprite("rightJumpMario");
+        }
+    }
+
+    public class JumpStateLeft : HeroState
+    {
+        public JumpStateLeft() : base()
+        {
+            sprite = spriteFactory.CreateSprite("leftJumpMario");
         }
     }
 
     public class CrouchState : HeroState
     {
         public CrouchState() : base() {
-            sprite = spriteFactory.CreateSprite("crouchingMario");
+            // Need to add crouching sprite
+            // sprite = spriteFactory.CreateSprite("crouchingMario");
         }
     }
 

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mario.Interfaces.Entities;
 using Mario.Entities.Character.HeroStates;
+using System;
 
 namespace Mario.Entities.Character
 {
@@ -12,6 +13,8 @@ namespace Mario.Entities.Character
         private SpriteBatch spriteBatch;
         private Vector2 position;
         private int health = 1;
+        // True is right, false is left
+        private Boolean direction = true;
 
         public Hero()
         {
@@ -44,7 +47,17 @@ namespace Mario.Entities.Character
 
         public void Jump()
         {
-            currentState = new JumpState();
+            if (currentState is JumpStateRight || currentState is JumpStateLeft)
+            {
+                return;
+            }
+            if (direction)
+            {
+                currentState = new JumpStateRight();
+            } else
+            {
+                currentState = new JumpStateLeft();
+            }
         }
 
         public void Crouch()

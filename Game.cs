@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
 using Mario.Singletons;
+using Mario.Interfaces.Entities;
+using Mario.Sprites;
 
 namespace Mario
 {
@@ -12,6 +14,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        private IEntityBase[] entities;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,16 +33,25 @@ namespace Mario
 
         protected override void LoadContent()
         {
+            SpriteFactory.Instance.LoadAllTextures(Content);
+            gameContentManager.Load();
+            entities = gameContentManager.GetEntities();
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, Content, spriteBatch);
-            gameContentManager.Load(Content, spriteBatch);
+            keyboardController.LoadCommands(this, entities);
             base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
+            foreach (IEntityBase entity in entities)
+            {
+                // This will eventually check if the entity needs to be updated
+                if (entity != null)
+                {
+                    entity.Update(gameTime);
+                }
+            }   
             keyboardController.Update();
-            gameContentManager.Update(gameTime);
             base.Update(gameTime);
         }
 

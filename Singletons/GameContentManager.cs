@@ -14,13 +14,11 @@ namespace Mario.Singletons
 		private SpriteFactory spriteFactory;
 		private ISprite[] itemSprites;
 		private ISprite[] blockSprites;
-		private ISprite[] goombaSprites;
-		private ISprite[] koopaSprites;
-		private IHero marioDisplay;
-		private IEnemyCycle goombaDisplay;
-		private IEnemyCycle koopaDisplay;
-        private IItem itemDisplay; 
-		private IBlock blockDisplay;
+		private ISprite[] enemySprites;
+		private IHero mario;
+		private IEnemyCycle enemy;
+        private IItem item; 
+		private IBlock block;
 
 		public GameContentManager() { }
 
@@ -29,10 +27,8 @@ namespace Mario.Singletons
 			spriteFactory = SpriteFactory.Instance;
 		}
 
-		public void Load(ContentManager content, SpriteBatch spriteBatch)
+		public void Load()
 		{
-            spriteFactory.LoadAllTextures(content);
-
             //Displays the item Sprites for sprint 2
 			itemSprites = new ISprite[] { 
                 spriteFactory.CreateSprite("fireFlower"), 
@@ -50,40 +46,44 @@ namespace Mario.Singletons
 				spriteFactory.CreateSprite("pipeTile"),
             };
 
-			goombaSprites = new ISprite[]
+			enemySprites = new ISprite[]
 			{
-				spriteFactory.CreateSprite("goomba")
-			};
-
-			koopaSprites = new ISprite[]
-			{
+				spriteFactory.CreateSprite("goomba"),
 				spriteFactory.CreateSprite("rightKoopa"),
 				spriteFactory.CreateSprite("leftKoopa")
 			};
 
-            itemDisplay = new Item(itemSprites);
-			blockDisplay = new Block(blockSprites);
-			goombaDisplay = new EnemyCycle(goombaSprites);
-			koopaDisplay = new EnemyCycle(koopaSprites);
-			marioDisplay = new Hero();
+
+            item = new Item(itemSprites);
+			block = new Block(blockSprites);
+			enemy = new EnemyCycle(enemySprites);
+			mario = new Hero();
 		}
+
+		public IEntityBase[] GetEntities()
+		{
+			IEntityBase[] entities = new IEntityBase[4];
+			entities[0] = item;
+			entities[1] = block;
+			entities[2] = mario;
+			entities[3] = enemy;
+            return entities;
+        }
 
 		public void Update(GameTime gameTime)
 		{
-			marioDisplay.Update(gameTime);
-            itemDisplay.Update(gameTime);
-			blockDisplay.Update(gameTime);
-			goombaDisplay.Update(gameTime);
-			koopaDisplay.Update(gameTime);
+			mario.Update(gameTime);
+            item.Update(gameTime);
+			block.Update(gameTime);
+			enemy.Update(gameTime);
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-            itemDisplay.Draw(spriteBatch, new Vector2(100, 100));
-			blockDisplay.Draw(spriteBatch, new Vector2(200, 100));
-			marioDisplay.Draw(spriteBatch, new Vector2(300, 100));
-			goombaDisplay.Draw(spriteBatch, new Vector2(400, 100));
-			koopaDisplay.Draw(spriteBatch, new Vector2(500, 100));
+            item.Draw(spriteBatch, new Vector2(100, 100));
+			block.Draw(spriteBatch, new Vector2(200, 100));
+			mario.Draw(spriteBatch, new Vector2(300, 100));
+			enemy.Draw(spriteBatch, new Vector2(400, 100));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Mario.Interfaces.Entities
 {
-    public interface IEnemy : IBase
+    public interface IEnemy : IEntityBase
     {
         // Movement
         public void ChangeDirection();

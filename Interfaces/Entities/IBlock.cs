@@ -2,7 +2,7 @@
 
 namespace Mario.Interfaces
 {
-	public interface IBlock : IBase
+	public interface IBlock : IEntityBase
     {
         // Changes block sprite when it is hit etc.
         public void CycleBlockNext();

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Mario.Interfaces;
-using Microsoft.Xna.Framework.Content;
 using System;
 using Mario.Interfaces.Entities;
 
@@ -28,8 +26,14 @@ namespace Mario.Input
 
         // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
         // to assign the functions to call when keys are pressed.
-        public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
+        public void LoadCommands(MarioRemake game, IEntityBase[] entities)
         {
+
+            item = (IItem)entities[0];
+            block = (IBlock)entities[1];
+            mario = (IHero)entities[2];
+            enemy = (IEnemyCycle)entities[3];
+
             // System commands
             Commands.Add(Keys.Q, new Action(game.Exit));
             Commands.Add(Keys.R, new Action(game.Run));

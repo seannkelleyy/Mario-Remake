@@ -1,6 +1,6 @@
 ﻿namespace Mario.Interfaces.Entities
 {
-    public interface IHero : IBase
+    public interface IHero : IEntityBase
     {
         public void WalkLeft();
         public void WalkRight();
