@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Mario.Input;
 using Mario.Interfaces;
 using Mario.Singletons;
+
 namespace Mario
 {
     public class MarioRemake : Game

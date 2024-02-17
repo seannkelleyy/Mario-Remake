@@ -19,8 +19,6 @@ namespace Mario.Input
         private IHero mario;
         private IEnemyCycle enemy;
         private Keys[] keysPressed;
-        private delegate void NewGame(MarioRemake game);
-        // private IEnemy EnemySprite;
 
 
         public KeyboardController()
@@ -32,19 +30,24 @@ namespace Mario.Input
         // to assign the functions to call when keys are pressed.
         public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
         {
+            // System commands
             Commands.Add(Keys.Q, new Action(game.Exit));
             Commands.Add(Keys.R, new Action(game.Run));
 
-            Commands.Add(Keys.W, mario.Jump);
-            Commands.Add(Keys.A, mario.WalkLeft);
-            Commands.Add(Keys.S, mario.Crouch);
-            Commands.Add(Keys.D, mario.WalkRight);
-            Commands.Add(Keys.E, mario.Attack);
+            // Hero/Player Commands
+            Commands.Add(Keys.W, new Action(mario.Jump));
+            Commands.Add(Keys.A, new Action(mario.WalkLeft));
+            Commands.Add(Keys.S, new Action(mario.Crouch));
+            Commands.Add(Keys.D, new Action(mario.WalkRight));
+            Commands.Add(Keys.E, new Action(mario.TakeDamage));
 
+            // Non-moving entity Cycle Commands
             Commands.Add(Keys.I, new Action(item.CycleItemNext));
             Commands.Add(Keys.U, new Action(item.CycleItemPrev));
             Commands.Add(Keys.T, new Action(block.CycleBlockNext));
             Commands.Add(Keys.Y, new Action(block.CycleBlockPrev));
+
+            // Moving entity Cycle Commands
             Commands.Add(Keys.O, new Action(enemy.CycleEnemyNext));
             Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));
         }
