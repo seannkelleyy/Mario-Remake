@@ -7,156 +7,81 @@ namespace Mario.Entities.Character.HeroStates
 {
     public abstract class HeroState
     {
-        private SpriteBatch _spriteBatch;
-        private SpriteFactory _spriteFactory;
-        public ISprite _sprite;
+        protected SpriteFactory spriteFactory;
+        public ISprite sprite;
 
-
-        public HeroState(SpriteBatch spriteBatch)
+        public HeroState()
         {
-            _spriteFactory = SpriteFactory.Instance;
-            _spriteBatch = spriteBatch;
-            _sprite = _spriteFactory.CreateSprite("leftRunMario");
+            spriteFactory = SpriteFactory.Instance;
+            sprite = spriteFactory.CreateSprite("leftRunMario");
         }
 
-        public abstract void Update(GameTime gameTime);
-        public abstract void Draw(SpriteBatch spriteBatch, Vector2 position);
+        public virtual void Update(GameTime gameTime)
+        {
+            sprite.Update(gameTime);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            sprite.Draw(spriteBatch, position);
+        }
     }
 
-    public class StandingState : HeroState
+    // These will be used for transitions 
+    public class StandingLeftState : HeroState
     {
-
-        public StandingState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
+        public StandingLeftState() : base() {
+            sprite = spriteFactory.CreateSprite("leftStandMario");
         }
+    }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
+    public class StandingRightState : HeroState
+    {
+        public StandingRightState() : base()
         {
-            _sprite.Draw(spriteBatch, position);
+            sprite = spriteFactory.CreateSprite("rightStandMario");
         }
     }
 
     public class LeftMovingState : HeroState
     {
-        public LeftMovingState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public LeftMovingState() : base() {
+            sprite = spriteFactory.CreateSprite("leftRunMario");
         }
     }
 
     public class RightMovingState : HeroState
     {
-        public RightMovingState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public RightMovingState() : base() {
+            sprite = spriteFactory.CreateSprite("rightRunMario");
         }
     }
 
     public class JumpState : HeroState
     {
-        public JumpState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public JumpState() : base() {
+            sprite = spriteFactory.CreateSprite("jumpingMario");
         }
     }
 
     public class CrouchState : HeroState
     {
-        public CrouchState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public CrouchState() : base() {
+            sprite = spriteFactory.CreateSprite("crouchingMario");
         }
     }
 
-    public class ClollectState : HeroState
+    public class CollectState : HeroState
     {
-        public ClollectState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
-        }
-    }
-
-    public class TakeDamageState : HeroState
-    {
-        public TakeDamageState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
-        }
-    }
-
-    public class AttackState : HeroState
-    {
-        public AttackState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public CollectState() : base() {
+            // add collect sprite
         }
     }
 
     public class DeadState : HeroState
     {
-        public DeadState(SpriteBatch spriteBatch) : base(spriteBatch) { }
-
-        public override void Update(GameTime gameTime)
-        {
-            _sprite.Update(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            _sprite.Draw(spriteBatch, position);
+        public DeadState() : base() {
+            // add dead sprite
         }
     }
 }
-

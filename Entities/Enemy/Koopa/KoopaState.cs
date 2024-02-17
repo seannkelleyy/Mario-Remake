@@ -29,21 +29,29 @@ namespace Mario.Entities.Enemy.Koopa
 
     public class LeftMovingKoopaState : KoopaState
     {
-        public LeftMovingKoopaState() : base() { }
+        public LeftMovingKoopaState() : base() {
+            sprite = spriteFactory.CreateSprite("leftKoopa");
+        }
     }
 
     public class RightMovingKoopaState : KoopaState
     {
-        public RightMovingKoopaState() : base() { }
+        public RightMovingKoopaState() : base() {
+            sprite = spriteFactory.CreateSprite("rightKoopa");
+        }
     }
 
     public class FlippedKoopaState : KoopaState
     {
-        public FlippedKoopaState() : base() { }
+        public FlippedKoopaState() : base() {
+            sprite = spriteFactory.CreateSprite("flippedKoopa");
+        }
     }
 
     public class StompedKoopaState : KoopaState
     {
-        public StompedKoopaState() : base() { }
+        public StompedKoopaState() : base() {
+            sprite = spriteFactory.CreateSprite("stompedKoopa");    
+        }
     }
 }
