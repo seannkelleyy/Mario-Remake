@@ -18,9 +18,9 @@ public class GlobalVariables
             { "rightKoopa", new int[] { 0, 16, 16, 24, 2, 1, 2 } },
             { "leftKoopa", new int[] { 0, 40, 16, 24, 2, 1, 2 } },
             { "rightJumpMario", new int[] { 0, 0, 16, 16, 1, 1, 3 } },
-            { "rightRunMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },
+            { "leftRunMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },
             { "rightStandMario", new int[] { 64, 0, 16, 16, 1, 1, 3 } },
             { "leftJumpMario", new int[] { 0, 16, 16, 16, 1, 1, 3 } },
-            { "leftRunMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
+            { "rightRunMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
             { "leftStandMario", new int[] { 64, 16, 16, 16, 1, 1, 3 } } };
 }
