@@ -29,21 +29,29 @@ namespace Mario.Entities.Enemy.Goomba
 
     public class LeftMovingGoombaState : GoombaState
     {
-        public LeftMovingGoombaState() : base() { }
+        public LeftMovingGoombaState() : base() {
+            sprite = spriteFactory.CreateSprite("leftGoomba");
+        }
     }
 
     public class RightMovingGoombaState : GoombaState
     {
-        public RightMovingGoombaState() : base() { }
+        public RightMovingGoombaState() : base() {
+            sprite = spriteFactory.CreateSprite("rightGoomba");
+        }
     }
 
     public class FlippedGoombaState : GoombaState
     {
-        public FlippedGoombaState() : base() { }
+        public FlippedGoombaState() : base() {
+            sprite = spriteFactory.CreateSprite("flippedGoomba");
+        }
     }
 
     public class StompedGoombaState : GoombaState
     {
-        public StompedGoombaState() : base() { }
+        public StompedGoombaState() : base() {
+            sprite = spriteFactory.CreateSprite("stompedGoomba");
+        }
     }
 }

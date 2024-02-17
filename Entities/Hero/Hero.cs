@@ -15,7 +15,7 @@ namespace Mario.Entities.Character
 
         public Hero()
         {
-            currentState = new StandingState(spriteBatch);
+            currentState = new StandingRightState();
         }
 
         public void Update(GameTime gameTime)
@@ -32,29 +32,29 @@ namespace Mario.Entities.Character
 
         public void WalkLeft()
         {
-            currentState = new LeftMovingState(spriteBatch);
+            currentState = new LeftMovingState();
             position.X -= 2; 
         }
 
         public void WalkRight()
         {
-            currentState = new RightMovingState(spriteBatch);
+            currentState = new RightMovingState();
             position.X += 2; 
         }
 
         public void Jump()
         {
-            currentState = new JumpState(spriteBatch);
+            currentState = new JumpState();
         }
 
         public void Crouch()
         {
-            currentState = new CrouchState(spriteBatch);
+            currentState = new CrouchState();
         }
 
         void IHero.Collect(IItem item)
         {
-            currentState = new ClollectState(spriteBatch);
+            currentState = new CollectState();
             if (health < 3)
             {
                 health++;
@@ -63,7 +63,6 @@ namespace Mario.Entities.Character
 
         void IHero.TakeDamage()
         {
-            currentState = new TakeDamageState(spriteBatch);
             health--;
             if (health == 0)
             {
@@ -73,13 +72,13 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            currentState = new AttackState(spriteBatch);
+            // Make mario shoot fireball
         }
 
 
         public void Die()
         {
-            currentState = new DeadState(spriteBatch);
+            currentState = new DeadState();
         }
     }
 }
