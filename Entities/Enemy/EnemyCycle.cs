@@ -12,15 +12,15 @@ namespace Mario.Entities.EnemyCycle
         private int indexOfCurrentSprite = 0;
         private Vector2 position;
 
-        public EnemyCycle(ISprite[] enemies)
+        public EnemyCycle(ISprite[] enemies, Vector2 position)
         {
             Enemies = enemies;
             currentSprite = enemies[indexOfCurrentSprite];
+            this.position = position;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.position = position;
             currentSprite.Draw(spriteBatch, position);
         }
 

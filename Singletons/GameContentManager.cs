@@ -53,10 +53,10 @@ namespace Mario.Singletons
             };
 
 
-            item = new Item(itemSprites);
-            block = new Block(blockSprites);
-            enemy = new EnemyCycle(enemySprites);
-            mario = new Hero();
+            item = new Item(itemSprites, new Vector2(100, 100));
+            block = new Block(blockSprites, new Vector2(200, 100));
+            enemy = new EnemyCycle(enemySprites, new Vector2(400, 100));
+            mario = new Hero(new Vector2(300, 100));
         }
 
         public IEntityBase[] GetEntities()
@@ -71,10 +71,10 @@ namespace Mario.Singletons
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            item.Draw(spriteBatch, new Vector2(100, 100));
-            block.Draw(spriteBatch, new Vector2(200, 100));
-            mario.Draw(spriteBatch, new Vector2(300, 100));
-            enemy.Draw(spriteBatch, new Vector2(400, 100));
+            item.Draw(spriteBatch);
+            block.Draw(spriteBatch);
+            mario.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
         }
     }
 }

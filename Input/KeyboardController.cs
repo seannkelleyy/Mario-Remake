@@ -1,12 +1,9 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using Mario.Interfaces;
-using System;
-using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 
 namespace Mario.Input
 {
@@ -80,7 +77,7 @@ namespace Mario.Input
                     {
                         Commands[key].Invoke();
                     }
-                } 
+                }
             }
         }
     }

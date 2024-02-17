@@ -9,14 +9,16 @@ namespace Mario.Sprites
         private ISprite[] Blocks;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
+        private Vector2 position;
 
-        public Block(ISprite[] blocks)
+        public Block(ISprite[] blocks, Vector2 position)
         {
+            this.position = position;
             Blocks = blocks;
             currentSprite = blocks[indexOfCurrentSprite];
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
             currentSprite.Draw(spriteBatch, position);
         }

@@ -6,6 +6,6 @@ namespace Mario.Interfaces.Entities
     public interface IEntityBase
     {
         public void Update(GameTime gameTime);
-        public void Draw(SpriteBatch spriteBatch, Vector2 position);
+        public void Draw(SpriteBatch spriteBatch);
     }
 }

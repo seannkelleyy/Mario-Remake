@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
+// This class currently isn't being used in sprint 2
 public class Goomba : IEnemy
 {
     public GoombaState currentState;
@@ -11,8 +12,9 @@ public class Goomba : IEnemy
     // Right is true, left is false
     private Boolean direction = true;
 
-    public Goomba()
+    public Goomba(Vector2 position)
     {
+        this.position = position;
         currentState = new LeftMovingGoombaState();
     }
 
@@ -21,9 +23,8 @@ public class Goomba : IEnemy
         currentState.Update(gameTime);
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
+    public void Draw(SpriteBatch spriteBatch)
     {
-        this.position = position;
         currentState.Draw(spriteBatch, position);
     }
 

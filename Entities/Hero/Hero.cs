@@ -16,8 +16,9 @@ namespace Mario.Entities.Character
         // True is right, false is left
         private Boolean direction = true;
 
-        public Hero()
+        public Hero(Vector2 position)
         {
+            this.position = position;
             currentState = new StandingRightState();
         }
 
@@ -26,9 +27,8 @@ namespace Mario.Entities.Character
             currentState.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.position = position;
             this.spriteBatch = spriteBatch;
             currentState.Draw(spriteBatch, position);
         }
@@ -51,6 +51,8 @@ namespace Mario.Entities.Character
             {
                 return;
             }
+            position.Y += 5;
+
             if (direction)
             {
                 currentState = new JumpStateRight();
