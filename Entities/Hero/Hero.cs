@@ -57,10 +57,11 @@ namespace Mario.Entities.Character
         {
             if (currentState is JumpStateRight || currentState is JumpStateLeft)
             {
+                position.Y -= 5;
+
                 return;
             }
             position.Y -= 5;
-
             if (direction)
             {
                 currentState = new JumpStateRight();
@@ -78,9 +79,11 @@ namespace Mario.Entities.Character
             // In sprint 3, we will have a crouch sprite and he will actually crouch
             if (currentState is CrouchState)
             {
+                position.Y += 5;
                 return;
             }
             position.Y += 5;
+
             currentState = new CrouchState();
         }
 

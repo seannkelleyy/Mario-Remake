@@ -60,6 +60,7 @@ namespace Mario.Input
                     mario.Jump();
                 }
             }));
+
             Commands.Add(Keys.A, new Action(mario.WalkLeft));
             Commands.Add(Keys.S, new Action(() =>
             {
