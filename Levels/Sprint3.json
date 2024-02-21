@@ -1,0 +1,47 @@
+{
+  "level": "Sprint 3",
+  "width": 60,
+  "height": 40,
+  "hero": {
+    "type": "Mario",
+    "x": 5,
+    "y": 5
+  },
+  "Enemies": [
+    {
+      "type": "Goomba",
+      "x": 10,
+      "y": 5,
+      "direction": "left"
+    },
+    {
+      "type": "Koopa",
+      "x": 20,
+      "y": 5,
+      "direction": "left"
+    }
+  ],
+  "Block-Section": [
+    {
+      "type": "Brick",
+      "starting-x": 0,
+      "starting-y": 6,
+      "ending-x": 60,
+      "ending-y": 10
+    }
+  ],
+  "Blocks": [
+    {
+      "type": "Brick",
+      "x": 5,
+      "y": 5,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 21,
+      "y": 5,
+      "item": "none"
+    }
+  ]
+}
