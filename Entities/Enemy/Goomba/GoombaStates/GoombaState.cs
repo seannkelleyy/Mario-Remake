@@ -3,17 +3,17 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Entities.Character.HeroStates
+namespace Mario.Entities.Enemy.Goomba.GoombaStates
 {
-    public abstract class HeroState
+    public abstract class GoombaState
     {
         protected SpriteFactory spriteFactory;
         public ISprite sprite;
 
-        public HeroState()
+        public GoombaState()
         {
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite("leftRunMario");
+            sprite = spriteFactory.CreateSprite("goomba");
         }
 
         public virtual void Update(GameTime gameTime)

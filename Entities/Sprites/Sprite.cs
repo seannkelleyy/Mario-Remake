@@ -1,18 +1,18 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Mario.Interfaces;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Sprites
 {
     // Class for sprites. Can either be an animated sprite or non animated sprite.
     public class Sprite : ISprite
     {
-        public Texture2D Texture { get; set; }
-        private int CurrentFrame = 0;
-        private int TotalFrames;
+        public Texture2D texture { get; set; }
+        private int currentFrame = 0;
+        private int totalFrames;
         private int size;
-        private int SpriteSheetStartingX;
-        private int SpriteSheetStartingY;
+        private int spriteSheetStartingX;
+        private int spriteSheetStartingY;
         private int width;
         private int height;
         float updateInterval;
@@ -21,12 +21,12 @@ namespace Mario.Sprites
 
         public Sprite(Texture2D texture, int[] spriteParams)
         {
-            Texture = texture;
-            SpriteSheetStartingX = spriteParams[0];
-            SpriteSheetStartingY = spriteParams[1];
+            this.texture = texture;
+            spriteSheetStartingX = spriteParams[0];
+            spriteSheetStartingY = spriteParams[1];
             width = spriteParams[2];
-            height = spriteParams[3];    
-            TotalFrames = spriteParams[4];
+            height = spriteParams[3];
+            totalFrames = spriteParams[4];
             this.size = spriteParams[5];
             updateInterval = .1f;
             elapsedSeconds = 0;
@@ -38,16 +38,16 @@ namespace Mario.Sprites
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (elapsedSeconds >= updateInterval)
             {
-                CurrentFrame = (CurrentFrame + 1) % TotalFrames;
+                currentFrame = (currentFrame + 1) % totalFrames;
                 elapsedSeconds = 0;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(SpriteSheetStartingX + width*CurrentFrame, SpriteSheetStartingY, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)(location.Y), width*size, height*size);
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            Rectangle sourceRectangle = new Rectangle(spriteSheetStartingX + width * currentFrame, spriteSheetStartingY, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)(location.Y), width * size, height * size);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
     }

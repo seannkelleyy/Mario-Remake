@@ -3,10 +3,9 @@ using Mario.Interfaces.Entities;
 
 namespace Mario.Interfaces
 {
-	public interface IItem : IEntityBase
-	{
-        public void CycleItemNext();
-		public void CycleItemPrev();
-	}
+    // TODO: Add rest of methods here
+    public interface IItem : IEntityBase
+    {
+    }
 }
 
