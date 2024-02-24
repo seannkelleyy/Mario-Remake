@@ -3,45 +3,64 @@
   "width": 26,
   "height": 18,
   "hero": {
-    "type": "Mario",
-    "x": 5,
-    "y": 4
+    "type": "mario",
+    "starting-x": 5,
+    "starting-y": 12,
+    "direction": true,
+    "starting-power": "small"
   },
-  "Enemies": [
+  "enemies": [
     {
-      "type": "Goomba",
-      "x": 10,
-      "y": 4,
-      "direction": "left"
+      "type": "goomba",
+      "starting-x": 10,
+      "starting-y": 12,
+      "direction": false
     },
     {
       "type": "Koopa",
-      "x": 20,
-      "y": 4,
-      "direction": "left"
+      "starting-x": 20,
+      "starting-y": 12,
+      "direction": false
     }
   ],
-  "Block-Section": [
+  "block-sections": [
     {
-      "type": "Brick",
+      "type": "ground",
       "starting-x": 0,
-      "starting-y": 6,
+      "starting-y": 14,
       "ending-x": 60,
-      "ending-y": 10
+      "ending-y": 18,
+      "item": "none",
+      "collideable": false,
+      "breakable": false
+    },
+    {
+      "type": "ground",
+      "starting-x": 0,
+      "starting-y": 13,
+      "ending-x": 60,
+      "ending-y": 13,
+      "item": "none",
+      "collideable": true,
+      "breakable": false
     }
   ],
-  "Blocks": [
+  "blocks": [
     {
-      "type": "Brick",
-      "x": 5,
+      "type": "brick",
+      "x": 12,
       "y": 3,
-      "item": "none"
+      "item": "none",
+      "collideable": true,
+      "breakable": false
     },
     {
       "type": "brick",
       "x": 21,
-      "y": 3,
-      "item": "none"
+      "y": 12,
+      "item": "none",
+      "collideable": true,
+      "breakable": false
     }
   ]
 }
