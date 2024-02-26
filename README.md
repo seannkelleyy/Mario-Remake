@@ -15,6 +15,14 @@ Languages and Frameworks Used:
 * C#
 * Monogame
 
+## Controls
+* `A` or Left Arrow - Move Left
+* `D` or Right Arrow - Move Right
+* `W`, `Space` or Up Arror - Jump
+* `S` or Down Arrow - Crouch
+* `E` or Right CTRL - Attack
+* `R` - Restart Level
+* `Q` - Quit Game
 ## Getting Started
 
 To being, you must clone the repository and run it in Visual Studio.

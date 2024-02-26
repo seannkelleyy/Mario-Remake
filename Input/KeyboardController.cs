@@ -13,10 +13,7 @@ namespace Mario.Input
 
         // We will probably just instantiate these here for Spint 2 purposes,
         // but they will be gone after that.
-        private IItem item;
-        private IBlock block;
         private IHero mario;
-        private IEnemyCycle enemy;
         private Keys[] keysPressed;
         float updateInterval = 0.1f;
         float elapsedSeconds = 0;
@@ -31,18 +28,43 @@ namespace Mario.Input
         // to assign the functions to call when keys are pressed.
         public void LoadCommands(MarioRemake game, IEntityBase[] entities)
         {
+            mario = (IHero)entities[0];
 
-            item = (IItem)entities[0];
-            block = (IBlock)entities[1];
-            mario = (IHero)entities[2];
-            enemy = (IEnemyCycle)entities[3];
+            Action[] actions = LoadActions(game);
 
             // System commands
-            Commands.Add(Keys.Q, new Action(game.Exit));
-            Commands.Add(Keys.R, new Action(game.Restart));
+            Commands.Add(Keys.Q, actions[0]);
+            Commands.Add(Keys.R, actions[1]);
+            Commands.Add(Keys.Escape, actions[7]);
+            Commands.Add(Keys.P, actions[7]);
 
-            // Hero/Player Commands
-            Commands.Add(Keys.W, new Action(() =>
+            // WASD commands
+            Commands.Add(Keys.W, actions[2]);
+            Commands.Add(Keys.A, actions[3]);
+            Commands.Add(Keys.S, actions[4]);
+            Commands.Add(Keys.D, actions[5]);
+            Commands.Add(Keys.E, actions[6]);
+
+            // Arrow commands
+            Commands.Add(Keys.Left, actions[3]);
+            Commands.Add(Keys.Right, actions[5]);
+            Commands.Add(Keys.Up, actions[2]);
+            Commands.Add(Keys.Down, actions[4]);
+            Commands.Add(Keys.Space, actions[2]);
+            Commands.Add(Keys.RightControl, actions[6]);
+        }
+
+        public void Add(Keys key, Action action)
+        {
+            Commands.Add(key, action);
+        }
+
+        private Action[] LoadActions(MarioRemake game)
+        {
+            Action[] actions = new Action[8];
+            actions[0] = new Action(game.Exit);
+            actions[1] = new Action(game.Restart);
+            actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right
                 if (Keyboard.GetState().IsKeyDown(Keys.A))
@@ -59,45 +81,12 @@ namespace Mario.Input
                 {
                     mario.Jump();
                 }
-            }));
-
-            Commands.Add(Keys.A, new Action(mario.WalkLeft));
-            Commands.Add(Keys.S, new Action(() =>
-            {
-                // This will change after sprint 2, we just wanted to be able to move mario around
-                // This allows for mario to move down and to the left or right
-                if (Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    mario.Crouch();
-                    mario.WalkLeft();
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    mario.Crouch();
-                    mario.WalkRight();
-                }
-                else
-                {
-                    mario.Crouch();
-                }
-            }));
-            Commands.Add(Keys.D, new Action(mario.WalkRight));
-            Commands.Add(Keys.E, new Action(mario.TakeDamage));
-
-            // Non-moving entity Cycle Commands
-            Commands.Add(Keys.I, new Action(item.CycleItemNext));
-            Commands.Add(Keys.U, new Action(item.CycleItemPrev));
-            Commands.Add(Keys.T, new Action(block.CycleBlockNext));
-            Commands.Add(Keys.Y, new Action(block.CycleBlockPrev));
-
-            // Moving entity Cycle Commands
-            Commands.Add(Keys.O, new Action(enemy.CycleEnemyNext));
-            Commands.Add(Keys.P, new Action(enemy.CycleEnemyPrev));
-        }
-
-        public void Add(Keys key, Action action)
-        {
-            Commands.Add(key, action);
+            });
+            actions[3] = new Action(mario.WalkLeft);
+            actions[4] = new Action(mario.Crouch);
+            actions[5] = new Action(mario.WalkRight);
+            actions[6] = new Action(mario.Attack);
+            return actions;
         }
 
         public void Update(GameTime gameTime)

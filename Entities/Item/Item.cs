@@ -6,7 +6,7 @@ namespace Mario.Sprites
 {
     public class Item : IItem
     {
-        private ISprite[] Items;
+        private ISprite[] items;
         private ISprite currentSprite;
         private int indexOfCurrentSprite = 0;
         private Vector2 position;
@@ -14,7 +14,7 @@ namespace Mario.Sprites
         public Item(ISprite[] items, Vector2 position)
         {
             this.position = position;
-            Items = items;
+            this.items = items;
             currentSprite = items[indexOfCurrentSprite];
         }
 
@@ -26,36 +26,6 @@ namespace Mario.Sprites
         public void Update(GameTime gameTime)
         {
             currentSprite.Update(gameTime);
-        }
-
-        // NOTE: These methods will go bye bye after Sprint 2.
-
-        // Changes the current sprite to be drawn to the next item in the list
-        public void CycleItemNext()
-        {
-            if (indexOfCurrentSprite == Items.Length - 1)
-            {
-                indexOfCurrentSprite = 0;
-            }
-            else
-            {
-                indexOfCurrentSprite++;
-            }
-            currentSprite = Items[indexOfCurrentSprite];
-        }
-
-        // Changes the current sprite to be drawn to the previous item in the list
-        public void CycleItemPrev()
-        {
-            if (indexOfCurrentSprite == 0)
-            {
-                indexOfCurrentSprite = Items.Length - 1;
-            }
-            else
-            {
-                indexOfCurrentSprite--;
-            }
-            currentSprite = Items[indexOfCurrentSprite];
         }
     }
 }

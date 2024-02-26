@@ -1,4 +1,4 @@
-﻿using Mario.Entities.Enemy.Koopa;
+﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
