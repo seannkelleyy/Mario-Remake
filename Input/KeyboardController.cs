@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using Mario.Interfaces;
-using Microsoft.Xna.Framework.Content;
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace Mario.Input
 {
@@ -13,10 +13,10 @@ namespace Mario.Input
 
         // We will probably just instantiate these here for Spint 2 purposes,
         // but they will be gone after that.
-        private IItem ItemSprite;
-        private IBlock BlockSprite;
-        private delegate void NewGame(MarioRemake game);
-        // private IEnemy EnemySprite;
+        private IHero mario;
+        private Keys[] keysPressed;
+        float updateInterval = 0.1f;
+        float elapsedSeconds = 0;
 
 
         public KeyboardController()
@@ -26,25 +26,32 @@ namespace Mario.Input
 
         // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
         // to assign the functions to call when keys are pressed.
-        public void LoadCommands(MarioRemake game, ContentManager Content, SpriteBatch spriteBatch)
+        public void LoadCommands(MarioRemake game, IEntityBase[] entities)
         {
-            Commands.Add(Keys.Q, new Action(game.Exit));
-            Commands.Add(Keys.R, new Action(game.Run));
+            mario = (IHero)entities[0];
 
-            //Commands.Add(Keys.W, );
-            //Commands.Add(Keys.A, );
-            //Commands.Add(Keys.S, );
-            //Commands.Add(Keys.D, );
-            //Commands.Add(Keys.E, );
+            Action[] actions = LoadActions(game);
 
-            Commands.Add(Keys.I, new Action(ItemSprite.CycleItemNext));
-            Commands.Add(Keys.U, new Action(ItemSprite.CycleItemPrev));
-            Commands.Add(Keys.T, new Action(BlockSprite.CycleBlockNext));
-            Commands.Add(Keys.Y, new Action(BlockSprite.CycleBlockPrev));
+            // System commands
+            Commands.Add(Keys.Q, actions[0]);
+            Commands.Add(Keys.R, actions[1]);
+            Commands.Add(Keys.Escape, actions[7]);
+            Commands.Add(Keys.P, actions[7]);
 
-            // These will be added in enemy ticket.
-            // Commands.Add(Keys.O, new RelayCommand(new Action(EnemySprite.CycleEnemyNext)));
-            // Commands.Add(Keys.P, new RelayCommand(new Action(EnemySprite.CycleEnemyPrev)));
+            // WASD commands
+            Commands.Add(Keys.W, actions[2]);
+            Commands.Add(Keys.A, actions[3]);
+            Commands.Add(Keys.S, actions[4]);
+            Commands.Add(Keys.D, actions[5]);
+            Commands.Add(Keys.E, actions[6]);
+
+            // Arrow commands
+            Commands.Add(Keys.Left, actions[3]);
+            Commands.Add(Keys.Right, actions[5]);
+            Commands.Add(Keys.Up, actions[2]);
+            Commands.Add(Keys.Down, actions[4]);
+            Commands.Add(Keys.Space, actions[2]);
+            Commands.Add(Keys.RightControl, actions[6]);
         }
 
         public void Add(Keys key, Action action)
@@ -52,14 +59,49 @@ namespace Mario.Input
             Commands.Add(key, action);
         }
 
-        public void Update()
+        private Action[] LoadActions(MarioRemake game)
         {
-            KeyboardState state = Keyboard.GetState();
-            foreach (Keys key in Commands.Keys)
+            Action[] actions = new Action[8];
+            actions[0] = new Action(game.Exit);
+            actions[1] = new Action(game.Restart);
+            actions[2] = new Action(() =>
             {
-                if (state.IsKeyDown(key))
+                // This allows for mario to move up and to the left or right
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
                 {
-                    Commands[key].Invoke();
+                    mario.Jump();
+                    mario.WalkLeft();
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    mario.Jump();
+                    mario.WalkRight();
+                }
+                else
+                {
+                    mario.Jump();
+                }
+            });
+            actions[3] = new Action(mario.WalkLeft);
+            actions[4] = new Action(mario.Crouch);
+            actions[5] = new Action(mario.WalkRight);
+            actions[6] = new Action(mario.Attack);
+            return actions;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= updateInterval)
+            {
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                foreach (Keys key in keysPressed)
+                {
+                    if (Commands.ContainsKey(key))
+                    {
+                        Commands[key].Invoke();
+                    }
                 }
             }
         }

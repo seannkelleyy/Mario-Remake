@@ -1,16 +1,16 @@
-﻿using System;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Mario.Interfaces
 {
     public interface IController
     {
-        void Update();
+        void Update(GameTime gameTime);
 
         void Add(Keys key, Action action);
 
-        void LoadCommands(MarioRemake game, ContentManager content, SpriteBatch spriteBatch);
+        void LoadCommands(MarioRemake game, IEntityBase[] entities);
     }
 }

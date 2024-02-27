@@ -1,17 +1,11 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿
+using Mario.Interfaces.Entities;
 
 namespace Mario.Interfaces
 {
-	public interface IItem
-	{
-        	void Update(GameTime gameTime);
-        	void Draw(SpriteBatch spriteBatch);
-        	// Cycles through to next sprite when moving
-        	public void CycleItemNext();
-
-		public void CycleItemPrev();
-	}
+    // TODO: Add rest of methods here
+    public interface IItem : IEntityBase
+    {
+    }
 }
 
