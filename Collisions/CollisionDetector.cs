@@ -7,7 +7,7 @@ public class CollisionDetector
         Rectangle intersection = Rectangle.Intersect(obj1, obj2);
         if (!intersection.IsEmpty)
         {
-            if(intersection.Height > intersection.Width)
+            if(intersection.Width >= intersection.Height)
             {
                 if(obj1.X > obj2.X)
                 {
