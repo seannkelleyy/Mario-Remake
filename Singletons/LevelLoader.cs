@@ -2,7 +2,8 @@
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
 using Microsoft.Xna.Framework;
-
+using System.IO;
+using System.Text.Json;
 namespace Mario.Singletons
 {
     public class LevelLoader
@@ -16,9 +17,9 @@ namespace Mario.Singletons
 
         public void LoadLevel(string levelName)
         {
-            // Parse the JSON into a Level object
-            string json = /* your JSON string */;
-            Level level = JsonConvert.DeserializeObject<Level>("Sprint3.json");
+            string jsonString = File.ReadAllText(levelName);
+            Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
+
 
             // Create the hero
             IHero hero = (IHero)GameObjectFactory.Instance.CreateEntity(level.hero.type, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
