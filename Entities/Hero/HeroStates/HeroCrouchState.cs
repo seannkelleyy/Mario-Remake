@@ -4,7 +4,6 @@ public class CrouchState : HeroState
 {
     public CrouchState() : base()
     {
-        // Need to add crouching sprite
-        // sprite = spriteFactory.CreateSprite("crouchingMario");
+        sprite = spriteFactory.CreateSprite("rightCrouchFireMario");
     }
 }
