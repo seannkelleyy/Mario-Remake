@@ -11,9 +11,9 @@ public class CollisionDetector
             {
                 if(obj1.X > obj2.X)
                 {
-                    return Right;
+                    return Left;
                 }
-                return Left;
+                return Right;
             }
             else
             {
