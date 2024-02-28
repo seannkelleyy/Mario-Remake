@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Mario.Logging
@@ -21,7 +22,7 @@ namespace Mario.Logging
         private SeanLogger()
         {
             // Set the path to the log file (you can customize this)
-            logFilePath = "sean_log.txt";
+            logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sean_log.txt");
 
             // Initialize the StreamWriter to append to the log file
             logFileWriter = new StreamWriter(logFilePath, append: true);
@@ -31,22 +32,23 @@ namespace Mario.Logging
         }
 
 
+
         // Log an error to the file
         public void LogError(string message)
         {
-            logFileWriter.WriteLine("ERROR: " + message);
+            Debug.WriteLine("ERROR: " + message);
         }
 
         // Log a warning to the file
         public void LogWarning(string message)
         {
-            logFileWriter.WriteLine("WARNING: " + message);
+            Debug.WriteLine("WARNING: " + message);
         }
 
         // Log an info message to the file
         public void LogInfo(string message)
         {
-            logFileWriter.WriteLine("INFO: " + message);
+            Debug.WriteLine("INFO: " + message);
         }
 
         // Dispose method to close the StreamWriter

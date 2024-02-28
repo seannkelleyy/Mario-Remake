@@ -1,6 +1,7 @@
 ﻿using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Logging;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
@@ -17,6 +18,7 @@ namespace Mario
         private SpriteBatch spriteBatch;
         private IController keyboardController;
         private IEntityBase[] entities;
+        private SeanLogger logger = SeanLogger.Instance;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -41,6 +43,7 @@ namespace Mario
             spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, entities);
             base.LoadContent();
+            logger.LogInfo("Game content loaded");
         }
 
         protected override void Update(GameTime gameTime)
