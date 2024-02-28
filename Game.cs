@@ -28,7 +28,6 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
-            gameContentManager.Initialize();
 
             base.Initialize();
         }
