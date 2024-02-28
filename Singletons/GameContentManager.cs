@@ -3,14 +3,15 @@ using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections;
 
 namespace Mario.Singletons
 {
     public class GameContentManager
     {
         private SpriteFactory spriteFactory;
-        private IHero mario;
         private static GameContentManager instance = new GameContentManager();
+        private ArrayList entities;
 
         // This code follows the singleton pattern
         // When you need a GCM, you call GameContentManager.Instance
@@ -28,24 +29,23 @@ namespace Mario.Singletons
         public void Initialize()
         {
             spriteFactory = SpriteFactory.Instance;
+            entities = new ArrayList();
         }
 
         public void Load()
         {
             // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
+            entities.Add(new Hero(new Vector2(300, 100)));
         }
-
-        public IEntityBase[] GetEntities()
+        public void add(IEntityBase entity) { 
+            entities.Add(entity);
+        }
+        public void remove(IEntityBase entity) { 
+            entities.Remove(entity);
+        }
+        public ArrayList GetEntities()
         {
-            IEntityBase[] entities = new IEntityBase[1];
-            entities[0] = mario;
             return entities;
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            mario.Draw(spriteBatch);
         }
     }
 }

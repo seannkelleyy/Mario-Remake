@@ -3,6 +3,7 @@ using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Mario.Input
@@ -26,7 +27,7 @@ namespace Mario.Input
 
         // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
         // to assign the functions to call when keys are pressed.
-        public void LoadCommands(MarioRemake game, IEntityBase[] entities)
+        public void LoadCommands(MarioRemake game, ArrayList entities)
         {
             mario = (IHero)entities[0];
 

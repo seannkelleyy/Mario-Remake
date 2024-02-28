@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 
 namespace Mario.Interfaces
 {
@@ -11,6 +12,6 @@ namespace Mario.Interfaces
 
         void Add(Keys key, Action action);
 
-        void LoadCommands(MarioRemake game, IEntityBase[] entities);
+        void LoadCommands(MarioRemake game, ArrayList entities);
     }
 }
