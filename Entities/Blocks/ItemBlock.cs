@@ -60,8 +60,7 @@ namespace Mario.Entities.Blocks
             // Since items haven't been implemented yet, the idea is to create the item in the same place as the block
             // but have it not be visiable until Mario hits the block to get an item. Then the item just needs to be set to visible and drawn 
             // above the block
-            // NOTE: This is subject to change since items haven't been implmented yet
-            item.MakeVisable();
+            item.MakeVisable(); // NOTE: This is subject to change since items haven't been implmented yet
             currentState = new HardBlockState();
         }
     }

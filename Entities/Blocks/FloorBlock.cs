@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Entities.Blocks
 {
-    public class FloorBlock : IEntityBase
+    // Does not implement IBlock because it doesn't need the GetHit method. The block will only be drawn and won't do anything else
+    public class FloorBlock : IEntityBase 
     {
         private BlockState currentState;
         private Vector2 position;
