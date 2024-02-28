@@ -1,33 +1,22 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Mario.Entities.Blocks.BlockStates;
+using System;
 
 namespace Mario.Entities.Blocks
 {
-    public class EmptyBrickBlock : IBlock
+    public class EmptyBrickBlock : AbstractBlock
     {
-        private BlockState currentState;
-        private Vector2 position;
+        public Boolean isCollidable { get; } = true;
+        public Boolean isBreakable { get; } = true;
 
-        public EmptyBrickBlock(Vector2 position, string itemName)
+        public EmptyBrickBlock(Vector2 position)
         {
             this.position = position;
             currentState = new BrickBlockNormalState();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            currentState.Draw(spriteBatch, position);
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            currentState.Update(gameTime);
-        }
-
         // Block will be broken
-        public void GetHit()
+        public override void GetHit()
         {
             currentState = new BrickBlockBrokenState();
         }

@@ -1,37 +1,36 @@
 ﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Mario.Entities.Blocks.BlockStates;
+using System;
+using Mario.Singletons;
 
 namespace Mario.Entities.Blocks
 {
-    public class CoinBlock : IBlock
+    public class CoinBlock : AbstractBlock
     {
-        private BlockState currentState;
-        private Vector2 position;
         private int coinCount;
-        private IItem coin;
+        private IItem[] coins;
+        public Boolean isCollidable { get; } = true;
+        public Boolean isBreakable { get; } = false;
 
-        public CoinBlock(Vector2 position, int coinCount)
+        public CoinBlock(Vector2 position, int coinAmount)
         {
             this.position = position;
             currentState = new GoldenBlockState();
-            this.coinCount = coinCount;
-            coin = new Coin();
-        }
+            coinCount = coinAmount;
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            currentState.Draw(spriteBatch, position);
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            currentState.Update(gameTime);
+            // Give the block the coins
+            GameObjectFactory gameObjectFactory = GameObjectFactory.Instance;
+            coins = new IItem[coinAmount];
+            for (int i = 0; i < coinAmount; i++)
+            {
+                // TODO: This instantiation will be changed once items are implemented and can be constructed properly
+                coins[i] = (IItem)gameObjectFactory.CreateEntity("coin", position);
+            }
         }
 
         // Give out a coin until out of coins. Then turn into hard block
-        public void GetHit()
+        public override void GetHit()
         {
             if (coinCount == 0)
             {
@@ -39,8 +38,8 @@ namespace Mario.Entities.Blocks
             } 
             else
             {
-                // Replace method with something like coin.Appear()
-                coin.Draw(position + 16);
+                coinCount--;
+                coins[coinCount].MakeVisable(); // NOTE: MakeVisable will make the item appear above the block. It's not implemented yet
             }
         }
     }
