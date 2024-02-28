@@ -45,6 +45,8 @@ public class GlobalVariables
             { "rightJumpFireMario", new int[] { 0, 128, 16, 32, 1, 1, 3 } },
             { "rightRunFireMario", new int[] { 16, 128, 16, 32, 3, 1, 3 } },
             { "rightStandFireMario", new int[] { 64, 128, 16, 32, 1, 1, 3 } },
-            { "rightCrouchFireMario", new int[] { 80, 128, 16, 22, 1, 1, 3 } }
+            { "rightCrouchFireMario", new int[] { 80, 128, 16, 22, 1, 1, 3 } },
+            { "fireball", new int[] { 0, 0, 8, 8, 2, 1, 4 } } ,
+            { "fireballExplosion", new int[] { 0, 8, 16, 16, 3, 1, 4 } }
      };
 }
