@@ -86,6 +86,18 @@ namespace Mario.Singletons
         public void Draw(SpriteBatch spriteBatch)
         {
             mario.Draw(spriteBatch);
+            foreach (IEnemy enemy in enemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            foreach (IItem item in items)
+            {
+                item.Draw(spriteBatch);
+            }
+            foreach (IBlock block in blocks)
+            {
+                block.Draw(spriteBatch);
+            }
         }
     }
 }
