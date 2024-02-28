@@ -24,11 +24,11 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
-    <Folder Include="Singletons\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />
