@@ -3,17 +3,17 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Entities.Character.HeroStates
+namespace Mario.Entities.Enemy.Koopa.KoopaStates
 {
-    public abstract class HeroState
+    public abstract class KoopaState
     {
         protected SpriteFactory spriteFactory;
         public ISprite sprite;
 
-        public HeroState()
+        public KoopaState()
         {
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite("leftRunMario");
+            sprite = spriteFactory.CreateSprite("leftKoopa");
         }
 
         public virtual void Update(GameTime gameTime)
