@@ -4,6 +4,6 @@ public class StandingLeftState : HeroState
 {
     public StandingLeftState() : base()
     {
-        sprite = spriteFactory.CreateSprite("leftStandMario");
+        sprite = spriteFactory.CreateSprite("leftStandFireMario");
     }
 }
