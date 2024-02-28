@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 public class CollisionDetector
 {
-    public static Direction DetectCollision(Rectangle obj1, Rectangle obj2){
+    public static CollisionDirection DetectCollision(Rectangle obj1, Rectangle obj2){
         Rectangle intersection = Rectangle.Intersect(obj1, obj2);
         if (!intersection.IsEmpty)
         {
@@ -24,6 +24,6 @@ public class CollisionDetector
                 return Top;
             }
         }
-        return NoCollision
+        return NoCollision;
     }
 }
