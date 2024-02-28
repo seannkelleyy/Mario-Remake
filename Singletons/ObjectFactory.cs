@@ -1,16 +1,15 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Character;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Character;
 
 namespace Mario.Singletons
 {
     public class GameObjectFactory
     {
         private static GameObjectFactory instance = new GameObjectFactory();
-        private Dictionary<string, Vector2> entityPosition;
         private ISprite[] items;
 
         // Singleton instance property
@@ -20,25 +19,25 @@ namespace Mario.Singletons
         private GameObjectFactory() { }
 
         // Factory method to create game entities
-        public IEntityBase CreateEntity(string type)
+        public IEntityBase CreateEntity(string type, Vector2 position)
         {
             switch (type)
             {
                 case "Mario":
                     // Assuming Mario implements IHero
-                    return new Hero(entityPosition[type]);
+                    return new Hero(position);
                 case "Goomba":
                     // Assuming Koopa implements IEnemy
-                    return new Goomba(entityPosition[type]);
+                    return new Goomba(position);
                 case "Koopa":
                     // Assuming Koopa implements IEnemy
-                    return new Koopa(entityPosition[type]);
+                    return new Koopa(position);
                 case "Block":
                     // Assuming Block implements IBlock
-                    return new Block(entityPosition[type]);
+                    return new Block(position);
                 case "Item":
                     // Assuming Item implements IItem
-                    return new Item(items, entityPosition[type]);
+                    return new Item(items, position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");

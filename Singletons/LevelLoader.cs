@@ -1,6 +1,6 @@
-﻿using Mario.Interfaces.Entities;
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
-using Mario.Sprites;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Singletons
@@ -21,34 +21,34 @@ namespace Mario.Singletons
             Level level = JsonConvert.DeserializeObject<Level>("Sprint3.json");
 
             // Create the hero
-            IHero hero = ObjectFactory.Create(level.hero.type, new Vector2(level.hero.starting_x * 16, level.hero.starting_y * 16));
-            gameContentManager.Add(hero);
+            IHero hero = (IHero)GameObjectFactory.Instance.CreateEntity(level.hero.type, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
+            gameContentManager.AddEntity(hero);
 
             // Create the enemies
-            foreach (Enemy enemy in level.enemies)
+            foreach (LevelEnemy enemy in level.enemies)
             {
-                IEnemy enemyObject = ObjectFactory.Create(enemy.type, new Vector2(enemy.starting_x, enemy.starting_y));
-                gameContentManager.Add(enemyObject);
+                IEnemy enemyObject = (IEnemy)GameObjectFactory.Instance.CreateEntity(enemy.type, new Vector2(enemy.startingX, enemy.startingY));
+                gameContentManager.AddEntity(enemyObject);
             }
 
             // Create the block sections
-            foreach (BlockSection blockSection in level.block_sections)
+            foreach (LevelBlockSection blockSection in level.block_sections)
             {
-                for (int x = blockSection.starting_x; x <= blockSection.ending_x; x++)
+                for (int x = blockSection.startingX; x <= blockSection.endingX; x++)
                 {
-                    for (int y = blockSection.starting_y; y <= blockSection.ending_y; y++)
+                    for (int y = blockSection.startingY; y <= blockSection.endingY; y++)
                     {
-                        GameObject block = ObjectFactory.Create(blockSection.type, new Vector2(x, y));
-                        gameContentManager.Add(block);
+                        IBlock block = (IBlock)GameObjectFactory.Instance.CreateEntity(blockSection.type, new Vector2(x, y));
+                        gameContentManager.AddEntity(block);
                     }
                 }
             }
 
             // Create the individual blocks
-            foreach (Block block in level.blocks)
+            foreach (LevelBlock block in level.blocks)
             {
-                GameObject blockObject = ObjectFactory.Create(block.type, new Vector2(block.x, block.y));
-                gameContentManager.Add(blockObject);
+                IItem blockObject = (IItem)GameObjectFactory.Instance.CreateEntity(block.type, new Vector2(block.x, block.y));
+                gameContentManager.AddEntity(blockObject);
             }
         }
     }
