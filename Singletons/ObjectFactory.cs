@@ -11,7 +11,6 @@ namespace Mario.Singletons
     {
         private static GameObjectFactory instance = new GameObjectFactory();
         //private Dictionary<string, Vector2> entityPosition;
-        private ISprite[] items;//To be deleted
 
         // Singleton instance property
         public static GameObjectFactory Instance => instance;
