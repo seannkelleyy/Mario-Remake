@@ -37,7 +37,7 @@ namespace Mario.Singletons
                     return new Block(position);
                 case "Item":
                     // Assuming Item implements IItem
-                    return new Item(items, position);
+                    return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
