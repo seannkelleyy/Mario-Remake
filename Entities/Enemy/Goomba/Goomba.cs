@@ -1,4 +1,4 @@
-﻿using Mario.Entities.Enemy.Goomba;
+﻿using Mario.Entities.Enemy.Goomba.GoombaStates;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
