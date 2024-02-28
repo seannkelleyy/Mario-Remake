@@ -107,7 +107,10 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            // Make mario shoot fireball
+            if (health == 3)
+            {
+                
+            }
         }
 
 

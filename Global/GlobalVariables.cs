@@ -22,5 +22,8 @@ public class GlobalVariables
             { "rightStandMario", new int[] { 64, 0, 16, 16, 1, 1, 3 } },
             { "leftJumpMario", new int[] { 0, 16, 16, 16, 1, 1, 3 } },
             { "rightRunMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
-            { "leftStandMario", new int[] { 64, 16, 16, 16, 1, 1, 3 } } };
+            { "leftStandMario", new int[] { 64, 16, 16, 16, 1, 1, 3 } },
+            { "fireball", new int[] { 0, 0, 8, 8, 2, 1, 4 } } ,
+            { "fireballExplosion", new int[] { 0, 8, 16, 16, 3, 1, 4 } }
+    };
 }
