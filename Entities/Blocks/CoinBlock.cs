@@ -39,7 +39,7 @@ namespace Mario.Entities.Blocks
             else
             {
                 coinCount--;
-                coins[coinCount].MakeVisable(); // NOTE: MakeVisable will make the item appear above the block. It's not implemented yet
+                // coins[coinCount].MakeVisable(); // NOTE: MakeVisable will make the item appear above the block. It's not implemented yet
             }
         }
     }
