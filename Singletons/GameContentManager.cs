@@ -1,8 +1,7 @@
-﻿using Mario.Entities.Character;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mario.Singletons
@@ -10,9 +9,9 @@ namespace Mario.Singletons
     public class GameContentManager
     {
         private IHero mario;
-        private IEnemy[] enemies;
-        private IItem[] items;
-        private IBlock[] blocks;
+        private List<IEnemy> enemies;
+        private List<IItem> items;
+        private List<IBlock> blocks;
         private static GameContentManager instance = new GameContentManager();
 
         // This code follows the singleton pattern
@@ -31,13 +30,15 @@ namespace Mario.Singletons
         public void Load()
         {
             // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
         }
 
-        public IEntityBase[] GetEntities()
+        public List<IEntityBase> GetEntities()
         {
-            IEntityBase[] entities = new IEntityBase[1];
-            entities[0] = mario;
+            List<IEntityBase> entities = new List<IEntityBase>();
+            entities.Add(mario);
+            entities.AddRange(enemies.Cast<IEntityBase>());
+            entities.AddRange(items.Cast<IEntityBase>());
+            entities.AddRange(blocks.Cast<IEntityBase>());
             return entities;
         }
 
@@ -61,9 +62,6 @@ namespace Mario.Singletons
             }
         }
 
-        // Not sure how to procede here, since we don't have a way of 
-        // knowing which entity to remove. Maybe we should add an ID to 
-        // each entity?
         public void RemoveEntity(IEntityBase entity)
         {
             if (entity is IHero)
@@ -72,15 +70,15 @@ namespace Mario.Singletons
             }
             else if (entity is IEnemy)
             {
-                // Remove enemy from list
+                enemies.Remove((IEnemy)entity);
             }
             else if (entity is IItem)
             {
-                // Remove item from list
+                items.Remove((IItem)entity);
             }
             else if (entity is IBlock)
             {
-                // Remove block from list
+                blocks.Remove((IBlock)entity);
             }
         }
 

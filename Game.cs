@@ -27,7 +27,6 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
-            gameContentManager.Initialize();
 
             base.Initialize();
         }
@@ -45,7 +44,7 @@ namespace Mario
         {
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
-                    entity.Update(gameTime);
+                entity.Update(gameTime);
             }
             keyboardController.Update(gameTime);
             base.Update(gameTime);
