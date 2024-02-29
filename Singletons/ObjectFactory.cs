@@ -38,7 +38,7 @@ namespace Mario.Singletons
                     return new FloorBlock(position);
                 case "Item":
                     // Assuming Item implements IItem
-                    return new Item(position);
+                    // return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
