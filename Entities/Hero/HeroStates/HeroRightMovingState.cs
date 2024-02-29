@@ -4,6 +4,6 @@ public class RightMovingState : HeroState
 {
     public RightMovingState() : base()
     {
-        sprite = spriteFactory.CreateSprite("rightRunMario");
+        sprite = spriteFactory.CreateSprite("rightRunFireMario");
     }
 }
