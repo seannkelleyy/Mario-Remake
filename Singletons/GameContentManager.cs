@@ -42,6 +42,11 @@ namespace Mario.Singletons
             return entities;
         }
 
+        public IHero GetHero()
+        {
+            return mario; 
+        }
+
         public void AddEntity(IEntityBase entity)
         {
             if (entity is IHero)
