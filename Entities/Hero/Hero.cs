@@ -1,35 +1,36 @@
 using Mario.Entities.Character.HeroStates;
+using Mario.Entities.Hero;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
         public HeroState currentState { get; set; }
-        private SpriteBatch spriteBatch;
         private Vector2 position;
+        private HeroPhysics physics;
         private int health = 1;
         // True is right, false is left
-        private Boolean direction = true;
+        private bool direction = true;
 
         public Hero(Vector2 position)
         {
             this.position = position;
+            physics = new HeroPhysics(direction);
             currentState = new StandingRightState();
         }
 
         public void Update(GameTime gameTime)
         {
+            physics.Update(gameTime);
             currentState.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
             currentState.Draw(spriteBatch, position);
         }
 
@@ -37,7 +38,7 @@ namespace Mario.Entities.Character
         {
             if (currentState is LeftMovingState)
             {
-                position.X -= 3;
+                position.X -= physics.velocity.X;
                 return;
             }
             currentState = new LeftMovingState();
@@ -47,7 +48,7 @@ namespace Mario.Entities.Character
         {
             if (currentState is RightMovingState)
             {
-                position.X += 3;
+                position.X += physics.velocity.X;
                 return;
             }
             currentState = new RightMovingState();
@@ -57,7 +58,7 @@ namespace Mario.Entities.Character
         {
             if (currentState is JumpStateRight || currentState is JumpStateLeft)
             {
-                position.Y -= 5;
+                position.Y -= physics.Jump();
 
                 return;
             }
@@ -74,16 +75,6 @@ namespace Mario.Entities.Character
 
         public void Crouch()
         {
-            // If mario is already crouching, move him down
-            // This is just for sprint 2 to be able to move mario around more
-            // In sprint 3, we will have a crouch sprite and he will actually crouch
-            if (currentState is CrouchState)
-            {
-                position.Y += 5;
-                return;
-            }
-            position.Y += 5;
-
             currentState = new CrouchState();
         }
 
