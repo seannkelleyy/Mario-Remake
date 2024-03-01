@@ -36,7 +36,7 @@ namespace Mario
             SpriteFactory.Instance.LoadAllTextures(Content);
             gameContentManager.Load();
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, gameContentManager.GetEntities());
+            keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
         }
 
