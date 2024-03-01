@@ -1,9 +1,8 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Character;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Character;
 
 namespace Mario.Singletons
 {
@@ -36,8 +35,8 @@ namespace Mario.Singletons
                     // Assuming Block implements IBlock
                     return new Block(position);
                 case "Item":
-                    // Assuming Item implements IItem
-                    return new Item(position);
+                // Assuming Item implements IItem
+                //return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");

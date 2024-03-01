@@ -7,6 +7,7 @@ namespace Mario.Logging
     public class SeanLogger
     {
         private static SeanLogger instance = new SeanLogger();
+
         private readonly string logFilePath; // Path to the log file
         private StreamWriter logFileWriter; // StreamWriter for writing logs
 
