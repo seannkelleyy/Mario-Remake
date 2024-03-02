@@ -1,4 +1,5 @@
-﻿using Mario.Input;
+﻿using Mario.Global;
+using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
@@ -17,6 +18,11 @@ namespace Mario
         private SpriteBatch spriteBatch;
         private IController keyboardController;
         private IEntityBase[] entities;
+
+        int totalFrames = 0;
+        float elapsedTime = 0.0f;
+        int fps = 0;
+
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -29,6 +35,8 @@ namespace Mario
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
             gameContentManager.Initialize();
+
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
             base.Initialize();
         }
@@ -45,7 +53,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            foreach (IEntityBase entity in entities)
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 // This will eventually check if the entity needs to be updated
                 if (entity != null)
@@ -54,6 +62,19 @@ namespace Mario
                 }
             }
             keyboardController.Update(gameTime);
+
+            totalFrames++;
+
+            elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // 1000 ms = 1 second
+            if (elapsedTime >= 1000.0f)
+            {
+                fps = totalFrames;
+                totalFrames = 0;
+                elapsedTime = 0;
+            }
+            Debug.WriteLine(fps);
             base.Update(gameTime);
         }
 

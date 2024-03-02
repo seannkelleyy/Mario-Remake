@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Sprites
+namespace Mario.Entities.Sprites
 {
     // Class for sprites. Can either be an animated sprite or non animated sprite.
     public class Sprite : ISprite
@@ -27,7 +27,7 @@ namespace Mario.Sprites
             width = spriteParams[2];
             height = spriteParams[3];
             totalFrames = spriteParams[4];
-            this.size = spriteParams[5];
+            size = spriteParams[5];
             updateInterval = .1f;
             elapsedSeconds = 0;
         }
@@ -46,7 +46,7 @@ namespace Mario.Sprites
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle sourceRectangle = new Rectangle(spriteSheetStartingX + width * currentFrame, spriteSheetStartingY, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)(location.Y), width * size, height * size);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * size, height * size);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 

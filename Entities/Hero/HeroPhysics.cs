@@ -1,70 +1,73 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Mario.Global;
+using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Mario.Entities.Hero
 {
     public class HeroPhysics
     {
         public Vector2 velocity;
-        private const float gravity = 9.8f;
-        private const float jumpForce = 15f;
-        private const float maxFallSpeed = 20f;
-        private const float maxRunSpeed = 5f;
-        private const float runAcceleration = 0.5f;
-        private const float friction = 0.5f;
-        private bool direction;
+        public bool direction = true;
 
-        public HeroPhysics(bool direction)
+        public HeroPhysics()
         {
-            this.direction = direction;
             velocity = new Vector2(0, 0);
         }
-        public void Update(GameTime gameTime)
-        {
-            ApplyGravity();
-            ApplyFriction();
-            ApplySpeed();
-        }
 
-        private void ApplyGravity()
+        public float ApplyGravity()
         {
-            if (velocity.Y < maxFallSpeed)
+            if (velocity.Y < PhysicsVariables.maxFallSpeed)
             {
-                velocity.Y += gravity;
-            }
-        }
-
-        private void ApplyFriction()
-        {
-            if (velocity.X > 0)
-            {
-                velocity.X -= friction;
-            }
-            else if (velocity.X < 0)
-            {
-                velocity.X += friction;
-            }
-        }
-        private void ApplySpeed()
-        {
-            if (direction)
-            {
-                if (velocity.X < maxRunSpeed)
-                {
-                    velocity.X += runAcceleration;
-                }
+                velocity.Y += PhysicsVariables.gravity;
+                Debug.WriteLine(velocity.Y);
             }
             else
             {
-                if (velocity.X > -maxRunSpeed)
-                {
-                    velocity.X -= runAcceleration;
-                }
+                velocity.Y = PhysicsVariables.maxFallSpeed;
             }
+            return velocity.Y;
+        }
+
+        public float ApplyFriction()
+        {
+            if (velocity.X < PhysicsVariables.friction && velocity.X > -PhysicsVariables.friction)
+            {
+                return 0;
+            }
+            else if (velocity.X > 0)
+            {
+                velocity.X -= PhysicsVariables.friction;
+            }
+            else if (velocity.X < 0)
+            {
+                velocity.X += PhysicsVariables.friction;
+            }
+            return velocity.X;
+        }
+        public float WalkRight()
+        {
+            Debug.WriteLine(velocity.X);
+            direction = true;
+            if (velocity.X < PhysicsVariables.maxRunSpeed)
+            {
+                velocity.X += PhysicsVariables.runAcceleration;
+            }
+            return velocity.X;
+        }
+        public float WalkLeft()
+        {
+            Debug.WriteLine(velocity.X);
+            direction = false;
+            if (velocity.X > -PhysicsVariables.maxRunSpeed)
+            {
+                velocity.X -= PhysicsVariables.runAcceleration;
+            }
+            return velocity.X;
         }
 
         public float Jump()
         {
-            velocity.Y = -jumpForce;
+            velocity.Y = PhysicsVariables.jumpForce;
             return velocity.Y;
         }
     }

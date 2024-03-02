@@ -33,7 +33,7 @@ namespace Mario.Singletons
         public void Load()
         {
             // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
+            mario = new Hero(new Vector2(300, 400));
         }
 
         public IEntityBase[] GetEntities()
