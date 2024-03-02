@@ -8,6 +8,7 @@ public class Logger
 
     private static Logger instance = new Logger();
 
+    // Singleton pattern, when you need a logger, you call Logger.Instance
     public static Logger Instance
     {
         get
@@ -50,6 +51,7 @@ public class Logger
         _logger.Error(message);
     }
 
+    // This is called when the game is closed
     public void Close()
     {
         Log.CloseAndFlush();
