@@ -11,8 +11,8 @@ namespace Mario.Entities.Blocks
     {
         private BlockState state;
         private Vector2 position;
-        public Boolean isCollidable { get; } = true;
-        public Boolean isBreakable { get; } = false;
+        public bool isCollidable { get; } = true;
+        public bool isBreakable { get; } = false;
 
         public FloorBlock (Vector2 position)
         {

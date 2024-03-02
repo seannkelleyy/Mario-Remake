@@ -1,5 +1,5 @@
 ﻿using Mario.Interfaces.Entities;
-using Mario.Sprites;
+using Mario.Entities.Items;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Mario.Entities.Character;
@@ -36,9 +36,6 @@ namespace Mario.Singletons
                 
                 case "FloorBlock": // Floor block is an IEntityBase not IBlock
                     return new FloorBlock(position);
-                case "Item":
-                    // Assuming Item implements IItem
-                    // return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
@@ -61,6 +58,30 @@ namespace Mario.Singletons
         public IBlock CreateCoinBlock(Vector2 position, int coinAmount)
         {
             return new CoinBlock(position, coinAmount);
+        }
+
+        // Returns a new coin
+        public IItem CreateCoin(Vector2 position)
+        {
+            return new Coin(position);
+        }
+
+        // Returns a new fire flower
+        public IItem CreateFireFlower(Vector2 position)
+        {
+            return new FireFlower(position);
+        }
+
+        // Returns a new star
+        public IItem CreateStar(Vector2 position)
+        {
+            return new Star(position);
+        }
+
+        // Returns a new mushrrom (red mushroom or 1up)
+        public IItem CreateMushroom(Vector2 position, string mushroomType)
+        {
+            return new Mushroom(position, mushroomType);
         }
     }
 }

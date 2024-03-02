@@ -6,8 +6,8 @@ namespace Mario.Entities.Blocks
 {
     public class EmptyBrickBlock : AbstractBlock
     {
-        public Boolean isCollidable { get; } = true;
-        public Boolean isBreakable { get; } = true;
+        public bool isCollidable { get; } = true;
+        public bool isBreakable { get; } = true;
 
         public EmptyBrickBlock(Vector2 position)
         {
