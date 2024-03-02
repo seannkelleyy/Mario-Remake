@@ -10,6 +10,8 @@ namespace Mario.Singletons
     {
         private SpriteFactory spriteFactory;
         private IHero mario;
+
+
         private static GameContentManager instance = new GameContentManager();
 
         // This code follows the singleton pattern
@@ -34,6 +36,7 @@ namespace Mario.Singletons
         {
             // Will call level loader 
             mario = new Hero(new Vector2(300, 100));
+            Logger.Instance.LogInformation("Mario loaded");
         }
 
         public IEntityBase[] GetEntities()
