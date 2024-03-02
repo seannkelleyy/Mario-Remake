@@ -26,7 +26,7 @@ namespace Mario.Input
 
         // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
         // to assign the functions to call when keys are pressed.
-        public void LoadCommands(MarioRemake game, IEntityBase[] entities)
+        public void LoadCommands(MarioRemake game, IHero[] entities)
         {
             mario = (IHero)entities[0];
 

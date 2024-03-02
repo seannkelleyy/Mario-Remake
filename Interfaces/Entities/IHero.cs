@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Mario.Interfaces.Entities
+﻿namespace Mario.Interfaces.Entities
 {
-    public interface IHero : IEntityBase
+    public interface IHero : IEntityBase, ICollideable
     {
-        public Vector2 GetPosition();
-        public void SetPosition(Vector2 position);
         public void WalkLeft();
         public void WalkRight();
         public void Jump();

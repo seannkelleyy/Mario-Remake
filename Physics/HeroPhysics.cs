@@ -2,8 +2,11 @@
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using static Mario.Global.CollisionVariables;
 
-namespace Mario.Entities.Hero
+namespace Mario.Physics
 {
     public class HeroPhysics
     {
@@ -11,7 +14,17 @@ namespace Mario.Entities.Hero
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
         private bool isJumping = false;
-        private float jumpTimer = 0;
+        private float jumpCounter = 0;
+        public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
+        {
+            { CollisionDirection.Top, false },
+            { CollisionDirection.Bottom, false },
+            { CollisionDirection.Left, false },
+            { CollisionDirection.Right, false },
+            { CollisionDirection.None, true }
+        };
+
+
         public IHero hero;
 
         public HeroPhysics(IHero hero)
@@ -24,6 +37,12 @@ namespace Mario.Entities.Hero
         {
             UpdateHorizontal();
             UpdateVertical();
+            if (hero.GetPosition().Y >= 400)
+            {
+                Debug.WriteLineIf(collisionStates[CollisionDirection.Bottom], "Bottom collision");
+                collisionStates[CollisionDirection.Bottom] = true;
+                collisionStates[CollisionDirection.None] = false;
+            }
         }
 
         #region Horizontal Movement
@@ -102,7 +121,7 @@ namespace Mario.Entities.Hero
             {
                 isJumping = true;
                 velocity.Y = -PhysicsVariables.jumpForce;
-                jumpTimer = 0;
+                jumpCounter = 0;
             }
         }
 
@@ -111,13 +130,15 @@ namespace Mario.Entities.Hero
             if (isJumping)
             {
                 // If Mario is still within the jump limit, keep moving up
-                if (jumpTimer < PhysicsVariables.jumpLimit && jumpTimer >= 0)
+                if (jumpCounter < PhysicsVariables.jumpLimit && jumpCounter >= 0)
                 {
-                    jumpTimer++;
+                    collisionStates[CollisionDirection.Bottom] = false;
+                    jumpCounter++;
+                    Debug.WriteLine(jumpCounter);
                 }
-                else
+                else if (collisionStates[CollisionDirection.Bottom] == true)
                 {
-                    jumpTimer = 0;
+                    jumpCounter = 0;
                     isJumping = false;
                 }
             }
@@ -125,7 +146,7 @@ namespace Mario.Entities.Hero
             // If Mario is not jumping, apply gravity
             if (!isJumping)
             {
-                if (hero.GetPosition().Y < 400)
+                if (collisionStates[CollisionDirection.Bottom] != true)
                 {
                     velocity.Y += ApplyGravity();
                 }

@@ -17,7 +17,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private IEntityBase[] entities;
+        private IHero[] entities;
 
         public MarioRemake()
         {
@@ -49,7 +49,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            foreach (IHero entity in gameContentManager.GetEntities())
             {
                 // This will eventually check if the entity needs to be updated
                 if (entity != null)

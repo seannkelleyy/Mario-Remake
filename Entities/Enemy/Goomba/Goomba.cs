@@ -1,16 +1,18 @@
 ﻿using Mario.Entities.Enemy.Goomba.GoombaStates;
+using Mario.Global;
 using Mario.Interfaces.Entities;
+using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using System.Collections.Generic;
+using static Mario.Global.CollisionVariables;
 
 // This class currently isn't being used in sprint 2
 public class Goomba : IEnemy
 {
     public GoombaState currentState;
     private Vector2 position;
-    // Right is true, left is false
-    private Boolean direction = true;
+    private EntityPhysics physics;
 
     public Goomba(Vector2 position)
     {
@@ -28,11 +30,6 @@ public class Goomba : IEnemy
         currentState.Draw(spriteBatch, position);
     }
 
-    public void ChangeDirection()
-    {
-        direction = !direction;
-    }
-
     public void Stomp()
     {
         currentState = new StompedGoombaState();
@@ -43,25 +40,40 @@ public class Goomba : IEnemy
         currentState = new FlippedGoombaState();
     }
 
-    // These will need edited later
-    public void MoveLeft()
+    public void ChangeDirection()
     {
-        if (position.X == 0)
+        if (physics.horizontalDirection)
+        {
+            physics.horizontalDirection = false;
+            currentState = new LeftMovingGoombaState();
+        }
+        else
+        {
+            physics.horizontalDirection = true;
+            currentState = new RightMovingGoombaState();
+        }
+    }
+
+    public Vector2 GetPosition()
+    {
+        return position;
+    }
+
+    public void SetPosition(Vector2 position)
+    {
+        this.position = position;
+    }
+
+    public void HandleCollision(ICollideable entity, Dictionary<CollisionVariables.CollisionDirection, bool> collisionDirection)
+    {
+        if (collisionDirection[CollisionDirection.Top])
+        {
+            Stomp();
+        }
+        else if (collisionDirection[CollisionDirection.Left] || collisionDirection[CollisionDirection.Right])
         {
             ChangeDirection();
         }
-        position.X = position.X - 2;
     }
-
-    public void MoveRight()
-    {
-        //Edit value to whatever the edge of the screen is
-        if (position.X == 0)
-        {
-            ChangeDirection();
-        }
-        position.X = position.X + 2;
-    }
-
 }
 

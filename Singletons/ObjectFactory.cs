@@ -20,7 +20,7 @@ namespace Mario.Singletons
         private GameObjectFactory() { }
 
         // Factory method to create game entities
-        public IEntityBase CreateEntity(string type, Vector2 position)
+        public IHero CreateEntity(string type, Vector2 position)
         {
             switch (type)
             {

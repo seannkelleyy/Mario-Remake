@@ -36,9 +36,9 @@ namespace Mario.Singletons
             mario = new Hero(new Vector2(300, 400));
         }
 
-        public IEntityBase[] GetEntities()
+        public IHero[] GetEntities()
         {
-            IEntityBase[] entities = new IEntityBase[1];
+            IHero[] entities = new IHero[1];
             entities[0] = mario;
             return entities;
         }

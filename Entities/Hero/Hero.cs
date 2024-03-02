@@ -1,9 +1,11 @@
 using Mario.Entities.Character.HeroStates;
-using Mario.Entities.Hero;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using static Mario.Global.CollisionVariables;
 
 namespace Mario.Entities.Character
 {
@@ -103,10 +105,24 @@ namespace Mario.Entities.Character
             // Make mario shoot fireball
         }
 
-
         public void Die()
         {
             currentState = new DeadState();
+        }
+
+        public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+        {
+            // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
+            if (collideable is IEnemy)
+            {
+                if (collisionDirection[CollisionDirection.Bottom])
+                {
+                    ((IEnemy)collideable).Stomp();
+                }
+                else
+                {
+                }
+            }
         }
     }
 }

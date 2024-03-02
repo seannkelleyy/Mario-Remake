@@ -1,11 +1,8 @@
 ﻿namespace Mario.Interfaces.Entities
 {
-    public interface IEnemy : IEntityBase
+    public interface IEnemy : IEntityBase, ICollideable
     {
-        // Movement
         public void ChangeDirection();
-
-        // Function to handle when Enemu takes damage
         public void Stomp();
         public void Flip();
     }
