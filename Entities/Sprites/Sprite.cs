@@ -28,7 +28,7 @@ namespace Mario.Entities.Sprites
             height = spriteParams[3];
             totalFrames = spriteParams[4];
             size = spriteParams[5];
-            updateInterval = .1f;
+            updateInterval = .2f;
             elapsedSeconds = 0;
         }
 

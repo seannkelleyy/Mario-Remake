@@ -4,7 +4,6 @@ using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace Mario.Entities.Character
 {
@@ -14,39 +13,16 @@ namespace Mario.Entities.Character
         private Vector2 position;
         private HeroPhysics physics;
         private int health = 1;
-        // True is right, false is left
-        private bool isFalling = false;
-
         public Hero(Vector2 position)
         {
             this.position = position;
-            physics = new HeroPhysics();
+            physics = new HeroPhysics(this);
             currentState = new StandingRightState();
         }
 
         public void Update(GameTime gameTime)
         {
-
-            if (isFalling)
-            {
-                if (position.Y < 400)
-                {
-                    position.Y += physics.ApplyGravity();
-                }
-                else if (position.Y >= 400)
-                {
-                    isFalling = false;
-                    if (physics.direction)
-                    {
-                        currentState = new StandingRightState();
-                    }
-                    else
-                    {
-                        currentState = new StandingLeftState();
-                    }
-                }
-            }
-
+            physics.Update();
             currentState.Update(gameTime);
         }
 
@@ -55,11 +31,21 @@ namespace Mario.Entities.Character
             currentState.Draw(spriteBatch, position);
         }
 
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return position;
+        }
+
         public void WalkLeft()
         {
             if (currentState is LeftMovingState)
             {
-                position.X += physics.WalkLeft();
+                physics.WalkLeft();
                 return;
             }
             currentState = new LeftMovingState();
@@ -69,7 +55,7 @@ namespace Mario.Entities.Character
         {
             if (currentState is RightMovingState)
             {
-                position.X += physics.WalkRight();
+                physics.WalkRight();
                 return;
             }
             currentState = new RightMovingState();
@@ -77,27 +63,15 @@ namespace Mario.Entities.Character
 
         public void Jump()
         {
-            Debug.WriteLine("Jumping");
-            if (isFalling)
-            {
-                return;
-            }
-            if (currentState is JumpStateRight || currentState is JumpStateLeft)
-            {
-                return;
-            }
-            position.Y -= physics.Jump();
-            if (physics.direction)
+            physics.Jump();
+
+            if (physics.horizontalDirection)
             {
                 currentState = new JumpStateRight();
-                position.Y -= physics.Jump();
-                isFalling = true;
             }
             else
             {
                 currentState = new JumpStateLeft();
-                position.Y -= physics.Jump();
-                isFalling = true;
             }
         }
 
