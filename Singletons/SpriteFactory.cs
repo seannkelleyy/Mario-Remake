@@ -1,5 +1,5 @@
 ﻿using Mario.Entities.Sprites;
-using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;

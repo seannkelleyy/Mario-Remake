@@ -1,4 +1,4 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,7 +7,7 @@ namespace Mario.Entities.Sprites
     // Class for sprites. Can either be an animated sprite or non animated sprite.
     public class Sprite : ISprite
     {
-        public Texture2D texture { get; set; }
+        private Texture2D texture { get; set; }
         private int currentFrame = 0;
         private int totalFrames;
         private int size;
@@ -15,8 +15,8 @@ namespace Mario.Entities.Sprites
         private int spriteSheetStartingY;
         private int width;
         private int height;
-        float updateInterval;
-        float elapsedSeconds;
+        float updateInterval = .2f;
+        float elapsedSeconds = 0;
 
 
         public Sprite(Texture2D texture, int[] spriteParams)
@@ -28,13 +28,10 @@ namespace Mario.Entities.Sprites
             height = spriteParams[3];
             totalFrames = spriteParams[4];
             size = spriteParams[5];
-            updateInterval = .2f;
-            elapsedSeconds = 0;
         }
 
         public void Update(GameTime gameTime)
         {
-            // Update the sprite every 1/30th of a second
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (elapsedSeconds >= updateInterval)
             {

@@ -14,6 +14,10 @@ namespace Mario.Physics
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
         private float jumpCounter = 0;
+
+        // This is a dictionary that keeps track of the collision states of the entity, This could 
+        // based upon exactly how we want to handle collisions, but for now, we are just going to
+        // keep track of the collision states of the entity
         public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -38,6 +42,8 @@ namespace Mario.Physics
             UpdateVertical();
             if (hero.GetPosition().Y >= 400)
             {
+                // This will change after full collision handling is implemented. 
+                // This is mainly here so we can test the jump mechanic
                 collisionStates[CollisionDirection.Bottom] = true;
                 collisionStates[CollisionDirection.None] = false;
             }
@@ -136,7 +142,7 @@ namespace Mario.Physics
                     Debug.WriteLine(jumpCounter);
                 }
                 else
-                {
+                { // If Mario has reached the jump limit, start moving down
                     verticalDirection = true;
                 }
             }
@@ -148,7 +154,7 @@ namespace Mario.Physics
                     velocity.Y += ApplyGravity();
                 }
                 else
-                {
+                { // If Mario has landed, stop moving
                     velocity.Y = 0;
                 }
             }

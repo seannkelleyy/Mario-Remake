@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
-namespace Mario.Interfaces.Entities
+namespace Mario.Interfaces.Base
 {
     public interface ICollideable
     {

@@ -1,5 +1,5 @@
 ﻿using Mario.Global;
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,10 @@ namespace Mario.Physics
         public Vector2 velocity;
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
+
+        // This is a dictionary that keeps track of the collision states of the entity, This could 
+        // based upon exactly how we want to handle collisions, but for now, we are just going to
+        // keep track of the collision states of the entity
         public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -99,6 +103,8 @@ namespace Mario.Physics
             return velocity.Y;
         }
 
+        // Much simpler than Hero's movement because they can jump, they just fall if they
+        // walk off a ledge
         private void UpdateVertical()
         {
             if (collisionStates[CollisionDirection.None] == true)

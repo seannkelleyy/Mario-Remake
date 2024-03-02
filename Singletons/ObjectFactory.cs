@@ -1,7 +1,7 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Interfaces;
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
