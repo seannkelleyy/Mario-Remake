@@ -16,6 +16,7 @@ public class Goomba : IEnemy
 
     public Goomba(Vector2 position)
     {
+        physics = new EntityPhysics(this);
         this.position = position;
         currentState = new LeftMovingGoombaState();
     }

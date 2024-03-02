@@ -13,7 +13,6 @@ namespace Mario.Physics
         public Vector2 velocity;
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
-        private bool isJumping = false;
         private float jumpCounter = 0;
         public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
         {
@@ -39,7 +38,6 @@ namespace Mario.Physics
             UpdateVertical();
             if (hero.GetPosition().Y >= 400)
             {
-                Debug.WriteLineIf(collisionStates[CollisionDirection.Bottom], "Bottom collision");
                 collisionStates[CollisionDirection.Bottom] = true;
                 collisionStates[CollisionDirection.None] = false;
             }
@@ -117,9 +115,9 @@ namespace Mario.Physics
         }
         public void Jump()
         {
-            if (!isJumping)
+            if (verticalDirection && collisionStates[CollisionDirection.Bottom])
             {
-                isJumping = true;
+                verticalDirection = false;
                 velocity.Y = -PhysicsVariables.jumpForce;
                 jumpCounter = 0;
             }
@@ -127,38 +125,44 @@ namespace Mario.Physics
 
         private void UpdateVertical()
         {
-            if (isJumping)
+            if (!verticalDirection)
             {
                 // If Mario is still within the jump limit, keep moving up
-                if (jumpCounter < PhysicsVariables.jumpLimit && jumpCounter >= 0)
+                if (jumpCounter < PhysicsVariables.jumpLimit)
                 {
                     collisionStates[CollisionDirection.Bottom] = false;
+                    velocity.Y = -PhysicsVariables.jumpForce * (1 - (float)jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
                     Debug.WriteLine(jumpCounter);
                 }
-                else if (collisionStates[CollisionDirection.Bottom] == true)
+                else
                 {
-                    jumpCounter = 0;
-                    isJumping = false;
+                    verticalDirection = true;
                 }
             }
-
-            // If Mario is not jumping, apply gravity
-            if (!isJumping)
+            else
             {
-                if (collisionStates[CollisionDirection.Bottom] != true)
+                // If Mario is not jumping, apply gravity
+                if (collisionStates[CollisionDirection.Bottom] == false)
                 {
                     velocity.Y += ApplyGravity();
                 }
                 else
                 {
                     velocity.Y = 0;
-                    isJumping = false;
                 }
             }
+
+            // If Mario has landed, reset the jump counter
+            if (collisionStates[CollisionDirection.Bottom] == true)
+            {
+                jumpCounter = 0;
+            }
+
             hero.SetPosition(hero.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;
         }
+
 
         #endregion
     }

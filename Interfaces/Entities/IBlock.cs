@@ -2,7 +2,7 @@
 
 namespace Mario.Interfaces
 {
-    public interface IBlock : IHero
+    public interface IBlock : IEntityBase
     {
         public void GetHit();
     }

@@ -22,11 +22,11 @@ namespace Mario.Physics
         };
 
 
-        public IHero entity;
+        public ICollideable entity;
 
-        public EntityPhysics(IHero hero)
+        public EntityPhysics(ICollideable entity)
         {
-            this.entity = hero;
+            this.entity = entity;
             velocity = new Vector2(0, 0);
         }
 

@@ -1,15 +1,15 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Mario.Entities.Blocks.BlockStates;
-using System;
+﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Interfaces;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace Mario.Entities.Blocks
 {
     public class ItemBlock : AbstractBlock
     {
-        public Boolean isCollidable { get; } = true;
-        public Boolean isBreakable { get; } = false;
+        public bool isCollidable { get; } = true;
+        public bool isBreakable { get; } = false;
         private IItem item;
 
         public ItemBlock(Vector2 position, string itemName, string itemBlockType)

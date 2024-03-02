@@ -1,8 +1,7 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Mario.Entities.Blocks.BlockStates;
-using System;
+﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Interfaces;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
@@ -10,8 +9,8 @@ namespace Mario.Entities.Blocks
     {
         private int coinCount;
         private IItem[] coins;
-        public Boolean isCollidable { get; } = true;
-        public Boolean isBreakable { get; } = false;
+        public bool isCollidable { get; } = true;
+        public bool isBreakable { get; } = false;
 
         public CoinBlock(Vector2 position, int coinAmount)
         {
@@ -35,7 +34,7 @@ namespace Mario.Entities.Blocks
             if (coinCount == 0)
             {
                 currentState = new HardBlockState();
-            } 
+            }
             else
             {
                 coinCount--;

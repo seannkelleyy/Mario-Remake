@@ -15,6 +15,7 @@ public class Koopa : IEnemy
 
     public Koopa(Vector2 position)
     {
+        physics = new EntityPhysics(this);
         this.position = position;
         currentState = new LeftMovingKoopaState();
     }
