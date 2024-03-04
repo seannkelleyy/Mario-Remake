@@ -1,8 +1,8 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Mario.Entities.Blocks.BlockStates;
+﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Interfaces;
 using Mario.Singletons;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace Mario.Entities.Blocks
 {

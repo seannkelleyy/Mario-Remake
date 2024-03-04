@@ -1,6 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Mario.Entities.Blocks.BlockStates;
-using System;
+﻿using Mario.Entities.Blocks.BlockStates;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {

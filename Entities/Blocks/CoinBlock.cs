@@ -1,7 +1,7 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework;
-using Mario.Entities.Blocks.BlockStates;
+﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Interfaces;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
@@ -33,7 +33,7 @@ namespace Mario.Entities.Blocks
             if (coinCount == 0)
             {
                 currentState = new HardBlockState();
-            } 
+            }
             else
             {
                 coinCount--;

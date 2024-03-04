@@ -1,5 +1,6 @@
-﻿using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework.Graphics;
+﻿
+using Mario.Interfaces.Base;
+
 namespace Mario.Interfaces
 {
     public interface IItem : IEntityBase
