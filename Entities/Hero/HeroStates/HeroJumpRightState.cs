@@ -4,6 +4,6 @@ public class JumpStateRight : HeroState
 {
     public JumpStateRight() : base()
     {
-        sprite = spriteFactory.CreateSprite("rightJumpMario");
+        sprite = spriteFactory.CreateSprite("rightJumpFireMario");
     }
 }

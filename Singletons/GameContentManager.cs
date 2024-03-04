@@ -1,8 +1,7 @@
-﻿using Mario.Entities.Character;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mario.Singletons
@@ -10,20 +9,15 @@ namespace Mario.Singletons
     public class GameContentManager
     {
         private IHero mario;
-        private IEnemy[] enemies;
-        private IItem[] items;
-        private IBlock[] blocks;
+        private List<IEnemy> enemies;
+        private List<IItem> items;
+        private List<IBlock> blocks;
+
         private static GameContentManager instance = new GameContentManager();
 
         // This code follows the singleton pattern
         // When you need a GCM, you call GameContentManager.Instance
-        public static GameContentManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static GameContentManager Instance => instance;
 
         // This is a private constructor, so no one can create a new GameContentManager
         private GameContentManager() { }
@@ -31,14 +25,43 @@ namespace Mario.Singletons
         public void Load()
         {
             // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
         }
 
-        public IEntityBase[] GetEntities()
+        public List<IEntityBase> GetEntities()
         {
-            IEntityBase[] entities = new IEntityBase[1];
-            entities[0] = mario;
+            List<IEntityBase> entities = new List<IEntityBase>
+            {
+                mario
+            };
+            entities.AddRange(enemies.Cast<IEntityBase>());
+            entities.AddRange(items.Cast<IEntityBase>());
+            entities.AddRange(blocks.Cast<IEntityBase>());
             return entities;
+        }
+
+        public IHero GetHero()
+        {
+            return mario; 
+        }
+
+        public void AddEntity(IEntityBase entity)
+        {
+            if (entity is IHero)
+            {
+                mario = (IHero)entity;
+            }
+            else if (entity is IEnemy)
+            {
+                enemies.Append((IEnemy)entity);
+            }
+            else if (entity is IItem)
+            {
+                items.Append((IItem)entity);
+            }
+            else if (entity is IBlock)
+            {
+                blocks.Append((IBlock)entity);
+            }
         }
 
         public void AddEntity(IEntityBase entity)
@@ -83,20 +106,23 @@ namespace Mario.Singletons
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void RemoveEntity(IEntityBase entity)
         {
-            mario.Draw(spriteBatch);
-            foreach (IEnemy enemy in enemies)
+            if (entity is IHero)
             {
-                enemy.Draw(spriteBatch);
+                mario = null;
             }
-            foreach (IItem item in items)
+            else if (entity is IEnemy)
             {
-                item.Draw(spriteBatch);
+                enemies.Remove((IEnemy)entity);
             }
-            foreach (IBlock block in blocks)
+            else if (entity is IItem)
             {
-                block.Draw(spriteBatch);
+                items.Remove((IItem)entity);
+            }
+            else if (entity is IBlock)
+            {
+                blocks.Remove((IBlock)entity);
             }
         }
     }
