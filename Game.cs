@@ -1,7 +1,7 @@
 ﻿using Mario.Global;
 using Mario.Input;
 using Mario.Interfaces;
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
