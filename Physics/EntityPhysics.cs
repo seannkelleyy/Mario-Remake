@@ -37,7 +37,7 @@ namespace Mario.Physics
         public void Update()
         {
             UpdateHorizontal();
-            UpdateVertical();
+            // UpdateVertical(); This works, but since we hav eno collision they just fly off the screen
         }
 
         #region Horizontal Movement
@@ -64,24 +64,24 @@ namespace Mario.Physics
             // If the player is not pressing any keys, apply friction
             if (horizontalDirection)
             {
-                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                if (velocity.X < PhysicsVariables.enemyMaxSpeed)
                 {
-                    velocity.X += PhysicsVariables.runAcceleration;
+                    velocity.X += PhysicsVariables.enemyAcceleration;
                 }
                 else
                 {
-                    velocity.X = PhysicsVariables.maxRunSpeed;
+                    velocity.X = PhysicsVariables.enemyMaxSpeed;
                 }
             }
             else if (!horizontalDirection)
             {
-                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                if (velocity.X > -PhysicsVariables.enemyMaxSpeed)
                 {
-                    velocity.X -= PhysicsVariables.runAcceleration;
+                    velocity.X -= PhysicsVariables.enemyAcceleration;
                 }
                 else
                 {
-                    velocity.X = -PhysicsVariables.maxRunSpeed;
+                    velocity.X = -PhysicsVariables.enemyMaxSpeed;
                 }
             }
 

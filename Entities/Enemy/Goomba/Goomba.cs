@@ -25,6 +25,7 @@ public class Goomba : IEnemy
     public void Update(GameTime gameTime)
     {
         currentState.Update(gameTime);
+        physics.Update();
     }
 
     public void Draw(SpriteBatch spriteBatch)

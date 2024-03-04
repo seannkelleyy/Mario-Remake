@@ -3,7 +3,6 @@ using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -40,7 +39,7 @@ namespace Mario.Physics
         {
             UpdateHorizontal();
             UpdateVertical();
-            if (hero.GetPosition().Y >= 400)
+            if (hero.GetPosition().Y >= 174) // Would change to collision on bottom
             {
                 // This will change after full collision handling is implemented. 
                 // This is mainly here so we can test the jump mechanic
@@ -139,7 +138,6 @@ namespace Mario.Physics
                     collisionStates[CollisionDirection.Bottom] = false;
                     velocity.Y = -PhysicsVariables.jumpForce * (1 - (float)jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
-                    Debug.WriteLine(jumpCounter);
                 }
                 else
                 { // If Mario has reached the jump limit, start moving down
