@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Mario.Entities.Items.ItemStates;
 using System.Collections.Generic;
+using Mario.Physics;
 
 namespace Mario.Entities.Items
 {
     public class Mushroom : AbstractItem
     {
-        public bool IsCollidable { get; set; } = false;
+        private EntityPhysics physics;
 
         public Mushroom(Vector2 position, string mushroomType)
         {
             this.position = position;
+            physics = new EntityPhysics(this);
+
             // Set the correct sprite of this item block
             if (mushroomType.CompareTo("redMushroom") == 0)
             {
@@ -33,6 +36,9 @@ namespace Mario.Entities.Items
             IsCollidable = true;
         }
 
-        // TODO: Implment more methods to handle movement
+        public void Move()
+        {
+            physics.Update();
+        }
     }
 }

@@ -1,16 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Mario.Entities.Items.ItemStates;
+using Mario.Physics;
 
 namespace Mario.Entities.Items
 {
     public class Star : AbstractItem
     {
-        public bool IsCollidable { get; set; } = false;
+        private EntityPhysics physics;
 
         public Star(Vector2 position)
         {
             this.position = position;
             currentState = new StarState();
+            physics = new EntityPhysics(this);
         }
 
         public override void MakeVisable()
@@ -19,6 +21,10 @@ namespace Mario.Entities.Items
             IsCollidable = true;
         }
 
-        // TODO: Implment more methods to handle movement
+        // Makes the star move 
+        public void Move()
+        {
+            physics.Update();
+        }
     }
 }

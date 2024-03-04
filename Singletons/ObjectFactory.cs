@@ -1,5 +1,6 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
@@ -35,9 +36,7 @@ namespace Mario.Singletons
 
                 case "FloorBlock": // Floor block is an IEntityBase not IBlock
                     return new FloorBlock(position);
-                case "Item":
-                // Assuming Item implements IItem
-                // return new Item(position);
+
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");

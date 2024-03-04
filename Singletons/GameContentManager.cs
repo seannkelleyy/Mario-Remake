@@ -10,8 +10,8 @@ namespace Mario.Singletons
     {
         private IHero mario;
         private List<IEntityBase> enemies;
-        private List<IItem> items;
-        private List<IBlock> blocks;
+        private List<IEntityBase> items;
+        private List<IEntityBase> blocks;
 
         private static GameContentManager instance = new GameContentManager();
 
@@ -26,8 +26,8 @@ namespace Mario.Singletons
         {
             mario = GameObjectFactory.Instance.CreateEntity("Mario", new Vector2(100, 220)) as IHero;
             enemies = new List<IEntityBase>();
-            items = new List<IItem>();
-            blocks = new List<IBlock>();
+            items = new List<IEntityBase>();
+            blocks = new List<IEntityBase>();
         }
 
         public List<IEntityBase> GetEntities()

@@ -5,8 +5,6 @@ namespace Mario.Entities.Items
 {
     public class Coin : AbstractItem
     {
-        public bool IsCollidable { get; } = false;
-
         public Coin(Vector2 position)
         {
             this.position = position;
@@ -17,7 +15,5 @@ namespace Mario.Entities.Items
         {
             IsVisable = true;
         }
-
-        // TODO: Implment more methods to handle movement
     }
 }
