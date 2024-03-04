@@ -40,6 +40,12 @@ namespace Mario
             base.LoadContent();
         }
 
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+            Logger.Instance.Close();
+        }
+
         protected override void Update(GameTime gameTime)
         {
             foreach (IEntityBase entity in gameContentManager.GetEntities())
