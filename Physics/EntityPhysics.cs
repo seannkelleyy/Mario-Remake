@@ -37,7 +37,7 @@ namespace Mario.Physics
         public void Update()
         {
             UpdateHorizontal();
-            // UpdateVertical(); This works, but since we hav eno collision they just fly off the screen
+            UpdateVertical(); //This works, but since we hav eno collision they just fly off the screen
         }
 
         #region Horizontal Movement

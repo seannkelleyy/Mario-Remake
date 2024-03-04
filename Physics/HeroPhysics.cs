@@ -39,7 +39,7 @@ namespace Mario.Physics
         {
             UpdateHorizontal();
             UpdateVertical();
-            if (hero.GetPosition().Y >= 174) // Would change to collision on bottom
+            if (hero.GetPosition().Y >= 174) // Would change to collision on bottomddddd
             {
                 // This will change after full collision handling is implemented. 
                 // This is mainly here so we can test the jump mechanic
