@@ -1,43 +1,54 @@
 using Mario.Entities.Character.HeroStates;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using System.Collections.Generic;
+using static Mario.Global.CollisionVariables;
 
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
         public HeroState currentState { get; set; }
-        private SpriteBatch spriteBatch;
         private Vector2 position;
+        private HeroPhysics physics;
         private int health = 1;
-        // True is right, false is left
-        private Boolean direction = true;
-
         public Hero(Vector2 position)
         {
             this.position = position;
+            physics = new HeroPhysics(this);
             currentState = new StandingRightState();
         }
 
         public void Update(GameTime gameTime)
         {
+            physics.Update();
             currentState.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
             currentState.Draw(spriteBatch, position);
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return position;
         }
 
         public void WalkLeft()
         {
             if (currentState is LeftMovingState)
             {
-                position.X -= 3;
+                physics.WalkLeft();
                 return;
             }
             currentState = new LeftMovingState();
@@ -47,7 +58,7 @@ namespace Mario.Entities.Character
         {
             if (currentState is RightMovingState)
             {
-                position.X += 3;
+                physics.WalkRight();
                 return;
             }
             currentState = new RightMovingState();
@@ -55,14 +66,9 @@ namespace Mario.Entities.Character
 
         public void Jump()
         {
-            if (currentState is JumpStateRight || currentState is JumpStateLeft)
-            {
-                position.Y -= 5;
+            physics.Jump();
 
-                return;
-            }
-            position.Y -= 5;
-            if (direction)
+            if (physics.horizontalDirection)
             {
                 currentState = new JumpStateRight();
             }
@@ -74,16 +80,6 @@ namespace Mario.Entities.Character
 
         public void Crouch()
         {
-            // If mario is already crouching, move him down
-            // This is just for sprint 2 to be able to move mario around more
-            // In sprint 3, we will have a crouch sprite and he will actually crouch
-            if (currentState is CrouchState)
-            {
-                position.Y += 5;
-                return;
-            }
-            position.Y += 5;
-
             currentState = new CrouchState();
         }
 
@@ -113,10 +109,24 @@ namespace Mario.Entities.Character
             }
         }
 
-
         public void Die()
         {
             currentState = new DeadState();
+        }
+
+        public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+        {
+            // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
+            if (collideable is IEnemy)
+            {
+                if (collisionDirection[CollisionDirection.Bottom])
+                {
+                    ((IEnemy)collideable).Stomp();
+                }
+                else
+                {
+                }
+            }
         }
     }
 }

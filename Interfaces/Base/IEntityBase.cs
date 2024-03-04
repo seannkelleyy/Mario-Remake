@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Interfaces.Entities
+namespace Mario.Interfaces.Base
 {
     public interface IEntityBase
     {

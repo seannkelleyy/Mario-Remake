@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class GlobalVariables
+public class SpriteVariables
 {
     public static Dictionary<string, int[]> spriteNumbers = new Dictionary<string, int[]> {
             { "fireFlower", new int[] { 0, 0, 16, 16, 4, 1, 0 } },
