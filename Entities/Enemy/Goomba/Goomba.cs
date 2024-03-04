@@ -68,7 +68,7 @@ public class Goomba : IEnemy
 
     public void HandleCollision(ICollideable entity, Dictionary<CollisionVariables.CollisionDirection, bool> collisionDirection)
     {
-        if (collisionDirection[CollisionDirection.Top])
+        if (collisionDirection[CollisionDirection.Top] && entity is IHero)
         {
             Stomp();
         }

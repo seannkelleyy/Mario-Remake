@@ -67,7 +67,7 @@ public class Koopa : IEnemy
 
     public void HandleCollision(ICollideable entity, Dictionary<CollisionDirection, bool> collisionDirection)
     {
-        if (collisionDirection[CollisionDirection.Top])
+        if (collisionDirection[CollisionDirection.Top] && entity is IHero)
         {
             Flip();
         }
