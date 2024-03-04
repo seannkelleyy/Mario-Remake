@@ -1,7 +1,6 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace Mario.Singletons
@@ -9,9 +8,9 @@ namespace Mario.Singletons
     public class GameContentManager
     {
         private IHero mario;
-        private List<IEnemy> enemies;
-        private List<IItem> items;
-        private List<IBlock> blocks;
+        private List<IEnemy> enemies = new List<IEnemy>();
+        private List<IItem> items = new List<IItem>();
+        private List<IBlock> blocks = new List<IBlock>();
 
         private static GameContentManager instance = new GameContentManager();
 
@@ -24,11 +23,7 @@ namespace Mario.Singletons
 
         public void Load()
         {
-            string currentDir = Directory.GetCurrentDirectory();
-            string parentDir = Directory.GetParent(currentDir).FullName; // Go up 1 directory
-            parentDir = Directory.GetParent(parentDir).FullName; // Go up 2 directories
-            parentDir = Directory.GetParent(parentDir).FullName; // Go up 3 directories
-            LevelLoader.Instance.LoadLevel($"{parentDir}/Levels/Sprint3.json");
+            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
         }
 
         public List<IEntityBase> GetEntities()
