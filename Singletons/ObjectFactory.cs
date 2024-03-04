@@ -1,8 +1,11 @@
-﻿using Mario.Entities.Character;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Mario.Entities.Character;
+using Mario.Entities.Blocks;
+using Mario.Interfaces;
 
 namespace Mario.Singletons
 {
@@ -31,17 +34,35 @@ namespace Mario.Singletons
                     return new Goomba(position, numberOfItems);
                 case "Koopa":
                     // Assuming Koopa implements IEnemy
-                    return new Koopa(position, numberOfItems);
-                case "Block":
-                    // Assuming Block implements IBlock
-                    return new Block(position, numberOfItems);
+                    return new Koopa(position);
+                
+                case "FloorBlock": // Floor block is an IEntityBase not IBlock
+                    return new FloorBlock(position);
                 case "Item":
                     // Assuming Item implements IItem
-                    return new Item(position, numberOfItems);
+                    // return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
+        }
+
+        // Returns a new empty brick block
+        public IBlock CreateItemBlock(Vector2 position)
+        {
+            return new EmptyBrickBlock(position);
+        }
+
+        // Returns a new item block
+        public IBlock CreateItemBlock(Vector2 position, string itemName, string itemBlockType)
+        {
+            return new ItemBlock(position, itemName, itemBlockType);
+        }
+
+        // Returns a new coin block
+        public IBlock CreateCoinBlock(Vector2 position, int coinAmount)
+        {
+            return new CoinBlock(position, coinAmount);
         }
     }
 }
