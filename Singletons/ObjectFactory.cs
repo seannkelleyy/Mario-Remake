@@ -1,7 +1,7 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Interfaces;
-using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -9,8 +9,8 @@ namespace Mario.Singletons
 {
     public class GameObjectFactory
     {
+        // keep track of the number of items created, so we can assign an ID to each
         private static GameObjectFactory instance = new GameObjectFactory();
-        //private Dictionary<string, Vector2> entityPosition;
 
         // Singleton instance property
         public static GameObjectFactory Instance => instance;

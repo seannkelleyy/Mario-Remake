@@ -17,8 +17,6 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private IHero[] entities;
-
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,7 +28,6 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
-            gameContentManager.Initialize();
 
             this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
@@ -41,21 +38,16 @@ namespace Mario
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
             gameContentManager.Load();
-            entities = gameContentManager.GetEntities();
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, entities);
+            keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            foreach (IHero entity in gameContentManager.GetEntities())
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
-                // This will eventually check if the entity needs to be updated
-                if (entity != null)
-                {
-                    entity.Update(gameTime);
-                }
+                entity.Update(gameTime);
             }
             keyboardController.Update(gameTime);
 
@@ -67,7 +59,10 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            gameContentManager.Draw(spriteBatch);
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            {
+                entity.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
