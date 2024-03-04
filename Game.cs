@@ -1,6 +1,7 @@
-﻿using Mario.Input;
+﻿using Mario.Global;
+using Mario.Input;
 using Mario.Interfaces;
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,8 @@ namespace Mario
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
 
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
             base.Initialize();
         }
 
@@ -53,6 +56,7 @@ namespace Mario
                 entity.Update(gameTime);
             }
             keyboardController.Update(gameTime);
+
             base.Update(gameTime);
         }
 

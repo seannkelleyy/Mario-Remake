@@ -1,6 +1,8 @@
-﻿namespace Mario.Interfaces.Entities
+﻿using Mario.Interfaces.Base;
+
+namespace Mario.Interfaces.Entities
 {
-    public interface IHero : IEntityBase
+    public interface IHero : IEntityBase, ICollideable
     {
         public void WalkLeft();
         public void WalkRight();
