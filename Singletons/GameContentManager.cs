@@ -1,6 +1,7 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Mario.Singletons
@@ -8,9 +9,9 @@ namespace Mario.Singletons
     public class GameContentManager
     {
         private IHero mario;
-        private List<IEnemy> enemies;
-        private List<IItem> items;
-        private List<IBlock> blocks;
+        private List<IEnemy> enemies = new List<IEnemy>();
+        private List<IItem> items = new List<IItem>();
+        private List<IBlock> blocks = new List<IBlock>();
 
         private static GameContentManager instance = new GameContentManager();
 
@@ -23,7 +24,11 @@ namespace Mario.Singletons
 
         public void Load()
         {
-            // Will call level loader 
+            string currentDir = Directory.GetCurrentDirectory();
+            string parentDir = Directory.GetParent(currentDir).FullName; // Go up 1 directory
+            parentDir = Directory.GetParent(parentDir).FullName; // Go up 2 directories
+            parentDir = Directory.GetParent(parentDir).FullName; // Go up 3 directories
+            LevelLoader.Instance.LoadLevel($"{parentDir}/Levels/Sprint3.json");
         }
 
         public List<IEntityBase> GetEntities()
@@ -45,22 +50,27 @@ namespace Mario.Singletons
 
         public void AddEntity(IEntityBase entity)
         {
+            if (entity == null)
+            {
+                return;
+            }
             if (entity is IHero)
             {
                 mario = (IHero)entity;
             }
             else if (entity is IEnemy)
             {
-                enemies.Append((IEnemy)entity);
+                enemies.Add((IEnemy)entity);
             }
             else if (entity is IItem)
             {
-                items.Append((IItem)entity);
+                items.Add((IItem)entity);
             }
             else if (entity is IBlock)
             {
-                blocks.Append((IBlock)entity);
+                blocks.Add((IBlock)entity);
             }
+            Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)

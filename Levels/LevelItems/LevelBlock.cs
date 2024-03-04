@@ -1,6 +1,4 @@
-﻿using Mario.Interfaces;
-
-namespace Mario.Levels.Level
+﻿namespace Mario.Levels.Level
 {
     public class LevelBlock
     {
@@ -9,6 +7,6 @@ namespace Mario.Levels.Level
         public int y { get; set; }
         public bool collideable { get; set; }
         public bool breakable { get; set; }
-        public IItem item { get; set; }
+        // public IItem item { get; set; }
     }
 }

@@ -17,48 +17,44 @@
       "direction": false
     },
     {
-      "type": "Koopa",
+      "type": "koopa",
       "starting-x": 20,
       "starting-y": 12,
       "direction": false
     }
   ],
-  "block-sections": [
+  "blockSections": [
     {
-      "type": "ground",
+      "type": "floorBlock",
       "starting-x": 0,
       "starting-y": 14,
       "ending-x": 60,
       "ending-y": 18,
-      "item": "none",
       "collideable": false,
       "breakable": false
     },
     {
-      "type": "ground",
+      "type": "floorBlock",
       "starting-x": 0,
       "starting-y": 13,
       "ending-x": 60,
       "ending-y": 13,
-      "item": "none",
       "collideable": true,
       "breakable": false
     }
   ],
   "blocks": [
     {
-      "type": "brick",
+      "type": "floorBlock",
       "x": 12,
       "y": 3,
-      "item": "none",
       "collideable": true,
       "breakable": false
     },
     {
-      "type": "brick",
+      "type": "floorBlock",
       "x": 21,
       "y": 12,
-      "item": "none",
       "collideable": true,
       "breakable": false
     }

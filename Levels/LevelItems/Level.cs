@@ -9,7 +9,7 @@ namespace Mario.Levels.Level
         public int height { get; set; }
         public LevelHero hero { get; set; }
         public List<LevelEnemy> enemies { get; set; }
-        public List<LevelBlockSection> block_sections { get; set; }
+        public List<LevelBlockSection> blockSections { get; set; }
         public List<LevelBlock> blocks { get; set; }
     }
 }
