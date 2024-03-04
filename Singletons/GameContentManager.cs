@@ -1,6 +1,7 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace Mario.Singletons
@@ -23,7 +24,10 @@ namespace Mario.Singletons
 
         public void Load()
         {
-            // Will call level loader 
+            mario = GameObjectFactory.Instance.CreateEntity("Mario", new Vector2(100, 220)) as IHero;
+            enemies = new List<IEntityBase>();
+            items = new List<IItem>();
+            blocks = new List<IBlock>();
         }
 
         public List<IEntityBase> GetEntities()
