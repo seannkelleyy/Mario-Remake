@@ -1,6 +1,5 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Mario.Entities.Blocks

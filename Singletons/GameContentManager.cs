@@ -1,17 +1,17 @@
 ﻿using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Mario.Singletons
 {
     public class GameContentManager
     {
         private IHero mario;
-        private List<IEnemy> enemies = new List<IEnemy>();
-        private List<IItem> items = new List<IItem>();
-        private List<IBlock> blocks = new List<IBlock>();
+        private List<IEnemy> enemies;
+        private List<IItem> items;
+        private List<IBlock> blocks;
 
         private static GameContentManager instance = new GameContentManager();
 
@@ -37,9 +37,9 @@ namespace Mario.Singletons
             {
                 mario
             };
-            entities.AddRange(enemies.Cast<IEntityBase>());
-            entities.AddRange(items.Cast<IEntityBase>());
-            entities.AddRange(blocks.Cast<IEntityBase>());
+            entities.AddRange(enemies);
+            entities.AddRange(items);
+            entities.AddRange(blocks);
             return entities;
         }
 
