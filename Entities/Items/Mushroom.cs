@@ -26,7 +26,7 @@ namespace Mario.Entities.Items
             else
             {
                 // Error passing in mushroom type, do something
-                throw new KeyNotFoundException($"ItemBlock type {mushroomType} not recognized.");
+                Logger.Instance.LogError($"ItemBlock type {mushroomType} not recognized.");
             }
         }
 

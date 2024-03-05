@@ -26,7 +26,7 @@ namespace Mario.Entities.Items
                 currentState.Draw(spriteBatch, position);
             } else
             {
-                Console.Error.WriteLine("Error: Item's Draw can only be called when isVisable = true.");
+                Logger.Instance.LogError("Error: Item's Draw can only be called when isVisable = true.");
             }
             
         }
