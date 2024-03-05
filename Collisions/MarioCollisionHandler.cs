@@ -2,7 +2,9 @@ using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using static Mario.Global.CollisionVariables;
 
 public class MarioCollisionHandler 
 { 
@@ -11,18 +13,18 @@ public class MarioCollisionHandler
     public IItem item { get; set; }
     public IBlock block { get; set; }
 
-    Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/> collisionDictionary;
+    private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
 
     public MarioCollisionHandler(IHero Mario)
     {
         this.mario = Mario;
 
-        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/>();
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>();
 
-        collisionDictionary.Add(typeof(IBlock), new Dictionary<CollisionDirection, /*delegate?*/>());
-        collisionDictionary.Add(typeof(IEnemy), new Dictionary<CollisionDirection, /*delegate?*/>());
-        collisionDictionary.Add(typeof(IItem), new Dictionary<CollisionDirection, /*delegate?*/>());
+        collisionDictionary.Add(typeof(IBlock), new Dictionary<CollisionDirection, Action>());
+        collisionDictionary.Add(typeof(IEnemy), new Dictionary<CollisionDirection, Action>());
+        collisionDictionary.Add(typeof(IItem), new Dictionary<CollisionDirection, Action>());
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new MarioBlockSide(this));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new MarioBlockSide(this));
@@ -31,7 +33,7 @@ public class MarioCollisionHandler
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new MarioEnemySide(this));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new MarioEnemySide(this));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new MarioEnemyBottom(this));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action());
     }
 
     public void MarioEnemyCollision(IEntityBase Enemy)

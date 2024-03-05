@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class CollisionHandler
 {
-    public void CollisionHandler(IHero mario, List<IEntityBase> enemies, List<IItem> items, List<IBlock> blocks)
+    public CollisionHandler(IHero mario, List<IEntityBase> enemies, List<IItem> items, List<IBlock> blocks)
     {
         MarioCollision(mario, enemies, items, blocks);
         EnemyCollision(enemies, blocks);
@@ -38,9 +38,9 @@ public class CollisionHandler
             {
                 enemyHandler.EnemyBlockCollision(block);
             }
-            foreach (IEntityBase enemy in enemies)
+            foreach (IEntityBase enemy2 in enemies)
             {
-                enemyHandler.EnemyEnemyCollision(enemy);
+                enemyHandler.EnemyEnemyCollision(enemy2);
             }
         }
         

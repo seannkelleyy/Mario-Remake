@@ -1,16 +1,12 @@
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using static Mario.Global.CollisionVariables;
 
 public class CollisionDetector
 {
     public static CollisionDirection DetectCollision(Rectangle obj1, Rectangle obj2)
     {
-        //default to be not collided
-        bool top = false;
-        bool bot = false;
-        bool left = false;
-        bool right = false;
 
         Rectangle intersection = Rectangle.Intersect(obj1, obj2);
         if (!intersection.IsEmpty)
@@ -19,19 +15,19 @@ public class CollisionDetector
             {
                 if (obj1.X > obj2.X)
                 {
-                    return Left;
+                    return CollisionDirection.Left;
                 }
-                    return Right;
+                    return CollisionDirection.Right;
             }
             else
             {
                 if (obj1.Y > obj2.Y)
                 {
-                    return Bottom;
+                    return CollisionDirection.Bottom;
                 }
-                    return Top;
+                    return CollisionDirection.Top;
             }
         }
-        return NoCollision;
+        return CollisionDirection.None;
     }
 }
