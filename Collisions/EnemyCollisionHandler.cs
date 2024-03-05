@@ -10,11 +10,21 @@ public class EnemyCollisionHandler
     public IEntityBase enemy2 { get; set; }
     public IBlock block { get; set; }
 
+    Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/> collisionDictionary;
 
     public EnemyCollisionHandler(IEntityBase Enemy)
     {
         this.enemy = Enemy;
-        //create dictionary of delegates for collision calls
+
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/>();
+
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new EnemyEnemySide(this));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new EnemyEnemySide(this));
+
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new EnemyBlockSide(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new EnemyBlockSide(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new EnemyBlockTop(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new EnemyBlockBottom(this));
     }
 
     public void EnemyEnemyCollision(IEntityBase Enemy)

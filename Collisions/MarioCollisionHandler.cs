@@ -11,11 +11,27 @@ public class MarioCollisionHandler
     public IItem item { get; set; }
     public IBlock block { get; set; }
 
+    Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/> collisionDictionary;
+
 
     public MarioCollisionHandler(IHero Mario)
     {
         this.mario = Mario;
-        //create dictionary of delegates for collision calls
+
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/>();
+
+        collisionDictionary.Add(typeof(IBlock), new Dictionary<CollisionDirection, /*delegate?*/>());
+        collisionDictionary.Add(typeof(IEnemy), new Dictionary<CollisionDirection, /*delegate?*/>());
+        collisionDictionary.Add(typeof(IItem), new Dictionary<CollisionDirection, /*delegate?*/>());
+
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new MarioBlockSide(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new MarioBlockSide(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new MarioBlockTop(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new MarioBlockBottom(this));
+
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new MarioEnemySide(this));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new MarioEnemySide(this));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new MarioEnemyBottom(this));
     }
 
     public void MarioEnemyCollision(IEntityBase Enemy)
@@ -39,7 +55,11 @@ public class MarioCollisionHandler
         this.block = Block;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
-        //Traverse dictionary for delegate
+
+        if (direction != NoCollision)
+        {
+            //Call MarioItem();
+        }
     }
 }
  
