@@ -12,15 +12,15 @@ public class MarioCollisionHandler
     public IBlock block { get; set; }
 
 
-    public void MarioCollisionHandler(IHero Mario)
+    public MarioCollisionHandler(IHero Mario)
     {
-        mario = Mario;
+        this.mario = Mario;
         //create dictionary of delegates for collision calls
     }
 
     public void MarioEnemyCollision(IEntityBase Enemy)
     {
-        enemy = Enemy;
+        this.enemy = Enemy;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
         //Traverse dictionary for delegate
@@ -28,7 +28,7 @@ public class MarioCollisionHandler
 
     public void MarioItemCollision(IItem Item)
     {
-        item = Item;
+        this.item = Item;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
         //Traverse dictionary for delegate
@@ -36,7 +36,7 @@ public class MarioCollisionHandler
 
     public void MarioBlockCollision(IBlock Block)
     {
-        block = Block;
+        this.block = Block;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
         //Traverse dictionary for delegate
