@@ -28,7 +28,7 @@ namespace Mario.Entities.Blocks
             else
             {
                 // Error passing in item block type
-                throw new KeyNotFoundException($"ItemBlock type {itemBlockType} not recognized.");
+                Logger.Instance.LogError($"ItemBlock type {itemBlockType} not recognized.");
             }
 
             // Give the block an item to hold
