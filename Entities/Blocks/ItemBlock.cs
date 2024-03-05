@@ -52,7 +52,7 @@ namespace Mario.Entities.Blocks
                     break;
                 default:
                     // Error passing in item type
-                    throw new KeyNotFoundException($"Item type {itemName} not recognized.");
+                Logger.Instance.LogError($"Item type {itemName} not recognized.");
             }
         }
 
