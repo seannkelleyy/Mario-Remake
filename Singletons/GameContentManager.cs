@@ -12,6 +12,7 @@ namespace Mario.Singletons
         private List<IEntityBase> enemies;
         private List<IItem> items;
         private List<IBlock> blocks;
+        private List<IEntityBase> projectiles;
 
         private static GameContentManager instance = new GameContentManager();
 
@@ -28,6 +29,7 @@ namespace Mario.Singletons
             enemies = new List<IEntityBase>();
             items = new List<IItem>();
             blocks = new List<IBlock>();
+            projectiles = new List<IEntityBase>();
         }
 
         public List<IEntityBase> GetEntities()
@@ -39,6 +41,7 @@ namespace Mario.Singletons
             entities.AddRange(enemies);
             entities.AddRange(items);
             entities.AddRange(blocks);
+            entities.AddRange(projectiles);
             return entities;
         }
 
@@ -65,6 +68,10 @@ namespace Mario.Singletons
             {
                 blocks.Add((IBlock)entity);
             }
+            else if (entity is IEntityBase)
+            {
+                projectiles.Add((IEntityBase)entity);
+            }
         }
 
         public void RemoveEntity(IEntityBase entity)
@@ -85,6 +92,11 @@ namespace Mario.Singletons
             {
                 blocks.Remove((IBlock)entity);
             }
+            else if(entity is IEntityBase)
+            {
+                projectiles.Remove((IEntityBase)entity);
+            }
+
         }
     }
 }

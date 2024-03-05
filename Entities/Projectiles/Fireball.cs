@@ -1,6 +1,4 @@
-﻿using Mario.Interfaces;
-using Mario.Interfaces.Entities;
-using Mario.Sprites;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,30 +9,34 @@ using System.Threading.Tasks;
 
 namespace Mario.Entities.Projectiles
 {
-    internal class Fireball:IEntityBase
+    internal class Fireball : IEntityBase
     {
-        private ISprite fireballSprite;
-        private Vector2 position;
-        private float verticleVelocity = 0;
-        public Fireball(Vector2 position) { 
-            this.position = position;
-            fireballSprite = SpriteFactory.Instance.CreateSprite("fireball");
+        IFireballState fireballState;
+        bool exploded;
+        public Fireball(Vector2 position, bool facingLeft)
+        {
+            fireballState = new FireballMovingState(position, facingLeft);
+            exploded = false;
         }
-        public void Update(GameTime gameTime) {
-            position.X += 6.25f;
-            position.Y += verticleVelocity;
-            verticleVelocity -= 1.6f;
-            
+        public void Update(GameTime gameTime)
+        {
+            fireballState.Update(gameTime);
         }
-        public void Draw(SpriteBatch spriteBatch) { 
-            fireballSprite.Draw(spriteBatch, position);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            fireballState.Draw(spriteBatch);
         }
-        public void Bounce() {
-            verticleVelocity = 8f;
+        public void Bounce()
+        {
+            fireballState.Bounce();
         }
-        public void Explode() {
-            fireballSprite = SpriteFactory.Instance.CreateSprite("fireballExplosion");
+        public void Explode()
+        {
+            if (!exploded)
+            {
+                fireballState = new FireballExplosionState(((FireballMovingState)fireballState).GetPosition());
+                exploded = true;
+            }
         }
-
     }
 }
