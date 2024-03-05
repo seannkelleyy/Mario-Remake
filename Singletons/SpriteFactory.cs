@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Sprites;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Mario.Sprites
         // This is a private constructor, so no one can create a new SpriteFactory
         private SpriteFactory()
         {
-            spriteNumbers = GlobalVariables.spriteNumbers;
+            spriteNumbers = SpriteVariables.spriteNumbers;
         }
         public void LoadAllTextures(ContentManager content)
         {

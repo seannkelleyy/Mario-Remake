@@ -1,16 +1,16 @@
-﻿using Mario.Interfaces;
-using Mario.Interfaces.Entities;
-using Mario.Sprites;
+﻿using Mario.Entities.Blocks;
+using Mario.Entities.Character;
+using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Character;
 
 namespace Mario.Singletons
 {
     public class GameObjectFactory
     {
+        // keep track of the number of items created, so we can assign an ID to each
         private static GameObjectFactory instance = new GameObjectFactory();
-        //private Dictionary<string, Vector2> entityPosition;
 
         // Singleton instance property
         public static GameObjectFactory Instance => instance;
@@ -32,16 +32,34 @@ namespace Mario.Singletons
                 case "Koopa":
                     // Assuming Koopa implements IEnemy
                     return new Koopa(position);
-                case "Block":
-                    // Assuming Block implements IBlock
-                    return new Block(position);
+
+                case "FloorBlock": // Floor block is an IEntityBase not IBlock
+                    return new FloorBlock(position);
                 case "Item":
-                    // Assuming Item implements IItem
-                    return new Item(position);
+                // Assuming Item implements IItem
+                // return new Item(position);
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
+        }
+
+        // Returns a new empty brick block
+        public IBlock CreateItemBlock(Vector2 position)
+        {
+            return new EmptyBrickBlock(position);
+        }
+
+        // Returns a new item block
+        public IBlock CreateItemBlock(Vector2 position, string itemName, string itemBlockType)
+        {
+            return new ItemBlock(position, itemName, itemBlockType);
+        }
+
+        // Returns a new coin block
+        public IBlock CreateCoinBlock(Vector2 position, int coinAmount)
+        {
+            return new CoinBlock(position, coinAmount);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 
 namespace Mario.Interfaces
 {
