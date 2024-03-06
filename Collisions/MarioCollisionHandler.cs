@@ -9,7 +9,7 @@ using static Mario.Global.CollisionVariables;
 public class MarioCollisionHandler 
 { 
     public IHero mario {  get; set; }
-    public IEntityBase enemy { get; set; }
+    public IEnemy enemy { get; set; }
     public IItem item { get; set; }
     public IBlock block { get; set; }
 
@@ -33,10 +33,11 @@ public class MarioCollisionHandler
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new MarioEnemySide(this));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new MarioEnemySide(this));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action());
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(mario.Jump));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(enemy.Stomp));
     }
 
-    public void MarioEnemyCollision(IEntityBase Enemy)
+    public void MarioEnemyCollision(IEnemy Enemy)
     {
         this.enemy = Enemy;
         //Figure out how to pass rectangle

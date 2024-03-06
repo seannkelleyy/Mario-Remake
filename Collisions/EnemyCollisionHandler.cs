@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 public class EnemyCollisionHandler
 {
-    public IEntityBase enemy { get; set; }
-    public IEntityBase enemy2 { get; set; }
+    public IEnemy enemy { get; set; }
+    public IEnemy enemy2 { get; set; }
     public IBlock block { get; set; }
 
     Dictionary<Type, Dictionary<CollisionDirection, /*delegate?*/> collisionDictionary;
 
-    public EnemyCollisionHandler(IEntityBase Enemy)
+    public EnemyCollisionHandler(IEnemy Enemy)
     {
         this.enemy = Enemy;
 
@@ -27,7 +27,7 @@ public class EnemyCollisionHandler
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new EnemyBlockBottom(this));
     }
 
-    public void EnemyEnemyCollision(IEntityBase Enemy)
+    public void EnemyEnemyCollision(IEnemy Enemy)
     {
         this.enemy2 = Enemy;
         //Figure out how to pass rectangle
