@@ -22,7 +22,7 @@ namespace Mario.Entities.Blocks
             coins = new IItem[coinAmount];
             for (int i = 0; i < coinAmount; i++)
             {
-                coins[i] = gameObjectFactory.CreateCoin(position);
+                coins[i] = GameObjectFactory.Instance.CreateCoin(position);
             }
         }
 

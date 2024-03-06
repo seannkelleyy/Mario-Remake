@@ -2,7 +2,6 @@
 using Mario.Interfaces;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
 namespace Mario.Entities.Blocks
 {
@@ -52,7 +51,9 @@ namespace Mario.Entities.Blocks
                     break;
                 default:
                     // Error passing in item type
-                Logger.Instance.LogError($"Item type {itemName} not recognized.");
+                    Logger.Instance.LogError($"Item type {itemName} not recognized.");
+                    break;
+
             }
         }
 
