@@ -37,7 +37,7 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
-            gameContentManager.Load();
+            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();

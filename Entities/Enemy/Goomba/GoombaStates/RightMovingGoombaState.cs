@@ -4,6 +4,6 @@ public class RightMovingGoombaState : GoombaState
 {
     public RightMovingGoombaState() : base()
     {
-        sprite = spriteFactory.CreateSprite("rightGoomba");
+        sprite = spriteFactory.CreateSprite("goomba");
     }
 }

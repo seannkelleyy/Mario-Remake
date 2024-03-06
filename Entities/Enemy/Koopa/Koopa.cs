@@ -24,6 +24,7 @@ public class Koopa : IEnemy
     public void Update(GameTime gameTime)
     {
         currentState.Update(gameTime);
+        physics.Update();
     }
 
     public void Draw(SpriteBatch spriteBatch)

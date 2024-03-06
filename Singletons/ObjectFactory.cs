@@ -24,17 +24,17 @@ namespace Mario.Singletons
         {
             switch (type)
             {
-                case "Mario":
+                case "mario":
                     // Assuming Mario implements IHero
                     return new Hero(position);
-                case "Goomba":
+                case "goomba":
                     // Assuming Koopa implements IEnemy
                     return new Goomba(position);
-                case "Koopa":
+                case "koopa":
                     // Assuming Koopa implements IEnemy
                     return new Koopa(position);
 
-                case "FloorBlock": // Floor block is an IEntityBase not IBlock
+                case "floorBlock": // Floor block is an IEntityBase not IBlock
                     return new FloorBlock(position);
 
                 // Add cases for other entities as needed

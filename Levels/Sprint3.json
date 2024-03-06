@@ -4,61 +4,57 @@
   "height": 18,
   "hero": {
     "type": "mario",
-    "starting-x": 5,
-    "starting-y": 12,
+    "startingX": 5,
+    "startingY": 11,
     "direction": true,
     "starting-power": "small"
   },
   "enemies": [
     {
       "type": "goomba",
-      "starting-x": 10,
-      "starting-y": 12,
+      "startingX": 10,
+      "startingY": 12,
       "direction": false
     },
     {
-      "type": "Koopa",
-      "starting-x": 20,
-      "starting-y": 12,
+      "type": "koopa",
+      "startingX": 20,
+      "startingY": 11.5,
       "direction": false
     }
   ],
-  "block-sections": [
+  "blockSections": [
     {
-      "type": "ground",
-      "starting-x": 0,
-      "starting-y": 14,
-      "ending-x": 60,
-      "ending-y": 18,
-      "item": "none",
+      "type": "floorBlock",
+      "startingX": 0,
+      "startingY": 14,
+      "endingX": 60,
+      "endingY": 18,
       "collideable": false,
       "breakable": false
     },
     {
-      "type": "ground",
-      "starting-x": 0,
-      "starting-y": 13,
-      "ending-x": 60,
-      "ending-y": 13,
-      "item": "none",
+      "type": "floorBlock",
+      "startingX": 0,
+      "startingY": 13,
+      "endingX": 60,
+      "endingY": 13,
       "collideable": true,
       "breakable": false
     }
   ],
   "blocks": [
     {
-      "type": "brick",
-      "x": 12,
-      "y": 3,
-      "item": "none",
+      "type": "floorBlock",
+      "x": 4,
+      "y": 12,
       "collideable": true,
       "breakable": false
     },
     {
-      "type": "brick",
+      "type": "floorBlock",
       "x": 21,
       "y": 12,
-      "item": "none",
       "collideable": true,
       "breakable": false
     }
