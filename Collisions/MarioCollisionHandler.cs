@@ -31,10 +31,12 @@ public class MarioCollisionHandler
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new MarioBlockTop(this));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new MarioBlockBottom(this));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new MarioEnemySide(this));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new MarioEnemySide(this));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(mario.Jump));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(enemy.Stomp));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(mario.TakeDamage));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(mario.TakeDamage));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() => {
+            mario.Jump();
+            enemy.Stomp();
+            }));
     }
 
     public void MarioEnemyCollision(IEnemy Enemy)
