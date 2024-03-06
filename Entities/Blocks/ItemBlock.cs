@@ -2,7 +2,7 @@
 using Mario.Interfaces;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using System;
+using System.Collections.Generic;
 
 namespace Mario.Entities.Blocks
 {
@@ -27,23 +27,39 @@ namespace Mario.Entities.Blocks
             }
             else
             {
-                // Error passing in block type, do something
-                Console.Error.WriteLine("Error creating item block");
+                // Error passing in item block type
+                Logger.Instance.LogError($"ItemBlock type {itemBlockType} not recognized.");
             }
 
             // Give the block an item to hold
             GameObjectFactory gameObjectFactory = GameObjectFactory.Instance;
-            // TODO: This instantiation will be changed once items are implemented and can be constructed properly
-            item = (IItem)gameObjectFactory.CreateEntity(itemName, position);
+            switch (itemName)
+            {
+                case "mushroom":
+                    item = gameObjectFactory.CreateMushroom(position, "redMushroom");
+                    break;
+                case "fireFlower":
+                    item = gameObjectFactory.CreateFireFlower(position);
+                    break;
+                case "coin":
+                    item = gameObjectFactory.CreateCoin(position);
+                    break;
+                case "1up":
+                    item = gameObjectFactory.CreateMushroom(position, "1up");
+                    break;
+                case "star":
+                    item = gameObjectFactory.CreateStar(position);
+                    break;
+                default:
+                    // Error passing in item type
+                Logger.Instance.LogError($"Item type {itemName} not recognized.");
+            }
         }
 
         // Gives up its item and turns into a hard block
         public override void GetHit()
         {
-            // Since items haven't been implemented yet, the idea is to create the item in the same place as the block
-            // but have it not be visiable until Mario hits the block to get an item. Then the item just needs to be set to visible and drawn 
-            // above the block
-            // item.MakeVisable(); // NOTE: This is subject to change since items haven't been implmented yet
+            item.MakeVisable();
             currentState = new HardBlockState();
         }
     }
