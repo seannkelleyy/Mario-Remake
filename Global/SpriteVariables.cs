@@ -3,11 +3,13 @@
 public class SpriteVariables
 {
     public static Dictionary<string, int[]> spriteNumbers = new Dictionary<string, int[]> {
+            // items
             { "fireFlower", new int[] { 0, 0, 16, 16, 4, 1, 0 } },
             { "star", new int[] { 0, 16, 16, 16, 4, 1, 0 } },
             { "coin", new int[] { 0, 32, 16, 16, 4, 1, 0 } },
             { "mushroom", new int[] { 0, 48, 16, 16, 1, 1, 0 } },
             { "1up", new int[] { 0, 64, 16, 16, 1, 1, 0 } },
+            // blocks
             { "questionMarkTile", new int[] { 0, 0, 16, 16, 3, 1, 1 } },
             { "brickTile", new int[] { 0, 16, 16, 16, 1, 1, 1 } },
             { "brokenBrickTile", new int[] { 0, 48, 16, 16, 1, 1, 1 } },
@@ -16,15 +18,16 @@ public class SpriteVariables
             { "floorTile", new int[] { 32, 16, 16, 16, 1, 1, 1 } },
             { "stoneTile", new int[] { 0, 32, 16, 16, 1, 1, 1 } },
             { "pipeTile", new int[] { 16, 32, 32, 32, 1, 1, 1 } },
-            { "leftGoomba", new int[] { 0, 0, 16, 16, 2, 1, 2 } },
+            //goomba
             { "goomba", new int[] { 0, 0, 16, 16, 2, 1, 2 } },
-            { "rightGoomba", new int[] { 0, 16, 16, 16, 2, 1, 2 } },
             { "flippedGoomba", new int[] { 0, 64, 16, 16, 2, 1, 2 } },
             { "stompedGoomba", new int[] { 32, 0, 16, 8, 1, 1, 2 } },
+            // koopa
             { "rightKoopa", new int[] { 0, 16, 16, 24, 2, 1, 2 } },
             { "leftKoopa", new int[] { 0, 40, 16, 24, 2, 1, 2 } },
             { "shellLegsKoopa", new int[] { 0, 16, 16, 16, 1, 1, 2 } },
             { "shellKoopa", new int[] { 0, 40, 16, 16, 1, 1, 2 } },
+            //mario
             { "rightJumpMario", new int[] { 0, 0, 16, 16, 1, 1, 3 } },
             { "leftRunMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },
             { "rightStandMario", new int[] { 64, 0, 16, 16, 1, 1, 3 } },
