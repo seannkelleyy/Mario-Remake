@@ -1,5 +1,6 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
@@ -23,21 +24,19 @@ namespace Mario.Singletons
         {
             switch (type)
             {
-                case "Mario":
+                case "mario":
                     // Assuming Mario implements IHero
                     return new Hero(position);
-                case "Goomba":
+                case "goomba":
                     // Assuming Koopa implements IEnemy
                     return new Goomba(position);
-                case "Koopa":
+                case "koopa":
                     // Assuming Koopa implements IEnemy
                     return new Koopa(position);
 
-                case "FloorBlock": // Floor block is an IEntityBase not IBlock
+                case "floorBlock": // Floor block is an IEntityBase not IBlock
                     return new FloorBlock(position);
-                case "Item":
-                // Assuming Item implements IItem
-                // return new Item(position);
+
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
@@ -60,6 +59,30 @@ namespace Mario.Singletons
         public IBlock CreateCoinBlock(Vector2 position, int coinAmount)
         {
             return new CoinBlock(position, coinAmount);
+        }
+
+        // Returns a new coin
+        public IItem CreateCoin(Vector2 position)
+        {
+            return new Coin(position);
+        }
+
+        // Returns a new fire flower
+        public IItem CreateFireFlower(Vector2 position)
+        {
+            return new FireFlower(position);
+        }
+
+        // Returns a new star
+        public IItem CreateStar(Vector2 position)
+        {
+            return new Star(position);
+        }
+
+        // Returns a new mushrrom (red mushroom or 1up)
+        public IItem CreateMushroom(Vector2 position, string mushroomType)
+        {
+            return new Mushroom(position, mushroomType);
         }
     }
 }

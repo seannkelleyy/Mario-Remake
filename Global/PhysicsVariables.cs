@@ -9,6 +9,8 @@
         public const float maxRunSpeed = 3f;
         public const float runAcceleration = .75f;
         public const float friction = 0.05f;
+        public const float enemyAcceleration = 0.5f;
+        public const float enemyMaxSpeed = 1.5f;
         // This is the number of frames the player can jump for. Currently,
         // this does not change much except for how high the player goes.
         // Eventually we should change the keyboard controller to allow for
