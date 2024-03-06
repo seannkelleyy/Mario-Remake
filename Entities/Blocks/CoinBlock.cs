@@ -22,8 +22,7 @@ namespace Mario.Entities.Blocks
             coins = new IItem[coinAmount];
             for (int i = 0; i < coinAmount; i++)
             {
-                // TODO: This instantiation will be changed once items are implemented and can be constructed properly
-                coins[i] = (IItem)GameObjectFactory.Instance.CreateEntity("coin", position);
+                coins[i] = gameObjectFactory.CreateCoin(position);
             }
         }
 
@@ -37,7 +36,7 @@ namespace Mario.Entities.Blocks
             else
             {
                 coinCount--;
-                // coins[coinCount].MakeVisable(); // NOTE: MakeVisable will make the item appear above the block. It's not implemented yet
+                coins[coinCount].MakeVisable();
             }
         }
     }

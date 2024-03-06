@@ -17,16 +17,6 @@ namespace Mario.Entities.Blocks
             currentState = new FloorBlockState();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            currentState.Draw(spriteBatch, position);
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            currentState.Update(gameTime);
-        }
-
         public override void GetHit()
         {
             throw new NotImplementedException();
