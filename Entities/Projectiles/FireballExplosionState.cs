@@ -17,10 +17,12 @@ namespace Mario.Entities.Projectiles
     {
         private ISprite fireballSprite;
         private Vector2 position;
-        private float updateInterval = .6f;
+        private float deleteInterval = .6f;
         private float elapsedSeconds = 0;
-        public FireballExplosionState(Vector2 position)
+        private Fireball thisFireball;
+        public FireballExplosionState(Vector2 position,Fireball thisFireball)
         {
+            this.thisFireball = thisFireball;
             this.position = position;
             fireballSprite = SpriteFactory.Instance.CreateSprite("fireballExplosion");
         }
@@ -28,9 +30,9 @@ namespace Mario.Entities.Projectiles
         {
             fireballSprite.Update(gameTime);
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= deleteInterval)
             {
-                GameContentManager.Instance.RemoveEntity(this);
+                GameContentManager.Instance.RemoveEntity(thisFireball);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
