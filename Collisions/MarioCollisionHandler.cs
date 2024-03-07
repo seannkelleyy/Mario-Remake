@@ -61,9 +61,9 @@ public class MarioCollisionHandler
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
 
-        if (direction != NoCollision)
+        if (direction != CollisionDirection.None)
         {
-            //Call MarioItem();
+            mario.Collect()
         }
     }
 }
