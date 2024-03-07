@@ -1,11 +1,11 @@
 ﻿
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 
 namespace Mario.Interfaces
 {
-    // TODO: Add rest of methods here
-    public interface IItem : IEntityBase
+    public interface IItem : IEntityBase, ICollideable
     {
+        public void MakeVisable();
     }
 }
 

@@ -1,52 +1,74 @@
-﻿using Mario.Entities.Character;
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Mario.Sprites;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Mario.Singletons
 {
     public class GameContentManager
     {
-        private SpriteFactory spriteFactory;
-        private IHero mario;
         private static GameContentManager instance = new GameContentManager();
+        private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
+        {
+            { typeof(IHero), new List<IHero>() },
+            { typeof(IEnemy), new List<IEnemy>() },
+            { typeof(IItem), new List<IItem>() },
+            { typeof(IBlock), new List<IBlock>() }
+        };
 
         // This code follows the singleton pattern
         // When you need a GCM, you call GameContentManager.Instance
-        public static GameContentManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static GameContentManager Instance => instance;
 
         // This is a private constructor, so no one can create a new GameContentManager
         private GameContentManager() { }
 
-        public void Initialize()
+        public List<IEntityBase> GetEntities()
         {
-            spriteFactory = SpriteFactory.Instance;
+            List<IEntityBase> allEntities = new List<IEntityBase>();
+            foreach (var entityList in entities.Values)
+            {
+                allEntities.AddRange((IEnumerable<IEntityBase>)entityList);
+            }
+            return allEntities;
         }
 
-        public void Load()
+        public IHero GetHero()
         {
-            // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
+            return (IHero)entities[typeof(IHero)][0];
         }
 
-        public IEntityBase[] GetEntities()
+        private Type GetEntityType(IEntityBase entity)
         {
-            IEntityBase[] entities = new IEntityBase[1];
-            entities[0] = mario;
-            return entities;
+            return entity is IHero ? typeof(IHero) :
+                   entity is IEnemy ? typeof(IEnemy) :
+                   entity is IItem ? typeof(IItem) :
+                   entity is IBlock ? typeof(IBlock) : null;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void AddEntity(IEntityBase entity)
         {
-            mario.Draw(spriteBatch);
+            if (entity == null)
+            {
+                return;
+            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Add(entity);
+            Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
+
+        public void RemoveEntity(IEntityBase entity)
+        {
+            if (entity == null)
+            {
+                return;
+            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Remove(entity);
+        }
+
+
     }
 }
-

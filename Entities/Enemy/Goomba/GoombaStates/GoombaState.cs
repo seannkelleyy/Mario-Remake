@@ -1,4 +1,4 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Interfaces.Base;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -11,6 +11,6 @@ namespace Mario.Interfaces
 
         void Add(Keys key, Action action);
 
-        void LoadCommands(MarioRemake game, IEntityBase[] entities);
+        void LoadCommands(MarioRemake game, IHero hero);
     }
 }

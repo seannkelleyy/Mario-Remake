@@ -1,6 +1,7 @@
-﻿using Mario.Input;
+﻿using Mario.Global;
+using Mario.Input;
 using Mario.Interfaces;
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
@@ -16,7 +17,6 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private IEntityBase[] entities;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,7 +28,8 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
-            gameContentManager.Initialize();
+
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
             base.Initialize();
         }
@@ -36,24 +37,26 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
-            gameContentManager.Load();
-            entities = gameContentManager.GetEntities();
+            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, entities);
+            keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+            Logger.Instance.Close();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            foreach (IEntityBase entity in entities)
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
-                // This will eventually check if the entity needs to be updated
-                if (entity != null)
-                {
-                    entity.Update(gameTime);
-                }
+                entity.Update(gameTime);
             }
             keyboardController.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -62,7 +65,10 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            gameContentManager.Draw(spriteBatch);
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            {
+                entity.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
