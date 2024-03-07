@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Character.HeroStates;
 
-public class JumpStateLeft : HeroState
+public class JumpLeftFireState : HeroState
 {
-    public JumpStateLeft() : base()
+    public JumpLeftFireState() : base()
     {
         sprite = spriteFactory.CreateSprite("leftJumpFireMario");
     }

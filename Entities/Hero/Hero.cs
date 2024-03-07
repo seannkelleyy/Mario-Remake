@@ -125,5 +125,9 @@ namespace Mario.Entities.Character
                 }
             }
         }
+
+        public int ReportHealth () {
+            return this.health;
+        }
     }
 }

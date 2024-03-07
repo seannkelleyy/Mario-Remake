@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Character.HeroStates;
 
-public class CrouchState : HeroState
+public class CrouchFireState : HeroState
 {
-    public CrouchState() : base()
+    public CrouchFireState() : base()
     {
         sprite = spriteFactory.CreateSprite("rightCrouchFireMario");
     }
