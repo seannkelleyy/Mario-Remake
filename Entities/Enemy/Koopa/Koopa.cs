@@ -57,7 +57,7 @@ public class Koopa : IEnemy
 
     public Vector2 GetPosition()
     {
-        return position;
+        return this.position;
     }
 
     public void SetPosition(Vector2 position)

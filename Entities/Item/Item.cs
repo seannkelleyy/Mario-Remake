@@ -30,7 +30,7 @@ namespace Mario.Sprites
         }
         public Vector2 GetPosition()
         {
-            return position;
+            return this.position;
         }
 
         public void SetPosition(Vector2 position)

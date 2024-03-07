@@ -41,7 +41,7 @@ namespace Mario.Entities.Character
 
         public Vector2 GetPosition()
         {
-            return position;
+            return this.position;
         }
 
         public void WalkLeft()

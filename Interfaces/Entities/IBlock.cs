@@ -2,7 +2,7 @@
 
 namespace Mario.Interfaces
 {
-    public interface IBlock : IEntityBase
+    public interface IBlock : IEntityBase, ICollideable
     {
         public void GetHit();
     }
