@@ -111,7 +111,14 @@ namespace Mario.Entities.Character
             currentState = new DeadState();
         }
 
-        public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+        public static Rectangle GetHitBox()
+        {
+
+        }
+
+
+
+    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
         {
             // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
             if (collideable is IEnemy)

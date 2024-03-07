@@ -44,7 +44,11 @@ public class MarioCollisionHandler
     {
         this.enemy = Enemy;
         //Figure out how to pass rectangle
-        CollisionDirection direction = DetectCollision();
+        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 enemyPosition = enemy.GetPosition();
+        Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
+
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, EnemyBox);
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -55,10 +59,15 @@ public class MarioCollisionHandler
     {
         this.item = Item;
         //Figure out how to pass rectangle
-        CollisionDirection direction = DetectCollision();
+        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 itemPosition = item.GetPosition();
+        Rectangle ItemBox = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 30, 30);
+
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, ItemBox);
         if (direction != CollisionDirection.None)
         {
             mario.Collect(item);
+            //function that deletes item from the screen
         }
     }
 
@@ -66,7 +75,12 @@ public class MarioCollisionHandler
     {
         this.block = Block;
         //Figure out how to pass rectangle
-        CollisionDirection direction = DetectCollision();
+        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 blockPosition = block.GetPosition();
+        Rectangle BlockBox = new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 30, 30);
+
+
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, BlockBox);
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();

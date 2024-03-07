@@ -28,5 +28,9 @@ namespace Mario.Sprites
         {
             currentSprite.Update(gameTime);
         }
+        public Vector2 GetPosition()
+        {
+            return position;
+        }
     }
 }
