@@ -20,16 +20,17 @@ public class MarioCollisionHandler
     {
         this.mario = Mario;
 
-        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>();
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
+        {
+            { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
+        };
 
-        collisionDictionary.Add(typeof(IBlock), new Dictionary<CollisionDirection, Action>());
-        collisionDictionary.Add(typeof(IEnemy), new Dictionary<CollisionDirection, Action>());
-        collisionDictionary.Add(typeof(IItem), new Dictionary<CollisionDirection, Action>());
-
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new MarioBlockSide(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new MarioBlockSide(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new MarioBlockTop(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new MarioBlockBottom(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action());
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(mario.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(mario.TakeDamage));

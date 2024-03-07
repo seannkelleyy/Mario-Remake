@@ -18,10 +18,11 @@ public class EnemyCollisionHandler
     {
         this.enemy = Enemy;
 
-        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>();
-
-        collisionDictionary.Add(typeof(IBlock), new Dictionary<CollisionDirection, Action>());
-        collisionDictionary.Add(typeof(IEnemy), new Dictionary<CollisionDirection, Action>());
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
+        {
+            { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
+        };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new EnemyBlockSide(this));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new EnemyBlockSide(this));
