@@ -24,10 +24,10 @@ public class EnemyCollisionHandler
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new EnemyBlockSide(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new EnemyBlockSide(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new EnemyBlockTop(this));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new EnemyBlockBottom(this));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action());
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => {
             enemy.ChangeDirection();
@@ -43,7 +43,12 @@ public class EnemyCollisionHandler
     {
         this.enemy2 = Enemy;
         //Figure out how to pass rectangle
-        CollisionDirection direction = DetectCollision();
+        Vector2 enemy2Position = enemy2.GetPosition();
+        Rectangle Enemy2Box = new Rectangle((int)enemy2Position.X, (int)enemy2Position.Y, 30, 30);
+        Vector2 enemyPosition = enemy.GetPosition();
+        Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
+
+        CollisionDirection direction = CollisionDetector.DetectCollision(EnemyBox, Enemy2Box);
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -54,7 +59,12 @@ public class EnemyCollisionHandler
     {
        this. block = Block;
         //Figure out how to pass rectangle
-        CollisionDirection direction = DetectCollision();
+        Vector2 enemyPosition = enemy.GetPosition();
+        Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
+        Vector2 blockPosition = block.GetPosition();
+        Rectangle BlockBox = new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 30, 30);
+
+        CollisionDirection direction = CollisionDetector.DetectCollision(EnemyBox, BlockBox);
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
