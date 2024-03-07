@@ -44,7 +44,10 @@ public class MarioCollisionHandler
         this.enemy = Enemy;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
-        //Traverse dictionary for delegate
+        if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
+        {
+            collisionDictionary[typeof(IEnemy)][direction].Invoke();
+        }
     }
 
     public void MarioItemCollision(IItem Item)
@@ -52,7 +55,10 @@ public class MarioCollisionHandler
         this.item = Item;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
-        //Traverse dictionary for delegate
+        if (direction != CollisionDirection.None)
+        {
+            mario.Collect(item);
+        }
     }
 
     public void MarioBlockCollision(IBlock Block)
@@ -60,11 +66,11 @@ public class MarioCollisionHandler
         this.block = Block;
         //Figure out how to pass rectangle
         CollisionDirection direction = DetectCollision();
-
-        if (direction != CollisionDirection.None)
+        if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
-            mario.Collect()
+            collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
+
     }
 }
  
