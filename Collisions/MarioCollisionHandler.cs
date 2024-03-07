@@ -44,7 +44,8 @@ public class MarioCollisionHandler
     {
         this.enemy = Enemy;
         //Figure out how to pass rectangle
-        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 marioPosition = mario.GetPosition();
+        Rectangle MarioBox = new Rectangle((int)marioPosition.X, (int)marioPosition.Y, 30, 30);
         Vector2 enemyPosition = enemy.GetPosition();
         Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
 
@@ -59,7 +60,8 @@ public class MarioCollisionHandler
     {
         this.item = Item;
         //Figure out how to pass rectangle
-        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 marioPosition = mario.GetPosition();
+        Rectangle MarioBox = new Rectangle((int)marioPosition.X, (int)marioPosition.Y, 30, 30);
         Vector2 itemPosition = item.GetPosition();
         Rectangle ItemBox = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 30, 30);
 
@@ -75,7 +77,8 @@ public class MarioCollisionHandler
     {
         this.block = Block;
         //Figure out how to pass rectangle
-        Rectangle MarioBox = mario.GetHitBox();
+        Vector2 marioPosition = mario.GetPosition();
+        Rectangle MarioBox = new Rectangle((int)marioPosition.X, (int)marioPosition.Y, 30, 30);
         Vector2 blockPosition = block.GetPosition();
         Rectangle BlockBox = new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 30, 30);
 

@@ -111,12 +111,6 @@ namespace Mario.Entities.Character
             currentState = new DeadState();
         }
 
-        public static Rectangle GetHitBox()
-        {
-
-        }
-
-
 
     public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
         {
