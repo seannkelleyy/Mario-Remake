@@ -36,6 +36,7 @@ public class SpriteVariables
             { "rightRunMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
             { "leftStandMario", new int[] { 64, 16, 16, 16, 1, 1, 3 } },
             { "deadMario", new int[] { 80, 0, 16, 16, 1, 1, 3 } },
+            //big mario
             { "leftJumpBigMario", new int[] { 0, 32, 16, 32, 1, 1, 3 } },
             { "leftRunBigMario", new int[] { 16, 32, 16, 32, 3, 1, 3 } },
             { "leftStandBigMario", new int[] { 64, 32, 16, 32, 1, 1, 3 } },
@@ -44,6 +45,7 @@ public class SpriteVariables
             { "rightRunBigMario", new int[] { 16, 64, 16, 32, 3, 1, 3 } },
             { "rightStandBigMario", new int[] { 64, 64, 16, 32, 1, 1, 3 } },
             { "rightCrouchBigMario", new int[] { 80, 64, 16, 22, 1, 1, 3 } },
+            //fire mario
             { "leftJumpFireMario", new int[] { 0, 96, 16, 32, 1, 1, 3 } },
             { "leftRunFireMario", new int[] { 16, 96, 16, 32, 3, 1, 3 } },
             { "leftStandFireMario", new int[] { 64, 96, 16, 32, 1, 1, 3 } },
@@ -52,6 +54,7 @@ public class SpriteVariables
             { "rightRunFireMario", new int[] { 16, 128, 16, 32, 3, 1, 3 } },
             { "rightStandFireMario", new int[] { 64, 128, 16, 32, 1, 1, 3 } },
             { "rightCrouchFireMario", new int[] { 80, 128, 16, 22, 1, 1, 3 } },
+            //fireball
             { "fireball", new int[] { 0, 0, 8, 8, 2, 1, 4 } } ,
             { "fireballExplosion", new int[] { 0, 8, 16, 16, 3, 1, 4 } }
      };
