@@ -2,7 +2,6 @@
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -12,19 +11,6 @@ namespace Mario.Physics
         public Vector2 velocity;
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
-
-        // This is a dictionary that keeps track of the collision states of the entity, This could 
-        // based upon exactly how we want to handle collisions, but for now, we are just going to
-        // keep track of the collision states of the entity
-        public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
-        {
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
-
 
         public ICollideable entity;
 
@@ -64,16 +50,19 @@ namespace Mario.Physics
             // If the player is not pressing any keys, apply friction
             if (horizontalDirection)
             {
-                if (velocity.X < PhysicsVariables.enemyMaxSpeed)
+                if (entity.GetCollisionState(CollisionDirection.Right) == true)
                 {
-                    velocity.X += PhysicsVariables.enemyAcceleration;
-                }
-                else
-                {
-                    velocity.X = PhysicsVariables.enemyMaxSpeed;
+                    if (velocity.X < PhysicsVariables.enemyMaxSpeed)
+                    {
+                        velocity.X += PhysicsVariables.enemyAcceleration;
+                    }
+                    else
+                    {
+                        velocity.X = PhysicsVariables.enemyMaxSpeed;
+                    }
                 }
             }
-            else if (!horizontalDirection)
+            else if (entity.GetCollisionState(CollisionDirection.Right) == false)
             {
                 if (velocity.X > -PhysicsVariables.enemyMaxSpeed)
                 {
@@ -107,11 +96,11 @@ namespace Mario.Physics
         // walk off a ledge
         private void UpdateVertical()
         {
-            if (collisionStates[CollisionDirection.None] == true)
+            if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
                 velocity.Y += ApplyGravity();
             }
-            else if (collisionStates[CollisionDirection.Bottom] == true)
+            else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
             {
                 velocity.Y = 0;
             }

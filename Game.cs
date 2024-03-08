@@ -51,6 +51,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
+            CollisionManager.Instance.HandleCollisions();
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 entity.Update(gameTime);
@@ -77,7 +78,7 @@ namespace Mario
         // Restarts the game
         public void Restart()
         {
-            String currentApplication = Process.GetCurrentProcess().MainModule.FileName;
+            string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(currentApplication);
             Environment.Exit(0);
         }

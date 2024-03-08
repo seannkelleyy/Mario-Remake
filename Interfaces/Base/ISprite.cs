@@ -6,7 +6,7 @@ namespace Mario.Interfaces.Base
     public interface ISprite
     {
         void Update(GameTime gameTime);
-
         void Draw(SpriteBatch spriteBatch, Vector2 position);
+        public Rectangle GetRectangle();
     }
 }

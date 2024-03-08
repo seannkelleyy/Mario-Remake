@@ -25,5 +25,10 @@ namespace Mario.Entities.Blocks.BlockStates
         {
             sprite.Draw(spriteBatch, position);
         }
+
+        public Rectangle GetRectangle()
+        {
+            return sprite.GetRectangle();
+        }
     }
 }

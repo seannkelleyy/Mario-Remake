@@ -1,6 +1,7 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,17 +36,45 @@ namespace Mario.Singletons
             return allEntities;
         }
 
+        public List<ICollideable> GetEnemies()
+        {
+            List<ICollideable> allCollideables = new List<ICollideable>();
+            foreach (IEnemy enemy in entities[typeof(IEnemy)])
+            {
+                allCollideables.Add(enemy);
+            }
+            return allCollideables;
+        }
+
+
+        public List<ICollideable> GetItems()
+        {
+            List<ICollideable> allCollideables = new List<ICollideable>();
+            foreach (IItem item in entities[typeof(IItem)])
+            {
+                allCollideables.Add(item);
+            }
+            return allCollideables;
+        }
+
+
+        // Gets all blocks within a certain position of mario that are collideable
+        public List<IBlock> GetBlocksInProximity(Vector2 position)
+        {
+            List<IBlock> blocks = new List<IBlock>();
+            foreach (IBlock block in entities[typeof(IBlock)])
+            {
+                if (block.GetPosition().X <= (position.X * 16) + 32 && block.GetPosition().X >= (position.X * 16) + 32 && block.isCollidable)
+                {
+                    blocks.Add(block);
+                }
+            }
+            return blocks;
+        }
+
         public IHero GetHero()
         {
             return (IHero)entities[typeof(IHero)][0];
-        }
-
-        private Type GetEntityType(IEntityBase entity)
-        {
-            return entity is IHero ? typeof(IHero) :
-                   entity is IEnemy ? typeof(IEnemy) :
-                   entity is IItem ? typeof(IItem) :
-                   entity is IBlock ? typeof(IBlock) : null;
         }
 
         public void AddEntity(IEntityBase entity)
@@ -69,6 +98,13 @@ namespace Mario.Singletons
             entities[entityType].Remove(entity);
         }
 
-
+        // Helper method to get the type of the entitys
+        private Type GetEntityType(IEntityBase entity)
+        {
+            return entity is IHero ? typeof(IHero) :
+                   entity is IEnemy ? typeof(IEnemy) :
+                   entity is IItem ? typeof(IItem) :
+                   entity is IBlock ? typeof(IBlock) : null;
+        }
     }
 }

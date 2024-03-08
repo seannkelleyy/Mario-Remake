@@ -1,7 +1,6 @@
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 public class CollisionHandler
@@ -14,10 +13,10 @@ public class CollisionHandler
 
     public void MarioCollision(IHero mario, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
     {
-        MarioCollisionHandler heroHandler = new MarioCollisionHandler(mario);
+        HeroCollisionHandler heroHandler = new HeroCollisionHandler(mario);
         foreach (IEntityBase enemy in enemies)
         {
-            heroHandler.MarioEnemyCollision(enemy);
+            heroHandler.MarioEnemyCollision(enemy as IEnemy);
         }
         foreach (IItem item in items)
         {
@@ -34,15 +33,14 @@ public class CollisionHandler
         foreach (IEnemy enemy in enemies)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
-            foreach(IBlock block in blocks)
+            foreach (IBlock block in blocks)
             {
                 enemyHandler.EnemyBlockCollision(block);
             }
-            foreach (IEnemy enemy2 in enemies)
+            foreach (IEnemy collidingEnemy in enemies)
             {
-                enemyHandler.EnemyEnemyCollision(enemy2);
+                enemyHandler.EnemyEnemyCollision(collidingEnemy);
             }
         }
-        
     }
 }

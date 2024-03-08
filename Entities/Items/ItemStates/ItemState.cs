@@ -24,5 +24,10 @@ namespace Mario.Entities.Items.ItemStates
         {
             sprite.Draw(spriteBatch, position);
         }
+
+        public Rectangle GetRectangle()
+        {
+            return sprite.GetRectangle();
+        }
     }
 }

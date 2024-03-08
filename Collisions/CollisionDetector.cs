@@ -1,31 +1,28 @@
-using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input.Touch;
 using static Mario.Global.CollisionVariables;
 
 public class CollisionDetector
 {
-    public static CollisionDirection DetectCollision(Rectangle obj1, Rectangle obj2)
+    public static CollisionDirection DetectCollision(Rectangle entity1, Rectangle entity2)
     {
-
-        Rectangle intersection = Rectangle.Intersect(obj1, obj2);
+        Rectangle intersection = Rectangle.Intersect(entity1, entity2);
         if (!intersection.IsEmpty)
         {
             if (intersection.Width >= intersection.Height)
             {
-                if (obj1.X > obj2.X)
+                if (entity1.X > entity2.X)
                 {
                     return CollisionDirection.Left;
                 }
-                    return CollisionDirection.Right;
+                return CollisionDirection.Right;
             }
             else
             {
-                if (obj1.Y > obj2.Y)
+                if (entity1.Y > entity2.Y)
                 {
                     return CollisionDirection.Bottom;
                 }
-                    return CollisionDirection.Top;
+                return CollisionDirection.Top;
             }
         }
         return CollisionDirection.None;

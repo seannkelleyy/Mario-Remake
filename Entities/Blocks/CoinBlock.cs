@@ -9,14 +9,14 @@ namespace Mario.Entities.Blocks
     {
         private int coinCount;
         private IItem[] coins;
-        public bool isCollidable { get; } = true;
-        public bool isBreakable { get; } = false;
 
         public CoinBlock(Vector2 position, int coinAmount)
         {
             this.position = position;
             currentState = new GoldenBlockState();
             coinCount = coinAmount;
+            isCollidable = true;
+            isBreakable = false;
 
             // Give the block the coins
             coins = new IItem[coinAmount];

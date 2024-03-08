@@ -15,13 +15,7 @@ namespace Mario.Sprites
 
         // This code follows the singleton pattern
         // When you need a SpriteFactory, you call SpriteFactory.Instance
-        public static SpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static SpriteFactory Instance => instance;
         // This is a private constructor, so no one can create a new SpriteFactory
         private SpriteFactory()
         {

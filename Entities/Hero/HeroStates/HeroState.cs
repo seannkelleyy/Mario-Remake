@@ -25,5 +25,10 @@ namespace Mario.Entities.Character.HeroStates
         {
             sprite.Draw(spriteBatch, position);
         }
+
+        public Rectangle GetRectangle()
+        {
+            return sprite.GetRectangle();
+        }
     }
 }

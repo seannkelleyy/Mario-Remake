@@ -7,13 +7,13 @@ namespace Mario.Entities.Blocks
 {
     public class ItemBlock : AbstractBlock
     {
-        public bool isCollidable { get; } = true;
-        public bool isBreakable { get; } = false;
         private IItem item;
 
         public ItemBlock(Vector2 position, string itemName, string itemBlockType)
         {
             this.position = position;
+            isCollidable = true;
+            isBreakable = false;
 
             // Set the correct sprite of this item block
             if (itemBlockType.CompareTo("brickBlock") == 0)

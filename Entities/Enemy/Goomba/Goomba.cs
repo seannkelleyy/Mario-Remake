@@ -1,10 +1,9 @@
 ﻿using Mario.Entities.Enemy.Goomba.GoombaStates;
-using Mario.Global;
-using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
@@ -14,7 +13,14 @@ public class Goomba : IEnemy
     public GoombaState currentState;
     private Vector2 position;
     private EntityPhysics physics;
-
+    private Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
+    {
+        { CollisionDirection.Top, false },
+        { CollisionDirection.Bottom, false },
+        { CollisionDirection.Left, false },
+        { CollisionDirection.Right, false },
+        { CollisionDirection.None, true }
+    };
     public Goomba(Vector2 position)
     {
         physics = new EntityPhysics(this);
@@ -26,6 +32,11 @@ public class Goomba : IEnemy
     {
         currentState.Update(gameTime);
         physics.Update();
+        // Reset all collision states to false at the start of each update
+        foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+        {
+            SetCollisionState((CollisionDirection)direction, false);
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -59,7 +70,7 @@ public class Goomba : IEnemy
 
     public Vector2 GetPosition()
     {
-        return this.position;
+        return position;
     }
 
     public void SetPosition(Vector2 position)
@@ -67,16 +78,19 @@ public class Goomba : IEnemy
         this.position = position;
     }
 
-    public void HandleCollision(ICollideable entity, Dictionary<CollisionVariables.CollisionDirection, bool> collisionDirection)
+    public bool GetCollisionState(CollisionDirection direction)
     {
-        if (collisionDirection[CollisionDirection.Top] && entity is IHero)
-        {
-            Stomp();
-        }
-        else if (collisionDirection[CollisionDirection.Left] || collisionDirection[CollisionDirection.Right])
-        {
-            ChangeDirection();
-        }
+        return collisionStates[direction];
+    }
+
+    public void SetCollisionState(CollisionDirection direction, bool state)
+    {
+        collisionStates[direction] = state;
+    }
+
+    public Rectangle GetRectangle()
+    {
+        return currentState.GetRectangle();
     }
 }
 

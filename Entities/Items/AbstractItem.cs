@@ -1,12 +1,10 @@
-﻿using Mario.Interfaces;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Mario.Entities.Items.ItemStates;
+using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Mario.Entities.Items.ItemStates;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using Mario.Interfaces.Base;
-using static Mario.Global.CollisionVariables;
 using System.Collections.Generic;
-using Mario.Interfaces.Entities;
+using static Mario.Global.CollisionVariables;
 
 namespace Mario.Entities.Items
 {
@@ -16,6 +14,14 @@ namespace Mario.Entities.Items
         public Vector2 position;
         public bool IsVisable { get; set; } = false;
         public bool IsCollidable { get; set; } = false;
+        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
+        {
+            { CollisionDirection.Top, false },
+            { CollisionDirection.Bottom, false },
+            { CollisionDirection.Left, false },
+            { CollisionDirection.Right, false },
+            { CollisionDirection.None, true }
+        };
 
         // This method will only draw the item when isVisable is true. If this method is called when isVisable is false, an error will be reported
         public void Draw(SpriteBatch spriteBatch)
@@ -24,16 +30,22 @@ namespace Mario.Entities.Items
             if (IsVisable)
             {
                 currentState.Draw(spriteBatch, position);
-            } else
+            }
+            else
             {
                 Logger.Instance.LogError("Error: Item's Draw can only be called when isVisable = true.");
             }
-            
+
         }
 
         public void Update(GameTime gameTime)
         {
             currentState.Update(gameTime);
+            // Reset all collision states to false at the start of each update
+            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+            {
+                SetCollisionState((CollisionDirection)direction, false);
+            }
         }
 
         public Vector2 GetPosition()
@@ -42,19 +54,24 @@ namespace Mario.Entities.Items
         }
 
         public void SetPosition(Vector2 position)
-        { 
+        {
             this.position = position;
         }
 
-        public void HandleCollision(ICollideable entity, Dictionary<CollisionDirection, bool> collisionDirection)
+        public Rectangle GetRectangle()
         {
-            if (entity is IHero)
-            {
-                // Makes the item disappear because it was collected
-                IsVisable = false;
-                IsCollidable = false;
-            }
-    }
+            return currentState.GetRectangle();
+        }
+
+        public void SetCollisionState(CollisionDirection direction, bool state)
+        {
+            collisions[direction] = state;
+        }
+
+        public bool GetCollisionState(CollisionDirection direction)
+        {
+            return collisions[direction];
+        }
 
         // Makes the item visable
         public abstract void MakeVisable();

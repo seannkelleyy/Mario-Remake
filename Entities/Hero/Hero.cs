@@ -1,10 +1,10 @@
 using Mario.Entities.Character.HeroStates;
 using Mario.Interfaces;
-using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
@@ -16,6 +16,14 @@ namespace Mario.Entities.Character
         private Vector2 position;
         private HeroPhysics physics;
         private int health = 1;
+        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
+        {
+            { CollisionDirection.Top, false },
+            { CollisionDirection.Bottom, false },
+            { CollisionDirection.Left, false },
+            { CollisionDirection.Right, false },
+            { CollisionDirection.None, true }
+        };
         public Hero(Vector2 position)
         {
             this.position = position;
@@ -27,6 +35,12 @@ namespace Mario.Entities.Character
         {
             physics.Update();
             currentState.Update(gameTime);
+
+            // Reset all collision states to false at the start of each update
+            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+            {
+                SetCollisionState((CollisionDirection)direction, false);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -41,7 +55,22 @@ namespace Mario.Entities.Character
 
         public Vector2 GetPosition()
         {
-            return this.position;
+            return position;
+        }
+
+        public bool GetCollisionState(CollisionDirection direction)
+        {
+            return collisions[direction];
+        }
+
+        public void SetCollisionState(CollisionDirection direction, bool state)
+        {
+            collisions[direction] = state;
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return currentState.GetRectangle();
         }
 
         public void WalkLeft()
@@ -70,17 +99,17 @@ namespace Mario.Entities.Character
 
             if (physics.horizontalDirection)
             {
-                currentState = new JumpStateRight();
+                currentState = new JumpRightFireState();
             }
             else
             {
-                currentState = new JumpStateLeft();
+                currentState = new JumpLeftFireState();
             }
         }
 
         public void Crouch()
         {
-            currentState = new CrouchState();
+            currentState = new CrouchFireState();
         }
 
         void IHero.Collect(IItem item)
@@ -111,24 +140,9 @@ namespace Mario.Entities.Character
             currentState = new DeadState();
         }
 
-
-    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+        public int ReportHealth()
         {
-            // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
-            if (collideable is IEnemy)
-            {
-                if (collisionDirection[CollisionDirection.Bottom])
-                {
-                    ((IEnemy)collideable).Stomp();
-                }
-                else
-                {
-                }
-            }
-        }
-
-        public int ReportHealth () {
-            return this.health;
+            return health;
         }
     }
 }
