@@ -1,19 +1,22 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Mario.Singletons
 {
     public class GameContentManager
     {
-        private IHero mario;
-        private List<IEntityBase> enemies;
-        private List<IItem> items;
-        private List<IBlock> blocks;
-
         private static GameContentManager instance = new GameContentManager();
+        private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
+        {
+            { typeof(IHero), new List<IHero>() },
+            { typeof(IEnemy), new List<IEnemy>() },
+            { typeof(IItem), new List<IItem>() },
+            { typeof(IBlock), new List<IBlock>() }
+        };
 
         // This code follows the singleton pattern
         // When you need a GCM, you call GameContentManager.Instance
@@ -22,70 +25,50 @@ namespace Mario.Singletons
         // This is a private constructor, so no one can create a new GameContentManager
         private GameContentManager() { }
 
-        public void Load()
-        {
-            mario = GameObjectFactory.Instance.CreateEntity("Mario", new Vector2(100, 220)) as IHero;
-            enemies = new List<IEntityBase>();
-            items = new List<IItem>();
-            blocks = new List<IBlock>();
-        }
-
         public List<IEntityBase> GetEntities()
         {
-            List<IEntityBase> entities = new List<IEntityBase>
+            List<IEntityBase> allEntities = new List<IEntityBase>();
+            foreach (var entityList in entities.Values)
             {
-                mario
-            };
-            entities.AddRange(enemies);
-            entities.AddRange(items);
-            entities.AddRange(blocks);
-            return entities;
+                allEntities.AddRange((IEnumerable<IEntityBase>)entityList);
+            }
+            return allEntities;
         }
 
         public IHero GetHero()
         {
-            return mario;
+            return (IHero)entities[typeof(IHero)][0];
+        }
+
+        private Type GetEntityType(IEntityBase entity)
+        {
+            return entity is IHero ? typeof(IHero) :
+                   entity is IEnemy ? typeof(IEnemy) :
+                   entity is IItem ? typeof(IItem) :
+                   entity is IBlock ? typeof(IBlock) : null;
         }
 
         public void AddEntity(IEntityBase entity)
         {
-            if (entity is IHero)
+            if (entity == null)
             {
-                mario = (IHero)entity;
+                return;
             }
-            else if (entity is IEnemy)
-            {
-                enemies.Add((IEnemy)entity);
-            }
-            else if (entity is IItem)
-            {
-                items.Add((IItem)entity);
-            }
-            else if (entity is IBlock)
-            {
-                blocks.Add((IBlock)entity);
-            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Add(entity);
+            Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)
         {
-            if (entity is IHero)
+            if (entity == null)
             {
-                mario = null;
+                return;
             }
-            else if (entity is IEnemy)
-            {
-                enemies.Remove((IEnemy)entity);
-            }
-            else if (entity is IItem)
-            {
-                items.Remove((IItem)entity);
-            }
-            else if (entity is IBlock)
-            {
-                blocks.Remove((IBlock)entity);
-            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Remove(entity);
         }
+
+
     }
 }
-
