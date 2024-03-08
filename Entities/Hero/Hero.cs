@@ -15,12 +15,16 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         private HeroPhysics physics;
-        private int health = 1;
+        public enum health { Mario, BigMario, FireMario };
+        public health currentHealth=health.Mario;
+        // True is right, false is left
+        public enum direction { left, right };
+        public direction currentDirection = direction.left;
         public Hero(Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
-            currentState = new StandingRightState();
+            currentState = new StandState();
         }
 
         public void Update(GameTime gameTime)
@@ -46,59 +50,35 @@ namespace Mario.Entities.Character
 
         public void WalkLeft()
         {
-            if (currentState is LeftMovingState)
-            {
-                physics.WalkLeft();
-                return;
-            }
-            currentState = new LeftMovingState();
+            physics.WalkLeft();
+            currentState.WalkLeft();
         }
 
         public void WalkRight()
         {
-            if (currentState is RightMovingState)
-            {
-                physics.WalkRight();
-                return;
-            }
-            currentState = new RightMovingState();
+            physics.WalkRight();
+            currentState.WalkRight();
         }
 
         public void Jump()
         {
             physics.Jump();
-
-            if (physics.horizontalDirection)
-            {
-                currentState = new JumpStateRight();
-            }
-            else
-            {
-                currentState = new JumpStateLeft();
-            }
+            currentState.Jump();
         }
 
         public void Crouch()
         {
-            currentState = new CrouchState();
+            currentState.Crouch();
         }
 
         void IHero.Collect(IItem item)
         {
             currentState = new CollectState();
-            if (health < 3)
-            {
-                health++;
-            }
         }
 
         void IHero.TakeDamage()
         {
-            health--;
-            if (health == 0)
-            {
-                Die();
-            }
+            currentState.TakeDamage();
         }
 
         void IHero.Attack()
@@ -108,7 +88,7 @@ namespace Mario.Entities.Character
 
         public void Die()
         {
-            currentState = new DeadState();
+            currentState.Die();
         }
 
         public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)

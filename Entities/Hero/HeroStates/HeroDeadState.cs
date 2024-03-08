@@ -2,8 +2,5 @@
 
 public class DeadState : HeroState
 {
-    public DeadState() : base()
-    {
-        sprite= spriteFactory.CreateSprite("deadMario");
-    }
+
 }
