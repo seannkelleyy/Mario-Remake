@@ -21,5 +21,14 @@ namespace Mario.Entities.Blocks
         }
 
         public abstract void GetHit();
+
+        public Vector2 GetPosition()
+        {
+            return this.position;
+        }
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
     }
 }

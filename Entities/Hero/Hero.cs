@@ -41,7 +41,7 @@ namespace Mario.Entities.Character
 
         public Vector2 GetPosition()
         {
-            return position;
+            return this.position;
         }
 
         public void WalkLeft()
@@ -111,7 +111,8 @@ namespace Mario.Entities.Character
             currentState = new DeadState();
         }
 
-        public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+
+    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
         {
             // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
             if (collideable is IEnemy)
