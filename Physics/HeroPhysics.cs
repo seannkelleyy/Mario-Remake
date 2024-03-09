@@ -141,6 +141,10 @@ namespace Mario.Physics
                     velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
                 }
+                else if(hero.GetCollisionState(CollisionDirection.Top))
+                {
+                    velocity.Y = 0;
+                }
                 else
                 { // If Mario has reached the jump limit, start moving down
                     verticalDirection = true;
