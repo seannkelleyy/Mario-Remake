@@ -33,5 +33,4 @@ public class CollisionDetector
         }
         return CollisionDirection.None;
     }
-
 }
