@@ -110,7 +110,10 @@ namespace Mario.Physics
         }
         public void Jump()
         {
-            if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom) == true)
+            Logger.Instance.LogInformation("Jumping");
+            Logger.Instance.LogInformation("Bottom: " + hero.GetCollisionState(CollisionDirection.Bottom));
+            // Cant figure out why this is false when you are colliding with the ground. Cntrl + F "Jump" to see the log
+            if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 verticalDirection = false;
                 velocity.Y = -PhysicsVariables.jumpForce;

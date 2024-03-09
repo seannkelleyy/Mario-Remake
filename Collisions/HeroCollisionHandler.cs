@@ -45,8 +45,7 @@ public class HeroCollisionHandler
         {
             hero.SetCollisionState(CollisionDirection.Bottom, true);
             Logger.Instance.LogInformation("Bottom collision detected");
-        }
-            ));
+        }));
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
@@ -90,6 +89,6 @@ public class HeroCollisionHandler
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
-        Logger.Instance.LogInformation($"Hero collision enum: {hero.GetCollisionState(direction).ToString()}");
+        Logger.Instance.LogInformation($"Hero collision enum: {direction} {hero.GetCollisionState(direction)}");
     }
 }
