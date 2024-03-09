@@ -20,7 +20,7 @@ public class CollisionDetector
                 return CollisionDirection.Bottom;
             }
             // Check for horizontal collision
-            if (entity1.Right + entity1Velocity.X > entity2.Left && entity1.Left < entity2.Left)
+            else if (entity1.Right + entity1Velocity.X > entity2.Left && entity1.Left < entity2.Left)
             {
                 return CollisionDirection.Left;
             }
