@@ -1,6 +1,7 @@
 ﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -31,15 +32,16 @@ public class Koopa : IEnemy
 
     public void Update(GameTime gameTime)
     {
-        currentState.Update(gameTime);
-        physics.Update();
-
         // Reset all collision states to false at the start of each update
         foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
         {
             SetCollisionState((CollisionDirection)direction, false);
         }
+        CollisionManager.Instance.Run(this);
+        physics.Update();
+        currentState.Update(gameTime);
     }
+
 
     public void Draw(SpriteBatch spriteBatch)
     {

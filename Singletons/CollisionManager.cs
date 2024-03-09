@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using System.Collections.Generic;
 
@@ -8,17 +9,23 @@ namespace Mario.Singletons
     {
         private static CollisionManager instance = new CollisionManager();
         public static CollisionManager Instance => instance;
-        IHero hero = GameContentManager.Instance.GetHero();
 
         private CollisionManager() { }
 
-        public void Run()
+        //Fascade for the collision manager
+        public void Run(IEntityBase entity)
         {
-            DetectHeroCollisions();
-            DetectEnemyCollisions();
+            if (entity is IHero)
+            {
+                DetectHeroCollisions(entity as IHero);
+            }
+            else if (entity is IEnemy)
+            {
+                DetectEnemyCollisions(entity as IEnemy);
+            }
         }
 
-        private void DetectHeroCollisions()
+        private void DetectHeroCollisions(IHero hero)
         {
             List<IEnemy> entities = new List<IEnemy>();
             List<IItem> items = new List<IItem>();
@@ -34,7 +41,6 @@ namespace Mario.Singletons
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
-                //Logger.Instance.LogInformation("Enemy in proximity");
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
                     Logger.Instance.LogInformation("Hero and enemy collision detected");
@@ -57,31 +63,26 @@ namespace Mario.Singletons
             CollisionHandler.Instance.HandleHeroCollisions(hero, entities, items, blocks);
         }
 
-        private void DetectEnemyCollisions()
+        private void DetectEnemyCollisions(IEnemy enemy)
         {
-            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
+            List<IBlock> blocks = new List<IBlock>();
+            foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(enemy.GetPosition()))
             {
-                List<IBlock> blocks = new List<IBlock>();
-                foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(enemy.GetPosition()))
+                if (enemy.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    if (enemy.GetRectangle().Intersects(block.GetRectangle()))
-                    {
-                        // Logger.Instance.LogInformation("Enemy and block collision detected");
-                        blocks.Add(block);
-                    }
+                    blocks.Add(block);
                 }
-
-                List<IEnemy> enemies = new List<IEnemy>();
-                foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
-                {
-                    if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
-                    {
-                        Logger.Instance.LogInformation("Enemy and enemy collision detected");
-                        enemies.Add(collidingEnemy);
-                    }
-                }
-                CollisionHandler.Instance.HandleEnemyCollisions(enemies, blocks);
             }
+
+            List<IEnemy> enemies = new List<IEnemy>();
+            foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
+            {
+                if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
+                {
+                    enemies.Add(collidingEnemy);
+                }
+            }
+            CollisionHandler.Instance.HandleEnemyCollisions(enemy, enemies, blocks);
         }
     }
 }

@@ -21,10 +21,27 @@ public class EnemyCollisionHandler
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Left, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Right, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Left, true);
+            Logger.Instance.LogInformation("mainEnemy Left collision detected");
+        }
+ ));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Right, true);
+            Logger.Instance.LogInformation(" mainEnemy Right collision detected");
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Top, true);
+            Logger.Instance.LogInformation("mainEnemy Top collision detected");
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Bottom, true);
+            Logger.Instance.LogInformation("mainEnemy Bottom collision detected");
+        }));
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
         {
@@ -54,6 +71,7 @@ public class EnemyCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetVelocity(), mainEnemy.GetRectangle(), block.GetRectangle());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
+            Logger.Instance.LogInformation("Enemy and block collision invoiked");
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

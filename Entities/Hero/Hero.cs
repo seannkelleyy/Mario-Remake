@@ -16,10 +16,10 @@ namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
+        private HeroStateManager stateManager; // Strategy Pattern
+        private HeroPhysics physics; // Strategy Pattern
         public HeroState currentState { get; set; }
-        private HeroStateManager stateManager;
         private Vector2 position;
-        private HeroPhysics physics;
         private int health = 1;
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
@@ -53,14 +53,14 @@ namespace Mario.Entities.Character
 
         public void Update(GameTime gameTime)
         {
-            physics.Update();
-            currentState.Update(gameTime);
-
             // Reset all collision states to false at the start of each update
             foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
             {
                 SetCollisionState((CollisionDirection)direction, false);
             }
+            currentState.Update(gameTime);
+            CollisionManager.Instance.Run(this);
+            physics.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
