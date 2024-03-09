@@ -14,6 +14,8 @@ namespace Mario.Interfaces.Entities
         void TakeDamage();
         public void Attack();
         public void Die();
+
+        public int ReportHealth();
     }
 }
 

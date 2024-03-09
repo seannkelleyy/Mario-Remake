@@ -2,7 +2,16 @@
 
 public class SpriteVariables
 {
+    // top left x pixel of sprite,
+    // top left y pixel of the sprite, 
+    // width of the sprite,
+    // height of the sprite, 
+    // number of frames for sprite, 
+    // scalar size variable, 
+    // spritesheet number
+
     public static Dictionary<string, int[]> spriteNumbers = new Dictionary<string, int[]> {
+        //top left x pixel of sprite,top left y pixel of the sprite, width of the sprite, height of the sprite, number of frames for sprite, scalar size variable, spritesheet number
             // items
             { "fireFlower", new int[] { 0, 0, 16, 16, 4, 1, 0 } },
             { "star", new int[] { 0, 16, 16, 16, 4, 1, 0 } },

@@ -1,8 +1,10 @@
 using Mario.Entities.Character.HeroStates;
+using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -45,7 +47,7 @@ namespace Mario.Entities.Character
 
         public Vector2 GetPosition()
         {
-            return position;
+            return this.position;
         }
 
         public void WalkLeft()
@@ -83,7 +85,8 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            // Make mario shoot fireball
+            bool facingLeft = false;
+                GameContentManager.Instance.AddEntity(new Fireball(position,facingLeft));
         }
 
         public void Die()
@@ -91,7 +94,8 @@ namespace Mario.Entities.Character
             currentState.Die();
         }
 
-        public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+
+    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
         {
             // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
             if (collideable is IEnemy)
@@ -104,6 +108,10 @@ namespace Mario.Entities.Character
                 {
                 }
             }
+        }
+
+        public int ReportHealth () {
+            return this.health;
         }
     }
 }
