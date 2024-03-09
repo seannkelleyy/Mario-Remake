@@ -25,7 +25,7 @@ namespace Mario.Entities.Blocks
                 case "mushroom":
                     item = ObjectFactory.Instance.CreateItem("mushroom", position);
                     break;
-                case "fireFlower":
+                case "fireflower":
                     item = ObjectFactory.Instance.CreateItem("fireflower", position);
                     break;
                 case "coin":
@@ -41,7 +41,6 @@ namespace Mario.Entities.Blocks
                     // Error passing in item type
                     Logger.Instance.LogError($"Item type `{itemName}` not recognized.");
                     break;
-
             }
         }
 

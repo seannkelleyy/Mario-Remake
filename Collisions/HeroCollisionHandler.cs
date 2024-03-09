@@ -11,7 +11,6 @@ public class HeroCollisionHandler
     public IEnemy enemy { get; set; }
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
-
     public HeroCollisionHandler(IHero hero)
     {
         this.hero = hero;
