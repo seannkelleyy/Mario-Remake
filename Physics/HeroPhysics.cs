@@ -85,29 +85,6 @@ namespace Mario.Physics
 
         private void UpdateHorizontal()
         {
-            // If the player is not pressing any keys, apply friction
-            if (hero.GetCollisionState(CollisionDirection.Right) == false)
-            {
-                if (velocity.X < PhysicsVariables.maxRunSpeed)
-                {
-                    velocity.X += PhysicsVariables.runAcceleration;
-                }
-                else
-                {
-                    velocity.X = PhysicsVariables.maxRunSpeed;
-                }
-            }
-            else if (hero.GetCollisionState(CollisionDirection.Left) == false)
-            {
-                if (velocity.X > -PhysicsVariables.maxRunSpeed)
-                {
-                    velocity.X -= PhysicsVariables.runAcceleration;
-                }
-                else
-                {
-                    velocity.X = -PhysicsVariables.maxRunSpeed;
-                }
-            }
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
@@ -154,7 +131,7 @@ namespace Mario.Physics
                     velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
                 }
-                else if(hero.GetCollisionState(CollisionDirection.Top))
+                else if (hero.GetCollisionState(CollisionDirection.Top))
                 {
                     velocity.Y = 0;
                 }

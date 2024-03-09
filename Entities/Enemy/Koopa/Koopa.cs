@@ -102,4 +102,3 @@ public class Koopa : IEnemy
         return physics.GetVelocity();
     }
 }
-
