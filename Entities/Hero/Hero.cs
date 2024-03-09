@@ -24,7 +24,7 @@ namespace Mario.Entities.Character
         {
             this.position = position;
             physics = new HeroPhysics(this);
-            currentState = new StandState();
+            currentState = new StandState(this);
         }
 
         public void Update(GameTime gameTime)
@@ -71,9 +71,9 @@ namespace Mario.Entities.Character
             currentState.Crouch();
         }
 
-        void IHero.Collect(IItem item)
+        void IHero.PowerUp(IItem item)
         {
-            currentState = new CollectState();
+            currentState.PowerUp();
         }
 
         void IHero.TakeDamage()

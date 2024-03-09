@@ -2,6 +2,7 @@
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Threading;
 
 namespace Mario.Entities.Character.HeroStates
@@ -16,17 +17,43 @@ namespace Mario.Entities.Character.HeroStates
         {
             this.mario = mario;
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite(nameof(mario.currentDirection)+this.GetType().Name+nameof(mario.currentHealth));
+            Console.WriteLine(nameof(mario.currentDirection) + this.GetType().Name + nameof(mario.currentHealth));
+            sprite = spriteFactory.CreateSprite((mario.currentDirection).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
         }
         public virtual void Jump()
         {
             mario.currentState = new JumpState(mario);
         }
+        public virtual void Crouch() {
+            if (mario.currentHealth != Hero.health.Mario)
+            {
+                mario.currentState = new CrouchState(mario);
+
+            }
+        }
         public virtual void WalkLeft()
         {
-
+            if (mario.currentDirection == Hero.direction.right)
+            {
+                mario.currentState = new SlideState(mario);
+            }
+            else
+            {
+                mario.currentState = new RunState(mario);
+            }
         }
         public virtual void WalkRight()
+        {
+            if (mario.currentDirection == Hero.direction.left)
+            {
+                mario.currentState=new SlideState(mario);
+            }
+            else
+            {
+                mario.currentState = new RunState(mario);
+            }
+        }
+        public virtual void PowerUp()
         {
 
         }
@@ -36,7 +63,7 @@ namespace Mario.Entities.Character.HeroStates
         }
         public virtual void Die()
         {
-
+            mario.currentState = new DeadState(mario);
         }
         public virtual void Update(GameTime gameTime)
         {
