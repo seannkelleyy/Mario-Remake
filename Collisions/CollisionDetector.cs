@@ -9,28 +9,9 @@ public class CollisionDetector
 
         if (!intersection.IsEmpty)
         {
-            // Check for vertical collision
-            //if (entity1.Top + entity1Velocity.Y < entity2.Bottom && entity1.Bottom > entity2.Bottom)
-            //{
-            //    return CollisionDirection.Top;
-            //}
-            //else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top)
-            //{
-            //    return CollisionDirection.Bottom;
-            //}
-            //// Check for horizontal collision
-            //if (entity1.Right + entity1Velocity.X > entity2.Left && entity1.Left < entity2.Left)
-            //{
-            //    return CollisionDirection.Right;
-            //}
-
-            //else if (entity1.Left + entity1Velocity.X < entity2.Right && entity1.Right > entity2.Right)
-            //{
-            //    return CollisionDirection.Left;
-            //}
             if (intersection.Height >= intersection.Width)
             {
-                if (entity2.Left < entity1.Left)
+                if (entity2.Left <= entity1.Left)
                 {
                     return CollisionDirection.Left;
                 }
@@ -41,7 +22,7 @@ public class CollisionDetector
             }
             else
             {
-                if (entity2.Bottom > entity1.Bottom)
+                if (entity2.Bottom >= entity1.Bottom)
                 {
                     return CollisionDirection.Bottom;
                 }
