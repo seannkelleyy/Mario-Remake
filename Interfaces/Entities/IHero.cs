@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces.Base;
+using static Mario.Entities.Character.Hero;
 
 namespace Mario.Interfaces.Entities
 {
@@ -15,7 +16,7 @@ namespace Mario.Interfaces.Entities
         public void Attack();
         public void Die();
 
-        public int ReportHealth();
+        public health ReportHealth();
     }
 }
 

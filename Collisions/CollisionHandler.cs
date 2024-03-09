@@ -17,7 +17,7 @@ public class CollisionHandler
         MarioCollisionHandler heroHandler = new MarioCollisionHandler(mario);
         foreach (IEntityBase enemy in enemies)
         {
-            heroHandler.MarioEnemyCollision(enemy);
+            heroHandler.MarioEnemyCollision((IEnemy)enemy);
         }
         foreach (IItem item in items)
         {

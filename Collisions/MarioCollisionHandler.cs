@@ -68,7 +68,7 @@ public class MarioCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, ItemBox);
         if (direction != CollisionDirection.None)
         {
-            mario.Collect(item);
+            mario.PowerUp(item);
             //function that deletes item from the screen
         }
     }

@@ -69,5 +69,8 @@ public class SpriteVariables
             { "leftCrouchStateFireMario", new int[] { 80, 128, 16, 22, 1, 1, 3 } },
             { "leftSlideStateFireMario",new int[] { 96, 128, 16, 22, 1, 1, 3 }},
             { "rightSlideStateFireMario",new int[] { 96, 96, 16, 22, 1, 1, 3 }},
+             //fireball
+            { "fireball", new int[] { 0, 0, 8, 8, 2, 1, 4 } } ,
+            { "fireballExplosion", new int[] { 0, 8, 16, 16, 3, 1, 4 } }
      };
 }
