@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Projectiles;
+using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
@@ -16,7 +17,8 @@ namespace Mario.Singletons
             { typeof(IHero), new List<IHero>() },
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
-            { typeof(IBlock), new List<IBlock>() }
+            { typeof(IBlock), new List<IBlock>() },
+            { typeof(Fireball), new List<Fireball>() }
         };
 
         // This code follows the singleton pattern

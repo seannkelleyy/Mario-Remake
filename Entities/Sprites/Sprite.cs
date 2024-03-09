@@ -15,8 +15,8 @@ namespace Mario.Entities.Sprites
         private int spriteSheetStartingY;
         private int width;
         private int height;
-        float updateInterval = .2f;
-        float elapsedSeconds = 0;
+        private float updateInterval = .2f;
+        private float elapsedSeconds = 0;
 
 
         public Sprite(Texture2D texture, int[] spriteParams)
