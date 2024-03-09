@@ -85,6 +85,16 @@ namespace Mario.Physics
 
         private void UpdateHorizontal()
         {
+            // If the player is not pressing any keys, apply friction
+            if (horizontalDirection && velocity.X > 0)
+            {
+                velocity.X -= PhysicsVariables.friction;
+            }
+            else if (!horizontalDirection && velocity.X < 0)
+            {
+                velocity.X += PhysicsVariables.friction;
+            }
+
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
