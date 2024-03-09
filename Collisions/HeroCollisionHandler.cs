@@ -29,8 +29,7 @@ public class HeroCollisionHandler
         {
             hero.SetCollisionState(CollisionDirection.Left, true);
             Logger.Instance.LogInformation("Left collision detected");
-        }
-        ));
+        }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
         {
             hero.SetCollisionState(CollisionDirection.Right, true);

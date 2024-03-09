@@ -71,7 +71,6 @@ public class EnemyCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetVelocity(), mainEnemy.GetRectangle(), block.GetRectangle());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
-            Logger.Instance.LogInformation("Enemy and block collision invoiked");
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

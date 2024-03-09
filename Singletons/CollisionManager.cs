@@ -43,7 +43,6 @@ namespace Mario.Singletons
             {
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
-                    Logger.Instance.LogInformation("Hero and enemy collision detected");
                     entities.Add(enemy);
                 }
             }
@@ -51,7 +50,6 @@ namespace Mario.Singletons
             {
                 if (hero.GetRectangle().Intersects(item.GetRectangle()))
                 {
-                    //Logger.Instance.LogInformation("Hero and item collision detected");
                     items.Add(item);
                 }
             }

@@ -32,7 +32,6 @@ public class CollisionHandler
         EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
         foreach (IBlock block in blocks)
         {
-            Logger.Instance.LogInformation("Enemy and block collision beginning handled");
             enemyHandler.EnemyBlockCollision(block);
         }
         foreach (IEnemy collidingEnemy in enemies)
