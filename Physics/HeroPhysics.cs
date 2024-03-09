@@ -2,6 +2,7 @@
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
+using System.Runtime.CompilerServices;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -30,6 +31,14 @@ namespace Mario.Physics
         public Vector2 GetVelocity()
         {
             return velocity;
+        }
+        public bool getHorizontalDirecion() {
+            return horizontalDirection;
+        }
+
+        public void setHorizontalDirecion(bool horizontalDirection)
+        {
+            this.horizontalDirection=horizontalDirection;
         }
 
         #region Horizontal Movement
