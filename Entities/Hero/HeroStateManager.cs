@@ -29,7 +29,7 @@ namespace Mario.Entities.Hero
             [(HeroStateType.StandingRight, 3)] = new StandingRightFireState(),
             [(HeroStateType.StandingLeft, 3)] = new StandingLeftFireState(),
             [(HeroStateType.MovingRight, 3)] = new MovingRightFireState(),
-            [(HeroStateType.JumpingRight, 2)] = new JumpRightFireState(),
+            [(HeroStateType.JumpingRight, 3)] = new JumpRightFireState(),
             [(HeroStateType.MovingLeft, 3)] = new MovingLeftFireState(),
             [(HeroStateType.JumpingLeft, 3)] = new JumpLeftFireState(),
             [(HeroStateType.Crouching, 3)] = new CrouchFireState(),
