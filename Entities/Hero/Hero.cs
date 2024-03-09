@@ -105,6 +105,7 @@ namespace Mario.Entities.Character
                 physics.WalkLeft();
                 return;
             }
+            physics.setHorizontalDirecion(false);
             stateManager.SetState(HeroStateType.MovingLeft, health);
         }
 
@@ -115,6 +116,7 @@ namespace Mario.Entities.Character
                 physics.WalkRight();
                 return;
             }
+            physics.setHorizontalDirecion(true);
             stateManager.SetState(HeroStateType.MovingRight, health);
 
         }
@@ -158,8 +160,7 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            bool facingLeft = false;
-            GameContentManager.Instance.AddEntity(new Fireball(position, facingLeft));
+            GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
             stateManager.SetState(HeroStateType.AttackingRight, health);
 
         }

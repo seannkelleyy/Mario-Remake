@@ -17,9 +17,9 @@ namespace Mario.Entities.Projectiles
         private Vector2 position;
         private float verticleVelocity = 0;
         private float horizontalVelocity;
-        public FireballMovingState(Vector2 position, bool facingLeft)
+        public FireballMovingState(Vector2 position, bool facingRight)
         {
-            if (facingLeft)
+            if (!facingRight)
             {
                 position = Vector2.Add(position, new Vector2(0, 16));
                 horizontalVelocity = -6.25f;
