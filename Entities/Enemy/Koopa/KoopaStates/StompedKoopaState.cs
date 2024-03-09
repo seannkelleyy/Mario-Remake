@@ -4,6 +4,6 @@ public class StompedKoopaState : KoopaState
 {
     public StompedKoopaState() : base()
     {
-        sprite = spriteFactory.CreateSprite("stompedKoopa");
+        sprite = spriteFactory.CreateSprite("shellLegsKoopa");
     }
 }

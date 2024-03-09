@@ -97,7 +97,7 @@ namespace Mario.Physics
 
         private void UpdateVertical()
         {
-            /*
+            
             //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
@@ -109,7 +109,6 @@ namespace Mario.Physics
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;
-            */
         }
 
         #endregion

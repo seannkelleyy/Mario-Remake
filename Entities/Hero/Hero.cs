@@ -124,7 +124,7 @@ namespace Mario.Entities.Character
 
             if (physics.horizontalDirection)
             {
-                stateManager.SetState(HeroStateType.JumpingLeft, health);
+                stateManager.SetState(HeroStateType.JumpingRight, health);
             }
             else
             {

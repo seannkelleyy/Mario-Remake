@@ -51,11 +51,14 @@ public class Koopa : IEnemy
     public void Stomp()
     {
         currentState = new StompedKoopaState();
+        GameContentManager.Instance.RemoveEntity(this);
+
     }
 
     public void Flip()
     {
         currentState = new FlippedKoopaState();
+        GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void ChangeDirection()
