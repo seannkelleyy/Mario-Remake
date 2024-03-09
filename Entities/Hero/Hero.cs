@@ -1,8 +1,10 @@
 using Mario.Entities.Character.HeroStates;
+using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -103,7 +105,8 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            // Make mario shoot fireball
+            bool facingLeft = false;
+                GameContentManager.Instance.AddEntity(new Fireball(position,facingLeft));
         }
 
         public void Die()
