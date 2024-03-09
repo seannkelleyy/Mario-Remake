@@ -72,6 +72,7 @@ public class HeroCollisionHandler
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
+            block.GetHit();
         }
         Logger.Instance.LogInformation($"Hero collision enum: {direction} {hero.GetCollisionState(direction)}");
     }
