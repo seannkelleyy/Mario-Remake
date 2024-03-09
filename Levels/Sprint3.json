@@ -13,13 +13,13 @@
     {
       "type": "goomba",
       "startingX": 10,
-      "startingY": 10,
+      "startingY": 12,
       "direction": false
     },
     {
       "type": "koopa",
       "startingX": 20,
-      "startingY": 10,
+      "startingY": 11.5,
       "direction": false
     }
   ],

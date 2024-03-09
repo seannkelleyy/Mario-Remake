@@ -107,7 +107,8 @@ namespace Mario.Singletons
             return entity is IHero ? typeof(IHero) :
                    entity is IEnemy ? typeof(IEnemy) :
                    entity is IItem ? typeof(IItem) :
-                   entity is IBlock ? typeof(IBlock) : null;
+                   entity is IBlock ? typeof(IBlock) :
+                   entity is Fireball ? typeof(Fireball): null;
         }
     }
 }
