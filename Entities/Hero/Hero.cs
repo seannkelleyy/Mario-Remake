@@ -152,6 +152,7 @@ namespace Mario.Entities.Character
             {
                 Die();
             }
+            stateManager.SetState(stateManager.GetStateType(), health);
         }
 
         void IHero.Attack()

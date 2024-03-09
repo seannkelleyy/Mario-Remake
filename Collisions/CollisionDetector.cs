@@ -29,14 +29,14 @@ public class CollisionDetector
                 return CollisionDirection.Right;
             }
 
-            else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top &&
-              entity1.Right > entity2.Left && entity1.Left < entity2.Right)
+            else if (entity1.Top + entity1Velocity.Y < entity2.Bottom && entity1.Bottom > entity2.Bottom &&
+                          entity1.Right > entity2.Left && entity1.Left < entity2.Right)
             {
                 return CollisionDirection.Top;
             }
 
-            else if (entity1.Top + entity1Velocity.Y < entity2.Bottom && entity1.Bottom > entity2.Bottom &&
-               entity1.Right > entity2.Left && entity1.Left < entity2.Right)
+            else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top &&
+                   entity1.Right > entity2.Left && entity1.Left < entity2.Right)
             {
                 return CollisionDirection.Bottom;
             }
