@@ -52,7 +52,6 @@ namespace Mario
         protected override void Update(GameTime gameTime)
         {
             Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
-            CollisionManager.Instance.Run();
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 entity.Update(gameTime);

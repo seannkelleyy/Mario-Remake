@@ -22,8 +22,8 @@ namespace Mario.Physics
 
         public void Update()
         {
-            UpdateHorizontal();
-            UpdateVertical(); //This works, but since we hav eno collision they just fly off the screen
+            //UpdateHorizontal();
+            UpdateVertical();
         }
         public Vector2 GetVelocity()
         {
@@ -51,7 +51,6 @@ namespace Mario.Physics
         // Keep enttity moving until they collide with something, then flip direction
         private void UpdateHorizontal()
         {
-            // If the player is not pressing any keys, apply friction
             if (horizontalDirection)
             {
                 if (entity.GetCollisionState(CollisionDirection.Right) == false)
@@ -96,20 +95,16 @@ namespace Mario.Physics
             return velocity.Y;
         }
 
-        // Much simpler than Hero's movement because they can jump, they just fall if they
-        // walk off a ledge
         private void UpdateVertical()
         {
             /*
             //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
-                //Logger.Instance.LogInformation("Applying gravity");
                 velocity.Y += ApplyGravity();
             }
             else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
             {
-                // Logger.Instance.LogInformation("Resetting Y velocity");
                 velocity.Y = 0;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));

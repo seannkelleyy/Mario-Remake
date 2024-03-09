@@ -129,7 +129,7 @@ namespace Mario.Physics
                 if (jumpCounter < PhysicsVariables.jumpLimit)
                 {
                     // maybe set bottom collision to false here
-                    velocity.Y = -PhysicsVariables.jumpForce * (1 - (float)jumpCounter / PhysicsVariables.jumpLimit);
+                    velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
                 }
                 else

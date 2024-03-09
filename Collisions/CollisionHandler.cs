@@ -27,19 +27,16 @@ public class CollisionHandler
         }
     }
 
-    public void HandleEnemyCollisions(List<IEnemy> enemies, List<IBlock> blocks)
+    public void HandleEnemyCollisions(IEnemy enemy, List<IEnemy> enemies, List<IBlock> blocks)
     {
-        foreach (IEnemy enemy in enemies)
+        EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
+        foreach (IBlock block in blocks)
         {
-            EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
-            foreach (IBlock block in blocks)
-            {
-                enemyHandler.EnemyBlockCollision(block);
-            }
-            foreach (IEnemy collidingEnemy in enemies)
-            {
-                enemyHandler.EnemyEnemyCollision(collidingEnemy);
-            }
+            enemyHandler.EnemyBlockCollision(block);
+        }
+        foreach (IEnemy collidingEnemy in enemies)
+        {
+            enemyHandler.EnemyEnemyCollision(collidingEnemy);
         }
     }
 }
