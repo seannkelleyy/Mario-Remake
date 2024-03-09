@@ -7,7 +7,7 @@
     "startingX": 5,
     "startingY": 10,
     "direction": true,
-    "starting-power": "small"
+    "starting-power": "fire"
   },
   "enemies": [
     {
@@ -25,14 +25,14 @@
   ],
   "blockSections": [
     {
-      "type": "brick",
+      "type": "floor",
       "startingX": 0,
       "startingY": 14,
       "endingX": 60,
       "endingY": 18,
-      "collideable": false,
+      "collidable": false,
       "breakable": false,
-      "item": "none""
+      "item": "none"
     },
     {
       "type": "floor",
@@ -40,7 +40,7 @@
       "startingY": 13,
       "endingX": 60,
       "endingY": 13,
-      "collideable": true,
+      "collidable": true,
       "breakable": false,
       "item": "none"
     }
@@ -50,7 +50,7 @@
       "type": "floor",
       "x": 4,
       "y": 12,
-      "collideable": true,
+      "collidable": true,
       "breakable": false,
       "item": "none"
     },
@@ -58,7 +58,15 @@
       "type": "floor",
       "x": 21,
       "y": 12,
-      "collideable": true,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "golden",
+      "x": 17,
+      "y": 8,
+      "collidable": true,
       "breakable": false,
       "item": "none"
     }

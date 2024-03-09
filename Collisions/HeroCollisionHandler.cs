@@ -25,10 +25,28 @@ public class HeroCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => hero.SetCollisionState(CollisionDirection.Left, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => hero.SetCollisionState(CollisionDirection.Right, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => hero.SetCollisionState(CollisionDirection.Top, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => hero.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Left, true);
+            Logger.Instance.LogInformation("Left collision detected");
+        }
+        ));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Right, true);
+            Logger.Instance.LogInformation("Right collision detected");
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Top, true);
+            Logger.Instance.LogInformation("Top collision detected");
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            Logger.Instance.LogInformation("Bottom collision detected");
+        }
+            ));
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
@@ -43,7 +61,7 @@ public class HeroCollisionHandler
     {
         this.enemy = enemy;
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), enemy.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), enemy.GetRectangle());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -54,7 +72,7 @@ public class HeroCollisionHandler
     {
         this.item = item;
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), item.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), item.GetRectangle());
         if (direction != CollisionDirection.None)
         {
             hero.Collect(item);
@@ -64,13 +82,14 @@ public class HeroCollisionHandler
 
     public void HeroBlockCollision(IBlock block)
     {
+        Logger.Instance.LogInformation("Handing block" + block.ToString());
         this.block = block;
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), block.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), block.GetRectangle());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
-
+        Logger.Instance.LogInformation($"Hero collision enum: {hero.GetCollisionState(direction).ToString()}");
     }
 }

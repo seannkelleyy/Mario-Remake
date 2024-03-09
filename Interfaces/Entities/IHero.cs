@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces.Entities
 {
@@ -14,8 +15,8 @@ namespace Mario.Interfaces.Entities
         void TakeDamage();
         public void Attack();
         public void Die();
-
         public int ReportHealth();
+        public Vector2 GetVelocity();
     }
 }
 

@@ -24,11 +24,27 @@ namespace Mario.Entities.Character
             { CollisionDirection.Right, false },
             { CollisionDirection.None, true }
         };
-        public Hero(Vector2 position)
+        public Hero(string startingPower, Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
             currentState = new StandingRightState();
+
+            switch (startingPower)
+            {
+                case "small":
+                    currentState = new StandingRightState();
+                    health = 1;
+                    break;
+                case "big":
+                    currentState = new StandingRightBigState();
+                    health = 2;
+                    break;
+                case "fire":
+                    currentState = new StandingRightFireState();
+                    health = 3;
+                    break;
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -73,6 +89,10 @@ namespace Mario.Entities.Character
             return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
 
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
+        }
         public void WalkLeft()
         {
             if (currentState is LeftMovingState)

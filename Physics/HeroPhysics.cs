@@ -27,6 +27,11 @@ namespace Mario.Physics
             UpdateVertical();
         }
 
+        public Vector2 GetVelocity()
+        {
+            return velocity;
+        }
+
         #region Horizontal Movement
         public float ApplyFriction()
         {

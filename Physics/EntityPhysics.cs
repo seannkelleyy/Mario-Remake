@@ -25,6 +25,10 @@ namespace Mario.Physics
             UpdateHorizontal();
             UpdateVertical(); //This works, but since we hav eno collision they just fly off the screen
         }
+        public Vector2 GetVelocity()
+        {
+            return velocity;
+        }
 
         #region Horizontal Movement
         public float ApplyFriction()
@@ -96,15 +100,15 @@ namespace Mario.Physics
         // walk off a ledge
         private void UpdateVertical()
         {
-            Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
+            //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
-                Logger.Instance.LogInformation("Applying gravity");
+                //Logger.Instance.LogInformation("Applying gravity");
                 velocity.Y += ApplyGravity();
             }
             else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
             {
-                Logger.Instance.LogInformation("Resetting Y velocity");
+                // Logger.Instance.LogInformation("Resetting Y velocity");
                 velocity.Y = 0;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));

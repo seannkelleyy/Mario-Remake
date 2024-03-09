@@ -29,7 +29,7 @@ namespace Mario
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
 
-            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
             base.Initialize();
         }
@@ -51,6 +51,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
+            Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
             CollisionManager.Instance.Run();
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {

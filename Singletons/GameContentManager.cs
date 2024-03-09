@@ -67,8 +67,6 @@ namespace Mario.Singletons
                 if (block.GetPosition().X <= position.X + 16 && block.GetPosition().X >= position.X - 16 && block.isCollidable)
                 {
                     blocks.Add(block);
-                    Logger.Instance.LogInformation("Block Added: " + block.GetRectangle());
-                    Logger.Instance.LogInformation("Mario Position: " + position);
                 }
             }
             return blocks;

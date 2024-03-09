@@ -26,10 +26,6 @@ namespace Mario.Singletons
 
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
             {
-                Logger.Instance.LogInformation("Block in proximity");
-                Logger.Instance.LogInformation("block: " + block.GetRectangle().ToString());
-                Logger.Instance.LogInformation("hero: " + hero.GetRectangle().ToString());
-                Logger.Instance.LogInformation("block intersects hero: " + hero.GetRectangle().Intersects(block.GetRectangle()));
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     Logger.Instance.LogInformation("Hero and Block collision detected");
@@ -53,6 +49,11 @@ namespace Mario.Singletons
                     items.Add(item);
                 }
             }
+            Logger.Instance.LogInformation($"Blocks colldied with:");
+            foreach (IBlock block in blocks)
+            {
+                Logger.Instance.LogInformation(block.ToString());
+            }
             CollisionHandler.Instance.HandleHeroCollisions(hero, entities, items, blocks);
         }
 
@@ -65,7 +66,7 @@ namespace Mario.Singletons
                 {
                     if (enemy.GetRectangle().Intersects(block.GetRectangle()))
                     {
-                        Logger.Instance.LogInformation("Enemy and block collision detected");
+                        // Logger.Instance.LogInformation("Enemy and block collision detected");
                         blocks.Add(block);
                     }
                 }

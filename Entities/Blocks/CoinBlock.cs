@@ -1,43 +1,28 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Entities.Items;
 using Mario.Interfaces;
-using Mario.Singletons;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
     public class CoinBlock : AbstractBlock
     {
-        private int coinCount;
-        private IItem[] coins;
+        private IItem coin;
 
-        public CoinBlock(Vector2 position, int coinAmount, )
+        public CoinBlock(Vector2 position, bool breakable, bool collidable, string item)
         {
             this.position = position;
+            coin = new Coin(position);
             currentState = new GoldenBlockState();
-            coinCount = coinAmount;
-            isCollidable = true;
-            isBreakable = false;
-
-            // Give the block the coins
-            coins = new IItem[coinAmount];
-            for (int i = 0; i < coinAmount; i++)
-            {
-                coins[i] = GameObjectFactory.Instance.CreateCoin(position);
-            }
+            isCollidable = collidable;
+            isBreakable = breakable;
         }
 
         // Give out a coin until out of coins. Then turn into hard block
         public override void GetHit()
         {
-            if (coinCount == 0)
-            {
-                currentState = new HardBlockState();
-            }
-            else
-            {
-                coinCount--;
-                coins[coinCount].MakeVisable();
-            }
+            currentState = new HardBlockState();
+            coin.MakeVisable();
         }
     }
 }

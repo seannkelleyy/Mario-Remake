@@ -9,36 +9,37 @@ namespace Mario.Entities.Blocks
     {
         private IItem item;
 
-        public GoldenBlock(Vector2 position, bool breakeable, bool collideable, string itemName)
+        public GoldenBlock(Vector2 position, bool breakable, bool collidable, string itemName)
         {
             this.position = position;
-            isCollidable = true;
-            isBreakable = false;
-
+            isCollidable = collidable;
+            isBreakable = breakable;
             currentState = new GoldenBlockState();
 
             // Give the block an item to hold
-            GameObjectFactory gameObjectFactory = GameObjectFactory.Instance;
             switch (itemName)
             {
+                case "none":
+                    item = null;
+                    break;
                 case "mushroom":
-                    item = gameObjectFactory.CreateMushroom(position, "redMushroom");
+                    item = ObjectFactory.Instance.CreateItem("mushroom", position);
                     break;
                 case "fireFlower":
-                    item = gameObjectFactory.CreateFireFlower(position);
+                    item = ObjectFactory.Instance.CreateItem("fireflower", position);
                     break;
                 case "coin":
-                    item = gameObjectFactory.CreateCoin(position);
+                    item = ObjectFactory.Instance.CreateItem("coin", position);
                     break;
                 case "1up":
-                    item = gameObjectFactory.CreateMushroom(position, "1up");
+                    item = ObjectFactory.Instance.CreateItem("1up", position);
                     break;
                 case "star":
-                    item = gameObjectFactory.CreateStar(position);
+                    item = ObjectFactory.Instance.CreateItem("star", position);
                     break;
                 default:
                     // Error passing in item type
-                    Logger.Instance.LogError($"Item type {itemName} not recognized.");
+                    Logger.Instance.LogError($"Item type `{itemName}` not recognized.");
                     break;
 
             }

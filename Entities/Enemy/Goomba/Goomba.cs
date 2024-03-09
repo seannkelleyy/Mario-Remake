@@ -92,5 +92,10 @@ public class Goomba : IEnemy
     {
         return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
     }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
+    }
 }
 

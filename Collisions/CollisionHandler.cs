@@ -10,9 +10,9 @@ public class CollisionHandler
 
     private CollisionHandler() { }
 
-    public void HandleHeroCollisions(IHero mario, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
+    public void HandleHeroCollisions(IHero hero, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
     {
-        HeroCollisionHandler heroHandler = new HeroCollisionHandler(mario);
+        HeroCollisionHandler heroHandler = new HeroCollisionHandler(hero);
         foreach (IEntityBase enemy in enemies)
         {
             heroHandler.HeroEnemyCollision(enemy as IEnemy);

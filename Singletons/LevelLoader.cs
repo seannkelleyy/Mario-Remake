@@ -25,13 +25,13 @@ namespace Mario.Singletons
 
 
             // Create the hero
-            IHero hero = (IHero)GameObjectFactory.Instance.CreateEntity(level.hero.type, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
+            IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies
             foreach (LevelEnemy enemy in level.enemies)
             {
-                IEnemy enemyObject = (IEnemy)GameObjectFactory.Instance.CreateEntity(enemy.type, new Vector2(enemy.startingX * 16, enemy.startingY * 16));
+                IEnemy enemyObject = ObjectFactory.Instance.CreateEnemy(enemy.type, new Vector2(enemy.startingX * 16, enemy.startingY * 16));
                 GameContentManager.Instance.AddEntity(enemyObject);
             }
 
@@ -42,7 +42,7 @@ namespace Mario.Singletons
                 {
                     for (int y = blockSection.startingY; y <= blockSection.endingY; y++)
                     {
-                        IBlock block = (IBlock)GameObjectFactory.Instance.CreateBlock(blockSection.type, new Vector2(x * 16, y * 16), blockSection.breakable, blockSection.collideable, blockSection.item);
+                        IBlock block = ObjectFactory.Instance.CreateBlock(blockSection.type, new Vector2(x * 16, y * 16), blockSection.breakable, blockSection.collidable, blockSection.item);
                         GameContentManager.Instance.AddEntity(block);
                     }
                 }
@@ -51,7 +51,7 @@ namespace Mario.Singletons
             // Create the individual blocks
             foreach (LevelBlock block in level.blocks)
             {
-                IBlock blockObject = (IBlock)GameObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.y * 16, block.y * 16), block.breakable, block.collideable, block.item);
+                IBlock blockObject = ObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.x * 16, block.y * 16), block.breakable, block.collidable, block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
             }
         }

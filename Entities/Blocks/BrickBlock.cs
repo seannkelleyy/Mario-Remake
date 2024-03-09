@@ -5,12 +5,12 @@ namespace Mario.Entities.Blocks
 {
     public class BrickBlock : AbstractBlock
     {
-        public BrickBlock(Vector2 position)
+        public BrickBlock(Vector2 position, bool breakable, bool collidable, string item)
         {
             this.position = position;
             currentState = new BrickBlockNormalState();
-            isCollidable = true;
-            isBreakable = true;
+            isCollidable = collidable;
+            isBreakable = breakable;
         }
 
         // Block will be broken
