@@ -22,11 +22,13 @@ public class CollisionDetector
             // Check for horizontal collision
             else if (entity1.Right + entity1Velocity.X > entity2.Left && entity1.Left < entity2.Left)
             {
-                return CollisionDirection.Left;
+                return CollisionDirection.Top;
             }
-            else if (entity1.Left + entity1Velocity.X < entity2.Right && entity1.Right > entity2.Right)
+
+            else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top &&
+                   entity1.Right > entity2.Left && entity1.Left < entity2.Right)
             {
-                return CollisionDirection.Right;
+                return CollisionDirection.Bottom;
             }
         }
         return CollisionDirection.None;

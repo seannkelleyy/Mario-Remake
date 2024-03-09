@@ -49,11 +49,13 @@ public class Goomba : IEnemy
     public void Stomp()
     {
         currentState = new StompedGoombaState();
+        GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void Flip()
     {
         currentState = new FlippedGoombaState();
+        GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void ChangeDirection()

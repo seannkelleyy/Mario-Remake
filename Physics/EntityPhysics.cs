@@ -97,6 +97,8 @@ namespace Mario.Physics
 
         private void UpdateVertical()
         {
+            
+            //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
                 velocity.Y += ApplyGravity();
