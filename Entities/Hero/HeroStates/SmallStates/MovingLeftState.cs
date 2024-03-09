@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Character.HeroStates;
 
-public class LeftMovingState : HeroState
+public class MovingLeftState : HeroState
 {
-    public LeftMovingState() : base()
+    public MovingLeftState() : base()
     {
         sprite = spriteFactory.CreateSprite("leftRunMario");
     }

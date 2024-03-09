@@ -14,11 +14,11 @@ namespace Mario.Singletons
         private static GameContentManager instance = new GameContentManager();
         private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
         {
-            { typeof(IHero), new List<IHero>() },
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
-            { typeof(Fireball), new List<Fireball>() }
+            { typeof(Fireball), new List<Fireball>() },
+            { typeof(IHero), new List<IHero>() }
         };
 
         // This code follows the singleton pattern

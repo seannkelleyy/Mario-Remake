@@ -1,10 +1,12 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Character.HeroStates;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
+        public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();

@@ -1,4 +1,5 @@
 using Mario.Entities.Character.HeroStates;
+using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -9,12 +10,14 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
+using static Mario.Global.HeroVariables;
 
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
         public HeroState currentState { get; set; }
+        private HeroStateManager stateManager;
         private Vector2 position;
         private HeroPhysics physics;
         private int health = 1;
@@ -30,23 +33,22 @@ namespace Mario.Entities.Character
         {
             this.position = position;
             physics = new HeroPhysics(this);
-            currentState = new StandingRightState();
+            stateManager = new HeroStateManager(this);
 
             switch (startingPower)
             {
                 case "small":
-                    currentState = new StandingRightState();
                     health = 1;
                     break;
                 case "big":
-                    currentState = new StandingRightBigState();
                     health = 2;
                     break;
                 case "fire":
-                    currentState = new StandingRightFireState();
                     health = 3;
                     break;
             }
+            stateManager.SetState(HeroStateType.StandingRight, health);
+
         }
 
         public void Update(GameTime gameTime)
@@ -97,22 +99,23 @@ namespace Mario.Entities.Character
         }
         public void WalkLeft()
         {
-            if (currentState is LeftMovingState)
+            if (stateManager.GetStateType() == HeroStateType.MovingLeft)
             {
                 physics.WalkLeft();
                 return;
             }
-            currentState = new LeftMovingState();
+            stateManager.SetState(HeroStateType.MovingLeft, health);
         }
 
         public void WalkRight()
         {
-            if (currentState is RightMovingState)
+            if (stateManager.GetStateType() == HeroStateType.MovingRight)
             {
                 physics.WalkRight();
                 return;
             }
-            currentState = new RightMovingState();
+            stateManager.SetState(HeroStateType.MovingRight, health);
+
         }
 
         public void Jump()
@@ -121,22 +124,21 @@ namespace Mario.Entities.Character
 
             if (physics.horizontalDirection)
             {
-                currentState = new JumpRightFireState();
+                stateManager.SetState(HeroStateType.JumpingLeft, health);
             }
             else
             {
-                currentState = new JumpLeftFireState();
+                stateManager.SetState(HeroStateType.JumpingLeft, health);
             }
         }
 
         public void Crouch()
         {
-            currentState = new CrouchFireState();
+            stateManager.SetState(HeroStateType.Crouching, health);
         }
 
         void IHero.Collect(IItem item)
         {
-            currentState = new CollectState();
             if (health < 3)
             {
                 health++;
@@ -155,12 +157,15 @@ namespace Mario.Entities.Character
         void IHero.Attack()
         {
             bool facingLeft = false;
-                GameContentManager.Instance.AddEntity(new Fireball(position,facingLeft));
+            GameContentManager.Instance.AddEntity(new Fireball(position, facingLeft));
+            stateManager.SetState(HeroStateType.AttackingRight, health);
+
         }
 
         public void Die()
         {
-            currentState = new DeadState();
+            stateManager.SetState(HeroStateType.Dead, health);
+            GameContentManager.Instance.RemoveEntity(this);
         }
 
         public int ReportHealth()

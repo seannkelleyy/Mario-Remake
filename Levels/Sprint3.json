@@ -5,9 +5,9 @@
   "hero": {
     "type": "mario",
     "startingX": 5,
-    "startingY": 10,
+    "startingY": 1,
     "direction": true,
-    "starting-power": "fire"
+    "startingPower": "fire"
   },
   "enemies": [
     {
