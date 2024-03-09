@@ -22,7 +22,7 @@ namespace Mario.Physics
 
         public void Update()
         {
-            //UpdateHorizontal();
+            UpdateHorizontal();
             UpdateVertical();
         }
         public Vector2 GetVelocity()
@@ -51,21 +51,18 @@ namespace Mario.Physics
         // Keep enttity moving until they collide with something, then flip direction
         private void UpdateHorizontal()
         {
-            if (horizontalDirection)
+            if (horizontalDirection && entity.GetCollisionState(CollisionDirection.Right) == false)
             {
-                if (entity.GetCollisionState(CollisionDirection.Right) == false)
+                if (velocity.X < PhysicsVariables.enemyMaxSpeed)
                 {
-                    if (velocity.X < PhysicsVariables.enemyMaxSpeed)
-                    {
-                        velocity.X += PhysicsVariables.enemyAcceleration;
-                    }
-                    else
-                    {
-                        velocity.X = PhysicsVariables.enemyMaxSpeed;
-                    }
+                    velocity.X += PhysicsVariables.enemyAcceleration;
+                }
+                else
+                {
+                    velocity.X = PhysicsVariables.enemyMaxSpeed;
                 }
             }
-            else if (entity.GetCollisionState(CollisionDirection.Left) == false)
+            else if (!horizontalDirection && entity.GetCollisionState(CollisionDirection.Left) == false)
             {
                 if (velocity.X > -PhysicsVariables.enemyMaxSpeed)
                 {
@@ -97,7 +94,7 @@ namespace Mario.Physics
 
         private void UpdateVertical()
         {
-            
+
             //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {

@@ -2,7 +2,6 @@
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
-using System.Runtime.CompilerServices;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -32,13 +31,14 @@ namespace Mario.Physics
         {
             return velocity;
         }
-        public bool getHorizontalDirecion() {
+        public bool getHorizontalDirecion()
+        {
             return horizontalDirection;
         }
 
         public void setHorizontalDirecion(bool horizontalDirection)
         {
-            this.horizontalDirection=horizontalDirection;
+            this.horizontalDirection = horizontalDirection;
         }
 
         #region Horizontal Movement
@@ -86,15 +86,28 @@ namespace Mario.Physics
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (horizontalDirection && velocity.X > 0)
+            if (hero.GetCollisionState(CollisionDirection.Right) == false)
             {
-                velocity.X -= PhysicsVariables.friction;
+                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X += PhysicsVariables.runAcceleration;
+                }
+                else
+                {
+                    velocity.X = PhysicsVariables.maxRunSpeed;
+                }
             }
-            else if (!horizontalDirection && velocity.X < 0)
+            else if (hero.GetCollisionState(CollisionDirection.Left) == false)
             {
-                velocity.X += PhysicsVariables.friction;
+                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X -= PhysicsVariables.runAcceleration;
+                }
+                else
+                {
+                    velocity.X = -PhysicsVariables.maxRunSpeed;
+                }
             }
-
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
