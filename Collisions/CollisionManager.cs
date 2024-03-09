@@ -18,15 +18,15 @@ namespace Mario.Collisions
         {
             if (entity is IHero)
             {
-                DetectHeroCollisions(entity as IHero);
+                ManageHeroCollisions(entity as IHero);
             }
             else if (entity is IEnemy)
             {
-                DetectEnemyCollisions(entity as IEnemy);
+                ManageHeroCollisions(entity as IEnemy);
             }
         }
 
-        private void DetectHeroCollisions(IHero hero)
+        private void ManageHeroCollisions(IHero hero)
         {
             HeroCollisionHandler heroHandler = new HeroCollisionHandler(hero);
             List<IBlock> blocks = new List<IBlock>(); //. testing only
@@ -60,7 +60,7 @@ namespace Mario.Collisions
             }
         }
 
-        private void DetectEnemyCollisions(IEnemy enemy)
+        private void ManageHeroCollisions(IEnemy enemy)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
 
