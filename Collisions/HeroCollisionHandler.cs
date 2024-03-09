@@ -59,7 +59,6 @@ public class HeroCollisionHandler
 
     public void HeroBlockCollision(IBlock block)
     {
-        Logger.Instance.LogInformation("Handing block" + block.ToString());
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), block.GetRectangle());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
