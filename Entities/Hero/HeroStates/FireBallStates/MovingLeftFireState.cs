@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Character.HeroStates;
 
-public class LeftMovingFireState : HeroState
+public class MovingLeftFireState : HeroState
 {
-    public LeftMovingFireState() : base()
+    public MovingLeftFireState() : base()
     {
         sprite = spriteFactory.CreateSprite("leftRunFireMario");
     }

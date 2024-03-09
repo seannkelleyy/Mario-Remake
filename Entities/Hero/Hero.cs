@@ -1,34 +1,67 @@
+using Mario.Collisions;
 using Mario.Entities.Character.HeroStates;
+using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
-using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
+using static Mario.Global.HeroVariables;
 
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
+        private HeroStateManager stateManager; // Strategy Pattern
+        private HeroPhysics physics; // Strategy Pattern
         public HeroState currentState { get; set; }
         private Vector2 position;
-        private HeroPhysics physics;
         private int health = 1;
-        public Hero(Vector2 position)
+        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
+        {
+            { CollisionDirection.Top, false },
+            { CollisionDirection.Bottom, false },
+            { CollisionDirection.Left, false },
+            { CollisionDirection.Right, false },
+            { CollisionDirection.None, true }
+        };
+        public Hero(string startingPower, Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
-            currentState = new StandingRightState();
+            stateManager = new HeroStateManager(this);
+
+            switch (startingPower)
+            {
+                case "small":
+                    health = 1;
+                    break;
+                case "big":
+                    health = 2;
+                    break;
+                case "fire":
+                    health = 3;
+                    break;
+            }
+            stateManager.SetState(HeroStateType.StandingRight, health);
+
         }
 
         public void Update(GameTime gameTime)
         {
-            physics.Update();
+            // Reset all collision states to false at the start of each update
+            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+            {
+                SetCollisionState((CollisionDirection)direction, false);
+            }
             currentState.Update(gameTime);
+            CollisionManager.Instance.Run(this);
+            physics.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -43,27 +76,49 @@ namespace Mario.Entities.Character
 
         public Vector2 GetPosition()
         {
-            return this.position;
+            return position;
         }
 
+        public bool GetCollisionState(CollisionDirection direction)
+        {
+            return collisions[direction];
+        }
+
+        public void SetCollisionState(CollisionDirection direction, bool state)
+        {
+            collisions[direction] = state;
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
+        }
         public void WalkLeft()
         {
-            if (currentState is LeftMovingState)
+            if (stateManager.GetStateType() == HeroStateType.MovingLeft)
             {
                 physics.WalkLeft();
                 return;
             }
-            currentState = new LeftMovingState();
+            physics.setHorizontalDirecion(false);
+            stateManager.SetState(HeroStateType.MovingLeft, health);
         }
 
         public void WalkRight()
         {
-            if (currentState is RightMovingState)
+            if (stateManager.GetStateType() == HeroStateType.MovingRight)
             {
                 physics.WalkRight();
                 return;
             }
-            currentState = new RightMovingState();
+            physics.setHorizontalDirecion(true);
+            stateManager.SetState(HeroStateType.MovingRight, health);
+
         }
 
         public void Jump()
@@ -72,22 +127,21 @@ namespace Mario.Entities.Character
 
             if (physics.horizontalDirection)
             {
-                currentState = new JumpStateRight();
+                stateManager.SetState(HeroStateType.JumpingRight, health);
             }
             else
             {
-                currentState = new JumpStateLeft();
+                stateManager.SetState(HeroStateType.JumpingLeft, health);
             }
         }
 
         public void Crouch()
         {
-            currentState = new CrouchState();
+            stateManager.SetState(HeroStateType.Crouching, health);
         }
 
         void IHero.Collect(IItem item)
         {
-            currentState = new CollectState();
             if (health < 3)
             {
                 health++;
@@ -101,37 +155,25 @@ namespace Mario.Entities.Character
             {
                 Die();
             }
+            stateManager.SetState(stateManager.GetStateType(), health);
         }
 
         void IHero.Attack()
         {
-            bool facingLeft = false;
-                GameContentManager.Instance.AddEntity(new Fireball(position,facingLeft));
+            GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
+            stateManager.SetState(HeroStateType.AttackingRight, health);
+
         }
 
         public void Die()
         {
-            currentState = new DeadState();
+            stateManager.SetState(HeroStateType.Dead, health);
+            GameContentManager.Instance.RemoveEntity(this);
         }
 
-
-    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
+        public int ReportHealth()
         {
-            // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
-            if (collideable is IEnemy)
-            {
-                if (collisionDirection[CollisionDirection.Bottom])
-                {
-                    ((IEnemy)collideable).Stomp();
-                }
-                else
-                {
-                }
-            }
-        }
-
-        public int ReportHealth () {
-            return this.health;
+            return health;
         }
     }
 }

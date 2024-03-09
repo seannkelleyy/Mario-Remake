@@ -13,6 +13,7 @@ namespace Mario.Entities.Items
 
         public override void MakeVisable()
         {
+            position.Y -= 16;
             IsVisable = true;
         }
     }

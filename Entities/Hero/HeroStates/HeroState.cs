@@ -13,7 +13,6 @@ namespace Mario.Entities.Character.HeroStates
         public HeroState()
         {
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite("leftRunMario");
         }
 
         public virtual void Update(GameTime gameTime)
@@ -24,6 +23,11 @@ namespace Mario.Entities.Character.HeroStates
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             sprite.Draw(spriteBatch, position);
+        }
+
+        public Vector2 GetVector()
+        {
+            return sprite.GetVector();
         }
     }
 }

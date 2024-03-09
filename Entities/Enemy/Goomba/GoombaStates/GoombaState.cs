@@ -2,6 +2,7 @@
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mario.Entities.Enemy.Goomba;
 
 namespace Mario.Entities.Enemy.Goomba.GoombaStates
 {
@@ -9,7 +10,6 @@ namespace Mario.Entities.Enemy.Goomba.GoombaStates
     {
         protected SpriteFactory spriteFactory;
         public ISprite sprite;
-
         public GoombaState()
         {
             spriteFactory = SpriteFactory.Instance;
@@ -24,6 +24,11 @@ namespace Mario.Entities.Enemy.Goomba.GoombaStates
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             sprite.Draw(spriteBatch, position);
+        }
+
+        public Vector2 GetVector()
+        {
+            return sprite.GetVector();
         }
     }
 }

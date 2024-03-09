@@ -3,15 +3,14 @@ using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
-    public class EmptyBrickBlock : AbstractBlock
+    public class BrickBlock : AbstractBlock
     {
-        public bool isCollidable { get; } = true;
-        public bool isBreakable { get; } = true;
-
-        public EmptyBrickBlock(Vector2 position)
+        public BrickBlock(Vector2 position, bool breakable, bool collidable, string item)
         {
             this.position = position;
             currentState = new BrickBlockNormalState();
+            isCollidable = collidable;
+            isBreakable = breakable;
         }
 
         // Block will be broken

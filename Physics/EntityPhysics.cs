@@ -2,7 +2,6 @@
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -12,19 +11,6 @@ namespace Mario.Physics
         public Vector2 velocity;
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
-
-        // This is a dictionary that keeps track of the collision states of the entity, This could 
-        // based upon exactly how we want to handle collisions, but for now, we are just going to
-        // keep track of the collision states of the entity
-        public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
-        {
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
-
 
         public ICollideable entity;
 
@@ -37,7 +23,11 @@ namespace Mario.Physics
         public void Update()
         {
             UpdateHorizontal();
-            UpdateVertical(); //This works, but since we hav eno collision they just fly off the screen
+            UpdateVertical();
+        }
+        public Vector2 GetVelocity()
+        {
+            return velocity;
         }
 
         #region Horizontal Movement
@@ -61,8 +51,7 @@ namespace Mario.Physics
         // Keep enttity moving until they collide with something, then flip direction
         private void UpdateHorizontal()
         {
-            // If the player is not pressing any keys, apply friction
-            if (horizontalDirection)
+            if (horizontalDirection && entity.GetCollisionState(CollisionDirection.Right) == false)
             {
                 if (velocity.X < PhysicsVariables.enemyMaxSpeed)
                 {
@@ -73,7 +62,7 @@ namespace Mario.Physics
                     velocity.X = PhysicsVariables.enemyMaxSpeed;
                 }
             }
-            else if (!horizontalDirection)
+            else if (!horizontalDirection && entity.GetCollisionState(CollisionDirection.Left) == false)
             {
                 if (velocity.X > -PhysicsVariables.enemyMaxSpeed)
                 {
@@ -103,15 +92,15 @@ namespace Mario.Physics
             return velocity.Y;
         }
 
-        // Much simpler than Hero's movement because they can jump, they just fall if they
-        // walk off a ledge
         private void UpdateVertical()
         {
-            if (collisionStates[CollisionDirection.None] == true)
+
+            //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
+            if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
                 velocity.Y += ApplyGravity();
             }
-            else if (collisionStates[CollisionDirection.Bottom] == true)
+            else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
             {
                 velocity.Y = 0;
             }

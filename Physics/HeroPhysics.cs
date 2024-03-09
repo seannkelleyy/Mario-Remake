@@ -2,7 +2,6 @@
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
@@ -13,19 +12,6 @@ namespace Mario.Physics
         public bool horizontalDirection = true; // True is right, false is left
         public bool verticalDirection = true; // True is down, false is up
         private float jumpCounter = 0;
-
-        // This is a dictionary that keeps track of the collision states of the entity, This could 
-        // based upon exactly how we want to handle collisions, but for now, we are just going to
-        // keep track of the collision states of the entity
-        public Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
-        {
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
-
 
         public IHero hero;
 
@@ -39,13 +25,20 @@ namespace Mario.Physics
         {
             UpdateHorizontal();
             UpdateVertical();
-            if (hero.GetPosition().Y >= 174) // Would change to collision on bottomddddd
-            {
-                // This will change after full collision handling is implemented. 
-                // This is mainly here so we can test the jump mechanic
-                collisionStates[CollisionDirection.Bottom] = true;
-                collisionStates[CollisionDirection.None] = false;
-            }
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return velocity;
+        }
+        public bool getHorizontalDirecion()
+        {
+            return horizontalDirection;
+        }
+
+        public void setHorizontalDirecion(bool horizontalDirection)
+        {
+            this.horizontalDirection = horizontalDirection;
         }
 
         #region Horizontal Movement
@@ -69,33 +62,52 @@ namespace Mario.Physics
         public void WalkRight()
         {
             horizontalDirection = true;
-            if (velocity.X < PhysicsVariables.maxRunSpeed)
+            if (hero.GetCollisionState(CollisionDirection.Right) == false)
             {
-                velocity.X += PhysicsVariables.runAcceleration;
+                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X += PhysicsVariables.runAcceleration;
+                }
             }
         }
 
         public void WalkLeft()
         {
             horizontalDirection = false;
-            if (velocity.X > -PhysicsVariables.maxRunSpeed)
+            if (hero.GetCollisionState(CollisionDirection.Left) == false)
             {
-                velocity.X -= PhysicsVariables.runAcceleration;
+                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X -= PhysicsVariables.runAcceleration;
+                }
             }
         }
 
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (horizontalDirection && velocity.X > 0)
+            if (hero.GetCollisionState(CollisionDirection.Right) == false)
             {
-                velocity.X -= PhysicsVariables.friction;
+                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X += PhysicsVariables.runAcceleration;
+                }
+                else
+                {
+                    velocity.X = PhysicsVariables.maxRunSpeed;
+                }
             }
-            else if (!horizontalDirection && velocity.X < 0)
+            else if (hero.GetCollisionState(CollisionDirection.Left) == false)
             {
-                velocity.X += PhysicsVariables.friction;
+                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                {
+                    velocity.X -= PhysicsVariables.runAcceleration;
+                }
+                else
+                {
+                    velocity.X = -PhysicsVariables.maxRunSpeed;
+                }
             }
-
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
@@ -120,7 +132,10 @@ namespace Mario.Physics
         }
         public void Jump()
         {
-            if (verticalDirection && collisionStates[CollisionDirection.Bottom])
+            Logger.Instance.LogInformation("Jumping");
+            Logger.Instance.LogInformation("Bottom: " + hero.GetCollisionState(CollisionDirection.Bottom));
+            // Cant figure out why this is false when you are colliding with the ground. Cntrl + F "Jump" to see the log
+            if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 verticalDirection = false;
                 velocity.Y = -PhysicsVariables.jumpForce;
@@ -135,9 +150,13 @@ namespace Mario.Physics
                 // If Mario is still within the jump limit, keep moving up
                 if (jumpCounter < PhysicsVariables.jumpLimit)
                 {
-                    collisionStates[CollisionDirection.Bottom] = false;
-                    velocity.Y = -PhysicsVariables.jumpForce * (1 - (float)jumpCounter / PhysicsVariables.jumpLimit);
+                    // maybe set bottom collision to false here
+                    velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
+                }
+                else if(hero.GetCollisionState(CollisionDirection.Top))
+                {
+                    velocity.Y = 0;
                 }
                 else
                 { // If Mario has reached the jump limit, start moving down
@@ -147,7 +166,7 @@ namespace Mario.Physics
             else
             {
                 // If Mario is not jumping, apply gravity
-                if (collisionStates[CollisionDirection.Bottom] == false)
+                if (hero.GetCollisionState(CollisionDirection.Bottom) == false)
                 {
                     velocity.Y += ApplyGravity();
                 }
@@ -158,7 +177,7 @@ namespace Mario.Physics
             }
 
             // If Mario has landed, reset the jump counter
-            if (collisionStates[CollisionDirection.Bottom] == true)
+            if (hero.GetCollisionState(CollisionDirection.Bottom) == true)
             {
                 jumpCounter = 0;
             }

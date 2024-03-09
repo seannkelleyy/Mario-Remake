@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Character.HeroStates;
 
-public class RightMovingBigState : HeroState
+public class MovingRightBigState : HeroState
 {
-    public RightMovingBigState() : base()
+    public MovingRightBigState() : base()
     {
         sprite = spriteFactory.CreateSprite("rightRunBigMario");
     }

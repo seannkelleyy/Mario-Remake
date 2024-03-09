@@ -7,8 +7,8 @@
         public int startingY { get; set; }
         public int endingX { get; set; }
         public int endingY { get; set; }
-        public bool collideable { get; set; }
+        public bool collidable { get; set; }
         public bool breakable { get; set; }
-        // public IItem item { get; set; }
+        public string item { get; set; }
     }
 }
