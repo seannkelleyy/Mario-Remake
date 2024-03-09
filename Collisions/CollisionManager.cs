@@ -29,13 +29,11 @@ namespace Mario.Collisions
         private void ManageHeroCollisions(IHero hero)
         {
             HeroCollisionHandler heroHandler = new HeroCollisionHandler(hero);
-            List<IBlock> blocks = new List<IBlock>(); //. testing only
 
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
             {
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    Logger.Instance.LogInformation("Hero and Block collision detected");
                     heroHandler.HeroBlockCollision(block);
                 }
             }
@@ -43,7 +41,7 @@ namespace Mario.Collisions
             {
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
-                    heroHandler.HeroEnemyCollision(enemy as IEnemy);
+                    heroHandler.HeroEnemyCollision(enemy);
                 }
             }
             foreach (IItem item in GameContentManager.Instance.GetItems())
@@ -53,18 +51,12 @@ namespace Mario.Collisions
                     heroHandler.HeroItemCollision(item);
                 }
             }
-            Logger.Instance.LogInformation($"Blocks colldied with:");
-            foreach (IBlock block in blocks)
-            {
-                Logger.Instance.LogInformation(block.ToString());
-            }
         }
 
         private void ManageHeroCollisions(IEnemy enemy)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
 
-            List<IBlock> blocks = new List<IBlock>(); // testing only
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(enemy.GetPosition()))
             {
                 if (enemy.GetRectangle().Intersects(block.GetRectangle()))

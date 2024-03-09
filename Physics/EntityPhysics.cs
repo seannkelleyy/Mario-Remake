@@ -73,6 +73,10 @@ namespace Mario.Physics
                     velocity.X = -PhysicsVariables.enemyMaxSpeed;
                 }
             }
+            if (entity.GetCollisionState(CollisionDirection.Left) || entity.GetCollisionState(CollisionDirection.Right))
+            {
+                horizontalDirection = !horizontalDirection;
+            }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
