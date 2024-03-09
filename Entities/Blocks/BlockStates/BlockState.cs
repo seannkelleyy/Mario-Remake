@@ -26,9 +26,9 @@ namespace Mario.Entities.Blocks.BlockStates
             sprite.Draw(spriteBatch, position);
         }
 
-        public Rectangle GetRectangle()
+        public Vector2 GetVector()
         {
-            return sprite.GetRectangle();
+            return sprite.GetVector();
         }
     }
 }

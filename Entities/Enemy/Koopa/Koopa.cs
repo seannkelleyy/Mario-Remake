@@ -92,7 +92,7 @@ public class Koopa : IEnemy
 
     public Rectangle GetRectangle()
     {
-        return new Rectangle((int)position.X, (int)position.Y, 16, 16);
+        return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
     }
 }
 

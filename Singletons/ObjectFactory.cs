@@ -33,32 +33,29 @@ namespace Mario.Singletons
                 case "koopa":
                     // Assuming Koopa implements IEnemy
                     return new Koopa(position);
-
-                case "floorBlock": // Floor block is an IEntityBase not IBlock
-                    return new FloorBlock(position);
-
                 // Add cases for other entities as needed
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
         }
 
-        // Returns a new empty brick block
-        public IBlock CreateItemBlock(Vector2 position)
+        public IBlock CreateBlock(string type, Vector2 position, bool breakeable, bool collideable, string item)
         {
-            return new EmptyBrickBlock(position);
-        }
-
-        // Returns a new item block
-        public IBlock CreateItemBlock(Vector2 position, string itemName, string itemBlockType)
-        {
-            return new ItemBlock(position, itemName, itemBlockType);
-        }
-
-        // Returns a new coin block
-        public IBlock CreateCoinBlock(Vector2 position, int coinAmount)
-        {
-            return new CoinBlock(position, coinAmount);
+            switch (type)
+            {
+                case "floor":
+                    return new FloorBlock(position, breakeable, collideable, item);
+                case "brick":
+                    return new BrickBlock(position, breakeable, collideable);
+                case "question":
+                    return new QuestionBlock(position, breakeable, collideable, item);
+                case "pipe":
+                    return new Pipe(position, breakeable, collideable);
+                case "flag":
+                    return new Flag(position, breakeable, collideable);
+                default:
+                    throw new KeyNotFoundException($"Block type {type} not recognized.");
+            }
         }
 
         // Returns a new coin

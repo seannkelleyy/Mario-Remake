@@ -50,7 +50,7 @@ namespace Mario.Physics
             // If the player is not pressing any keys, apply friction
             if (horizontalDirection)
             {
-                if (entity.GetCollisionState(CollisionDirection.Right) == true)
+                if (entity.GetCollisionState(CollisionDirection.Right) == false)
                 {
                     if (velocity.X < PhysicsVariables.enemyMaxSpeed)
                     {
@@ -96,12 +96,15 @@ namespace Mario.Physics
         // walk off a ledge
         private void UpdateVertical()
         {
+            Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
             {
+                Logger.Instance.LogInformation("Applying gravity");
                 velocity.Y += ApplyGravity();
             }
             else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
             {
+                Logger.Instance.LogInformation("Resetting Y velocity");
                 velocity.Y = 0;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));

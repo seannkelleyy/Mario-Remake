@@ -10,7 +10,7 @@ public class CollisionDetector
         {
             if (intersection.Width >= intersection.Height)
             {
-                if (entity1.X > entity2.X)
+                if (entity1.X >= entity2.X)
                 {
                     return CollisionDirection.Left;
                 }
@@ -18,7 +18,7 @@ public class CollisionDetector
             }
             else
             {
-                if (entity1.Y > entity2.Y)
+                if (entity1.Y >= entity2.Y)
                 {
                     return CollisionDirection.Bottom;
                 }

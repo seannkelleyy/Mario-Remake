@@ -60,7 +60,7 @@ namespace Mario.Entities.Items
 
         public Rectangle GetRectangle()
         {
-            return currentState.GetRectangle();
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
 
         public void SetCollisionState(CollisionDirection direction, bool state)

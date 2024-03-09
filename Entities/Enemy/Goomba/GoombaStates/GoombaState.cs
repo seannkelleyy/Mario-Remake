@@ -26,9 +26,9 @@ namespace Mario.Entities.Enemy.Goomba.GoombaStates
             sprite.Draw(spriteBatch, position);
         }
 
-        public Rectangle GetRectangle()
+        public Vector2 GetVector()
         {
-            return sprite.GetRectangle();
+            return sprite.GetVector();
         }
     }
 }

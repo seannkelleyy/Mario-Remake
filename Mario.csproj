@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
+    <Folder Include="Logging\logs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />

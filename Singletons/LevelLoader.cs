@@ -42,7 +42,7 @@ namespace Mario.Singletons
                 {
                     for (int y = blockSection.startingY; y <= blockSection.endingY; y++)
                     {
-                        IBlock block = (IBlock)GameObjectFactory.Instance.CreateEntity(blockSection.type, new Vector2(x * 16, y * 16));
+                        IBlock block = (IBlock)GameObjectFactory.Instance.CreateBlock(blockSection.type, new Vector2(x * 16, y * 16), blockSection.breakable, blockSection.collideable, blockSection.item);
                         GameContentManager.Instance.AddEntity(block);
                     }
                 }
@@ -51,7 +51,7 @@ namespace Mario.Singletons
             // Create the individual blocks
             foreach (LevelBlock block in level.blocks)
             {
-                IBlock blockObject = (IBlock)GameObjectFactory.Instance.CreateEntity(block.type, new Vector2(block.x * 16, block.y * 16));
+                IBlock blockObject = (IBlock)GameObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.y * 16, block.y * 16), block.breakable, block.collideable, block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
             }
         }

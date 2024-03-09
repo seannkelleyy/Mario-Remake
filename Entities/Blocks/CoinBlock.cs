@@ -10,7 +10,7 @@ namespace Mario.Entities.Blocks
         private int coinCount;
         private IItem[] coins;
 
-        public CoinBlock(Vector2 position, int coinAmount)
+        public CoinBlock(Vector2 position, int coinAmount, )
         {
             this.position = position;
             currentState = new GoldenBlockState();

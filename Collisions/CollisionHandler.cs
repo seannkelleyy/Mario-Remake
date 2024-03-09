@@ -5,30 +5,29 @@ using System.Collections.Generic;
 
 public class CollisionHandler
 {
-    public CollisionHandler(IHero mario, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
-    {
-        MarioCollision(mario, enemies, items, blocks);
-        EnemyCollision(enemies, blocks);
-    }
+    private static CollisionHandler instance = new CollisionHandler();
+    public static CollisionHandler Instance => instance;
 
-    public void MarioCollision(IHero mario, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
+    private CollisionHandler() { }
+
+    public void HandleHeroCollisions(IHero mario, List<IEnemy> enemies, List<IItem> items, List<IBlock> blocks)
     {
         HeroCollisionHandler heroHandler = new HeroCollisionHandler(mario);
         foreach (IEntityBase enemy in enemies)
         {
-            heroHandler.MarioEnemyCollision(enemy as IEnemy);
+            heroHandler.HeroEnemyCollision(enemy as IEnemy);
         }
         foreach (IItem item in items)
         {
-            heroHandler.MarioItemCollision(item);
+            heroHandler.HeroItemCollision(item);
         }
         foreach (IBlock block in blocks)
         {
-            heroHandler.MarioBlockCollision(block);
+            heroHandler.HeroBlockCollision(block);
         }
     }
 
-    public void EnemyCollision(List<IEnemy> enemies, List<IBlock> blocks)
+    public void HandleEnemyCollisions(List<IEnemy> enemies, List<IBlock> blocks)
     {
         foreach (IEnemy enemy in enemies)
         {

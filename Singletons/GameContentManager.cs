@@ -36,9 +36,9 @@ namespace Mario.Singletons
             return allEntities;
         }
 
-        public List<ICollideable> GetEnemies()
+        public List<IEnemy> GetEnemies()
         {
-            List<ICollideable> allCollideables = new List<ICollideable>();
+            List<IEnemy> allCollideables = new List<IEnemy>();
             foreach (IEnemy enemy in entities[typeof(IEnemy)])
             {
                 allCollideables.Add(enemy);
@@ -47,9 +47,9 @@ namespace Mario.Singletons
         }
 
 
-        public List<ICollideable> GetItems()
+        public List<IItem> GetItems()
         {
-            List<ICollideable> allCollideables = new List<ICollideable>();
+            List<IItem> allCollideables = new List<IItem>();
             foreach (IItem item in entities[typeof(IItem)])
             {
                 allCollideables.Add(item);
@@ -64,9 +64,11 @@ namespace Mario.Singletons
             List<IBlock> blocks = new List<IBlock>();
             foreach (IBlock block in entities[typeof(IBlock)])
             {
-                if (block.GetPosition().X <= (position.X * 16) + 32 && block.GetPosition().X >= (position.X * 16) + 32 && block.isCollidable)
+                if (block.GetPosition().X <= position.X + 16 && block.GetPosition().X >= position.X - 16 && block.isCollidable)
                 {
                     blocks.Add(block);
+                    Logger.Instance.LogInformation("Block Added: " + block.GetRectangle());
+                    Logger.Instance.LogInformation("Mario Position: " + position);
                 }
             }
             return blocks;
@@ -85,7 +87,7 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Add(entity);
-            Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
+            //Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)
@@ -96,6 +98,7 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Remove(entity);
+            Logger.Instance.LogInformation(entity.ToString() + " removed from GameContentManager");
         }
 
         // Helper method to get the type of the entitys

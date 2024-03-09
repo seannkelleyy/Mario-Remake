@@ -90,7 +90,7 @@ public class Goomba : IEnemy
 
     public Rectangle GetRectangle()
     {
-        return currentState.GetRectangle();
+        return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
     }
 }
 

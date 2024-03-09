@@ -39,7 +39,7 @@ public class HeroCollisionHandler
         }));
     }
 
-    public void MarioEnemyCollision(IEnemy enemy)
+    public void HeroEnemyCollision(IEnemy enemy)
     {
         this.enemy = enemy;
 
@@ -50,7 +50,7 @@ public class HeroCollisionHandler
         }
     }
 
-    public void MarioItemCollision(IItem item)
+    public void HeroItemCollision(IItem item)
     {
         this.item = item;
 
@@ -62,7 +62,7 @@ public class HeroCollisionHandler
         }
     }
 
-    public void MarioBlockCollision(IBlock block)
+    public void HeroBlockCollision(IBlock block)
     {
         this.block = block;
 

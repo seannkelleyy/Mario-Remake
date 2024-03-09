@@ -5,30 +5,17 @@ using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
-    public class ItemBlock : AbstractBlock
+    public class GoldenBlock : AbstractBlock
     {
         private IItem item;
 
-        public ItemBlock(Vector2 position, string itemName, string itemBlockType)
+        public GoldenBlock(Vector2 position, bool breakeable, bool collideable, string itemName)
         {
             this.position = position;
             isCollidable = true;
             isBreakable = false;
 
-            // Set the correct sprite of this item block
-            if (itemBlockType.CompareTo("brickBlock") == 0)
-            {
-                currentState = new BrickBlockNormalState();
-            }
-            else if (itemBlockType.CompareTo("goldenBlock") == 0)
-            {
-                currentState = new GoldenBlockState();
-            }
-            else
-            {
-                // Error passing in item block type
-                Logger.Instance.LogError($"ItemBlock type {itemBlockType} not recognized.");
-            }
+            currentState = new GoldenBlockState();
 
             // Give the block an item to hold
             GameObjectFactory gameObjectFactory = GameObjectFactory.Instance;

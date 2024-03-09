@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
-    public class EmptyBrickBlock : AbstractBlock
+    public class BrickBlock : AbstractBlock
     {
-        public EmptyBrickBlock(Vector2 position)
+        public BrickBlock(Vector2 position)
         {
             this.position = position;
             currentState = new BrickBlockNormalState();

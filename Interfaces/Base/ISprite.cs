@@ -7,6 +7,6 @@ namespace Mario.Interfaces.Base
     {
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch, Vector2 position);
-        public Rectangle GetRectangle();
+        public Vector2 GetVector();
     }
 }
