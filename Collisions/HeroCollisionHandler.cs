@@ -9,9 +9,6 @@ public class HeroCollisionHandler
 {
     public IHero hero { get; set; }
     public IEnemy enemy { get; set; }
-    public IItem item { get; set; }
-    public IBlock block { get; set; }
-
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
 
@@ -53,8 +50,6 @@ public class HeroCollisionHandler
 
     public void HeroItemCollision(IItem item)
     {
-        this.item = item;
-
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), item.GetRectangle());
         if (direction != CollisionDirection.None)
         {
@@ -66,8 +61,6 @@ public class HeroCollisionHandler
     public void HeroBlockCollision(IBlock block)
     {
         Logger.Instance.LogInformation("Handing block" + block.ToString());
-        this.block = block;
-
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetVelocity(), hero.GetRectangle(), block.GetRectangle());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {

@@ -1,7 +1,7 @@
-﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
+﻿using Mario.Collisions;
+using Mario.Entities.Enemy.Koopa.KoopaStates;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
-using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -51,14 +51,11 @@ public class Koopa : IEnemy
     public void Stomp()
     {
         currentState = new StompedKoopaState();
-        GameContentManager.Instance.RemoveEntity(this);
-
     }
 
     public void Flip()
     {
         currentState = new FlippedKoopaState();
-        GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void ChangeDirection()

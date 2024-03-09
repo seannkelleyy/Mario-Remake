@@ -1,9 +1,10 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using System.Collections.Generic;
 
-namespace Mario.Singletons
+namespace Mario.Collisions
 {
     public class CollisionManager
     {
@@ -27,30 +28,29 @@ namespace Mario.Singletons
 
         private void DetectHeroCollisions(IHero hero)
         {
-            List<IEnemy> entities = new List<IEnemy>();
-            List<IItem> items = new List<IItem>();
-            List<IBlock> blocks = new List<IBlock>();
+            HeroCollisionHandler heroHandler = new HeroCollisionHandler(hero);
+            List<IBlock> blocks = new List<IBlock>(); //. testing only
 
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
             {
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     Logger.Instance.LogInformation("Hero and Block collision detected");
-                    blocks.Add(block);
+                    heroHandler.HeroBlockCollision(block);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
-                    entities.Add(enemy);
+                    heroHandler.HeroEnemyCollision(enemy as IEnemy);
                 }
             }
             foreach (IItem item in GameContentManager.Instance.GetItems())
             {
                 if (hero.GetRectangle().Intersects(item.GetRectangle()))
                 {
-                    items.Add(item);
+                    heroHandler.HeroItemCollision(item);
                 }
             }
             Logger.Instance.LogInformation($"Blocks colldied with:");
@@ -58,17 +58,19 @@ namespace Mario.Singletons
             {
                 Logger.Instance.LogInformation(block.ToString());
             }
-            CollisionHandler.Instance.HandleHeroCollisions(hero, entities, items, blocks);
         }
 
         private void DetectEnemyCollisions(IEnemy enemy)
         {
-            List<IBlock> blocks = new List<IBlock>();
+            EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
+
+            List<IBlock> blocks = new List<IBlock>(); // testing only
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(enemy.GetPosition()))
             {
                 if (enemy.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    blocks.Add(block);
+                    enemyHandler.EnemyBlockCollision(block);
+
                 }
             }
 
@@ -77,10 +79,9 @@ namespace Mario.Singletons
             {
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {
-                    enemies.Add(collidingEnemy);
+                    enemyHandler.EnemyEnemyCollision(collidingEnemy);
                 }
             }
-            CollisionHandler.Instance.HandleEnemyCollisions(enemy, enemies, blocks);
         }
     }
 }

@@ -41,7 +41,6 @@ public class EnemyCollisionHandler
     public void EnemyEnemyCollision(IEnemy enemy)
     {
         collidingEnemy = enemy;
-
         CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetVelocity(), mainEnemy.GetRectangle(), enemy.GetRectangle());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {

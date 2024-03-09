@@ -1,4 +1,5 @@
-﻿using Mario.Entities.Enemy.Goomba.GoombaStates;
+﻿using Mario.Collisions;
+using Mario.Entities.Enemy.Goomba.GoombaStates;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
