@@ -7,6 +7,11 @@ public class CollisionDetector
     {
         Rectangle intersection = Rectangle.Intersect(entity1, entity2);
 
+        if (intersection.Height < 3 || intersection.Width < 3) {
+            return CollisionDirection.None;
+        }
+
+
         if (!intersection.IsEmpty)
         {
             if (intersection.Height >= intersection.Width)

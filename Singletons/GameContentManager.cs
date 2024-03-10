@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mario.Singletons
 {
@@ -63,16 +64,44 @@ namespace Mario.Singletons
         // Gets all blocks within a certain position of mario that are collideable
         public List<IBlock> GetBlocksInProximity(Vector2 position)
         {
+
             List<IBlock> blocks = new List<IBlock>();
             foreach (IBlock block in entities[typeof(IBlock)])
             {
-                if (block.GetPosition().X <= position.X + 16 && block.GetPosition().X >= position.X - 16 && block.isCollidable)
+                if (block.GetPosition().X <= position.X + 48 && block.GetPosition().X >= position.X - 48 && block.isCollidable)
                 {
                     blocks.Add(block);
                 }
             }
-            return blocks;
+            
+            return CombineBlocks(blocks);
         }
+
+        public List<IBlock> CombineBlocks(List<IBlock> blocks)
+        {
+            blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
+
+            List<IBlock> combinedBlocks = new List<IBlock>();
+
+            for (int i = 0; i < blocks.Count;)
+            {
+                IBlock currentBlock = blocks[i];
+
+                List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
+
+                int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
+                int combinedHeight = sameLevelBlocks[0].GetRectangle().Height; // Assuming all blocks have the same height
+
+                IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
+
+                combinedBlocks.Add(combinedBlock);
+
+                i += sameLevelBlocks.Count;
+            }
+
+            return combinedBlocks;
+        }
+
 
         public IHero GetHero()
         {

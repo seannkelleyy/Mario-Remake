@@ -22,7 +22,7 @@ namespace Mario.Collisions
             }
             else if (entity is IEnemy)
             {
-                ManageHeroCollisions(entity as IEnemy);
+                ManageEntityCollisions(entity as IEnemy);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Mario.Collisions
             }
         }
 
-        private void ManageHeroCollisions(IEnemy enemy)
+        private void ManageEntityCollisions(IEnemy enemy)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
 
@@ -66,7 +66,6 @@ namespace Mario.Collisions
                 }
             }
 
-            List<IEnemy> enemies = new List<IEnemy>();
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))

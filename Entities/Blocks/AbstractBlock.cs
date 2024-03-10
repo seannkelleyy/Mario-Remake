@@ -60,7 +60,7 @@ namespace Mario.Entities.Blocks
             collisions[direction] = state;
         }
 
-        public Rectangle GetRectangle()
+        public virtual Rectangle GetRectangle()
         {
             return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
