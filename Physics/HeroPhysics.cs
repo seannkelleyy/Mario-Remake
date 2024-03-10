@@ -161,7 +161,7 @@ namespace Mario.Physics
             }
 
             // If Mario has landed, reset the jump counter
-            if (hero.GetCollisionState(CollisionDirection.Bottom))
+            if (hero.GetCollisionState(CollisionDirection.Bottom) )
             {
                 jumpCounter = 0;
             }

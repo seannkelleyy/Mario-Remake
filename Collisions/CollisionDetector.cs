@@ -3,15 +3,24 @@ using static Mario.Global.CollisionVariables;
 
 public class CollisionDetector
 {
-    public static CollisionDirection DetectCollision(Rectangle entity1, Rectangle entity2)
+    public static CollisionDirection DetectCollision(Rectangle entity1, Rectangle entity2, Vector2 velocity)
     {
-        Rectangle intersection = Rectangle.Intersect(entity1, entity2);
+        // Predict the next position of the entity
+        Rectangle predictedEntity1 = new Rectangle(
+            entity1.X + (int)velocity.X,
+            entity1.Y + (int)velocity.Y,
+            entity1.Width,
+            entity1.Height
+        );
+
+        // Check for collisions at the predicted position
+        Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
         if (!intersection.IsEmpty)
         {
             if (intersection.Height >= intersection.Width)
             {
-                if (entity2.Left <= entity1.Left)
+                if (entity2.Left <= predictedEntity1.Left)
                 {
                     return CollisionDirection.Left;
                 }
@@ -22,7 +31,7 @@ public class CollisionDetector
             }
             else
             {
-                if (entity2.Bottom >= entity1.Bottom)
+                if (entity2.Bottom >= predictedEntity1.Bottom)
                 {
                     return CollisionDirection.Bottom;
                 }
@@ -34,4 +43,5 @@ public class CollisionDetector
         }
         return CollisionDirection.None;
     }
+
 }

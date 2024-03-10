@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 using static Mario.Global.HeroVariables;
 
+
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
@@ -167,6 +168,7 @@ namespace Mario.Entities.Character
 
         public void Die()
         {
+            health = 0;
             stateManager.SetState(HeroStateType.Dead, health);
             GameContentManager.Instance.RemoveEntity(this);
         }

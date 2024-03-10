@@ -41,7 +41,7 @@ public class EnemyCollisionHandler
     public void EnemyEnemyCollision(IEnemy enemy)
     {
         collidingEnemy = enemy;
-        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), enemy.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), enemy.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -50,11 +50,9 @@ public class EnemyCollisionHandler
 
     public void EnemyBlockCollision(IBlock block)
     {
-        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), block.GetRectangle());
-        Logger.Instance.LogInformation(block.GetRectangle().ToString());
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), block.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
-            Logger.Instance.LogInformation($"{mainEnemy.GetType()} collided with block: {block.GetPosition()} direction: {direction}");
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

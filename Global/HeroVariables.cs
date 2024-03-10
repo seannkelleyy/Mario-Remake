@@ -1,4 +1,6 @@
-﻿namespace Mario.Global
+﻿using Microsoft.Xna.Framework;
+
+namespace Mario.Global
 {
     public class HeroVariables
     {
@@ -15,5 +17,6 @@
             Crouching,
             Dead
         }
+
     }
 }
