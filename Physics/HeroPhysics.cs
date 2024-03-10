@@ -62,7 +62,7 @@ namespace Mario.Physics
         public void WalkRight()
         {
             horizontalDirection = true;
-            if (hero.GetCollisionState(CollisionDirection.Right) == false)
+            if (!hero.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsVariables.maxRunSpeed)
                 {
@@ -74,7 +74,7 @@ namespace Mario.Physics
         public void WalkLeft()
         {
             horizontalDirection = false;
-            if (hero.GetCollisionState(CollisionDirection.Left) == false)
+            if (!hero.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsVariables.maxRunSpeed)
                 {
@@ -119,9 +119,6 @@ namespace Mario.Physics
         }
         public void Jump()
         {
-            Logger.Instance.LogInformation("Jumping");
-            Logger.Instance.LogInformation("Bottom: " + hero.GetCollisionState(CollisionDirection.Bottom));
-            // Cant figure out why this is false when you are colliding with the ground. Cntrl + F "Jump" to see the log
             if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 verticalDirection = false;
@@ -153,7 +150,7 @@ namespace Mario.Physics
             else
             {
                 // If Mario is not jumping, apply gravity
-                if (hero.GetCollisionState(CollisionDirection.Bottom) == false)
+                if (!hero.GetCollisionState(CollisionDirection.Bottom))
                 {
                     velocity.Y += ApplyGravity();
                 }
@@ -164,7 +161,7 @@ namespace Mario.Physics
             }
 
             // If Mario has landed, reset the jump counter
-            if (hero.GetCollisionState(CollisionDirection.Bottom) == true)
+            if (hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 jumpCounter = 0;
             }
@@ -172,8 +169,6 @@ namespace Mario.Physics
             hero.SetPosition(hero.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;
         }
-
-
         #endregion
     }
 }

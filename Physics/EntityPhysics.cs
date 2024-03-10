@@ -32,7 +32,6 @@ namespace Mario.Physics
 
         #region Horizontal Movementss
 
-        // Keep enttity moving until they collide with something, then flip direction
         private void UpdateHorizontal()
         {
             if (horizontalDirection && !entity.GetCollisionState(CollisionDirection.Right))
@@ -43,16 +42,9 @@ namespace Mario.Physics
             {
                     velocity.X = -PhysicsVariables.enemySpeed;
             }
-            if (entity.GetCollisionState(CollisionDirection.Left))
+            if (entity.GetCollisionState(CollisionDirection.Left) || entity.GetCollisionState(CollisionDirection.Right))
             {
-                Logger.Instance.LogInformation($"{entity} direction flipped to right");
-                horizontalDirection = true;
-            }
-            else if (entity.GetCollisionState(CollisionDirection.Right))
-            {
-                Logger.Instance.LogInformation($"{entity} direction flipped to left");
-
-                horizontalDirection = false;
+                horizontalDirection = !horizontalDirection;
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -76,7 +68,6 @@ namespace Mario.Physics
         private void UpdateVertical()
         {
 
-            //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
             if (!entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 velocity.Y += ApplyGravity();
