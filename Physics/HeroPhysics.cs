@@ -83,6 +83,12 @@ namespace Mario.Physics
             }
         }
 
+        // Stops Mario from moving any further when he collides with a wall
+        public void Stop()
+        {
+            velocity.X = 0;
+        }
+
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction

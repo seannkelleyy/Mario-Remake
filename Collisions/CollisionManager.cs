@@ -2,7 +2,6 @@
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
-using System.Collections.Generic;
 
 namespace Mario.Collisions
 {

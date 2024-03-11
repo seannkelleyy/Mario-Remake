@@ -23,6 +23,9 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         private int health = 1;
+        private bool isInvunerable;
+        private double iFrames;
+        private const double invincibleTime = 4.0;
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -50,7 +53,8 @@ namespace Mario.Entities.Character
                     break;
             }
             stateManager.SetState(HeroStateType.StandingRight, health);
-
+            isInvunerable = false;
+            iFrames = 0;
         }
 
         public void Update(GameTime gameTime)
@@ -61,6 +65,15 @@ namespace Mario.Entities.Character
                 SetCollisionState((CollisionDirection)direction, false);
             }
             currentState.Update(gameTime);
+
+            // Check if Mario is invunerable 
+            iFrames += gameTime.ElapsedGameTime.TotalSeconds;
+            if (isInvunerable && (iFrames > invincibleTime))
+            {
+                isInvunerable = false;
+                iFrames = 0.0;
+            }
+
             CollisionManager.Instance.Run(this);
             physics.Update();
         }
@@ -122,6 +135,19 @@ namespace Mario.Entities.Character
 
         }
 
+        // Mario collides with wall
+        public void Stop()
+        {
+            physics.Stop();
+            if (collisions[CollisionDirection.Left])
+            {
+                position.X += 2;
+            } else if (collisions[CollisionDirection.Right])
+            {
+                position.X -= 2;
+            }
+        }
+
         public void Jump()
         {
             physics.Jump();
@@ -151,12 +177,16 @@ namespace Mario.Entities.Character
 
         void IHero.TakeDamage()
         {
-            health--;
-            if (health == 0)
+            if (!isInvunerable)
             {
-                Die();
+                health--;
+                if (health == 0)
+                {
+                    Die();
+                }
+                isInvunerable = true;
+                stateManager.SetState(stateManager.GetStateType(), health);
             }
-            stateManager.SetState(stateManager.GetStateType(), health);
         }
 
         void IHero.Attack()
