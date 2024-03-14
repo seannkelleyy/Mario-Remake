@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
-// This class currently isn't being used in sprint 2
 public class Goomba : IEnemy
 {
     public GoombaState currentState;
@@ -103,4 +102,3 @@ public class Goomba : IEnemy
         return physics.GetVelocity();
     }
 }
-

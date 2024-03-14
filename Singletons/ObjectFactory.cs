@@ -43,7 +43,7 @@ namespace Mario.Singletons
                     return new FloorBlock(position, breakeable, collideable, item);
                 case "brick":
                     return new BrickBlock(position, breakeable, collideable, item);
-                case "question":
+                case "coin":
                     return new CoinBlock(position, breakeable, collideable, item);
                 case "golden":
                     return new GoldenBlock(position, breakeable, collideable, item);

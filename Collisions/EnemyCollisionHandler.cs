@@ -26,16 +26,8 @@ public class EnemyCollisionHandler
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
-        {
-            mainEnemy.ChangeDirection();
-            collidingEnemy?.ChangeDirection();
-        }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
-        {
-            mainEnemy.ChangeDirection();
-            collidingEnemy?.ChangeDirection();
-        }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleEnemyEnemyCollision));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleEnemyEnemyCollision));
     }
 
     public void EnemyEnemyCollision(IEnemy enemy)
@@ -55,5 +47,19 @@ public class EnemyCollisionHandler
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
+    }
+
+    public void HandleEnemyEnemyCollision()
+    {
+        if (mainEnemy is Koopa mainKoopa && mainKoopa.isShell)
+        {
+            if (collidingEnemy is not Koopa)
+            {
+                collidingEnemy.Flip();
+                return;
+            }
+        }
+        mainEnemy.ChangeDirection();
+        collidingEnemy.ChangeDirection();
     }
 }

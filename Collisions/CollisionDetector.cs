@@ -5,7 +5,6 @@ public class CollisionDetector
 {
     public static CollisionDirection DetectCollision(Rectangle entity1, Rectangle entity2, Vector2 velocity)
     {
-        // Predict the next position of the entity
         Rectangle predictedEntity1 = new Rectangle(
             entity1.X + (int)velocity.X,
             entity1.Y + (int)velocity.Y,
@@ -13,7 +12,6 @@ public class CollisionDetector
             entity1.Height
         );
 
-        // Check for collisions at the predicted position
         Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
         if (!intersection.IsEmpty)
@@ -43,5 +41,4 @@ public class CollisionDetector
         }
         return CollisionDirection.None;
     }
-
 }

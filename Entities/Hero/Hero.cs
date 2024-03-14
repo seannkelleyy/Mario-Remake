@@ -112,6 +112,7 @@ namespace Mario.Entities.Character
         {
             return physics.GetVelocity();
         }
+
         public void WalkLeft()
         {
             if (stateManager.GetStateType() == HeroStateType.MovingLeft)
@@ -136,15 +137,25 @@ namespace Mario.Entities.Character
         }
 
         // Mario collides with wall
-        public void Stop()
+        public void StopHorizontal()
         {
-            physics.Stop();
+            physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
                 position.X += 2;
             } else if (collisions[CollisionDirection.Right])
             {
                 position.X -= 2;
+            }
+        }
+
+        // Mario collides with bottom of block
+        public void StopVertical()
+        {
+            physics.StopHorizontal();
+            if (collisions[CollisionDirection.Top])
+            {
+                position.Y += 4;
             }
         }
 

@@ -84,9 +84,15 @@ namespace Mario.Physics
         }
 
         // Stops Mario from moving any further when he collides with a wall
-        public void Stop()
+        public void StopHorizontal()
         {
             velocity.X = 0;
+        }
+
+        // Stops Mario from moving any further when he collides with a wall
+        public void StopVertical()
+        {
+            velocity.Y = 0;
         }
 
         private void UpdateHorizontal()

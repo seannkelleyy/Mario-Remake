@@ -3,13 +3,13 @@ using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using static Mario.Global.CollisionVariables;
 
 public class HeroCollisionHandler
 {
     public IHero hero { get; set; }
     public IEnemy enemy { get; set; }
+    public IBlock block { get; set; }
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
     public HeroCollisionHandler(IHero hero)
@@ -22,9 +22,13 @@ public class HeroCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => hero.Stop()));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => hero.Stop()));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => hero.SetCollisionState(CollisionDirection.Top, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(hero.StopHorizontal));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(hero.StopHorizontal));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
+            hero.SetCollisionState(CollisionDirection.Top, true);
+            block.GetHit();
+            hero.StopVertical();
+        }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => hero.SetCollisionState(CollisionDirection.Bottom, true)));
 
 
@@ -61,15 +65,12 @@ public class HeroCollisionHandler
 
     public void HeroBlockCollision(IBlock block)
     {
-        if (hero.GetRectangle().Intersects(block.GetRectangle()))
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), block.GetRectangle(), hero.GetVelocity());
+        if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
-            CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), block.GetRectangle(), hero.GetVelocity());
-            if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
-            {
-                hero.SetCollisionState(direction, true);
-                collisionDictionary[typeof(IBlock)][direction].Invoke();
-                block.GetHit();
-            }
+            this.block = block;
+            hero.SetCollisionState(direction, true);
+            collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }
 }

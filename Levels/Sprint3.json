@@ -56,7 +56,7 @@
     },
     {
       "type": "floor",
-      "x": 21,
+      "x": 19,
       "y": 12,
       "collidable": true,
       "breakable": false,
@@ -65,10 +65,26 @@
     {
       "type": "golden",
       "x": 17,
-      "y": 8,
+      "y": 9,
       "collidable": true,
       "breakable": false,
       "item": "fireflower"
+    },
+    {
+      "type": "brick",
+      "x": 14,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "1up"
+    },
+    {
+      "type": "coin",
+      "x": 21,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
     }
   ]
 }
