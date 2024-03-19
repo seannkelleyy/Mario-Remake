@@ -2,7 +2,6 @@
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
-using System.Collections.Generic;
 
 namespace Mario.Collisions
 {
@@ -22,20 +21,18 @@ namespace Mario.Collisions
             }
             else if (entity is IEnemy)
             {
-                ManageHeroCollisions(entity as IEnemy);
+                ManageEntityCollisions(entity as IEnemy);
             }
         }
 
         private void ManageHeroCollisions(IHero hero)
         {
             HeroCollisionHandler heroHandler = new HeroCollisionHandler(hero);
-            List<IBlock> blocks = new List<IBlock>(); //. testing only
 
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
             {
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    Logger.Instance.LogInformation("Hero and Block collision detected");
                     heroHandler.HeroBlockCollision(block);
                 }
             }
@@ -43,7 +40,7 @@ namespace Mario.Collisions
             {
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
-                    heroHandler.HeroEnemyCollision(enemy as IEnemy);
+                    heroHandler.HeroEnemyCollision(enemy);
                 }
             }
             foreach (IItem item in GameContentManager.Instance.GetItems())
@@ -53,18 +50,12 @@ namespace Mario.Collisions
                     heroHandler.HeroItemCollision(item);
                 }
             }
-            Logger.Instance.LogInformation($"Blocks colldied with:");
-            foreach (IBlock block in blocks)
-            {
-                Logger.Instance.LogInformation(block.ToString());
-            }
         }
 
-        private void ManageHeroCollisions(IEnemy enemy)
+        private void ManageEntityCollisions(IEnemy enemy)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
 
-            List<IBlock> blocks = new List<IBlock>(); // testing only
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(enemy.GetPosition()))
             {
                 if (enemy.GetRectangle().Intersects(block.GetRectangle()))
@@ -74,7 +65,6 @@ namespace Mario.Collisions
                 }
             }
 
-            List<IEnemy> enemies = new List<IEnemy>();
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))

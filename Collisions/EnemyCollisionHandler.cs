@@ -26,22 +26,14 @@ public class EnemyCollisionHandler
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
-        {
-            mainEnemy.ChangeDirection();
-            collidingEnemy?.ChangeDirection();
-        }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
-        {
-            mainEnemy.ChangeDirection();
-            collidingEnemy?.ChangeDirection();
-        }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleEnemyEnemyCollision));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleEnemyEnemyCollision));
     }
 
     public void EnemyEnemyCollision(IEnemy enemy)
     {
         collidingEnemy = enemy;
-        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetVelocity(), mainEnemy.GetRectangle(), enemy.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), enemy.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -50,10 +42,24 @@ public class EnemyCollisionHandler
 
     public void EnemyBlockCollision(IBlock block)
     {
-        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetVelocity(), mainEnemy.GetRectangle(), block.GetRectangle());
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), block.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
+    }
+
+    public void HandleEnemyEnemyCollision()
+    {
+        if (mainEnemy is Koopa mainKoopa && mainKoopa.isShell)
+        {
+            if (collidingEnemy is not Koopa)
+            {
+                collidingEnemy.Flip();
+                return;
+            }
+        }
+        mainEnemy.ChangeDirection();
+        collidingEnemy.ChangeDirection();
     }
 }

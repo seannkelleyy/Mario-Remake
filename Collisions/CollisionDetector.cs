@@ -3,32 +3,40 @@ using static Mario.Global.CollisionVariables;
 
 public class CollisionDetector
 {
-    public static CollisionDirection DetectCollision(Vector2 entity1Velocity, Rectangle entity1, Rectangle entity2)
+    public static CollisionDirection DetectCollision(Rectangle entity1, Rectangle entity2, Vector2 velocity)
     {
-        Rectangle intersection = Rectangle.Intersect(entity1, entity2);
+        Rectangle predictedEntity1 = new Rectangle(
+            entity1.X + (int)velocity.X,
+            entity1.Y + (int)velocity.Y,
+            entity1.Width,
+            entity1.Height
+        );
+
+        Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
         if (!intersection.IsEmpty)
         {
-
-            // Check for vertical collision
-            if (entity1.Top + entity1Velocity.Y < entity2.Bottom && entity1.Bottom > entity2.Bottom)
+            if (intersection.Height >= intersection.Width)
             {
-                return CollisionDirection.Top;
+                if (entity2.Left <= predictedEntity1.Left)
+                {
+                    return CollisionDirection.Left;
+                }
+                else
+                {
+                    return CollisionDirection.Right;
+                }
             }
-            else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top)
+            else
             {
-                return CollisionDirection.Bottom;
-            }
-            // Check for horizontal collision
-            else if (entity1.Right + entity1Velocity.X > entity2.Left && entity1.Left < entity2.Left)
-            {
-                return CollisionDirection.Top;
-            }
-
-            else if (entity1.Bottom + entity1Velocity.Y > entity2.Top && entity1.Top < entity2.Top &&
-                   entity1.Right > entity2.Left && entity1.Left < entity2.Right)
-            {
-                return CollisionDirection.Bottom;
+                if (entity2.Bottom >= predictedEntity1.Bottom)
+                {
+                    return CollisionDirection.Bottom;
+                }
+                else
+                {
+                    return CollisionDirection.Top;
+                }
             }
         }
         return CollisionDirection.None;

@@ -16,6 +16,7 @@
     <None Remove="Interfaces\Patterns\" />
     <None Remove="Interfaces\Entities\" />
     <None Remove="Singletons\" />
+    <None Remove="Logging\logs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

@@ -62,7 +62,7 @@ namespace Mario.Physics
         public void WalkRight()
         {
             horizontalDirection = true;
-            if (hero.GetCollisionState(CollisionDirection.Right) == false)
+            if (!hero.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsVariables.maxRunSpeed)
                 {
@@ -74,7 +74,7 @@ namespace Mario.Physics
         public void WalkLeft()
         {
             horizontalDirection = false;
-            if (hero.GetCollisionState(CollisionDirection.Left) == false)
+            if (!hero.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsVariables.maxRunSpeed)
                 {
@@ -83,31 +83,30 @@ namespace Mario.Physics
             }
         }
 
+        // Stops Mario from moving any further when he collides with a wall
+        public void StopHorizontal()
+        {
+            velocity.X = 0;
+        }
+
+        // Stops Mario from moving any further when he collides with a wall
+        public void StopVertical()
+        {
+            velocity.Y = 0;
+        }
+
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (hero.GetCollisionState(CollisionDirection.Right) == false)
+            if (horizontalDirection && velocity.X > 0)
             {
-                if (velocity.X < PhysicsVariables.maxRunSpeed)
-                {
-                    velocity.X += PhysicsVariables.runAcceleration;
-                }
-                else
-                {
-                    velocity.X = PhysicsVariables.maxRunSpeed;
-                }
+                velocity.X -= PhysicsVariables.friction;
             }
-            else if (hero.GetCollisionState(CollisionDirection.Left) == false)
+            else if (!horizontalDirection && velocity.X < 0)
             {
-                if (velocity.X > -PhysicsVariables.maxRunSpeed)
-                {
-                    velocity.X -= PhysicsVariables.runAcceleration;
-                }
-                else
-                {
-                    velocity.X = -PhysicsVariables.maxRunSpeed;
-                }
+                velocity.X += PhysicsVariables.friction;
             }
+
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
@@ -132,9 +131,6 @@ namespace Mario.Physics
         }
         public void Jump()
         {
-            Logger.Instance.LogInformation("Jumping");
-            Logger.Instance.LogInformation("Bottom: " + hero.GetCollisionState(CollisionDirection.Bottom));
-            // Cant figure out why this is false when you are colliding with the ground. Cntrl + F "Jump" to see the log
             if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 verticalDirection = false;
@@ -154,7 +150,7 @@ namespace Mario.Physics
                     velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
                     jumpCounter++;
                 }
-                else if(hero.GetCollisionState(CollisionDirection.Top))
+                else if (hero.GetCollisionState(CollisionDirection.Top))
                 {
                     velocity.Y = 0;
                 }
@@ -166,7 +162,7 @@ namespace Mario.Physics
             else
             {
                 // If Mario is not jumping, apply gravity
-                if (hero.GetCollisionState(CollisionDirection.Bottom) == false)
+                if (!hero.GetCollisionState(CollisionDirection.Bottom))
                 {
                     velocity.Y += ApplyGravity();
                 }
@@ -177,7 +173,7 @@ namespace Mario.Physics
             }
 
             // If Mario has landed, reset the jump counter
-            if (hero.GetCollisionState(CollisionDirection.Bottom) == true)
+            if (hero.GetCollisionState(CollisionDirection.Bottom) )
             {
                 jumpCounter = 0;
             }
@@ -185,8 +181,6 @@ namespace Mario.Physics
             hero.SetPosition(hero.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;
         }
-
-
         #endregion
     }
 }

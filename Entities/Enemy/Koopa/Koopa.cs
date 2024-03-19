@@ -2,18 +2,19 @@
 using Mario.Entities.Enemy.Koopa.KoopaStates;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
-// This class currently isn't being used in sprint 2
 public class Koopa : IEnemy
 {
     public KoopaState currentState;
     private Vector2 position;
     private EntityPhysics physics;
+    public bool isShell = false;
     private Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
     {
         { CollisionDirection.Top, false },
@@ -50,12 +51,21 @@ public class Koopa : IEnemy
 
     public void Stomp()
     {
-        currentState = new StompedKoopaState();
+        if (isShell)
+        {
+            GameContentManager.Instance.RemoveEntity(this);
+        }
+        else
+        {
+            currentState = new StompedKoopaState();
+            isShell = true;
+        }
     }
 
     public void Flip()
     {
         currentState = new FlippedKoopaState();
+        GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void ChangeDirection()
@@ -102,4 +112,3 @@ public class Koopa : IEnemy
         return physics.GetVelocity();
     }
 }
-

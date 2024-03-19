@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 using static Mario.Global.HeroVariables;
 
+
 namespace Mario.Entities.Character
 {
     public class Hero : IHero
@@ -22,6 +23,9 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         private int health = 1;
+        private bool isInvunerable;
+        private double iFrames;
+        private const double invincibleTime = 4.0;
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -49,7 +53,8 @@ namespace Mario.Entities.Character
                     break;
             }
             stateManager.SetState(HeroStateType.StandingRight, health);
-
+            isInvunerable = false;
+            iFrames = 0;
         }
 
         public void Update(GameTime gameTime)
@@ -60,6 +65,15 @@ namespace Mario.Entities.Character
                 SetCollisionState((CollisionDirection)direction, false);
             }
             currentState.Update(gameTime);
+
+            // Check if Mario is invunerable 
+            iFrames += gameTime.ElapsedGameTime.TotalSeconds;
+            if (isInvunerable && (iFrames > invincibleTime))
+            {
+                isInvunerable = false;
+                iFrames = 0.0;
+            }
+
             CollisionManager.Instance.Run(this);
             physics.Update();
         }
@@ -98,6 +112,7 @@ namespace Mario.Entities.Character
         {
             return physics.GetVelocity();
         }
+
         public void WalkLeft()
         {
             if (stateManager.GetStateType() == HeroStateType.MovingLeft)
@@ -119,6 +134,29 @@ namespace Mario.Entities.Character
             physics.setHorizontalDirecion(true);
             stateManager.SetState(HeroStateType.MovingRight, health);
 
+        }
+
+        // Mario collides with wall
+        public void StopHorizontal()
+        {
+            physics.StopHorizontal();
+            if (collisions[CollisionDirection.Left])
+            {
+                position.X += 2;
+            } else if (collisions[CollisionDirection.Right])
+            {
+                position.X -= 2;
+            }
+        }
+
+        // Mario collides with bottom of block
+        public void StopVertical()
+        {
+            physics.StopHorizontal();
+            if (collisions[CollisionDirection.Top])
+            {
+                position.Y += 4;
+            }
         }
 
         public void Jump()
@@ -150,12 +188,16 @@ namespace Mario.Entities.Character
 
         void IHero.TakeDamage()
         {
-            health--;
-            if (health == 0)
+            if (!isInvunerable)
             {
-                Die();
+                health--;
+                if (health == 0)
+                {
+                    Die();
+                }
+                isInvunerable = true;
+                stateManager.SetState(stateManager.GetStateType(), health);
             }
-            stateManager.SetState(stateManager.GetStateType(), health);
         }
 
         void IHero.Attack()
@@ -167,6 +209,7 @@ namespace Mario.Entities.Character
 
         public void Die()
         {
+            health = 0;
             stateManager.SetState(HeroStateType.Dead, health);
             GameContentManager.Instance.RemoveEntity(this);
         }

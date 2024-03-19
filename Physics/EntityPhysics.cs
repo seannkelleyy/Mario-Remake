@@ -30,48 +30,21 @@ namespace Mario.Physics
             return velocity;
         }
 
-        #region Horizontal Movement
-        public float ApplyFriction()
-        {
-            if (velocity.X < PhysicsVariables.friction && velocity.X > -PhysicsVariables.friction)
-            {
-                return 0;
-            }
-            else if (velocity.X > 0)
-            {
-                velocity.X -= PhysicsVariables.friction;
-            }
-            else if (velocity.X < 0)
-            {
-                velocity.X += PhysicsVariables.friction;
-            }
-            return velocity.X;
-        }
+        #region Horizontal Movementss
 
-        // Keep enttity moving until they collide with something, then flip direction
         private void UpdateHorizontal()
         {
-            if (horizontalDirection && entity.GetCollisionState(CollisionDirection.Right) == false)
+            if (horizontalDirection && !entity.GetCollisionState(CollisionDirection.Right))
             {
-                if (velocity.X < PhysicsVariables.enemyMaxSpeed)
-                {
-                    velocity.X += PhysicsVariables.enemyAcceleration;
-                }
-                else
-                {
-                    velocity.X = PhysicsVariables.enemyMaxSpeed;
-                }
+                    velocity.X = PhysicsVariables.enemySpeed;
             }
-            else if (!horizontalDirection && entity.GetCollisionState(CollisionDirection.Left) == false)
+            else if (!horizontalDirection && !entity.GetCollisionState(CollisionDirection.Left))
             {
-                if (velocity.X > -PhysicsVariables.enemyMaxSpeed)
-                {
-                    velocity.X -= PhysicsVariables.enemyAcceleration;
-                }
-                else
-                {
-                    velocity.X = -PhysicsVariables.enemyMaxSpeed;
-                }
+                    velocity.X = -PhysicsVariables.enemySpeed;
+            }
+            if (entity.GetCollisionState(CollisionDirection.Left) || entity.GetCollisionState(CollisionDirection.Right))
+            {
+                horizontalDirection = !horizontalDirection;
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -95,12 +68,11 @@ namespace Mario.Physics
         private void UpdateVertical()
         {
 
-            //Logger.Instance.LogInformation($"Updating vertical: {entity.GetCollisionState(CollisionDirection.Bottom)}");
-            if (entity.GetCollisionState(CollisionDirection.Bottom) == false)
+            if (!entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 velocity.Y += ApplyGravity();
             }
-            else if (entity.GetCollisionState(CollisionDirection.Bottom) == true)
+            else if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 velocity.Y = 0;
             }

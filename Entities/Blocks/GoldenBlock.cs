@@ -38,7 +38,6 @@ namespace Mario.Entities.Blocks
                     item = ObjectFactory.Instance.CreateItem("star", position);
                     break;
                 default:
-                    // Error passing in item type
                     Logger.Instance.LogError($"Item type `{itemName}` not recognized.");
                     break;
             }
@@ -47,6 +46,7 @@ namespace Mario.Entities.Blocks
         // Gives up its item and turns into a hard block
         public override void GetHit()
         {
+            Logger.Instance.LogInformation("golden block hit");
             item.MakeVisable();
             currentState = new HardBlockState();
         }
