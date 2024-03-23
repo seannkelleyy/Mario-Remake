@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mario.Input
 {
@@ -104,6 +105,20 @@ namespace Mario.Input
                     {
                         Commands[key].Invoke();
                     }
+                }
+            }
+        }
+
+        public void UpdatePause(GameTime gameTime)
+        {
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= updateInterval)
+            {
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                if (keysPressed.Contains(Keys.P) || keysPressed.Contains(Keys.Escape))
+                {
+                    Commands[Keys.P].Invoke();
                 }
             }
         }
