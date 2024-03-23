@@ -17,7 +17,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        public bool isPaused;
+        private bool isPaused;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
