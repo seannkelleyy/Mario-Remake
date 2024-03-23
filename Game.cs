@@ -17,6 +17,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        private bool isPaused;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,6 +31,8 @@ namespace Mario
             gameContentManager = GameContentManager.Instance;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
+            isPaused = false;
 
             base.Initialize();
         }
@@ -51,28 +54,35 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            if (!isPaused)
             {
-                entity.Update(gameTime);
-            }
-            keyboardController.Update(gameTime);
+                Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
+                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                {
+                    entity.Update(gameTime);
+                }
+                keyboardController.Update(gameTime);
 
-            base.Update(gameTime);
+                base.Update(gameTime);
+
+            } else
+            {
+                keyboardController.UpdatePause(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
-            {
-                entity.Draw(spriteBatch);
-            }
-            spriteBatch.End();
+                spriteBatch.Begin();
+                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                {
+                    entity.Draw(spriteBatch);
+                }
+                spriteBatch.End();
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
         }
 
         // Restarts the game
@@ -81,6 +91,12 @@ namespace Mario
             string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(currentApplication);
             Environment.Exit(0);
+        }
+
+        // Pauses or unpauses the game
+        public void Pause()
+        {
+            isPaused = !isPaused;
         }
     }
 }

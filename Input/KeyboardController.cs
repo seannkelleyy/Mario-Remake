@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mario.Input
 {
@@ -87,6 +88,7 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
+            actions[7] = new Action(game.Pause);
             return actions;
         }
 
@@ -103,6 +105,20 @@ namespace Mario.Input
                     {
                         Commands[key].Invoke();
                     }
+                }
+            }
+        }
+
+        public void UpdatePause(GameTime gameTime)
+        {
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= updateInterval)
+            {
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                if (keysPressed.Contains(Keys.P) || keysPressed.Contains(Keys.Escape))
+                {
+                    Commands[Keys.P].Invoke();
                 }
             }
         }
