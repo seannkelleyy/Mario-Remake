@@ -69,16 +69,19 @@ namespace Mario
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin();
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            if (!isPaused)
             {
-                entity.Draw(spriteBatch);
-            }
-            spriteBatch.End();
+                GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            base.Draw(gameTime);
+                spriteBatch.Begin();
+                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                {
+                    entity.Draw(spriteBatch);
+                }
+                spriteBatch.End();
+
+                base.Draw(gameTime);
+            }
         }
 
         // Restarts the game
@@ -92,13 +95,7 @@ namespace Mario
         // Pauses or unpauses the game
         public void Pause()
         {
-            if (!isPaused)
-            {
-                isPaused = true;
-            } else
-            {
-                isPaused = false;
-            }
+            isPaused = !isPaused;
         }
     }
 }
