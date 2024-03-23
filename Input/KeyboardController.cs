@@ -87,6 +87,7 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
+            actions[7] = new Action(game.Pause);
             return actions;
         }
 

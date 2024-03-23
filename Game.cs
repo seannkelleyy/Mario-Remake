@@ -17,6 +17,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        public bool isPaused;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,6 +31,8 @@ namespace Mario
             gameContentManager = GameContentManager.Instance;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
+            isPaused = false;
 
             base.Initialize();
         }
@@ -51,14 +54,17 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
-            {
-                entity.Update(gameTime);
-            }
             keyboardController.Update(gameTime);
+            if (!isPaused)
+            {
+                Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
+                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                {
+                    entity.Update(gameTime);
+                }
 
-            base.Update(gameTime);
+                base.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -81,6 +87,18 @@ namespace Mario
             string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(currentApplication);
             Environment.Exit(0);
+        }
+
+        // Pauses or unpauses the game
+        public void Pause()
+        {
+            if (!isPaused)
+            {
+                isPaused = true;
+            } else
+            {
+                isPaused = false;
+            }
         }
     }
 }
