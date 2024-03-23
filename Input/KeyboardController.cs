@@ -1,5 +1,6 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -64,7 +65,7 @@ namespace Mario.Input
         {
             Action[] actions = new Action[8];
             actions[0] = new Action(game.Exit);
-            actions[1] = new Action(game.Restart);
+            actions[1] = new Action(GameRestarter.Instance.Restart);
             actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right

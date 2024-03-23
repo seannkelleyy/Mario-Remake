@@ -75,12 +75,5 @@ namespace Mario
             base.Draw(gameTime);
         }
 
-        // Restarts the game
-        public void Restart()
-        {
-            string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
-            Process.Start(currentApplication);
-            Environment.Exit(0);
-        }
     }
 }

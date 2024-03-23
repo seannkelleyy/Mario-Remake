@@ -23,6 +23,7 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         private int health = 1;
+        private int lives;
         private bool isInvunerable;
         private double iFrames;
         private const double invincibleTime = 4.0;
@@ -39,6 +40,7 @@ namespace Mario.Entities.Character
             this.position = position;
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
+            lives = 10;
 
             switch (startingPower)
             {
@@ -210,8 +212,9 @@ namespace Mario.Entities.Character
         public void Die()
         {
             health = 0;
+            lives--;
             stateManager.SetState(HeroStateType.Dead, health);
-            GameContentManager.Instance.RemoveEntity(this);
+            GameRestarter.Instance.Restart();
         }
 
         public int ReportHealth()
