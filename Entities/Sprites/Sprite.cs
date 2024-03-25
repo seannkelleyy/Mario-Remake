@@ -47,5 +47,10 @@ namespace Mario.Entities.Sprites
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
+        public Vector2 GetVector()
+        {
+            return new Vector2(width, height);
+        }
+
     }
 }

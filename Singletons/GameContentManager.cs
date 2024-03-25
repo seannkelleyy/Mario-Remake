@@ -2,9 +2,11 @@
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mario.Singletons
 {
@@ -13,11 +15,11 @@ namespace Mario.Singletons
         private static GameContentManager instance = new GameContentManager();
         private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
         {
-            { typeof(IHero), new List<IHero>() },
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
-            { typeof(Fireball), new List<Fireball>() }
+            { typeof(Fireball), new List<Fireball>() },
+            { typeof(IHero), new List<IHero>() }
         };
 
         // This code follows the singleton pattern
@@ -37,18 +39,73 @@ namespace Mario.Singletons
             return allEntities;
         }
 
+        public List<IEnemy> GetEnemies()
+        {
+            List<IEnemy> allCollideables = new List<IEnemy>();
+            foreach (IEnemy enemy in entities[typeof(IEnemy)])
+            {
+                allCollideables.Add(enemy);
+            }
+            return allCollideables;
+        }
+
+
+        public List<IItem> GetItems()
+        {
+            List<IItem> allCollideables = new List<IItem>();
+            foreach (IItem item in entities[typeof(IItem)])
+            {
+                allCollideables.Add(item);
+            }
+            return allCollideables;
+        }
+
+
+        // Gets all blocks within a certain position of mario that are collideable
+        public List<IBlock> GetBlocksInProximity(Vector2 position)
+        {
+
+            List<IBlock> blocks = new List<IBlock>();
+            foreach (IBlock block in entities[typeof(IBlock)])
+            {
+                if (block.GetPosition().X <= position.X + 48 && block.GetPosition().X >= position.X - 48 && block.isCollidable)
+                {
+                    blocks.Add(block);
+                }
+            }
+            
+            return CombineBlocks(blocks);
+        }
+
+        public List<IBlock> CombineBlocks(List<IBlock> blocks)
+        {
+            blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
+
+            List<IBlock> combinedBlocks = new List<IBlock>();
+
+            for (int i = 0; i < blocks.Count;)
+            {
+                IBlock currentBlock = blocks[i];
+
+                List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
+
+                int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
+                int combinedHeight = sameLevelBlocks[0].GetRectangle().Height; // Assuming all blocks have the same height
+
+                IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
+
+                combinedBlocks.Add(combinedBlock);
+
+                i += sameLevelBlocks.Count;
+            }
+
+            return combinedBlocks;
+        }
+
+
         public IHero GetHero()
         {
             return (IHero)entities[typeof(IHero)][0];
-        }
-
-        private Type GetEntityType(IEntityBase entity)
-        {
-            return entity is IHero ? typeof(IHero) :
-                   entity is IEnemy ? typeof(IEnemy) :
-                   entity is IItem ? typeof(IItem) :
-                   entity is IBlock ? typeof(IBlock) : 
-                   entity is Fireball ? typeof(Fireball):null;
         }
 
         public void AddEntity(IEntityBase entity)
@@ -59,7 +116,7 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Add(entity);
-            Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
+            //Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)
@@ -70,8 +127,17 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Remove(entity);
+            Logger.Instance.LogInformation(entity.ToString() + " removed from GameContentManager");
         }
 
-
+        // Helper method to get the type of the entitys
+        private Type GetEntityType(IEntityBase entity)
+        {
+            return entity is IHero ? typeof(IHero) :
+                   entity is IEnemy ? typeof(IEnemy) :
+                   entity is IItem ? typeof(IItem) :
+                   entity is IBlock ? typeof(IBlock) :
+                   entity is Fireball ? typeof(Fireball): null;
+        }
     }
 }

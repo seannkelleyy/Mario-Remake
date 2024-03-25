@@ -6,4 +6,5 @@ public class StompedGoombaState : GoombaState
     {
         sprite = spriteFactory.CreateSprite("stompedGoomba");
     }
+
 }

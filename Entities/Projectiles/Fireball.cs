@@ -1,12 +1,6 @@
 ﻿using Mario.Interfaces.Base;
-using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mario.Entities.Projectiles
 {
@@ -15,8 +9,9 @@ namespace Mario.Entities.Projectiles
         IFireballState fireballState;
         bool exploded;
         public Fireball(Vector2 position, bool facingLeft)
+        public Fireball(Vector2 position, bool facingRight)
         {
-            fireballState = new FireballMovingState(position, facingLeft);
+            fireballState = new FireballMovingState(position, facingRight);
             exploded = false;
         }
         public void Update(GameTime gameTime)
@@ -35,7 +30,7 @@ namespace Mario.Entities.Projectiles
         {
             if (!exploded)
             {
-                fireballState = new FireballExplosionState(((FireballMovingState)fireballState).GetPosition(),this);
+                fireballState = new FireballExplosionState(((FireballMovingState)fireballState).GetPosition(), this);
                 exploded = true;
             }
         }

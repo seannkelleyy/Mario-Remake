@@ -1,22 +1,19 @@
 using Mario.Interfaces;
-using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 public class EnemyCollisionHandler
 {
-    public IEnemy enemy { get; set; }
-    public IEnemy enemy2 { get; set; }
-    public IBlock block { get; set; }
+    public IEnemy mainEnemy { get; set; }
+    public IEnemy collidingEnemy { get; set; }
 
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
-    public EnemyCollisionHandler(IEnemy Enemy)
+    public EnemyCollisionHandler(IEnemy enemy)
     {
-        this.enemy = Enemy;
+        mainEnemy = enemy;
 
         collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
         {
@@ -24,50 +21,45 @@ public class EnemyCollisionHandler
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action());
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Left, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Right, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => {
-            enemy.ChangeDirection();
-            enemy2.ChangeDirection();
-        }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() => {
-            enemy.ChangeDirection();
-            enemy2.ChangeDirection();
-        }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleEnemyEnemyCollision));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleEnemyEnemyCollision));
     }
 
-    public void EnemyEnemyCollision(IEnemy Enemy)
+    public void EnemyEnemyCollision(IEnemy enemy)
     {
-        this.enemy2 = Enemy;
-        //Figure out how to pass rectangle
-        Vector2 enemy2Position = enemy2.GetPosition();
-        Rectangle Enemy2Box = new Rectangle((int)enemy2Position.X, (int)enemy2Position.Y, 30, 30);
-        Vector2 enemyPosition = enemy.GetPosition();
-        Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
-
-        CollisionDirection direction = CollisionDetector.DetectCollision(EnemyBox, Enemy2Box);
+        collidingEnemy = enemy;
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), enemy.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
         }
     }
 
-    public void EnemyBlockCollision(IBlock Block)
+    public void EnemyBlockCollision(IBlock block)
     {
-       this. block = Block;
-        //Figure out how to pass rectangle
-        Vector2 enemyPosition = enemy.GetPosition();
-        Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
-        Vector2 blockPosition = block.GetPosition();
-        Rectangle BlockBox = new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 30, 30);
-
-        CollisionDirection direction = CollisionDetector.DetectCollision(EnemyBox, BlockBox);
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), block.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
+    }
+
+    public void HandleEnemyEnemyCollision()
+    {
+        if (mainEnemy is Koopa mainKoopa && mainKoopa.isShell)
+        {
+            if (collidingEnemy is not Koopa)
+            {
+                collidingEnemy.Flip();
+                return;
+            }
+        }
+        mainEnemy.ChangeDirection();
+        collidingEnemy.ChangeDirection();
     }
 }

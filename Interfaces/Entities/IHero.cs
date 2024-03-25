@@ -1,14 +1,17 @@
-﻿using Mario.Interfaces.Base;
-using static Mario.Entities.Character.Hero;
+﻿using Mario.Entities.Character.HeroStates;
+using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
+        public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
-        // Only for 'big' hereos. Implementation could change with state.
+        public void StopHorizontal();
+        public void StopVertical();
         public void Crouch();
         // Function to power up Hero. i.e.make big, firepower...
         void PowerUp(IItem item);

@@ -34,8 +34,8 @@ public class SpriteVariables
             // koopa
             { "rightKoopa", new int[] { 0, 16, 16, 24, 2, 1, 2 } },
             { "leftKoopa", new int[] { 0, 40, 16, 24, 2, 1, 2 } },
-            { "shellLegsKoopa", new int[] { 0, 16, 16, 16, 1, 1, 2 } },
-            { "shellKoopa", new int[] { 0, 40, 16, 16, 1, 1, 2 } },
+            { "shellLegsKoopa", new int[] { 32, 16, 16, 16, 1, 1, 2 } },
+            { "shellKoopa", new int[] { 32, 40, 16, 16, 1, 1, 2 } },
             //mario
             { "rightJumpStateMario", new int[] { 0, 16, 16, 16, 1, 1, 3 } },
             { "leftRunStateMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },

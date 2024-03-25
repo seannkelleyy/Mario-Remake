@@ -1,7 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Mario.Entities.Items.ItemStates;
-using System.Collections.Generic;
+﻿using Mario.Entities.Items.ItemStates;
 using Mario.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Items
 {
@@ -26,7 +25,7 @@ namespace Mario.Entities.Items
             else
             {
                 // Error passing in mushroom type, do something
-                Logger.Instance.LogError($"ItemBlock type {mushroomType} not recognized.");
+                Logger.Instance.LogError($"ItemBlock type `{mushroomType}` not recognized.");
             }
         }
 

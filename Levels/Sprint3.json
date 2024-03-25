@@ -5,9 +5,9 @@
   "hero": {
     "type": "mario",
     "startingX": 5,
-    "startingY": 11,
+    "startingY": 1,
     "direction": true,
-    "starting-power": "small"
+    "startingPower": "fire"
   },
   "enemies": [
     {
@@ -25,38 +25,66 @@
   ],
   "blockSections": [
     {
-      "type": "floorBlock",
+      "type": "floor",
       "startingX": 0,
       "startingY": 14,
       "endingX": 60,
       "endingY": 18,
-      "collideable": false,
-      "breakable": false
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
     },
     {
-      "type": "floorBlock",
+      "type": "floor",
       "startingX": 0,
       "startingY": 13,
       "endingX": 60,
       "endingY": 13,
-      "collideable": true,
-      "breakable": false
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     }
   ],
   "blocks": [
     {
-      "type": "floorBlock",
+      "type": "floor",
       "x": 4,
       "y": 12,
-      "collideable": true,
-      "breakable": false
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     },
     {
-      "type": "floorBlock",
-      "x": 21,
+      "type": "floor",
+      "x": 19,
       "y": 12,
-      "collideable": true,
-      "breakable": false
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "golden",
+      "x": 17,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "fireflower"
+    },
+    {
+      "type": "brick",
+      "x": 14,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "1up"
+    },
+    {
+      "type": "coin",
+      "x": 21,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
     }
   ]
 }

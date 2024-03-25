@@ -74,5 +74,10 @@ namespace Mario.Entities.Character.HeroStates
         {
             sprite.Draw(spriteBatch, position);
         }
+
+        public Vector2 GetVector()
+        {
+            return sprite.GetVector();
+        }
     }
 }

@@ -4,6 +4,6 @@ public class FlippedKoopaState : KoopaState
 {
     public FlippedKoopaState() : base()
     {
-        sprite = spriteFactory.CreateSprite("flippedKoopa");
+        sprite = spriteFactory.CreateSprite("shellKoopa");
     }
 }
