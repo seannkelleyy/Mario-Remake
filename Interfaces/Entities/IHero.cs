@@ -1,6 +1,7 @@
 ﻿using Mario.Entities.Character.HeroStates;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
+using static Mario.Entities.Character.Hero;
 
 namespace Mario.Interfaces.Entities
 {
@@ -20,6 +21,8 @@ namespace Mario.Interfaces.Entities
         public void Die();
 
         public health ReportHealth();
+        public Vector2 GetVelocity();
     }
 }
+
 

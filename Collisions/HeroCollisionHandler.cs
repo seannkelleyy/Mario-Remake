@@ -58,7 +58,7 @@ public class HeroCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), item.GetRectangle(), hero.GetVelocity());
         if (direction != CollisionDirection.None)
         {
-            hero.Collect(item);
+            hero.PowerUp(item);
             GameContentManager.Instance.RemoveEntity(item);
         }
     }

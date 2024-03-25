@@ -1,6 +1,5 @@
 using Mario.Collisions;
 using Mario.Entities.Character.HeroStates;
-using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -18,17 +17,15 @@ namespace Mario.Entities.Character
 {
     public class Hero : IHero
     {
-        private HeroStateManager stateManager; // Strategy Pattern
         private HeroPhysics physics; // Strategy Pattern
         public HeroState currentState { get; set; }
         private Vector2 position;
-        private HeroPhysics physics;
         public enum health { Mario, BigMario, FireMario };
         public health currentHealth=health.Mario;
         // True is right, false is left
         public enum direction { left, right };
         public direction currentDirection = direction.left;
-        public Hero(Vector2 position)
+        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
             { CollisionDirection.Bottom, false },
@@ -36,6 +33,12 @@ namespace Mario.Entities.Character
             { CollisionDirection.Right, false },
             { CollisionDirection.None, true }
         };
+        public Hero(Vector2 position)
+        {
+            this.position = position;
+            physics = new HeroPhysics(this);
+            currentState = new StandState(this);
+        }
         public Hero(string startingPower, Vector2 position)
         {
             this.position = position;
@@ -51,15 +54,6 @@ namespace Mario.Entities.Character
                 SetCollisionState((CollisionDirection)direction, false);
             }
             currentState.Update(gameTime);
-
-            // Check if Mario is invunerable 
-            iFrames += gameTime.ElapsedGameTime.TotalSeconds;
-            if (isInvunerable && (iFrames > invincibleTime))
-            {
-                isInvunerable = false;
-                iFrames = 0.0;
-            }
-
             CollisionManager.Instance.Run(this);
             physics.Update();
         }
@@ -158,31 +152,12 @@ namespace Mario.Entities.Character
         void IHero.Attack()
         {
             GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
-            stateManager.SetState(HeroStateType.AttackingRight, health);
-
         }
 
         public void Die()
         {
             currentState.Die();
         }
-
-
-    public void HandleCollision(ICollideable collideable, Dictionary<CollisionDirection, bool> collisionDirection)
-        {
-            // verrryyyyy basic collision response, jsut needed something to get by for this ticket.
-            if (collideable is IEnemy)
-            {
-                if (collisionDirection[CollisionDirection.Bottom])
-                {
-                    ((IEnemy)collideable).Stomp();
-                }
-                else
-                {
-                }
-            }
-        }
-
         public health ReportHealth () {
             return this.currentHealth;
         }

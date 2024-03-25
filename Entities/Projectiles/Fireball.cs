@@ -8,7 +8,6 @@ namespace Mario.Entities.Projectiles
     {
         IFireballState fireballState;
         bool exploded;
-        public Fireball(Vector2 position, bool facingLeft)
         public Fireball(Vector2 position, bool facingRight)
         {
             fireballState = new FireballMovingState(position, facingRight);

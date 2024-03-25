@@ -27,11 +27,6 @@ public class MarioCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action());
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action());
-
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(mario.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(mario.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() => {
@@ -49,7 +44,7 @@ public class MarioCollisionHandler
         Vector2 enemyPosition = enemy.GetPosition();
         Rectangle EnemyBox = new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y, 30, 30);
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, EnemyBox);
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, EnemyBox,mario.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -65,7 +60,7 @@ public class MarioCollisionHandler
         Vector2 itemPosition = item.GetPosition();
         Rectangle ItemBox = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 30, 30);
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, ItemBox);
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, ItemBox, mario.GetVelocity());
         if (direction != CollisionDirection.None)
         {
             mario.PowerUp(item);
@@ -83,7 +78,7 @@ public class MarioCollisionHandler
         Rectangle BlockBox = new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 30, 30);
 
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, BlockBox);
+        CollisionDirection direction = CollisionDetector.DetectCollision(MarioBox, BlockBox, mario.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
