@@ -16,17 +16,23 @@ public class SpriteVariables
             { "fireFlower", new int[] { 0, 0, 16, 16, 4, 1, 0 } },
             { "star", new int[] { 0, 16, 16, 16, 4, 1, 0 } },
             { "coin", new int[] { 0, 32, 16, 16, 4, 1, 0 } },
-            { "mushroom", new int[] { 0, 48, 16, 16, 1, 1, 0 } },
+            { "coinUnderground", new int[] { 0, 48, 16, 16, 4, 1, 0 } },
+            { "mushroom", new int[] { 16, 64, 16, 16, 1, 1, 0 } },
             { "1up", new int[] { 0, 64, 16, 16, 1, 1, 0 } },
             // blocks
             { "questionMarkTile", new int[] { 0, 0, 16, 16, 3, 1, 1 } },
             { "brickTile", new int[] { 0, 16, 16, 16, 1, 1, 1 } },
+            { "brickTileUnderground", new int[] { 0, 16, 16, 16, 1, 1, 1 } },
             { "brokenBrickTile", new int[] { 0, 48, 16, 16, 1, 1, 1 } },
             { "invisibleBlock", new int[] { 48, 0, 16, 16, 1, 1, 1 } },
             { "emptyBlockTile", new int[] { 16, 16, 16, 16, 1, 1, 1 } },
             { "floorTile", new int[] { 32, 16, 16, 16, 1, 1, 1 } },
+            { "floorTileUnderground", new int[] { 32, 16, 16, 16, 1, 1, 1 } },
             { "stoneTile", new int[] { 0, 32, 16, 16, 1, 1, 1 } },
             { "pipeTile", new int[] { 16, 32, 32, 32, 1, 1, 1 } },
+            { "pipeTube", new int[] { 16, 48, 32, 16, 1, 1, 1 } },
+            { "pipeTileSideways", new int[] { 48, 32, 64, 32, 1, 1, 1 } },
+            { "bulletLauncher", new int[] { 80, 0, 16, 32, 1, 1, 1 } },
             //goomba
             { "goomba", new int[] { 0, 0, 16, 16, 2, 1, 2 } },
             { "flippedGoomba", new int[] { 0, 64, 16, 16, 2, 1, 2 } },
@@ -36,6 +42,13 @@ public class SpriteVariables
             { "leftKoopa", new int[] { 0, 40, 16, 24, 2, 1, 2 } },
             { "shellLegsKoopa", new int[] { 32, 16, 16, 16, 1, 1, 2 } },
             { "shellKoopa", new int[] { 32, 40, 16, 16, 1, 1, 2 } },
+            //bullet
+            { "leftBullet", new int[] { 0, 80, 16, 14, 1, 1, 2 } },
+            { "rightBullet", new int[] { 16, 80, 16, 14, 1, 1, 2 } },
+            { "leftBulletFlipped", new int[] { 0, 96, 16, 14, 1, 1, 2 } },
+            { "rightBulletFlipped", new int[] { 16, 96, 16, 14, 1, 1, 2 } },
+            //piranha
+            { "piranha", new int[] { 0, 112, 16, 23, 2, 1, 2 } },
             //mario
             { "rightJumpMario", new int[] { 0, 16, 16, 16, 1, 1, 3 } },
             { "leftRunMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },
