@@ -1,10 +1,10 @@
-﻿using Mario.Global;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
 using Microsoft.Xna.Framework;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 namespace Mario.Singletons
 {
     public class LevelLoader
@@ -24,9 +24,8 @@ namespace Mario.Singletons
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
 
-
             // Create the hero
-            IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
+            IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, level.hero.lives, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies
@@ -55,6 +54,20 @@ namespace Mario.Singletons
                 IBlock blockObject = ObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.x * 16, block.y * 16), block.breakable, block.collidable, block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
             }
+        }
+
+        // Changes the number of lives Mario will start with in the level-loading JSON file 
+        public void ChangeMarioLives(string levelName, int lives)
+        {
+            string jsonString = File.ReadAllText(levelName);
+
+            // Change the number of lives in the JSON string
+            var jsonLives = JsonNode.Parse(jsonString);
+            jsonLives["hero"]["lives"] = lives;
+            
+            // Save the new number of lives to the JSON file
+            jsonString = jsonLives.ToString();
+            File.WriteAllText(levelName, jsonString);
         }
     }
 }

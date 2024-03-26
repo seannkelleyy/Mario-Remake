@@ -7,7 +7,6 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics;
 
 namespace Mario
 {
@@ -83,14 +82,6 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        // Restarts the game
-        public void Restart()
-        {
-            string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
-            Process.Start(currentApplication);
-            Environment.Exit(0);
         }
 
         // Pauses or unpauses the game

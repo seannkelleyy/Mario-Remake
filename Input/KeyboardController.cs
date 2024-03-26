@@ -65,7 +65,11 @@ namespace Mario.Input
         private Action[] LoadActions(MarioRemake game)
         {
             Action[] actions = new Action[8];
-            actions[0] = new Action(game.Exit);
+            actions[0] = new Action(() =>
+            {
+                LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", 10);
+                game.Exit();
+            });
             actions[1] = new Action(GameRestarter.Instance.Restart);
             actions[2] = new Action(() =>
             {

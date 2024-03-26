@@ -35,12 +35,12 @@ namespace Mario.Entities.Character
             { CollisionDirection.Right, false },
             { CollisionDirection.None, true }
         };
-        public Hero(string startingPower, Vector2 position)
+        public Hero(string startingPower, int lives, Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
-            lives = 10;
+            this.lives = lives;
 
             switch (startingPower)
             {
@@ -206,7 +206,6 @@ namespace Mario.Entities.Character
         {
             GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
             stateManager.SetState(HeroStateType.AttackingRight, health);
-
         }
 
         public void Die()
@@ -214,6 +213,8 @@ namespace Mario.Entities.Character
             health = 0;
             lives--;
             stateManager.SetState(HeroStateType.Dead, health);
+            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
+
             GameRestarter.Instance.Restart();
         }
 
