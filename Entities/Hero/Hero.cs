@@ -210,12 +210,19 @@ namespace Mario.Entities.Character
 
         public void Die()
         {
-            health = 0;
             lives--;
             stateManager.SetState(HeroStateType.Dead, health);
             LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
 
-            GameRestarter.Instance.Restart();
+            // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
+            if (lives != 0)
+            {
+                GameStateManager.Instance.BeginReset();
+            } else
+            {
+                lives = 10;
+                GameStateManager.Instance.Restart();
+            }
         }
 
         public int ReportHealth()

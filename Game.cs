@@ -16,7 +16,6 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private bool isPaused;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,8 +29,6 @@ namespace Mario
             gameContentManager = GameContentManager.Instance;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
-
-            isPaused = false;
 
             base.Initialize();
         }
@@ -53,7 +50,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            if (!isPaused)
+            if (!GameStateManager.Instance.isPaused) // Normal update
             {
                 Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
                 foreach (IEntityBase entity in gameContentManager.GetEntities())
@@ -64,8 +61,19 @@ namespace Mario
 
                 base.Update(gameTime);
 
-            } else
+            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
+                if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
+                {
+                    GameStateManager.Instance.SetResetTime(GameStateManager.Instance.resetTime + gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                else
+                {
+                    GameStateManager.Instance.EndReset();
+                    keyboardController = new KeyboardController();
+                    keyboardController.LoadCommands(this, gameContentManager.GetHero());
+                }
+            } else { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
             }
         }
@@ -82,12 +90,6 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        // Pauses or unpauses the game
-        public void Pause()
-        {
-            isPaused = !isPaused;
         }
     }
 }

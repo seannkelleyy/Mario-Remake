@@ -64,6 +64,14 @@
       "item": "none"
     },
     {
+      "type": "floor",
+      "x": 30,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
       "type": "golden",
       "x": 17,
       "y": 9,

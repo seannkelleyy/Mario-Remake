@@ -1,7 +1,9 @@
 ﻿using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -53,6 +55,16 @@ namespace Mario.Singletons
             {
                 IBlock blockObject = ObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.x * 16, block.y * 16), block.breakable, block.collidable, block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
+            }
+        }
+
+        // Removes all entities from the GCM to prepare for reloading the level
+        public void UnloadLevel()
+        {
+            List<IEntityBase> allEntities = GameContentManager.Instance.GetEntities();
+            foreach (IEntityBase entity in allEntities)
+            {
+                GameContentManager.Instance.RemoveEntity(entity);
             }
         }
 

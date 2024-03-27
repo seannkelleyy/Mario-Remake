@@ -70,7 +70,7 @@ namespace Mario.Input
                 LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", 10);
                 game.Exit();
             });
-            actions[1] = new Action(GameRestarter.Instance.Restart);
+            actions[1] = new Action(GameStateManager.Instance.Restart);
             actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right
@@ -93,7 +93,7 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
-            actions[7] = new Action(game.Pause);
+            actions[7] = new Action(GameStateManager.Instance.Pause);
             return actions;
         }
 
