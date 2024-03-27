@@ -1,6 +1,5 @@
 ﻿using Mario.Global;
 using Mario.Interfaces.Base;
-using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using static Mario.Global.CollisionVariables;
@@ -37,16 +36,30 @@ namespace Mario.Physics
         {
             if (horizontalDirection && !entity.GetCollisionState(CollisionDirection.Right))
             {
-                // if (entity is IEnemy)
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = 2 * PhysicsVariables.enemySpeed;
+                }
+                else
+                {
                     velocity.X = PhysicsVariables.enemySpeed;
+                }
             }
             else if (!horizontalDirection && !entity.GetCollisionState(CollisionDirection.Left))
             {
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = -2 * PhysicsVariables.enemySpeed;
+                }
+                else
+                {
                     velocity.X = -PhysicsVariables.enemySpeed;
+                }
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
+
         #endregion
 
         #region Vertical Movement

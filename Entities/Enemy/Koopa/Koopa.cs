@@ -59,6 +59,7 @@ public class Koopa : IEnemy
         {
             currentState = new StompedKoopaState();
             isShell = true;
+            position.Y += 8;
         }
     }
 
