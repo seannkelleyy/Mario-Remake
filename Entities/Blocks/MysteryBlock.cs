@@ -5,16 +5,17 @@ using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
-    public class GoldenBlock : AbstractBlock
+    public class MysteryBlock : AbstractBlock
     {
         private IItem item;
 
-        public GoldenBlock(Vector2 position, bool breakable, bool collidable, string itemName)
+        public MysteryBlock(Vector2 position, bool breakable, bool collidable, string itemName)
         {
             this.position = position;
             isCollidable = collidable;
             isBreakable = breakable;
             currentState = new GoldenBlockState();
+            canBeCombined = false;
 
             // Give the block an item to hold
             switch (itemName)
@@ -46,8 +47,12 @@ namespace Mario.Entities.Blocks
         // Gives up its item and turns into a hard block
         public override void GetHit()
         {
-            Logger.Instance.LogInformation("golden block hit");
-            item.MakeVisable();
+            GameContentManager.Instance.AddEntity(item);
+            if (currentState is not HardBlockState)
+            {
+                item.MakeVisable();
+            }
+            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
             currentState = new HardBlockState();
         }
     }

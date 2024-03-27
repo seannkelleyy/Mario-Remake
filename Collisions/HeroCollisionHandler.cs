@@ -22,14 +22,22 @@ public class HeroCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(hero.StopHorizontal));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(hero.StopHorizontal));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => {
+            hero.StopHorizontal();
+            hero.SetCollisionState(CollisionDirection.Left, true);
+            }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
+            hero.StopHorizontal();
+            hero.SetCollisionState(CollisionDirection.Right, true);
+        }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
             hero.SetCollisionState(CollisionDirection.Top, true);
             block.GetHit();
             hero.StopVertical();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => hero.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+        }));
 
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
@@ -37,7 +45,8 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.Jump();
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            hero.SmallJump();
             enemy.Stomp();
         }));
     }

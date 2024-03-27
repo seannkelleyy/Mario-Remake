@@ -9,9 +9,10 @@ namespace Mario.Physics
     public class HeroPhysics
     {
         public Vector2 velocity;
-        public bool horizontalDirection = true; // True is right, false is left
-        public bool verticalDirection = true; // True is down, false is up
+        public bool isRight = true; // True is right, false is left
+        public bool isDown = true; // True is down, false is up
         private float jumpCounter = 0;
+        private float smallJumpCounter = 0;
 
         public IHero hero;
 
@@ -33,12 +34,12 @@ namespace Mario.Physics
         }
         public bool getHorizontalDirecion()
         {
-            return horizontalDirection;
+            return isRight;
         }
 
         public void setHorizontalDirecion(bool horizontalDirection)
         {
-            this.horizontalDirection = horizontalDirection;
+            this.isRight = horizontalDirection;
         }
 
         #region Horizontal Movement
@@ -61,7 +62,7 @@ namespace Mario.Physics
 
         public void WalkRight()
         {
-            horizontalDirection = true;
+            isRight = true;
             if (!hero.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsVariables.maxRunSpeed)
@@ -73,7 +74,7 @@ namespace Mario.Physics
 
         public void WalkLeft()
         {
-            horizontalDirection = false;
+            isRight = false;
             if (!hero.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsVariables.maxRunSpeed)
@@ -98,11 +99,11 @@ namespace Mario.Physics
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (horizontalDirection && velocity.X > 0)
+            if (isRight && velocity.X > 0)
             {
                 velocity.X -= PhysicsVariables.friction;
             }
-            else if (!horizontalDirection && velocity.X < 0)
+            else if (!isRight && velocity.X < 0)
             {
                 velocity.X += PhysicsVariables.friction;
             }
@@ -129,37 +130,30 @@ namespace Mario.Physics
             }
             return velocity.Y;
         }
+
         public void Jump()
         {
-            if (verticalDirection && hero.GetCollisionState(CollisionDirection.Bottom))
+            if (hero.GetCollisionState(CollisionDirection.Bottom))
             {
-                verticalDirection = false;
+                isDown = false;
                 velocity.Y = -PhysicsVariables.jumpForce;
-                jumpCounter = 0;
+                jumpCounter = 1;
+            }
+        }
+
+        public void SmallJump()
+        {
+            if (hero.GetCollisionState(CollisionDirection.Bottom))
+            {
+                isDown = false;
+                velocity.Y = -PhysicsVariables.jumpForce;
+                smallJumpCounter = 1;
             }
         }
 
         private void UpdateVertical()
         {
-            if (!verticalDirection)
-            {
-                // If Mario is still within the jump limit, keep moving up
-                if (jumpCounter < PhysicsVariables.jumpLimit)
-                {
-                    // maybe set bottom collision to false here
-                    velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.jumpLimit);
-                    jumpCounter++;
-                }
-                else if (hero.GetCollisionState(CollisionDirection.Top))
-                {
-                    velocity.Y = 0;
-                }
-                else
-                { // If Mario has reached the jump limit, start moving down
-                    verticalDirection = true;
-                }
-            }
-            else
+            if (isDown)
             {
                 // If Mario is not jumping, apply gravity
                 if (!hero.GetCollisionState(CollisionDirection.Bottom))
@@ -168,7 +162,29 @@ namespace Mario.Physics
                 }
                 else
                 { // If Mario has landed, stop moving
-                    velocity.Y = 0;
+                    StopVertical();
+                }
+            }
+            else
+            {
+                // If Mario is still within the jump limit, keep moving up
+                if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit)
+                {
+                    velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
+                    smallJumpCounter++;
+                }
+                else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0)
+                {
+                    velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
+                    jumpCounter++;
+                }
+                else if (hero.GetCollisionState(CollisionDirection.Top))
+                {
+                    StopVertical();
+                }
+                else
+                { // If Mario has reached the jump limit, start moving down
+                    isDown = true;
                 }
             }
 
@@ -179,7 +195,7 @@ namespace Mario.Physics
             }
 
             hero.SetPosition(hero.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y = 0;
+            StopVertical();
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
@@ -11,12 +12,14 @@ namespace Mario.Entities.Blocks
             currentState = new BrickBlockNormalState();
             isCollidable = collidable;
             isBreakable = breakable;
+            canBeCombined = true;
         }
 
         // Block will be broken
         public override void GetHit()
         {
-            currentState = new BrickBlockBrokenState();
+            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
+            else currentState = new BrickBlockBrokenState();
         }
     }
 }

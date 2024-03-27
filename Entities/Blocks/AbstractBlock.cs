@@ -14,6 +14,7 @@ namespace Mario.Entities.Blocks
         internal Vector2 position;
         public bool isCollidable { get; set; }
         public bool isBreakable { get; set; }
+        public bool canBeCombined { get; set; }
 
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
@@ -24,6 +25,8 @@ namespace Mario.Entities.Blocks
             { CollisionDirection.None, true }
         };
 
+        public abstract void GetHit();
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             currentState.Draw(spriteBatch, position);
@@ -31,23 +34,26 @@ namespace Mario.Entities.Blocks
 
         public virtual void Update(GameTime gameTime)
         {
-            currentState.Update(gameTime);
-            // Reset all collision states to false at the start of each update
             foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
             {
                 SetCollisionState((CollisionDirection)direction, false);
             }
+            currentState.Update(gameTime);
         }
-
-        public abstract void GetHit();
 
         public Vector2 GetPosition()
         {
             return position;
         }
+
         public void SetPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public virtual Rectangle GetRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
 
         public bool GetCollisionState(CollisionDirection direction)
@@ -60,9 +66,5 @@ namespace Mario.Entities.Blocks
             collisions[direction] = state;
         }
 
-        public virtual Rectangle GetRectangle()
-        {
-            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
-        }
     }
 }

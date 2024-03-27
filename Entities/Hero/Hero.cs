@@ -25,7 +25,7 @@ namespace Mario.Entities.Character
         private int health = 1;
         private bool isInvunerable;
         private double iFrames;
-        private const double invincibleTime = 4.0;
+        private const double invincibleTime = 3.0;
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -65,6 +65,7 @@ namespace Mario.Entities.Character
                 SetCollisionState((CollisionDirection)direction, false);
             }
             currentState.Update(gameTime);
+            CollisionManager.Instance.Run(this);
 
             // Check if Mario is invunerable 
             iFrames += gameTime.ElapsedGameTime.TotalSeconds;
@@ -74,7 +75,6 @@ namespace Mario.Entities.Character
                 iFrames = 0.0;
             }
 
-            CollisionManager.Instance.Run(this);
             physics.Update();
         }
 
@@ -142,10 +142,10 @@ namespace Mario.Entities.Character
             physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
-                position.X += 2;
+                position.X += 1;
             } else if (collisions[CollisionDirection.Right])
             {
-                position.X -= 2;
+                position.X -= 1;
             }
         }
 
@@ -155,7 +155,7 @@ namespace Mario.Entities.Character
             physics.StopHorizontal();
             if (collisions[CollisionDirection.Top])
             {
-                position.Y += 4;
+                position.Y += 2;
             }
         }
 
@@ -163,7 +163,21 @@ namespace Mario.Entities.Character
         {
             physics.Jump();
 
-            if (physics.horizontalDirection)
+            if (physics.isRight)
+            {
+                stateManager.SetState(HeroStateType.JumpingRight, health);
+            }
+            else
+            {
+                stateManager.SetState(HeroStateType.JumpingLeft, health);
+            }
+        }
+
+        public void SmallJump()
+        {
+            physics.SmallJump();
+
+            if (physics.isRight)
             {
                 stateManager.SetState(HeroStateType.JumpingRight, health);
             }

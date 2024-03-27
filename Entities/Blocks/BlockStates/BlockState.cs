@@ -13,7 +13,6 @@ namespace Mario.Entities.Blocks.BlockStates
         public BlockState()
         {
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite("brickTile");
         }
 
         public virtual void Update(GameTime gameTime)

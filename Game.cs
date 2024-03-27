@@ -56,15 +56,12 @@ namespace Mario
         {
             if (!isPaused)
             {
-                Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
                 foreach (IEntityBase entity in gameContentManager.GetEntities())
                 {
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
-
                 base.Update(gameTime);
-
             } else
             {
                 keyboardController.UpdatePause(gameTime);
@@ -73,16 +70,16 @@ namespace Mario
 
         protected override void Draw(GameTime gameTime)
         {
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                spriteBatch.Begin();
-                foreach (IEntityBase entity in gameContentManager.GetEntities())
-                {
-                    entity.Draw(spriteBatch);
-                }
-                spriteBatch.End();
+            spriteBatch.Begin();
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            {
+                entity.Draw(spriteBatch);
+            }
+            spriteBatch.End();
 
-                base.Draw(gameTime);
+            base.Draw(gameTime);
         }
 
         // Restarts the game

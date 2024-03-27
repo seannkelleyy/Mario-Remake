@@ -1,5 +1,4 @@
-﻿using Mario.Global;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
 using Microsoft.Xna.Framework;

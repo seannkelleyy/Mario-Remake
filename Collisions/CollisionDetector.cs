@@ -14,11 +14,13 @@ public class CollisionDetector
 
         Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
+        if (intersection.Width < 2)
+            return CollisionDirection.None;
         if (!intersection.IsEmpty)
         {
-            if (intersection.Height >= intersection.Width)
+            if (intersection.Height > intersection.Width)
             {
-                if (entity2.Left <= predictedEntity1.Left)
+                if (entity2.Left < predictedEntity1.Left)
                 {
                     return CollisionDirection.Left;
                 }
@@ -29,7 +31,7 @@ public class CollisionDetector
             }
             else
             {
-                if (entity2.Bottom >= predictedEntity1.Bottom)
+                if (entity2.Bottom > predictedEntity1.Bottom)
                 {
                     return CollisionDirection.Bottom;
                 }

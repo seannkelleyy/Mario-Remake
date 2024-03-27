@@ -82,6 +82,9 @@ namespace Mario.Singletons
             blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
 
             List<IBlock> combinedBlocks = new List<IBlock>();
+            List<IBlock> nonCombinableBlocks = blocks.Where(block => block.canBeCombined == false).ToList();
+
+            blocks.RemoveAll(block => block.canBeCombined == false);
 
             for (int i = 0; i < blocks.Count;)
             {
@@ -89,19 +92,24 @@ namespace Mario.Singletons
 
                 List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
 
-                int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
-                int combinedHeight = sameLevelBlocks[0].GetRectangle().Height; // Assuming all blocks have the same height
+                if (sameLevelBlocks.Count > 0)
+                {
+                    int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
+                    int combinedHeight = sameLevelBlocks[0].GetRectangle().Height;
 
-                IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
+                    IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
 
-                combinedBlocks.Add(combinedBlock);
+                    combinedBlocks.Add(combinedBlock);
+                }
 
                 i += sameLevelBlocks.Count;
             }
 
+            // Add the non-combinable blocks at the end
+            combinedBlocks.AddRange(nonCombinableBlocks);
+
             return combinedBlocks;
         }
-
 
         public IHero GetHero()
         {
@@ -116,7 +124,6 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Add(entity);
-            //Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)
