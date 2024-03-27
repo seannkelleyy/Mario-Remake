@@ -1,5 +1,6 @@
 ﻿using Mario.Global;
 using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using static Mario.Global.CollisionVariables;
@@ -10,7 +11,7 @@ namespace Mario.Physics
     {
         public Vector2 velocity;
         public bool horizontalDirection = true; // True is right, false is left
-        public bool verticalDirection = true; // True is down, false is up
+        public bool isFalling = true; // True is down, false is up
 
         public ICollideable entity;
 
@@ -22,8 +23,8 @@ namespace Mario.Physics
 
         public void Update()
         {
-            UpdateHorizontal();
-            UpdateVertical();
+            if (!isFalling) UpdateHorizontal();
+            else UpdateVertical();
         }
         public Vector2 GetVelocity()
         {
@@ -36,6 +37,7 @@ namespace Mario.Physics
         {
             if (horizontalDirection && !entity.GetCollisionState(CollisionDirection.Right))
             {
+                // if (entity is IEnemy)
                     velocity.X = PhysicsVariables.enemySpeed;
             }
             else if (!horizontalDirection && !entity.GetCollisionState(CollisionDirection.Left))
@@ -66,11 +68,13 @@ namespace Mario.Physics
 
             if (!entity.GetCollisionState(CollisionDirection.Bottom))
             {
+                isFalling = true;
                 velocity.Y += ApplyGravity();
             }
             else if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 velocity.Y = 0;
+                isFalling = false;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;

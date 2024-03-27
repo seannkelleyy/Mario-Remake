@@ -73,12 +73,14 @@ public class Koopa : IEnemy
         if (physics.horizontalDirection)
         {
             physics.horizontalDirection = false;
-            currentState = new LeftMovingKoopaState();
+            if (!isShell)
+                currentState = new LeftMovingKoopaState();
         }
         else
         {
             physics.horizontalDirection = true;
-            currentState = new RightMovingKoopaState();
+            if (!isShell)
+                currentState = new RightMovingKoopaState();
         }
     }
 
@@ -110,5 +112,10 @@ public class Koopa : IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+
+    public bool ReportHealth()
+    {
+        return true;
     }
 }

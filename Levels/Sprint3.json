@@ -5,15 +5,15 @@
   "hero": {
     "type": "mario",
     "startingX": 5,
-    "startingY": 1,
+    "startingY": 6,
     "direction": true,
     "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 8,
-      "startingY": 12,
+      "startingX": 5,
+      "startingY": 1,
       "direction": false
     },
     {

@@ -38,6 +38,8 @@ namespace Mario.Collisions
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
+                if (!enemy.ReportHealth())
+                    return;
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
                     heroHandler.HeroEnemyCollision(enemy);
@@ -67,6 +69,8 @@ namespace Mario.Collisions
 
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
+                if (!collidingEnemy.ReportHealth())
+                    return;
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {
                     enemyHandler.EnemyEnemyCollision(collidingEnemy);

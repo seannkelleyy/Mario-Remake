@@ -47,6 +47,7 @@ public class HeroCollisionHandler
         {
             hero.SetCollisionState(CollisionDirection.Bottom, true);
             hero.SmallJump();
+            hero.SetCollisionState(CollisionDirection.Bottom, false);
             enemy.Stomp();
         }));
     }
@@ -67,6 +68,7 @@ public class HeroCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), item.GetRectangle(), hero.GetVelocity());
         if (direction != CollisionDirection.None)
         {
+            Logger.Instance.LogInformation($"item hit: {item.GetType()}");
             hero.Collect(item);
             GameContentManager.Instance.RemoveEntity(item);
         }

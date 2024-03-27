@@ -47,13 +47,13 @@ namespace Mario.Entities.Blocks
         // Gives up its item and turns into a hard block
         public override void GetHit()
         {
-            GameContentManager.Instance.AddEntity(item);
             if (currentState is not HardBlockState)
             {
+                GameContentManager.Instance.AddEntity(item);
                 item.MakeVisable();
+                currentState = new HardBlockState();
             }
             if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
-            currentState = new HardBlockState();
         }
     }
 }

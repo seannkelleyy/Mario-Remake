@@ -2,7 +2,6 @@
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Mario.Entities.Enemy.Goomba;
 
 namespace Mario.Entities.Enemy.Goomba.GoombaStates
 {

@@ -9,5 +9,6 @@ namespace Mario.Interfaces.Entities
         public void Stomp();
         public void Flip();
         public Vector2 GetVelocity();
+        public bool ReportHealth();
     }
 }

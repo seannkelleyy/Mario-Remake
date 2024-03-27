@@ -14,6 +14,7 @@ public class Goomba : IEnemy
     public GoombaState currentState;
     private Vector2 position;
     private EntityPhysics physics;
+    private double deadTimer = 0f;
     private Dictionary<CollisionDirection, bool> collisionStates = new Dictionary<CollisionDirection, bool>()
     {
         { CollisionDirection.Top, false },
@@ -38,7 +39,19 @@ public class Goomba : IEnemy
         }
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
-        physics.Update();
+        if (deadTimer > 0)
+        {
+            deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            if (deadTimer > 3)
+            {
+                GameContentManager.Instance.RemoveEntity(this);
+            }
+        }
+        else
+        {
+            physics.Update();
+        }
+
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -48,8 +61,10 @@ public class Goomba : IEnemy
 
     public void Stomp()
     {
+        if (deadTimer > 0) return;
         currentState = new StompedGoombaState();
-        GameContentManager.Instance.RemoveEntity(this);
+        position.Y += 8;
+        deadTimer = 1;
     }
 
     public void Flip()
@@ -100,5 +115,10 @@ public class Goomba : IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+
+    public bool ReportHealth()
+    {
+        return deadTimer == 0 ? true : false;
     }
 }
