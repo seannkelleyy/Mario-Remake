@@ -12,7 +12,13 @@
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 10,
+      "startingX": 8,
+      "startingY": 12,
+      "direction": false
+    },
+    {
+      "type": "goomba",
+      "startingX": 12,
       "startingY": 12,
       "direction": false
     },

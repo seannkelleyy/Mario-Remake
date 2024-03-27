@@ -40,6 +40,7 @@ namespace Mario.Entities.Hero
         {
             this.hero = hero;
         }
+
         public void SetState(HeroStateType state, int health)
         {
             if (stateMap.TryGetValue((state, health), out var heroState))

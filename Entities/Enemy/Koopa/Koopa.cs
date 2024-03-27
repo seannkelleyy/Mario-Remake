@@ -28,7 +28,7 @@ public class Koopa : IEnemy
     {
         physics = new EntityPhysics(this);
         this.position = position;
-        currentState = new LeftMovingKoopaState();
+        currentState = new RightMovingKoopaState();
     }
 
     public void Update(GameTime gameTime)
