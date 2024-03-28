@@ -44,6 +44,7 @@ namespace Mario.Input
             Commands.Add(Keys.S, actions[4]);
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
+            Commands.Add(Keys.G, hero.TakeDamage);
 
             // Arrow commands
             Commands.Add(Keys.Left, actions[3]);

@@ -202,7 +202,6 @@ namespace Mario.Entities.Character
 
         void IHero.TakeDamage()
         {
-            Logger.Instance.LogInformation($"Taking Damage {health}");
             if (!isInvunerable)
             {
                 isInvunerable = true;
@@ -210,6 +209,10 @@ namespace Mario.Entities.Character
                 if (health == 0)
                 {
                     Die();
+                }
+                else if (health == 1)
+                {
+                    position.Y += 16;
                 }
                 stateManager.SetState(stateManager.GetStateType(), health);
             }

@@ -134,7 +134,6 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Remove(entity);
-            Logger.Instance.LogInformation(entity.ToString() + " removed from GameContentManager");
         }
 
         // Helper method to get the type of the entitys
