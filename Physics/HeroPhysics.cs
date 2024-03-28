@@ -90,12 +90,6 @@ namespace Mario.Physics
             velocity.X = 0;
         }
 
-        // Stops Mario from moving any further when he collides with a wall
-        public void StopVertical()
-        {
-            velocity.Y = 0;
-        }
-
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
@@ -118,6 +112,14 @@ namespace Mario.Physics
         #endregion
 
         #region Vertical Movement
+
+
+        // Stops Mario from moving any further when he collides with a wall
+        public void StopVertical()
+        {
+            velocity.Y = 0;
+        }
+
         public float ApplyGravity()
         {
             if (velocity.Y < Math.Abs(PhysicsVariables.maxVericalSpeed))
@@ -151,52 +153,59 @@ namespace Mario.Physics
             }
         }
 
-        private void UpdateVertical()
+        private void HandleDownwardMovement()
         {
-            if (isDown)
+            if (!hero.GetCollisionState(CollisionDirection.Bottom))
             {
-                // If Mario is not jumping, apply gravity
-                if (!hero.GetCollisionState(CollisionDirection.Bottom))
-                {
-                    velocity.Y += ApplyGravity();
-                }
-                else
-                { // If Mario has landed, stop moving
-                    StopVertical();
-                }
+                velocity.Y += ApplyGravity();
             }
             else
             {
-                // If Mario is still within the jump limit, keep moving up
-                if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit)
-                {
-                    velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
-                    smallJumpCounter++;
-                }
-                else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0)
-                {
-                    velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
-                    jumpCounter++;
-                }
-                else if (hero.GetCollisionState(CollisionDirection.Top))
-                {
-                    StopVertical();
-                }
-                else
-                { // If Mario has reached the jump limit, start moving down
-                    isDown = true;
-                }
-            }
-
-            // If Mario has landed, reset the jump counter
-            if (hero.GetCollisionState(CollisionDirection.Bottom) )
-            {
+                smallJumpCounter = 0;
                 jumpCounter = 0;
+                StopVertical();
             }
+        }
 
+        private void HandleUpwardMovement()
+        {
+            if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !hero.GetCollisionState(CollisionDirection.Top))
+            {
+                velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
+                smallJumpCounter++;
+            }
+            else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0 && !hero.GetCollisionState(CollisionDirection.Top))
+            {
+                velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
+                jumpCounter++;
+            }
+            else if (hero.GetCollisionState(CollisionDirection.Top))
+            {
+                StopVertical();
+                jumpCounter = PhysicsVariables.regularJumpLimit;
+                smallJumpCounter = PhysicsVariables.smallJumpLimit;
+                isDown = true;
+            }
+            else
+            {
+                isDown = true;
+            }
+        }
+
+        public void UpdateVertical()
+        {
+            if (isDown)
+            {
+                HandleDownwardMovement();
+            }
+            else
+            {
+                HandleUpwardMovement();
+            }
             hero.SetPosition(hero.GetPosition() + new Vector2(0, velocity.Y));
             StopVertical();
         }
+
         #endregion
     }
 }

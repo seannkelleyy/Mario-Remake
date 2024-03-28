@@ -32,8 +32,8 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
             hero.SetCollisionState(CollisionDirection.Top, true);
-            block.GetHit();
             hero.StopVertical();
+            block.GetHit();
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
             hero.SetCollisionState(CollisionDirection.Bottom, true);
@@ -79,7 +79,6 @@ public class HeroCollisionHandler
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             this.block = block;
-            hero.SetCollisionState(direction, true);
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

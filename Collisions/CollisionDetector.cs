@@ -9,12 +9,12 @@ public class CollisionDetector
             entity1.X + (int)velocity.X,
             entity1.Y + (int)velocity.Y,
             entity1.Width,
-            entity1.Height
+            entity1.Height 
         );
 
         Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
-        if (intersection.Width < 3)
+        if (intersection.Width < 3 || intersection.Height < 3)
             return CollisionDirection.None;
         if (!intersection.IsEmpty)
         {

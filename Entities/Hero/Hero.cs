@@ -152,10 +152,10 @@ namespace Mario.Entities.Character
         // Mario collides with bottom of block
         public void StopVertical()
         {
-            physics.StopHorizontal();
+                physics.StopVertical();
             if (collisions[CollisionDirection.Top])
             {
-                position.Y += 2;
+                position.Y += 5;
             }
         }
 
