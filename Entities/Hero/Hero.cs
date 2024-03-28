@@ -67,10 +67,6 @@ namespace Mario.Entities.Character
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
 
-            Logger.Instance.LogInformation($"left: {collisions[CollisionDirection.Left]}");
-            Logger.Instance.LogInformation($"right: {collisions[CollisionDirection.Right]}");
-            Logger.Instance.LogInformation($"bottom: {collisions[CollisionDirection.Bottom]}");
-            Logger.Instance.LogInformation($"top: {collisions[CollisionDirection.Top]}");
             // Check if Mario is invunerable 
             if (isInvunerable)
             {
@@ -151,7 +147,6 @@ namespace Mario.Entities.Character
                 position.X += 1;
             } else if (collisions[CollisionDirection.Right])
             {
-                Logger.Instance.LogInformation("adjusting right collision");
                 position.X -= 1;
             }
         }

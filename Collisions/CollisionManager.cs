@@ -34,7 +34,6 @@ namespace Mario.Collisions
             {
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    Logger.Instance.LogInformation($"intersection: {Rectangle.Intersect(hero.GetRectangle(), block.GetRectangle())}");
                     heroHandler.HeroBlockCollision(block);
                 }
             }
