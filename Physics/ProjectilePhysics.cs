@@ -5,9 +5,9 @@ using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
 {
-    public class EntityPhysics : AbstractEntityPhysics
+    public class ProjectilePhysics : AbstractEntityPhysics
     {
-        public EntityPhysics(ICollideable entity) : base(entity)
+        public ProjectilePhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
             velocity = new Vector2(0, 0);
@@ -66,24 +66,24 @@ namespace Mario.Physics
 
         public override void WalkLeft()
         {
-            Logger.Instance.LogInformation("Walk left not implemented in Entity Physics");
+            Logger.Instance.LogInformation("Walk left not implemented in Projectile Physics");
         }
 
         public override void WalkRight()
         {
-            Logger.Instance.LogInformation("Walk right not implemented in Entity Physics");
+            Logger.Instance.LogInformation("Walk right not implemented in Projectile Physics");
 
         }
 
         public override void Jump()
         {
-            Logger.Instance.LogInformation("Jump not implemented in Entity Physics");
+            Logger.Instance.LogInformation("Jump not implemented in Projectile Physics");
 
         }
 
         public override void SmallJump()
         {
-            Logger.Instance.LogInformation("Small Jump left not implemented in Entity Physics");
+            Logger.Instance.LogInformation("Small Jump left not implemented in Projectile Physics");
 
         }
     }

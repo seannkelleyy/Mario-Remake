@@ -3,16 +3,16 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Entities.Enemy.Goomba.GoombaStates
+namespace Mario.Entities.Abstract
 {
-    public abstract class GoombaState
-    {
+	public abstract class AbstractEntityState
+	{
         protected SpriteFactory spriteFactory;
         public ISprite sprite;
-        public GoombaState()
+
+        public AbstractEntityState()
         {
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite("goomba");
         }
 
         public virtual void Update(GameTime gameTime)
@@ -31,3 +31,4 @@ namespace Mario.Entities.Enemy.Goomba.GoombaStates
         }
     }
 }
+

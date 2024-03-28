@@ -1,7 +1,7 @@
-﻿using Mario.Entities.Projectiles;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
@@ -18,7 +18,7 @@ namespace Mario.Singletons
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
-            { typeof(Fireball), new List<Fireball>() },
+            { typeof(IProjectile), new List<IProjectile>() },
             { typeof(IHero), new List<IHero>() }
         };
 
@@ -60,6 +60,15 @@ namespace Mario.Singletons
             return allCollideables;
         }
 
+        public List<IProjectile> GetProjectiles()
+        {
+            List<IProjectile> allCollideables = new List<IProjectile>();
+            foreach (IProjectile projetile in entities[typeof(IProjectile)])
+            {
+                allCollideables.Add(projetile);
+            }
+            return allCollideables;
+        }
 
         // Gets all blocks within a certain position of mario that are collideable
         public List<IBlock> GetBlocksInProximity(Vector2 position)
@@ -143,7 +152,7 @@ namespace Mario.Singletons
                    entity is IEnemy ? typeof(IEnemy) :
                    entity is IItem ? typeof(IItem) :
                    entity is IBlock ? typeof(IBlock) :
-                   entity is Fireball ? typeof(Fireball): null;
+                   entity is IProjectile ? typeof(IProjectile) : null;
         }
     }
 }

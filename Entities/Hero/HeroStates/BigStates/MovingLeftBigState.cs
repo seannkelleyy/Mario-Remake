@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
 
-public class MovingLeftBigState : HeroState
+public class MovingLeftBigState : AbstractEntityState
 {
     public MovingLeftBigState() : base()
     {

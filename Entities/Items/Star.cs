@@ -6,8 +6,6 @@ namespace Mario.Entities.Items
 {
     public class Star : AbstractItem
     {
-        private EntityPhysics physics;
-
         public Star(Vector2 position)
         {
             this.position = position;

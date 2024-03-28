@@ -1,5 +1,4 @@
 using Mario.Collisions;
-using Mario.Entities.Character.HeroStates;
 using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
@@ -7,7 +6,6 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
@@ -16,13 +14,10 @@ using static Mario.Global.HeroVariables;
 
 namespace Mario.Entities.Character
 {
-    public class Hero : IHero
+    public class Hero : AbstractCollideable, IHero
     {
         private HeroStateManager stateManager; // Strategy Pattern
-        private HeroPhysics physics; // Strategy Pattern
-        public HeroState currentState { get; set; }
-        private Vector2 position;
-        private int health = 1;
+        private int health;
         private bool isInvunerable;
         private double iFrames;
         private const double invincibleTime = 3.0;
@@ -34,6 +29,7 @@ namespace Mario.Entities.Character
             { CollisionDirection.Right, false },
             { CollisionDirection.None, true }
         };
+
         public Hero(string startingPower, Vector2 position)
         {
             this.position = position;
@@ -57,7 +53,7 @@ namespace Mario.Entities.Character
             iFrames = 0;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             // Reset all collision states to false at the start of each update
             foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
@@ -78,41 +74,6 @@ namespace Mario.Entities.Character
             }
 
             physics.Update();
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            currentState.Draw(spriteBatch, position);
-        }
-
-        public void SetPosition(Vector2 position)
-        {
-            this.position = position;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-
-        public bool GetCollisionState(CollisionDirection direction)
-        {
-            return collisions[direction];
-        }
-
-        public void SetCollisionState(CollisionDirection direction, bool state)
-        {
-            collisions[direction] = state;
-        }
-
-        public Rectangle GetRectangle()
-        {
-            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
-        }
-
-        public Vector2 GetVelocity()
-        {
-            return physics.GetVelocity();
         }
 
         public void WalkLeft()
@@ -141,13 +102,13 @@ namespace Mario.Entities.Character
         // Mario collides with wall
         public void StopHorizontal()
         {
-            physics.velocity.X = 0;
+            physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
-                position.X += 1;
+                position.X += 2;
             } else if (collisions[CollisionDirection.Right])
             {
-                position.X -= 1;
+                position.X -= 2;
             }
         }
 
@@ -222,9 +183,8 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
+            GameContentManager.Instance.AddEntity(new Fireball(position));
             stateManager.SetState(HeroStateType.AttackingRight, health);
-
         }
 
         public void Die()
