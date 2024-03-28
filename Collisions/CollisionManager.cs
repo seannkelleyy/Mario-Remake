@@ -33,11 +33,8 @@ namespace Mario.Collisions
 
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
             {
-                Logger.Instance.LogInformation($"checking between hero and {block}");
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    Logger.Instance.LogInformation($"intersection: {Rectangle.Intersect(hero.GetRectangle(), block.GetRectangle())}");
-
                     heroHandler.HeroBlockCollision(block);
                 }
             }

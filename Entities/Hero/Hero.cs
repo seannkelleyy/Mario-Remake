@@ -68,11 +68,13 @@ namespace Mario.Entities.Character
             CollisionManager.Instance.Run(this);
 
             // Check if Mario is invunerable 
-            iFrames += gameTime.ElapsedGameTime.TotalSeconds;
-            if (isInvunerable && (iFrames > invincibleTime))
+            if (isInvunerable)
             {
-                isInvunerable = false;
-                iFrames = 0.0;
+                iFrames += gameTime.ElapsedGameTime.TotalSeconds;
+                if (iFrames > invincibleTime){
+                    isInvunerable = false;
+                    iFrames = 0.0;
+                }
             }
 
             physics.Update();
