@@ -67,6 +67,10 @@ namespace Mario.Entities.Character
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
 
+            Logger.Instance.LogInformation($"left: {collisions[CollisionDirection.Left]}");
+            Logger.Instance.LogInformation($"right: {collisions[CollisionDirection.Right]}");
+            Logger.Instance.LogInformation($"bottom: {collisions[CollisionDirection.Bottom]}");
+            Logger.Instance.LogInformation($"top: {collisions[CollisionDirection.Top]}");
             // Check if Mario is invunerable 
             if (isInvunerable)
             {
@@ -141,12 +145,13 @@ namespace Mario.Entities.Character
         // Mario collides with wall
         public void StopHorizontal()
         {
-            physics.StopHorizontal();
+            physics.velocity.X = 0;
             if (collisions[CollisionDirection.Left])
             {
                 position.X += 1;
             } else if (collisions[CollisionDirection.Right])
             {
+                Logger.Instance.LogInformation("adjusting right collision");
                 position.X -= 1;
             }
         }
@@ -154,7 +159,7 @@ namespace Mario.Entities.Character
         // Mario collides with bottom of block
         public void StopVertical()
         {
-                physics.StopVertical();
+            physics.StopVertical();
             if (collisions[CollisionDirection.Top])
             {
                 position.Y += 5;

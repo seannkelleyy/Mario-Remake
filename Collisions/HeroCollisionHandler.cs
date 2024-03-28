@@ -23,12 +23,12 @@ public class HeroCollisionHandler
         };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => {
-            hero.StopHorizontal();
             hero.SetCollisionState(CollisionDirection.Left, true);
+            hero.StopHorizontal();
             }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
-            hero.StopHorizontal();
             hero.SetCollisionState(CollisionDirection.Right, true);
+            hero.StopHorizontal();
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
             hero.SetCollisionState(CollisionDirection.Top, true);

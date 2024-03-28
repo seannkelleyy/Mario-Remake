@@ -16,7 +16,7 @@ public class CollisionDetector
 
         if (intersection.Width < 3 || intersection.Height < 3)
             return CollisionDirection.None;
-        if (!intersection.IsEmpty)
+        else if (!intersection.IsEmpty)
         {
             if (intersection.Height > intersection.Width)
             {

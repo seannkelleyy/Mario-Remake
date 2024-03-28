@@ -83,7 +83,10 @@ namespace Mario.Input
                     mario.Jump();
                 }
             });
-            actions[3] = new Action(mario.WalkLeft);
+            actions[3] = new Action(() => {
+                mario.WalkLeft();
+                Logger.Instance.LogInformation("Walking left");
+            });
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
