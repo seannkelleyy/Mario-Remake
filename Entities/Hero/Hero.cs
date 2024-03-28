@@ -6,8 +6,8 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 using static Mario.Global.HeroVariables;
 
@@ -21,14 +21,9 @@ namespace Mario.Entities.Character
         private bool isInvunerable;
         private double iFrames;
         private const double invincibleTime = 3.0;
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
-        {
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
+        private bool isFlashing = false;
+        private double flashTimer = 0.0;
+        private const double flashDuration = 0.05;
 
         public Hero(string startingPower, Vector2 position)
         {
@@ -62,10 +57,15 @@ namespace Mario.Entities.Character
             }
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
-
             // Check if Mario is invunerable 
             if (isInvunerable)
             {
+                flashTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (flashTimer > flashDuration)
+                {
+                    isFlashing = !isFlashing;
+                    flashTimer = 0.0;
+                }
                 iFrames += gameTime.ElapsedGameTime.TotalSeconds;
                 if (iFrames > invincibleTime){
                     isInvunerable = false;
@@ -74,6 +74,14 @@ namespace Mario.Entities.Character
             }
 
             physics.Update();
+        }
+
+        public new virtual void Draw(SpriteBatch spriteBatch)
+        {
+            if (!isFlashing || !isInvunerable)
+            {
+                currentState.Draw(spriteBatch, position);
+            }
         }
 
         public void WalkLeft()
@@ -99,7 +107,6 @@ namespace Mario.Entities.Character
 
         }
 
-        // Mario collides with wall
         public void StopHorizontal()
         {
             physics.StopHorizontal();
@@ -112,7 +119,6 @@ namespace Mario.Entities.Character
             }
         }
 
-        // Mario collides with bottom of block
         public void StopVertical()
         {
             physics.StopVertical();

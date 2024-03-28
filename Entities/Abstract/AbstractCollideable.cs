@@ -13,7 +13,7 @@ namespace Mario.Entities
         internal AbstractEntityPhysics physics; // Strategy Pattern
         internal Vector2 position;
         public AbstractEntityState currentState; 
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
+        internal Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
             { CollisionDirection.Bottom, false },

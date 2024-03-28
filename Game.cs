@@ -54,6 +54,8 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
+            if (GameSettings.isDevelopment)
+                Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
             if (!isPaused)
             {
                 foreach (IEntityBase entity in gameContentManager.GetEntities())
