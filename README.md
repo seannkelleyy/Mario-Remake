@@ -10,6 +10,9 @@ We were tasked with creating a video game remake using Monogame.
 For our project we chose to make a Mario clone.
 
 This project was completed in sprints that were completely designed and completed by the members in our group.
+
+### CHECK OUT OUR WIKI FOR DOCUMENTATION
+
 ## Technical Details
 Languages and Frameworks Used:
 * C#
@@ -28,3 +31,4 @@ Languages and Frameworks Used:
 To being, you must clone the repository and run it in Visual Studio.
 
 To run Sprint-2 either go to the Sprint 2 release and download the zip file OR simply open the 'Sprint-2-Release' branch.
+To run Sprint-3 either go to the Sprint 3 release and download the zip file OR simply open the 'Sprint-3-Release' branch.
