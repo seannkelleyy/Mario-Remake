@@ -6,6 +6,7 @@ using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Diagnostics;
 
@@ -17,6 +18,7 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        private MediaManager mediaManager;
         private bool isPaused;
         public MarioRemake()
         {
@@ -42,6 +44,8 @@ namespace Mario
             SpriteFactory.Instance.LoadAllTextures(Content);
             LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            mediaManager =  new MediaManager();
+            mediaManager.LoadContent(Content);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
         }

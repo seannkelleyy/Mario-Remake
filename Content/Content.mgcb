@@ -13,6 +13,42 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 01. Ground Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:01. Ground Theme.mp3
+
+#begin 02. Underground Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:02. Underground Theme.mp3
+
+#begin 05. Invincibility Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:05. Invincibility Theme.mp3
+
+#begin 06. Level Complete.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:06. Level Complete.mp3
+
+#begin 08. Lost a Life.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:08. Lost a Life.mp3
+
+#begin 09. Game Over.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:09. Game Over.mp3
+
 #begin enemySpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
