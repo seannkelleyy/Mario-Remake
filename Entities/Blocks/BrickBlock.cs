@@ -12,12 +12,13 @@ namespace Mario.Entities.Blocks
             currentState = new BrickBlockNormalState();
             isCollidable = collidable;
             isBreakable = breakable;
-            canBeCombined = true;
+            canBeCombined = false;
         }
 
         // Block will be broken
         public override void GetHit()
         {
+
             if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
             else currentState = new BrickBlockBrokenState();
         }

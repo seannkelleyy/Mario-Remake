@@ -6,7 +6,7 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 10,
+    "lives": 3,
     "startingPower": "fire"
   },
   "enemies": [
@@ -77,7 +77,7 @@
       "item": "none"
     },
     {
-      "type": "golden",
+      "type": "mystery",
       "x": 17,
       "y": 9,
       "collidable": true,

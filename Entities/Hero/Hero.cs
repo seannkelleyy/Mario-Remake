@@ -18,14 +18,15 @@ namespace Mario.Entities.Character
     {
         private HeroStateManager stateManager; // Strategy Pattern
         private int health;
+        private int lives;
         private bool isInvunerable;
         private double iFrames;
         private const double invincibleTime = 3.0;
         private bool isFlashing = false;
-        private double flashTimer = 0.0;
+        private double flashIntervalTimer = 0.0;
         private const double flashDuration = 0.05;
 
-        public Hero(string startingPower, Vector2 position)
+        public Hero(string startingPower, int lives, Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
@@ -47,6 +48,7 @@ namespace Mario.Entities.Character
             stateManager.SetState(HeroStateType.StandingRight, health);
             isInvunerable = false;
             iFrames = 0;
+            this.lives = lives;
         }
 
         public override void Update(GameTime gameTime)
@@ -61,14 +63,15 @@ namespace Mario.Entities.Character
             // Check if Mario is invunerable 
             if (isInvunerable)
             {
-                flashTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                if (flashTimer > flashDuration)
+                flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (flashIntervalTimer > flashDuration)
                 {
                     isFlashing = !isFlashing;
-                    flashTimer = 0.0;
+                    flashIntervalTimer = 0.0;
                 }
                 iFrames += gameTime.ElapsedGameTime.TotalSeconds;
-                if (iFrames > invincibleTime){
+                if (iFrames > invincibleTime)
+                {
                     isInvunerable = false;
                     iFrames = 0.0;
                 }
@@ -114,7 +117,8 @@ namespace Mario.Entities.Character
             if (collisions[CollisionDirection.Left])
             {
                 position.X += 2;
-            } else if (collisions[CollisionDirection.Right])
+            }
+            else if (collisions[CollisionDirection.Right])
             {
                 position.X -= 2;
             }
@@ -204,7 +208,8 @@ namespace Mario.Entities.Character
             if (lives != 0)
             {
                 GameStateManager.Instance.BeginReset();
-            } else
+            }
+            else
             {
                 lives = 10;
                 GameStateManager.Instance.Restart();
