@@ -39,7 +39,7 @@ namespace Mario.Collisions
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
-                if (!enemy.ReportHealth())
+                if (!enemy.ReportIsAlive())
                     return;
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
@@ -70,7 +70,7 @@ namespace Mario.Collisions
 
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
-                if (!collidingEnemy.ReportHealth())
+                if (!collidingEnemy.ReportIsAlive())
                     return;
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {

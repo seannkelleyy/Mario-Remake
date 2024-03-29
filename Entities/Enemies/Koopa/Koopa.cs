@@ -66,7 +66,7 @@ public class Koopa : AbstractCollideable, IEnemy
         }
     }
 
-    public bool ReportHealth()
+    public bool ReportIsAlive()
     {
         return true;
     }

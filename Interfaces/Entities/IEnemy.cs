@@ -7,6 +7,6 @@ namespace Mario.Interfaces.Entities
         public void ChangeDirection();
         public void Stomp();
         public void Flip();
-        public bool ReportHealth();
+        public bool ReportIsAlive();
     }
 }

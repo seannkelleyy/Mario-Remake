@@ -70,7 +70,7 @@ public class Goomba : AbstractCollideable, IEnemy
         }
     }
 
-    public bool ReportHealth()
+    public bool ReportIsAlive()
     {
         return deadTimer == 0 ? true : false;
     }
