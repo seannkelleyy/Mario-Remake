@@ -23,6 +23,7 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         private int health = 1;
+        private int lives;
         private bool isInvunerable;
         private double iFrames;
         private const double invincibleTime = 4.0;
@@ -34,11 +35,12 @@ namespace Mario.Entities.Character
             { CollisionDirection.Right, false },
             { CollisionDirection.None, true }
         };
-        public Hero(string startingPower, Vector2 position)
+        public Hero(string startingPower, int lives, Vector2 position)
         {
             this.position = position;
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
+            this.lives = lives;
 
             switch (startingPower)
             {
@@ -204,14 +206,23 @@ namespace Mario.Entities.Character
         {
             GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
             stateManager.SetState(HeroStateType.AttackingRight, health);
-
         }
 
         public void Die()
         {
-            health = 0;
+            lives--;
             stateManager.SetState(HeroStateType.Dead, health);
-            GameContentManager.Instance.RemoveEntity(this);
+            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
+
+            // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
+            if (lives != 0)
+            {
+                GameStateManager.Instance.BeginReset();
+            } else
+            {
+                lives = 10;
+                GameStateManager.Instance.Restart();
+            }
         }
 
         public int ReportHealth()

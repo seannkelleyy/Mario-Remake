@@ -1,5 +1,6 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -64,8 +65,12 @@ namespace Mario.Input
         private Action[] LoadActions(MarioRemake game)
         {
             Action[] actions = new Action[8];
-            actions[0] = new Action(game.Exit);
-            actions[1] = new Action(game.Restart);
+            actions[0] = new Action(() =>
+            {
+                LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", 10);
+                game.Exit();
+            });
+            actions[1] = new Action(GameStateManager.Instance.Restart);
             actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right
@@ -88,7 +93,7 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
-            actions[7] = new Action(game.Pause);
+            actions[7] = new Action(GameStateManager.Instance.Pause);
             return actions;
         }
 
