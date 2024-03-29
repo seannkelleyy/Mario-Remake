@@ -1,68 +1,25 @@
-﻿using Mario.Entities.Blocks.BlockStates;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Entities.Blocks
 {
-    public abstract class AbstractBlock : IBlock
+    public abstract class AbstractBlock : AbstractCollideable, IBlock
     {
-        internal BlockState currentState;
-        internal Vector2 position;
         public bool isCollidable { get; set; }
         public bool isBreakable { get; set; }
+        public bool canBeCombined { get; set; }
 
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
-        {
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
+        public abstract void GetHit();
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Update(GameTime gameTime)
         {
-            currentState.Draw(spriteBatch, position);
-        }
-
-        public virtual void Update(GameTime gameTime)
-        {
-            currentState.Update(gameTime);
-            // Reset all collision states to false at the start of each update
             foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
             {
                 SetCollisionState((CollisionDirection)direction, false);
             }
-        }
-
-        public abstract void GetHit();
-
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-        public void SetPosition(Vector2 position)
-        {
-            this.position = position;
-        }
-
-        public bool GetCollisionState(CollisionDirection direction)
-        {
-            return collisions[direction];
-        }
-
-        public void SetCollisionState(CollisionDirection direction, bool state)
-        {
-            collisions[direction] = state;
-        }
-
-        public virtual Rectangle GetRectangle()
-        {
-            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
+            currentState.Update(gameTime);
         }
     }
 }

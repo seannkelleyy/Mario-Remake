@@ -11,11 +11,11 @@ namespace Mario.Entities.Items
             currentState = new FireFlowerState();
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
             position.Y -= 16;
-            IsVisable = true;
-            IsCollidable = true;
+            isVisible = true;
+            isCollidable = true;
         }
     }
 }

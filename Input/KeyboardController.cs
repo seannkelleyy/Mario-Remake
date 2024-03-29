@@ -4,10 +4,8 @@ using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace Mario.Input
 {
     public class KeyboardController : IController
@@ -47,6 +45,7 @@ namespace Mario.Input
             Commands.Add(Keys.S, actions[4]);
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
+            Commands.Add(Keys.G, hero.TakeDamage);
 
             // Arrow commands
             Commands.Add(Keys.Left, actions[3]);

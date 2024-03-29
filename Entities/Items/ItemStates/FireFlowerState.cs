@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Items.ItemStates;
+﻿using Mario.Entities.Abstract;
 
-public class FireFlowerState : ItemState
+namespace Mario.Entities.Items.ItemStates;
+
+public class FireFlowerState : AbstractEntityState
 {
     public FireFlowerState() : base()
     {

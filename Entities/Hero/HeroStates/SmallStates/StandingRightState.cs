@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
 
-public class StandingRightState : HeroState
+public class StandingRightState : AbstractEntityState
 {
     public StandingRightState() : base()
     {

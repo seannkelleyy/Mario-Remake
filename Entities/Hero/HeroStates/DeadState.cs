@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
 
-public class DeadState : HeroState
+public class DeadState : AbstractEntityState
 {
     public DeadState() : base()
     {

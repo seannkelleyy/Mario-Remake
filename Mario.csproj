@@ -17,6 +17,10 @@
     <None Remove="Interfaces\Entities\" />
     <None Remove="Singletons\" />
     <None Remove="Logging\logs\" />
+    <None Remove="Entities\Projectiles\Fireball\" />
+    <None Remove="Entities\Projectiles\Fireball\FireballStates\" />
+    <None Remove="Interfaces\Entities\Projectiles\" />
+    <None Remove="Entities\Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -33,6 +37,10 @@
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
+    <Folder Include="Entities\Projectiles\Fireball\" />
+    <Folder Include="Entities\Projectiles\Fireball\FireballStates\" />
+    <Folder Include="Interfaces\Entities\Projectiles\" />
+    <Folder Include="Entities\Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />

@@ -7,7 +7,6 @@
         public int startingY { get; set; }
         public int lives { get; set; }
         // true is right, false is left
-        public bool startingDirection { get; set; }
         // small, big, fire
         public string startingPower { get; set; }
     }

@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
 
-public class CrouchFireState : HeroState
+public class CrouchFireState : AbstractEntityState
 {
     public CrouchFireState() : base()
     {

@@ -50,15 +50,15 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
+            if (GameSettings.isDevelopment)
+                Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
             if (!GameStateManager.Instance.isPaused) // Normal update
             {
-                Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
                 foreach (IEntityBase entity in gameContentManager.GetEntities())
                 {
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
-
                 base.Update(gameTime);
 
             } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies

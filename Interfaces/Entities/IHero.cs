@@ -1,15 +1,13 @@
-﻿using Mario.Entities.Character.HeroStates;
-using Mario.Interfaces.Base;
-using Microsoft.Xna.Framework;
+﻿using Mario.Interfaces.Base;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
-        public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
+        public void SmallJump();
         public void StopHorizontal();
         public void StopVertical();
         public void Crouch();
@@ -18,7 +16,6 @@ namespace Mario.Interfaces.Entities
         public void Attack();
         public void Die();
         public int ReportHealth();
-        public Vector2 GetVelocity();
     }
 }
 
