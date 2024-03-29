@@ -38,25 +38,25 @@ namespace Mario.Physics
             return velocity;
         }
 
-        public bool getHorizontalDirecion()
+        public bool getHorizontalDirection()
         {
             return isRight;
         }
 
-        public void setHorizontalDirecion(bool horizontalDirection)
+        public void setHorizontalDirection(bool horizontalDirection)
         {
             isRight = horizontalDirection;
         }
 
         public float ApplyGravity()
         {
-            if (velocity.Y < Math.Abs(PhysicsVariables.maxVericalSpeed))
+            if (velocity.Y < Math.Abs(PhysicsVariables.maxVerticalSpeed))
             {
                 velocity.Y += PhysicsVariables.gravity;
             }
             else
             {
-                velocity.Y = PhysicsVariables.maxVericalSpeed;
+                velocity.Y = PhysicsVariables.maxVerticalSpeed;
             }
             return velocity.Y;
         }

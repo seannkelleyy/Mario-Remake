@@ -95,7 +95,7 @@ namespace Mario.Entities.Character
                 physics.WalkLeft();
                 return;
             }
-            physics.setHorizontalDirecion(false);
+            physics.setHorizontalDirection(false);
             stateManager.SetState(HeroStateType.MovingLeft, health);
         }
 
@@ -106,7 +106,7 @@ namespace Mario.Entities.Character
                 physics.WalkRight();
                 return;
             }
-            physics.setHorizontalDirecion(true);
+            physics.setHorizontalDirection(true);
             stateManager.SetState(HeroStateType.MovingRight, health);
 
         }
