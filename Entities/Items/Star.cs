@@ -13,10 +13,10 @@ namespace Mario.Entities.Items
             physics = new EntityPhysics(this);
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
-            IsVisable = true;
-            IsCollidable = true;
+            isVisible = true;
+            isCollidable = true;
         }
 
         // Makes the star move 

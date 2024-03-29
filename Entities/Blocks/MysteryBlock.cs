@@ -50,7 +50,7 @@ namespace Mario.Entities.Blocks
             if (currentState is not HardBlockState)
             {
                 GameContentManager.Instance.AddEntity(item);
-                item.MakeVisable();
+                item.MakeVisible();
                 currentState = new HardBlockState();
             }
             if (isBreakable) GameContentManager.Instance.RemoveEntity(this);

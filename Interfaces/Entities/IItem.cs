@@ -5,7 +5,7 @@ namespace Mario.Interfaces
 {
     public interface IItem : IEntityBase, ICollideable
     {
-        public void MakeVisable();
+        public void MakeVisible();
     }
 }
 

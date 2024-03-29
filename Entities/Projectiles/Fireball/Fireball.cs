@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Mario.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Projectiles
 {
@@ -9,6 +10,7 @@ namespace Mario.Entities.Projectiles
         {
             currentState = new FireballMovingState();
             this.position = position;
+            physics = new FireballPhysics(this);
         }
 
         public override void Update(GameTime gameTime)

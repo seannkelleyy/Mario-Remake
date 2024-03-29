@@ -26,10 +26,10 @@ namespace Mario.Entities.Items
             }
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
-            IsVisable = true;
-            IsCollidable = true;
+            isVisible = true;
+            isCollidable = true;
         }
 
         public void Move()

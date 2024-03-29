@@ -6,6 +6,6 @@
         public int startingX { get; set; }
         public float startingY { get; set; }
         // true is right, false is left
-        public bool direction { get; set; }
+        public bool isRight { get; set; }
     }
 }

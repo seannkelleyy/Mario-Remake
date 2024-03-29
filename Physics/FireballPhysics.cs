@@ -5,9 +5,9 @@ using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
 {
-    public class ProjectilePhysics : AbstractEntityPhysics
+    public class FireballPhysics : AbstractEntityPhysics
     {
-        public ProjectilePhysics(ICollideable entity) : base(entity)
+        public FireballPhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
             velocity = new Vector2(0, 0);

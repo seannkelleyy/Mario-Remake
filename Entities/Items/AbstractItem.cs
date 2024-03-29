@@ -8,13 +8,13 @@ namespace Mario.Entities.Items
 {
     public abstract class AbstractItem : AbstractCollideable, IItem
     {
-        public bool IsVisable { get; set; } = false;
-        public bool IsCollidable { get; set; } = false;
+        public bool isVisible { get; set; } = false;
+        public bool isCollidable { get; set; } = false;
 
         public new virtual void Draw(SpriteBatch spriteBatch)
         {
             // If the item is still being held by a block, it should not be drawn yet
-            if (IsVisable)
+            if (isVisible)
             {
                 currentState.Draw(spriteBatch, position);
             }
@@ -33,6 +33,6 @@ namespace Mario.Entities.Items
             }
         }
 
-        public abstract void MakeVisable();
+        public abstract void MakeVisible();
     }
 }
