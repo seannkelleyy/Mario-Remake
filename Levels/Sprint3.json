@@ -5,8 +5,8 @@
   "hero": {
     "type": "mario",
     "startingX": 5,
-    "startingY": 6,
-    "isRight": true,
+    "startingY": 1,
+    "lives": 10,
     "startingPower": "fire"
   },
   "enemies": [
@@ -70,8 +70,16 @@
     },
     {
       "type": "floor",
-      "x": 27,
+      "x": 30,
       "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "golden",
+      "x": 17,
+      "y": 9,
       "collidable": true,
       "breakable": false,
       "item": "none"

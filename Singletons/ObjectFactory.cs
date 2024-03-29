@@ -14,9 +14,9 @@ namespace Mario.Singletons
         public static ObjectFactory Instance => instance;
         private ObjectFactory() { }
 
-        public IHero CreateHero(string startingPower, Vector2 position)
+        public IHero CreateHero(string startingPower, int lives, Vector2 position)
         {
-            return new Hero(startingPower, position);
+            return new Hero(startingPower, lives, position);
         }
 
         public IEnemy CreateEnemy(string type, Vector2 position)
