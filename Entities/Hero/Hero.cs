@@ -28,9 +28,9 @@ namespace Mario.Entities.Character
 
         public Hero(string startingPower, int lives, Vector2 position)
         {
-            this.position = position;
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
+            this.position = position;
             this.lives = lives;
 
             switch (startingPower)
@@ -166,15 +166,16 @@ namespace Mario.Entities.Character
             stateManager.SetState(HeroStateType.Crouching, health);
         }
 
-        void IHero.Collect(IItem item)
+        public void Collect(IItem item)
         {
             if (health < 3)
             {
                 health++;
             }
+            stateManager.SetState(stateManager.GetStateType(), health);
         }
 
-        void IHero.TakeDamage()
+        public void TakeDamage()
         {
             if (!isInvunerable)
             {
@@ -192,10 +193,13 @@ namespace Mario.Entities.Character
             }
         }
 
-        void IHero.Attack()
+        public void Attack()
         {
-            GameContentManager.Instance.AddEntity(new Fireball(position));
-            stateManager.SetState(HeroStateType.AttackingRight, health);
+            if (health == 3) // this will need changed if we add new power-ups.
+            {
+                GameContentManager.Instance.AddEntity(new Fireball(position));
+                stateManager.SetState(HeroStateType.AttackingRight, health);
+            }
         }
 
         public void Die()

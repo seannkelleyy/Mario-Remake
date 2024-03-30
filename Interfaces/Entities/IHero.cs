@@ -11,8 +11,8 @@ namespace Mario.Interfaces.Entities
         public void StopHorizontal();
         public void StopVertical();
         public void Crouch();
-        void Collect(IItem item);
-        void TakeDamage();
+        public void Collect(IItem item);
+        public void TakeDamage();
         public void Attack();
         public void Die();
         public int ReportHealth();
