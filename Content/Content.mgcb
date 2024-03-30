@@ -49,6 +49,48 @@
 /processorParam:Quality=Best
 /build:09. Game Over.mp3
 
+#begin 1up.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:1up.mp3
+
+#begin Beep.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Beep.mp3
+
+#begin Big Jump.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Big Jump.mp3
+
+#begin Bowser Die.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Bowser Die.mp3
+
+#begin Break.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Break.mp3
+
+#begin Bump.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Bump.mp3
+
+#begin Enemy Fire.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Enemy Fire.mp3
+
 #begin enemySpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -60,6 +102,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
+
+#begin Fire Ball.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Fire Ball.mp3
+
+#begin Flagpole.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Flagpole.mp3
+
+#begin Item.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Item.mp3
 
 #begin itemSpriteSheet.png
 /importer:TextureImporter
@@ -73,6 +133,18 @@
 /processorParam:TextureFormat=Color
 /build:itemSpriteSheet.png
 
+#begin Jump.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Jump.mp3
+
+#begin Kick.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Kick.mp3
+
 #begin marioSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +156,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:marioSpriteSheet.png
+
+#begin Pause.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Pause.mp3
+
+#begin Powerup.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Powerup.mp3
 
 #begin projectileSpriteSheet.png
 /importer:TextureImporter
@@ -97,6 +181,24 @@
 /processorParam:TextureFormat=Color
 /build:projectileSpriteSheet.png
 
+#begin Skid.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Skid.mp3
+
+#begin Squish.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Squish.mp3
+
+#begin Thwomp.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Thwomp.mp3
+
 #begin tileSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,4 +210,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tileSpriteSheet.png
+
+#begin Vine.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Vine.mp3
+
+#begin Warp.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Warp.mp3
 
