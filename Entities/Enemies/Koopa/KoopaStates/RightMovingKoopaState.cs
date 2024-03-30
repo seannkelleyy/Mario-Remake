@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
+﻿using Mario.Entities.Abstract;
 
-public class RightMovingKoopaState : KoopaState
+public class RightMovingKoopaState : AbstractEntityState
 {
     public RightMovingKoopaState() : base()
     {

@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Enemy.Goomba.GoombaStates;
+﻿using Mario.Entities.Abstract;
 
-public class FlippedGoombaState : GoombaState
+public class FlippedGoombaState : AbstractEntityState
 {
     public FlippedGoombaState() : base()
     {

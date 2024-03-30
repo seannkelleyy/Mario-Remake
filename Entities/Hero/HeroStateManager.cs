@@ -1,5 +1,4 @@
-﻿using Mario.Entities.Character.HeroStates;
-using Mario.Interfaces.Entities;
+﻿using Mario.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.HeroVariables;
@@ -8,8 +7,8 @@ namespace Mario.Entities.Hero
 {
     public class HeroStateManager
     {
-        private IHero hero;
-        Dictionary<(HeroStateType, int), HeroState> stateMap = new Dictionary<(HeroStateType, int), HeroState>
+        private AbstractCollideable hero;
+        Dictionary<(HeroStateType, int), AbstractEntityState> stateMap = new Dictionary<(HeroStateType, int), AbstractEntityState>
         {
             [(HeroStateType.StandingRight, 1)] = new StandingRightState(),
             [(HeroStateType.StandingLeft, 1)] = new StandingLeftState(),
@@ -36,10 +35,11 @@ namespace Mario.Entities.Hero
             [(HeroStateType.Dead, 3)] = new DeadState(),
         };
 
-        public HeroStateManager(IHero hero)
+        public HeroStateManager(AbstractCollideable hero)
         {
             this.hero = hero;
         }
+
         public void SetState(HeroStateType state, int health)
         {
             if (stateMap.TryGetValue((state, health), out var heroState))

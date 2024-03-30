@@ -14,9 +14,9 @@ namespace Mario.Singletons
         public static ObjectFactory Instance => instance;
         private ObjectFactory() { }
 
-        public IHero CreateHero(string startingPower, Vector2 position)
+        public IHero CreateHero(string startingPower, int lives, Vector2 position)
         {
-            return new Hero(startingPower, position);
+            return new Hero(startingPower, lives, position);
         }
 
         public IEnemy CreateEnemy(string type, Vector2 position)
@@ -40,13 +40,11 @@ namespace Mario.Singletons
             switch (type)
             {
                 case "floor":
-                    return new FloorBlock(position, breakeable, collideable, item);
+                    return new FloorBlock(position, breakeable, collideable);
                 case "brick":
                     return new BrickBlock(position, breakeable, collideable, item);
-                case "coin":
-                    return new CoinBlock(position, breakeable, collideable, item);
-                case "golden":
-                    return new GoldenBlock(position, breakeable, collideable, item);
+                case "mystery":
+                    return new MysteryBlock(position, breakeable, collideable, item);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }

@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
-using System.Diagnostics;
 
 namespace Mario
 {
@@ -18,8 +17,6 @@ namespace Mario
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private MediaManager mediaManager;
-        private bool isPaused;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,8 +30,6 @@ namespace Mario
             gameContentManager = GameContentManager.Instance;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
-
-            isPaused = false;
 
             base.Initialize();
         }
@@ -58,49 +53,46 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            if (!isPaused)
+            if (GameSettings.isDevelopment)
+                Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
+            if (!GameStateManager.Instance.isPaused) // Normal update
             {
-                Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
                 foreach (IEntityBase entity in gameContentManager.GetEntities())
                 {
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
-
                 base.Update(gameTime);
 
-            } else
+            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
+                if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
+                {
+                    GameStateManager.Instance.SetResetTime(GameStateManager.Instance.resetTime + gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                else
+                {
+                    GameStateManager.Instance.EndReset();
+                    keyboardController = new KeyboardController();
+                    keyboardController.LoadCommands(this, gameContentManager.GetHero());
+                }
+            } else { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
             }
         }
 
         protected override void Draw(GameTime gameTime)
         {
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                spriteBatch.Begin();
-                foreach (IEntityBase entity in gameContentManager.GetEntities())
-                {
-                    entity.Draw(spriteBatch);
-                }
-                spriteBatch.End();
+            spriteBatch.Begin();
+            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            {
+                entity.Draw(spriteBatch);
+            }
+            spriteBatch.End();
 
-                base.Draw(gameTime);
-        }
-
-        // Restarts the game
-        public void Restart()
-        {
-            string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
-            Process.Start(currentApplication);
-            Environment.Exit(0);
-        }
-
-        // Pauses or unpauses the game
-        public void Pause()
-        {
-            isPaused = !isPaused;
+            base.Draw(gameTime);
         }
     }
 }

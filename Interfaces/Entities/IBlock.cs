@@ -6,6 +6,7 @@ namespace Mario.Interfaces
     {
         public bool isCollidable { get; set; }
         public bool isBreakable { get; set; }
+        public bool canBeCombined { get; set; }
         public void GetHit();
     }
 }

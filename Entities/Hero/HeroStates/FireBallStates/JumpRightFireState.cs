@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
 
-public class JumpRightFireState : HeroState
+public class JumpRightFireState : AbstractEntityState
 {
     public JumpRightFireState() : base()
     {

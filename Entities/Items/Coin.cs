@@ -11,10 +11,10 @@ namespace Mario.Entities.Items
             currentState = new CoinState();
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
             position.Y -= 16;
-            IsVisable = true;
+            isVisible = true;
         }
     }
 }

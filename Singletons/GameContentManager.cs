@@ -1,7 +1,7 @@
-﻿using Mario.Entities.Projectiles;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
@@ -18,7 +18,7 @@ namespace Mario.Singletons
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
-            { typeof(Fireball), new List<Fireball>() },
+            { typeof(IProjectile), new List<IProjectile>() },
             { typeof(IHero), new List<IHero>() }
         };
 
@@ -60,6 +60,15 @@ namespace Mario.Singletons
             return allCollideables;
         }
 
+        public List<IProjectile> GetProjectiles()
+        {
+            List<IProjectile> allCollideables = new List<IProjectile>();
+            foreach (IProjectile projetile in entities[typeof(IProjectile)])
+            {
+                allCollideables.Add(projetile);
+            }
+            return allCollideables;
+        }
 
         // Gets all blocks within a certain position of mario that are collideable
         public List<IBlock> GetBlocksInProximity(Vector2 position)
@@ -82,6 +91,9 @@ namespace Mario.Singletons
             blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
 
             List<IBlock> combinedBlocks = new List<IBlock>();
+            List<IBlock> nonCombinableBlocks = blocks.Where(block => block.canBeCombined == false).ToList();
+
+            blocks.RemoveAll(block => block.canBeCombined == false);
 
             for (int i = 0; i < blocks.Count;)
             {
@@ -89,19 +101,24 @@ namespace Mario.Singletons
 
                 List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
 
-                int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
-                int combinedHeight = sameLevelBlocks[0].GetRectangle().Height; // Assuming all blocks have the same height
+                if (sameLevelBlocks.Count > 0)
+                {
+                    int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
+                    int combinedHeight = sameLevelBlocks[0].GetRectangle().Height;
 
-                IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
+                    IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
 
-                combinedBlocks.Add(combinedBlock);
+                    combinedBlocks.Add(combinedBlock);
+                }
 
                 i += sameLevelBlocks.Count;
             }
 
+            // Add the non-combinable blocks at the end
+            combinedBlocks.AddRange(nonCombinableBlocks);
+
             return combinedBlocks;
         }
-
 
         public IHero GetHero()
         {
@@ -116,7 +133,6 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Add(entity);
-            //Logger.Instance.LogInformation(entity.ToString() + " added to GameContentManager");
         }
 
         public void RemoveEntity(IEntityBase entity)
@@ -127,7 +143,6 @@ namespace Mario.Singletons
             }
             Type entityType = GetEntityType(entity);
             entities[entityType].Remove(entity);
-            Logger.Instance.LogInformation(entity.ToString() + " removed from GameContentManager");
         }
 
         // Helper method to get the type of the entitys
@@ -137,7 +152,7 @@ namespace Mario.Singletons
                    entity is IEnemy ? typeof(IEnemy) :
                    entity is IItem ? typeof(IItem) :
                    entity is IBlock ? typeof(IBlock) :
-                   entity is Fireball ? typeof(Fireball): null;
+                   entity is IProjectile ? typeof(IProjectile) : null;
         }
     }
 }

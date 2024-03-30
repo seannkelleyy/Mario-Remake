@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Blocks.BlockStates
+﻿using Mario.Entities.Abstract;
+
+namespace Mario.Entities.Blocks.BlockStates
 {
-    public class FloorBlockState : BlockState
+    public class FloorBlockState : AbstractEntityState
     {
         public FloorBlockState() : base()
         {
