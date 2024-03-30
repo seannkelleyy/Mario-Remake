@@ -1,6 +1,7 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
+using Mario.Interfaces.Entities.Projectiles;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 
@@ -22,7 +23,11 @@ namespace Mario.Collisions
             }
             else if (entity is IEnemy)
             {
-                ManageEntityCollisions(entity as IEnemy);
+                ManageEnemyCollisions(entity as IEnemy);
+            }
+            else if (entity is IProjectile)
+            {
+                ManageProjectileCollisions(entity as IProjectile);
             }
         }
 
@@ -55,7 +60,7 @@ namespace Mario.Collisions
             }
         }
 
-        private void ManageEntityCollisions(IEnemy enemy)
+        private void ManageEnemyCollisions(IEnemy enemy)
         {
             EnemyCollisionHandler enemyHandler = new EnemyCollisionHandler(enemy);
 
@@ -75,6 +80,28 @@ namespace Mario.Collisions
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {
                     enemyHandler.EnemyEnemyCollision(collidingEnemy);
+                }
+            }
+        }
+
+        private void ManageProjectileCollisions(IProjectile projectile)
+        {
+            HeroCollisionHandler projectileHandler = new ProjectileCollisionHandler(projectile);
+
+            foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
+            {
+                if (projectile.GetRectangle().Intersects(block.GetRectangle()))
+                {
+                    projectileHandler.HeroBlockCollision(block);
+                }
+            }
+            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
+            {
+                if (!enemy.ReportIsAlive())
+                    return;
+                if (projectile.GetRectangle().Intersects(enemy.GetRectangle()))
+                {
+                    projectileHandler.HeroEnemyCollision(enemy);
                 }
             }
         }
