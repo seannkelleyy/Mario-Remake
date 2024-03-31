@@ -29,15 +29,15 @@ public class ProjectileCollisionHandler
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
             projectile.SetCollisionState(CollisionDirection.Right, true);
-            hero.StopHorizontal();
+            projectile.UpdateHorizontal();
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
-            hero.SetCollisionState(CollisionDirection.Top, true);
-            hero.StopVertical();
-            block.GetHit();
+            projectile.SetCollisionState(CollisionDirection.Top, true);
+            projectile.UpdateVertical();
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
             projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            projectile.UpdateVertical();
         }));
 
 
