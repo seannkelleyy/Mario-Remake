@@ -63,7 +63,7 @@ public class ProjectileCollisionHandler
     {
         this.enemy = enemy;
 
-        CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), enemy.GetRectangle(), hero.GetVelocity());
+        CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), enemy.GetRectangle(), projectile.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
@@ -72,7 +72,7 @@ public class ProjectileCollisionHandler
 
     public void ProjectileBlockCollision(IBlock block)
     {
-        CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), block.GetRectangle(), hero.GetVelocity());
+        CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), block.GetRectangle(), projectile.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             this.block = block;
