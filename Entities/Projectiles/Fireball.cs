@@ -1,6 +1,7 @@
 ﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Mario.Physics.HeroPhysics;
 
 namespace Mario.Entities.Projectiles
 {
@@ -8,9 +9,9 @@ namespace Mario.Entities.Projectiles
     {
         IFireballState fireballState;
         bool exploded;
-        public Fireball(Vector2 position, bool facingRight)
+        public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
-            fireballState = new FireballMovingState(position, facingRight);
+            fireballState = new FireballMovingState(position, currentHorizontalDirection);
             exploded = false;
         }
         public void Update(GameTime gameTime)

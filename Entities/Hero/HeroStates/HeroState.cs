@@ -2,8 +2,6 @@
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Threading;
 
 namespace Mario.Entities.Character.HeroStates
 {
@@ -11,20 +9,21 @@ namespace Mario.Entities.Character.HeroStates
     {
         protected SpriteFactory spriteFactory;
         private ISprite sprite;
-        private Hero mario;
+        protected Hero mario;
 
         public HeroState(Hero mario)
         {
             this.mario = mario;
             spriteFactory = SpriteFactory.Instance;
-            Console.WriteLine(nameof(mario.currentDirection) + this.GetType().Name + nameof(mario.currentHealth));
-            sprite = spriteFactory.CreateSprite((mario.currentDirection).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+            sprite = spriteFactory.CreateSprite((mario.getHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
         }
         public virtual void Jump()
         {
+            mario.GetPhysics().Jump();
             mario.currentState = new JumpState(mario);
         }
-        public virtual void Crouch() {
+        public virtual void Crouch()
+        {
             if (mario.currentHealth != Hero.health.Mario)
             {
                 mario.currentState = new CrouchState(mario);
@@ -33,33 +32,35 @@ namespace Mario.Entities.Character.HeroStates
         }
         public virtual void WalkLeft()
         {
-            if (mario.currentDirection == Hero.direction.right)
+            mario.GetPhysics().WalkLeft();
+            mario.currentState = new RunState(mario);
+        }
+        public virtual void Stand()
+        {
+            if (mario.GetVelocity().X == 0)
             {
-                mario.currentState = new SlideState(mario);
-            }
-            else
-            {
-                mario.currentState = new RunState(mario);
+                mario.currentState = new StandState(mario);
             }
         }
         public virtual void WalkRight()
         {
-            if (mario.currentDirection == Hero.direction.left)
-            {
-                mario.currentState=new SlideState(mario);
-            }
-            else
-            {
-                mario.currentState = new RunState(mario);
-            }
+            mario.GetPhysics().WalkRight();
+            mario.currentState = new RunState(mario);
         }
         public virtual void PowerUp()
         {
 
         }
+        public virtual void Attack()
+        {
+            if (mario.currentHealth == Hero.health.FireMario)
+            {
+                mario.currentState = new AttackState(mario, mario.currentState);
+            }
+        }
         public virtual void TakeDamage()
         {
-
+            sprite = spriteFactory.CreateSprite((mario.getHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
         }
         public virtual void Die()
         {

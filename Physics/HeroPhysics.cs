@@ -9,7 +9,8 @@ namespace Mario.Physics
     public class HeroPhysics
     {
         public Vector2 velocity;
-        public bool horizontalDirection = true; // True is right, false is left
+        public enum horizontalDirection { left, right };
+        public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
         public bool verticalDirection = true; // True is down, false is up
         private float jumpCounter = 0;
 
@@ -31,14 +32,14 @@ namespace Mario.Physics
         {
             return velocity;
         }
-        public bool getHorizontalDirecion()
+        public horizontalDirection getHorizontalDirection()
         {
-            return horizontalDirection;
+            return currentHorizontalDirection;
         }
 
-        public void setHorizontalDirecion(bool horizontalDirection)
+        public void setHorizontalDirecion(horizontalDirection newHorizontalDirection)
         {
-            this.horizontalDirection = horizontalDirection;
+            this.currentHorizontalDirection = newHorizontalDirection;
         }
 
         #region Horizontal Movement
@@ -61,7 +62,7 @@ namespace Mario.Physics
 
         public void WalkRight()
         {
-            horizontalDirection = true;
+            currentHorizontalDirection = horizontalDirection.right;
             if (!hero.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsVariables.maxRunSpeed)
@@ -73,7 +74,7 @@ namespace Mario.Physics
 
         public void WalkLeft()
         {
-            horizontalDirection = false;
+            currentHorizontalDirection = horizontalDirection.left;
             if (!hero.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsVariables.maxRunSpeed)
@@ -98,11 +99,11 @@ namespace Mario.Physics
         private void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (horizontalDirection && velocity.X > 0)
+            if (currentHorizontalDirection == horizontalDirection.right && velocity.X > 0)
             {
                 velocity.X -= PhysicsVariables.friction;
             }
-            else if (!horizontalDirection && velocity.X < 0)
+            else if (currentHorizontalDirection == horizontalDirection.left && velocity.X < 0)
             {
                 velocity.X += PhysicsVariables.friction;
             }
@@ -110,6 +111,7 @@ namespace Mario.Physics
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
+                hero.Stand();
             }
 
             hero.SetPosition(hero.GetPosition() + new Vector2(velocity.X, 0));
@@ -169,11 +171,12 @@ namespace Mario.Physics
                 else
                 { // If Mario has landed, stop moving
                     velocity.Y = 0;
+                    hero.Stand();
                 }
             }
 
             // If Mario has landed, reset the jump counter
-            if (hero.GetCollisionState(CollisionDirection.Bottom) )
+            if (hero.GetCollisionState(CollisionDirection.Bottom))
             {
                 jumpCounter = 0;
             }

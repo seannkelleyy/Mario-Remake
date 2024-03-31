@@ -1,13 +1,8 @@
 ﻿using Mario.Interfaces.Base;
-using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Mario.Physics.HeroPhysics;
 
 namespace Mario.Entities.Projectiles
 {
@@ -17,9 +12,9 @@ namespace Mario.Entities.Projectiles
         private Vector2 position;
         private float verticleVelocity = 0;
         private float horizontalVelocity;
-        public FireballMovingState(Vector2 position, bool facingRight)
+        public FireballMovingState(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
-            if (!facingRight)
+            if (currentHorizontalDirection == horizontalDirection.left)
             {
                 position = Vector2.Add(position, new Vector2(0, 16));
                 horizontalVelocity = -6.25f;

@@ -1,16 +1,25 @@
-﻿using Mario.Entities.Character.HeroStates;
-using Mario.Entities.Character;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mario.Entities.Character;
+using Mario.Entities.Character.HeroStates;
 
 
-internal class SlideState:HeroState
+internal class SlideState : HeroState
 {
     public SlideState(Hero mario) : base(mario) { }
-
+    public override void WalkLeft()
+    {
+        mario.GetPhysics().WalkLeft();
+        if (mario.GetVelocity().X < 0)
+        {
+            mario.currentState = new RunState(mario);
+        }
+    }
+    public override void WalkRight()
+    {
+        mario.GetPhysics().WalkRight();
+        if (mario.GetVelocity().X > 0)
+        {
+            mario.currentState = new RunState(mario);
+        }
+    }
 }
 

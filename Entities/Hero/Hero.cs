@@ -1,16 +1,14 @@
 using Mario.Collisions;
 using Mario.Entities.Character.HeroStates;
-using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
-using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
-using static Mario.Global.HeroVariables;
+using static Mario.Physics.HeroPhysics;
 
 
 namespace Mario.Entities.Character
@@ -21,10 +19,8 @@ namespace Mario.Entities.Character
         public HeroState currentState { get; set; }
         private Vector2 position;
         public enum health { Mario, BigMario, FireMario };
-        public health currentHealth=health.Mario;
+        public health currentHealth = health.Mario;
         // True is right, false is left
-        public enum direction { left, right };
-        public direction currentDirection = direction.left;
         private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -41,6 +37,7 @@ namespace Mario.Entities.Character
         }
         public Hero(string startingPower, Vector2 position)
         {
+            currentHealth = health.FireMario;
             this.position = position;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
@@ -92,17 +89,23 @@ namespace Mario.Entities.Character
         {
             return physics.GetVelocity();
         }
+        public horizontalDirection getHorizontalDirection()
+        {
+            return physics.getHorizontalDirection();
+        }
 
         public void WalkLeft()
         {
-            physics.WalkLeft();
             currentState.WalkLeft();
         }
 
         public void WalkRight()
         {
-            physics.WalkRight();
             currentState.WalkRight();
+        }
+        public void Stand()
+        {
+            currentState.Stand();
         }
 
         // Mario collides with wall
@@ -112,7 +115,8 @@ namespace Mario.Entities.Character
             if (collisions[CollisionDirection.Left])
             {
                 position.X += 2;
-            } else if (collisions[CollisionDirection.Right])
+            }
+            else if (collisions[CollisionDirection.Right])
             {
                 position.X -= 2;
             }
@@ -130,7 +134,6 @@ namespace Mario.Entities.Character
 
         public void Jump()
         {
-            physics.Jump();
             currentState.Jump();
         }
 
@@ -151,15 +154,20 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
-            GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirecion()));
+            currentState.Attack();
         }
 
         public void Die()
         {
             currentState.Die();
         }
-        public health ReportHealth () {
+        public health ReportHealth()
+        {
             return this.currentHealth;
+        }
+        public HeroPhysics GetPhysics()
+        {
+            return physics;
         }
     }
 }

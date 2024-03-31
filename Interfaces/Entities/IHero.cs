@@ -13,6 +13,7 @@ namespace Mario.Interfaces.Entities
         public void Jump();
         public void StopHorizontal();
         public void StopVertical();
+        public void Stand();
         public void Crouch();
         // Function to power up Hero. i.e.make big, firepower...
         void PowerUp(IItem item);
