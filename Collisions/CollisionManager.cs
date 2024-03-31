@@ -86,13 +86,13 @@ namespace Mario.Collisions
 
         private void ManageProjectileCollisions(IProjectile projectile)
         {
-            HeroCollisionHandler projectileHandler = new ProjectileCollisionHandler(projectile);
+            ProjectileCollisionHandler projectileHandler = new ProjectileCollisionHandler(projectile);
 
-            foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(hero.GetPosition()))
+            foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(projectile.GetPosition()))
             {
                 if (projectile.GetRectangle().Intersects(block.GetRectangle()))
                 {
-                    projectileHandler.HeroBlockCollision(block);
+                    projectileHandler.ProjectileBlockCollision(block);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
@@ -101,7 +101,7 @@ namespace Mario.Collisions
                     return;
                 if (projectile.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
-                    projectileHandler.HeroEnemyCollision(enemy);
+                    projectileHandler.ProjectileEnemyCollision(enemy);
                 }
             }
         }
