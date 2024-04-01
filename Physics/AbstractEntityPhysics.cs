@@ -12,6 +12,7 @@ namespace Mario.Physics
         public bool isRight = true;
         public bool isFalling = true;
         public bool isMininumJump = false;
+        public bool isDecelerating = false;
         public float jumpCounter = 0;
         public float smallJumpCounter = 0;
         public ICollideable entity;
@@ -96,13 +97,15 @@ namespace Mario.Physics
             if (jumpCounter < PhysicsVariables.minimumJump)
             {
                 isMininumJump = true;
+                isDecelerating = true;
                 return;
             }
             else if (!isFalling)
             {
-                velocity.Y = 0;
-                isFalling = true;
+                // Start decelerating
+                isDecelerating = true;
             }
         }
+
     }
 }

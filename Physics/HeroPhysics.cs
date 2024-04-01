@@ -107,11 +107,11 @@ namespace Mario.Physics
         {
             if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsVariables.minimumJump)
             {
-                StopVertical();
                 jumpCounter = PhysicsVariables.regularJumpLimit;
                 smallJumpCounter = PhysicsVariables.smallJumpLimit;
                 isFalling = true;
                 isMininumJump = false;
+                isDecelerating = true;
             }
             else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
@@ -138,6 +138,18 @@ namespace Mario.Physics
             else
             {
                 HandleUpwardMovement();
+            }
+
+            if (isDecelerating)
+            {
+                velocity.Y += PhysicsVariables.decelerationFactor;
+                if (velocity.Y >= 0)
+                {
+                    // Once upward velocity reaches 0, start falling and stop decelerating
+                    velocity.Y = 0;
+                    isFalling = true;
+                    isDecelerating = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
             StopVertical();
