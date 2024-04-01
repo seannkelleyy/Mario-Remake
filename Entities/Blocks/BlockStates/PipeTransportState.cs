@@ -6,7 +6,7 @@ namespace Mario.Entities.Blocks.BlockStates
     {
         public PipeNormalState() : base()
         {
-            sprite = spriteFactory.CreateSprite("pipe");
+            sprite = spriteFactory.CreateSprite("pipe");    //Update for exact sprite title
         }
     }
 }
