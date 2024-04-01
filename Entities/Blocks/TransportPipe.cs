@@ -14,7 +14,7 @@ namespace Mario.Entities.Blocks
         }
         public override void GetHit()
         {
-            //Pipes aren't breakable
+            //Pipes aren't breakable could be utilized for transportation
         }
     }
 }
