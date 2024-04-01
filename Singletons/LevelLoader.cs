@@ -56,6 +56,7 @@ namespace Mario.Singletons
                 IBlock blockObject = ObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.x * 16, block.y * 16), block.breakable, block.collidable, block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
             }
+
         }
 
         // Removes all entities from the GCM to prepare for reloading the level

@@ -11,5 +11,6 @@ namespace Mario.Levels.Level
         public List<LevelEnemy> enemies { get; set; }
         public List<LevelBlockSection> blockSections { get; set; }
         public List<LevelBlock> blocks { get; set; }
+
     }
 }

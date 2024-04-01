@@ -1,3 +1,4 @@
+using Mario.Global;
 using Microsoft.Xna.Framework;
 using static Mario.Global.CollisionVariables;
 
@@ -14,7 +15,7 @@ public class CollisionDetector
 
         Rectangle intersection = Rectangle.Intersect(predictedEntity1, entity2);
 
-        if (intersection.Width < 4)
+        if (intersection.Width < buffer)
             return CollisionDirection.None;
         else if (!intersection.IsEmpty)
         {
