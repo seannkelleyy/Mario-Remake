@@ -12,6 +12,7 @@
         public const float enemySpeed = 1f;
         public const int regularJumpLimit = 35;
         public const int smallJumpLimit = 10;
+        public const int minimumJump = 15;
 
         // Fireaball physics
         public const float fireballHorizontalSpeed = 6.25f;

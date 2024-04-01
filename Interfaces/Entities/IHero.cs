@@ -7,6 +7,7 @@ namespace Mario.Interfaces.Entities
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
+        public void StopJump();
         public void SmallJump();
         public void StopHorizontal();
         public void StopVertical();

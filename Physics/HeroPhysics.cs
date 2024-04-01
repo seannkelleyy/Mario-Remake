@@ -8,9 +8,6 @@ namespace Mario.Physics
 {
     public class HeroPhysics : AbstractEntityPhysics
     {
-        private float jumpCounter = 0;
-        private float smallJumpCounter = 0;
-
         public HeroPhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
@@ -108,7 +105,15 @@ namespace Mario.Physics
 
         private void HandleUpwardMovement()
         {
-            if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsVariables.minimumJump)
+            {
+                StopVertical();
+                jumpCounter = PhysicsVariables.regularJumpLimit;
+                smallJumpCounter = PhysicsVariables.smallJumpLimit;
+                isFalling = true;
+                isMininumJump = false;
+            }
+            else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
                 velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
                 smallJumpCounter++;
@@ -117,13 +122,6 @@ namespace Mario.Physics
             {
                 velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
                 jumpCounter++;
-            }
-            else if (entity.GetCollisionState(CollisionDirection.Top))
-            {
-                StopVertical();
-                jumpCounter = PhysicsVariables.regularJumpLimit;
-                smallJumpCounter = PhysicsVariables.smallJumpLimit;
-                isFalling = true;
             }
             else
             {

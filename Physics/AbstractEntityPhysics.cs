@@ -11,6 +11,9 @@ namespace Mario.Physics
         public Vector2 velocity;
         public bool isRight = true;
         public bool isFalling = true;
+        public bool isMininumJump = false;
+        public float jumpCounter = 0;
+        public float smallJumpCounter = 0;
         public ICollideable entity;
 
         public AbstractEntityPhysics(ICollideable entity)
@@ -86,6 +89,20 @@ namespace Mario.Physics
         public void StopVertical()
         {
             velocity.Y = 0;
+        }
+
+        public void StopJump()
+        {
+            if (jumpCounter < PhysicsVariables.minimumJump)
+            {
+                isMininumJump = true;
+                return;
+            }
+            else if (!isFalling)
+            {
+                velocity.Y = 0;
+                isFalling = true;
+            }
         }
     }
 }
