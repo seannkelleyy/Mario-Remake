@@ -20,8 +20,8 @@ public class SpriteVariables
             { "1up", new int[] { 0, 64, 16, 16, 1, 1, 0 } },
             //underground
             { "coinUnderground", new int[] { 0, 48, 16, 16, 4, 1, 0 } },
-            { "brickTileUnderground", new int[] { 0, 16, 16, 16, 1, 1, 1 } },
-            { "floorTileUnderground", new int[] { 32, 16, 16, 16, 1, 1, 1 } },
+            { "brickTileUnderground", new int[] { 64, 16, 16, 16, 1, 1, 1 } },
+            { "floorTileUnderground", new int[] { 48, 16, 16, 16, 1, 1, 1 } },
             { "pipeTileSideways", new int[] { 48, 32, 64, 32, 1, 1, 1 } },
             // blocks
             { "questionMarkTile", new int[] { 0, 0, 16, 16, 3, 1, 1 } },
