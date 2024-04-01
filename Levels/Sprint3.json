@@ -1,5 +1,6 @@
 {
   "level": "Sprint 3",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 26,
   "height": 18,
   "hero": {

@@ -16,7 +16,7 @@
         // Fireaball physics
         public const float fireballHorizontalSpeed = 6.25f;
         public const float fireballVerticalSpeed = .9375f;
-        public const float fireballBounceSpeed = 3.75f;
-        public const float deleteInterval = .6f;
+        public const float fireballBounceForce = 3.75f;
+        public const float fireballDeleteInterval = .6f;
     }
 }

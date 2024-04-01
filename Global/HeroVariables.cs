@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Mario.Global
+﻿namespace Mario.Global
 {
     public class HeroVariables
     {

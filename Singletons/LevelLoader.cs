@@ -2,29 +2,36 @@
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
+using Mario.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+
 namespace Mario.Singletons
 {
     public class LevelLoader
     {
         private static LevelLoader instance = new LevelLoader();
-
-        // This code follows the singleton pattern
-        // When you need a GCM, you call GameContentManager.Instance
         public static LevelLoader Instance => instance;
+        private ContentManager content;
 
-        // This is a private constructor, so no one can create a new GameContentManager
-        private LevelLoader() { }
+        private LevelLoader() {}
 
+        public void Initialize(ContentManager content)
+        {
+            this.content = content;
+        }
 
         public void LoadLevel(string levelName)
         {
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
+
+            //SpriteVariables.LoadSpriteNumbers("../../../Levels/Data/SpriteData.json");
+            SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 
             // Create the hero
             IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, level.hero.lives, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));

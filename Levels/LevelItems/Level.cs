@@ -5,6 +5,7 @@ namespace Mario.Levels.Level
 {
     public class Level
     {
+        public string pathToSpriteJson { get; set; }
         public int width { get; set; }
         public int height { get; set; }
         public LevelHero hero { get; set; }
