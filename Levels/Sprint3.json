@@ -6,21 +6,27 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "direction": true,
+    "lives": 3,
     "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 10,
+      "startingX": 5,
+      "startingY": 1,
+      "isRight": false
+    },
+    {
+      "type": "goomba",
+      "startingX": 12,
       "startingY": 12,
-      "direction": false
+      "isRight": false
     },
     {
       "type": "koopa",
       "startingX": 20,
       "startingY": 11.5,
-      "direction": false
+      "isRight": false
     }
   ],
   "blockSections": [
@@ -63,12 +69,20 @@
       "item": "none"
     },
     {
-      "type": "golden",
+      "type": "floor",
+      "x": 30,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
       "x": 17,
       "y": 9,
       "collidable": true,
       "breakable": false,
-      "item": "fireflower"
+      "item": "none"
     },
     {
       "type": "brick",
@@ -79,8 +93,48 @@
       "item": "1up"
     },
     {
-      "type": "coin",
+      "type": "mystery",
+      "x": 10,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "fireflower"
+    },
+    {
+      "type": "mystery",
       "x": 21,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 22,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "star"
+    },
+    {
+      "type": "mystery",
+      "x": 23,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 24,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 25,
       "y": 9,
       "collidable": true,
       "breakable": true,

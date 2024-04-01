@@ -1,85 +1,90 @@
 ﻿using Mario.Global;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using System;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
 {
-    public class EntityPhysics
+    public class EntityPhysics : AbstractEntityPhysics
     {
-        public Vector2 velocity;
-        public bool horizontalDirection = true; // True is right, false is left
-        public bool verticalDirection = true; // True is down, false is up
-
-        public ICollideable entity;
-
-        public EntityPhysics(ICollideable entity)
+        public EntityPhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
             velocity = new Vector2(0, 0);
         }
 
-        public void Update()
+        public override void Update()
         {
-            UpdateHorizontal();
-            UpdateVertical();
-        }
-        public Vector2 GetVelocity()
-        {
-            return velocity;
+            if (!isFalling) UpdateHorizontal();
+            else UpdateVertical();
         }
 
-        #region Horizontal Movementss
-
-        private void UpdateHorizontal()
+        internal override void UpdateHorizontal()
         {
-            if (horizontalDirection && !entity.GetCollisionState(CollisionDirection.Right))
+            if (isRight && !entity.GetCollisionState(CollisionDirection.Right))
             {
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = 2 * PhysicsVariables.enemySpeed;
+                }
+                else
+                {
                     velocity.X = PhysicsVariables.enemySpeed;
+                }
             }
-            else if (!horizontalDirection && !entity.GetCollisionState(CollisionDirection.Left))
+            else if (!isRight && !entity.GetCollisionState(CollisionDirection.Left))
             {
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = -2 * PhysicsVariables.enemySpeed;
+                }
+                else
+                {
                     velocity.X = -PhysicsVariables.enemySpeed;
-            }
-            if (entity.GetCollisionState(CollisionDirection.Left) || entity.GetCollisionState(CollisionDirection.Right))
-            {
-                horizontalDirection = !horizontalDirection;
+                }
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
-        #endregion
 
-        #region Vertical Movement
-        public float ApplyGravity()
-        {
-            if (velocity.Y < Math.Abs(PhysicsVariables.maxVericalSpeed))
-            {
-                velocity.Y += PhysicsVariables.gravity;
-            }
-            else
-            {
-                velocity.Y = PhysicsVariables.maxVericalSpeed;
-            }
-            return velocity.Y;
-        }
-
-        private void UpdateVertical()
+        internal override void UpdateVertical()
         {
 
             if (!entity.GetCollisionState(CollisionDirection.Bottom))
             {
+                isFalling = true;
                 velocity.Y += ApplyGravity();
             }
             else if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 velocity.Y = 0;
+                isFalling = false;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
             velocity.Y = 0;
         }
 
-        #endregion
+        public override void WalkLeft()
+        {
+            Logger.Instance.LogInformation("Walk left not implemented in Entity Physics");
+        }
+
+        public override void WalkRight()
+        {
+            Logger.Instance.LogInformation("Walk right not implemented in Entity Physics");
+
+        }
+
+        public override void Jump()
+        {
+            Logger.Instance.LogInformation("Jump not implemented in Entity Physics");
+
+        }
+
+        public override void SmallJump()
+        {
+            Logger.Instance.LogInformation("Small Jump left not implemented in Entity Physics");
+
+        }
     }
 }

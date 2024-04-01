@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
+﻿using Mario.Entities.Abstract;
 
-public class StompedKoopaState : KoopaState
+public class StompedKoopaState : AbstractEntityState
 {
     public StompedKoopaState() : base()
     {

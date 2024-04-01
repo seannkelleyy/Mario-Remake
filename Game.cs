@@ -7,7 +7,6 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics;
 
 namespace Mario
 {
@@ -51,14 +50,32 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            Logger.Instance.LogInformation($"----------Update @ GameTime: {gameTime.TotalGameTime}-------------");
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            if (GameSettings.isDevelopment)
+                Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
+            if (!GameStateManager.Instance.isPaused) // Normal update
             {
-                entity.Update(gameTime);
-            }
-            keyboardController.Update(gameTime);
+                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                {
+                    entity.Update(gameTime);
+                }
+                keyboardController.Update(gameTime);
+                base.Update(gameTime);
 
-            base.Update(gameTime);
+            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
+            {
+                if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
+                {
+                    GameStateManager.Instance.SetResetTime(GameStateManager.Instance.resetTime + gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                else
+                {
+                    GameStateManager.Instance.EndReset();
+                    keyboardController = new KeyboardController();
+                    keyboardController.LoadCommands(this, gameContentManager.GetHero());
+                }
+            } else { // Update during a pause
+                keyboardController.UpdatePause(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -73,14 +90,6 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        // Restarts the game
-        public void Restart()
-        {
-            string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
-            Process.Start(currentApplication);
-            Environment.Exit(0);
         }
     }
 }

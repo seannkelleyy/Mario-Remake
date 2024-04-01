@@ -12,8 +12,9 @@ public class Block : AbstractBlock
         this.position = position;
         this.width = width;
         this.height = height;
-        isCollidable = true;
         this.isBreakable = isBreakable;
+        isCollidable = true;
+        canBeCombined = true;
     }
 
     public override void GetHit()

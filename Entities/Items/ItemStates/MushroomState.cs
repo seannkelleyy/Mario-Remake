@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Items.ItemStates;
+﻿using Mario.Entities.Abstract;
 
-public class MushroomState : ItemState
+namespace Mario.Entities.Items.ItemStates;
+
+public class MushroomState : AbstractEntityState
 {
     public MushroomState() : base()
     {

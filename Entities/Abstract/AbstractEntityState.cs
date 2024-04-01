@@ -3,10 +3,10 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Mario.Entities.Character.HeroStates
+namespace Mario.Entities.Abstract
 {
-    public abstract class HeroState
-    {
+	public abstract class AbstractEntityState
+	{
         protected SpriteFactory spriteFactory;
         private ISprite sprite;
         protected Hero mario;
@@ -82,3 +82,4 @@ namespace Mario.Entities.Character.HeroStates
         }
     }
 }
+

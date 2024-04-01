@@ -1,11 +1,11 @@
 ﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace Mario.Input
 {
     public class KeyboardController : IController
@@ -45,6 +45,7 @@ namespace Mario.Input
             Commands.Add(Keys.S, actions[4]);
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
+            Commands.Add(Keys.G, hero.TakeDamage);
 
             // Arrow commands
             Commands.Add(Keys.Left, actions[3]);
@@ -63,8 +64,12 @@ namespace Mario.Input
         private Action[] LoadActions(MarioRemake game)
         {
             Action[] actions = new Action[8];
-            actions[0] = new Action(game.Exit);
-            actions[1] = new Action(game.Restart);
+            actions[0] = new Action(() =>
+            {
+                LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", 10);
+                game.Exit();
+            });
+            actions[1] = new Action(GameStateManager.Instance.Restart);
             actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right
@@ -87,6 +92,7 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
+            actions[7] = new Action(GameStateManager.Instance.Pause);
             return actions;
         }
 
@@ -103,6 +109,20 @@ namespace Mario.Input
                     {
                         Commands[key].Invoke();
                     }
+                }
+            }
+        }
+
+        public void UpdatePause(GameTime gameTime)
+        {
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= updateInterval)
+            {
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                if (keysPressed.Contains(Keys.P) || keysPressed.Contains(Keys.Escape))
+                {
+                    Commands[Keys.P].Invoke();
                 }
             }
         }

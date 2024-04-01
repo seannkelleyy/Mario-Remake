@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Items.ItemStates;
+﻿using Mario.Entities.Abstract;
 
-public class StarState : ItemState
+namespace Mario.Entities.Items.ItemStates;
+
+public class StarState : AbstractEntityState
 {
     public StarState() : base()
     {

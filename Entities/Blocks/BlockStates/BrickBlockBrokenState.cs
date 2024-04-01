@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Blocks.BlockStates
+﻿using Mario.Entities.Abstract;
+
+namespace Mario.Entities.Blocks.BlockStates
 {
-    public class BrickBlockBrokenState : BlockState
+    public class BrickBlockBrokenState : AbstractEntityState
     {
         public BrickBlockBrokenState() : base()
         {

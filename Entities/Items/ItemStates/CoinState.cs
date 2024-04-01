@@ -1,6 +1,8 @@
-﻿namespace Mario.Entities.Items.ItemStates;
+﻿using Mario.Entities.Abstract;
 
-public class CoinState : ItemState
+namespace Mario.Entities.Items.ItemStates;
+
+public class CoinState : AbstractEntityState
 {
     public CoinState() : base()
     {

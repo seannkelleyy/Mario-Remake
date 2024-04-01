@@ -6,8 +6,6 @@ namespace Mario.Entities.Items
 {
     public class Star : AbstractItem
     {
-        private EntityPhysics physics;
-
         public Star(Vector2 position)
         {
             this.position = position;
@@ -15,10 +13,10 @@ namespace Mario.Entities.Items
             physics = new EntityPhysics(this);
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
-            IsVisable = true;
-            IsCollidable = true;
+            isVisible = true;
+            isCollidable = true;
         }
 
         // Makes the star move 

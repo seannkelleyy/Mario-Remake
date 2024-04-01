@@ -21,8 +21,15 @@ public class EnemyCollisionHandler
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Left, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Right, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Left, true);
+            mainEnemy.ChangeDirection();
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
+            mainEnemy.SetCollisionState(CollisionDirection.Right, true);
+            mainEnemy.ChangeDirection();
+            }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 

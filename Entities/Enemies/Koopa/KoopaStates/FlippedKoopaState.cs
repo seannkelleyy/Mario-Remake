@@ -1,6 +1,6 @@
-﻿using Mario.Entities.Enemy.Koopa.KoopaStates;
+﻿using Mario.Entities.Abstract;
 
-public class FlippedKoopaState : KoopaState
+public class FlippedKoopaState : AbstractEntityState
 {
     public FlippedKoopaState() : base()
     {

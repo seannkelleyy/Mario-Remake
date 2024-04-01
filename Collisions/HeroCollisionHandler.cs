@@ -22,14 +22,22 @@ public class HeroCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(hero.StopHorizontal));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(hero.StopHorizontal));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => {
+            hero.SetCollisionState(CollisionDirection.Left, true);
+            hero.StopHorizontal();
+            }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
+            hero.SetCollisionState(CollisionDirection.Right, true);
+            hero.StopHorizontal();
+        }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
             hero.SetCollisionState(CollisionDirection.Top, true);
-            block.GetHit();
             hero.StopVertical();
+            block.GetHit();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => hero.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+        }));
 
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
@@ -37,7 +45,9 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.Jump();
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            hero.SmallJump();
+            hero.SetCollisionState(CollisionDirection.Bottom, false);
             enemy.Stomp();
         }));
     }
@@ -69,7 +79,6 @@ public class HeroCollisionHandler
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             this.block = block;
-            hero.SetCollisionState(direction, true);
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

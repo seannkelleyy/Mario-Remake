@@ -6,13 +6,10 @@ namespace Mario.Entities.Items
 {
     public class Mushroom : AbstractItem
     {
-        private EntityPhysics physics;
-
         public Mushroom(Vector2 position, string mushroomType)
         {
-            this.position = position;
             physics = new EntityPhysics(this);
-
+            this.position = position;
             // Set the correct sprite of this item block
             if (mushroomType.CompareTo("redMushroom") == 0)
             {
@@ -29,10 +26,10 @@ namespace Mario.Entities.Items
             }
         }
 
-        public override void MakeVisable()
+        public override void MakeVisible()
         {
-            IsVisable = true;
-            IsCollidable = true;
+            isVisible = true;
+            isCollidable = true;
         }
 
         public void Move()
