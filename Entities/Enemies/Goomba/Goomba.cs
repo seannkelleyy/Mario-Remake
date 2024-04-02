@@ -1,15 +1,14 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
-using Mario.Global;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using System;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
+    public EntityPhysics physics { get; }
     private double deadTimer = 0f;
 
     public Goomba(Vector2 position)
@@ -21,11 +20,8 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public override void Update(GameTime gameTime)
     {
-        // Reset all collision states to false at the start of each update
-        foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-        {
-            SetCollisionState((CollisionDirection)direction, false);
-        }
+        ClearCollisions();
+
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         if (deadTimer > 0)
@@ -74,5 +70,10 @@ public class Goomba : AbstractCollideable, IEnemy
     public bool ReportIsAlive()
     {
         return deadTimer == 0 ? true : false;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
     }
 }

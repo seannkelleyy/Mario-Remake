@@ -20,7 +20,7 @@ namespace Mario.Physics
         }
 
         #region horizontal movement
-        public override void WalkRight()
+        public void WalkRight()
         {
             isRight = true;
             if (!entity.GetCollisionState(CollisionDirection.Right))
@@ -32,7 +32,7 @@ namespace Mario.Physics
             }
         }
 
-        public override void WalkLeft()
+        public void WalkLeft()
         {
             isRight = false;
             if (!entity.GetCollisionState(CollisionDirection.Left))
@@ -68,7 +68,7 @@ namespace Mario.Physics
 
         #region vertical movement
 
-        public override void Jump()
+        public void Jump()
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
@@ -78,7 +78,7 @@ namespace Mario.Physics
             }
         }
 
-        public override void SmallJump()
+        public void SmallJump()
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {

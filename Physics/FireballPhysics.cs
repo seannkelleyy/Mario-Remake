@@ -25,28 +25,5 @@ namespace Mario.Physics
         internal override void UpdateVertical()
         {
         }
-
-        public override void WalkLeft()
-        {
-            Logger.Instance.LogInformation("Walk left not implemented in Projectile Physics");
-        }
-
-        public override void WalkRight()
-        {
-            Logger.Instance.LogInformation("Walk right not implemented in Projectile Physics");
-
-        }
-
-        public override void Jump()
-        {
-            Logger.Instance.LogInformation("Jump not implemented in Projectile Physics");
-
-        }
-
-        public override void SmallJump()
-        {
-            Logger.Instance.LogInformation("Small Jump left not implemented in Projectile Physics");
-
-        }
     }
 }

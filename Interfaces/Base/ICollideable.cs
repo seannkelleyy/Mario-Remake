@@ -10,6 +10,5 @@ namespace Mario.Interfaces.Base
         public bool GetCollisionState(CollisionDirection direction);
         public void SetCollisionState(CollisionDirection direction, bool state);
         public Rectangle GetRectangle();
-        public Vector2 GetVelocity();
     }
 }

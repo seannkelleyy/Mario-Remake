@@ -7,7 +7,6 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using static Mario.Global.GlobalVariables;
 
 
@@ -15,7 +14,8 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        private HeroStateManager stateManager;
+        public HeroPhysics physics { get; } 
+        private HeroStateManager stateManager; // Strategy Pattern
         private int health;
         private int startingLives;
         private int lives;
@@ -52,11 +52,7 @@ namespace Mario.Entities.Character
 
         public override void Update(GameTime gameTime)
         {
-            // Reset all collision states to false at the start of each update
-            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-            {
-                SetCollisionState((CollisionDirection)direction, false);
-            }
+            ClearCollisions();
 
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
@@ -240,6 +236,11 @@ namespace Mario.Entities.Character
         public int GetStartingLives()
         {
             return startingLives;
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
         }
     }
 }
