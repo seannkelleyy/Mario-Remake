@@ -7,7 +7,7 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 1,
+    "lives": 0,
     "startingPower": "fire"
   },
   "enemies": [
