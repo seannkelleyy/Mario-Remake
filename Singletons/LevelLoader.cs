@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Levels.Level;
@@ -30,17 +31,23 @@ namespace Mario.Singletons
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
 
-            //SpriteVariables.LoadSpriteNumbers("../../../Levels/Data/SpriteData.json");
             SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 
             // Create the hero
-            IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, level.hero.lives, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));
+            IHero hero = ObjectFactory.Instance.CreateHero(
+                level.hero.startingPower,
+                level.hero.lives,
+                new Vector2(level.hero.startingX * GlobalVariables.blockHeightWidth,
+                level.hero.startingY * GlobalVariables.blockHeightWidth));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies
             foreach (LevelEnemy enemy in level.enemies)
             {
-                IEnemy enemyObject = ObjectFactory.Instance.CreateEnemy(enemy.type, new Vector2(enemy.startingX * 16, enemy.startingY * 16));
+                IEnemy enemyObject = ObjectFactory.Instance.CreateEnemy(
+                    enemy.type,
+                    new Vector2(enemy.startingX * GlobalVariables.blockHeightWidth,
+                    enemy.startingY * GlobalVariables.blockHeightWidth));
                 GameContentManager.Instance.AddEntity(enemyObject);
             }
 
@@ -51,7 +58,12 @@ namespace Mario.Singletons
                 {
                     for (int y = blockSection.startingY; y <= blockSection.endingY; y++)
                     {
-                        IBlock block = ObjectFactory.Instance.CreateBlock(blockSection.type, new Vector2(x * 16, y * 16), blockSection.breakable, blockSection.collidable, blockSection.item);
+                        IBlock block = ObjectFactory.Instance.CreateBlock(
+                            blockSection.type,
+                            new Vector2(x * GlobalVariables.blockHeightWidth, y * GlobalVariables.blockHeightWidth),
+                            blockSection.breakable,
+                            blockSection.collidable,
+                            blockSection.item);
                         GameContentManager.Instance.AddEntity(block);
                     }
                 }
@@ -60,7 +72,12 @@ namespace Mario.Singletons
             // Create the individual blocks
             foreach (LevelBlock block in level.blocks)
             {
-                IBlock blockObject = ObjectFactory.Instance.CreateBlock(block.type, new Vector2(block.x * 16, block.y * 16), block.breakable, block.collidable, block.item);
+                IBlock blockObject = ObjectFactory.Instance.CreateBlock(
+                    block.type,
+                    new Vector2(block.x * GlobalVariables.blockHeightWidth, block.y * GlobalVariables.blockHeightWidth),
+                    block.breakable,
+                    block.collidable,
+                    block.item);
                 GameContentManager.Instance.AddEntity(blockObject);
             }
 

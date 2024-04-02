@@ -5,7 +5,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
 {
@@ -40,7 +40,7 @@ public class Koopa : AbstractCollideable, IEnemy
         {
             currentState = new StompedKoopaState();
             isShell = true;
-            position.Y += 8;
+            position.Y += halfBlockAdjustment;
         }
     }
 

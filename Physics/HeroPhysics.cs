@@ -1,8 +1,7 @@
-﻿using Mario.Global;
-using Mario.Interfaces.Base;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -29,9 +28,9 @@ namespace Mario.Physics
             isRight = true;
             if (!entity.GetCollisionState(CollisionDirection.Right))
             {
-                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                if (velocity.X < PhysicsSettings.maxRunSpeed)
                 {
-                    velocity.X += PhysicsVariables.runAcceleration;
+                    velocity.X += PhysicsSettings.runAcceleration;
                 }
             }
         }
@@ -41,9 +40,9 @@ namespace Mario.Physics
             isRight = false;
             if (!entity.GetCollisionState(CollisionDirection.Left))
             {
-                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                if (velocity.X > -PhysicsSettings.maxRunSpeed)
                 {
-                    velocity.X -= PhysicsVariables.runAcceleration;
+                    velocity.X -= PhysicsSettings.runAcceleration;
                 }
             }
         }
@@ -53,14 +52,14 @@ namespace Mario.Physics
             // If the player is not pressing any keys, apply friction
             if (isRight && velocity.X > 0)
             {
-                velocity.X -= PhysicsVariables.friction;
+                velocity.X -= PhysicsSettings.friction;
             }
             else if (!isRight && velocity.X < 0)
             {
-                velocity.X += PhysicsVariables.friction;
+                velocity.X += PhysicsSettings.friction;
             }
 
-            if (Math.Abs(velocity.X) < PhysicsVariables.friction)
+            if (Math.Abs(velocity.X) < PhysicsSettings.friction)
             {
                 velocity.X = 0;
             }
@@ -77,7 +76,7 @@ namespace Mario.Physics
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 isFalling = false;
-                velocity.Y = -PhysicsVariables.jumpForce;
+                velocity.Y = -PhysicsSettings.jumpForce;
                 jumpCounter = 1;
             }
         }
@@ -87,7 +86,7 @@ namespace Mario.Physics
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 isFalling = false;
-                velocity.Y = -PhysicsVariables.jumpForce;
+                velocity.Y = -PhysicsSettings.jumpForce;
                 smallJumpCounter = 1;
             }
         }
@@ -108,21 +107,21 @@ namespace Mario.Physics
 
         private void HandleUpwardMovement()
         {
-            if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            if (smallJumpCounter > 0 && smallJumpCounter < PhysicsSettings.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
+                velocity.Y = -PhysicsSettings.jumpForce * (1 - smallJumpCounter / PhysicsSettings.smallJumpLimit);
                 smallJumpCounter++;
             }
-            else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter < PhysicsSettings.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
+                velocity.Y = -PhysicsSettings.jumpForce * (1 - jumpCounter / PhysicsSettings.regularJumpLimit);
                 jumpCounter++;
             }
             else if (entity.GetCollisionState(CollisionDirection.Top))
             {
                 StopVertical();
-                jumpCounter = PhysicsVariables.regularJumpLimit;
-                smallJumpCounter = PhysicsVariables.smallJumpLimit;
+                jumpCounter = PhysicsSettings.regularJumpLimit;
+                smallJumpCounter = PhysicsSettings.smallJumpLimit;
                 isFalling = true;
             }
             else

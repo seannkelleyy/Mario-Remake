@@ -1,4 +1,5 @@
 ﻿using Mario.Entities.Items.ItemStates;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Items
@@ -18,7 +19,7 @@ namespace Mario.Entities.Items
 
         public override void MakeVisible()
         {
-            position.Y -= 16;
+            position.Y -= GlobalVariables.blockHeightWidth;
             isVisible = true;
         }
     }

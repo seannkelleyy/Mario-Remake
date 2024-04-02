@@ -98,7 +98,8 @@
       "x": 10,
       "y": 9,
       "collidable": true,
-      "breakable": true
+      "breakable": true,
+      "item":  "1up"
     },
     {
       "type": "mystery",

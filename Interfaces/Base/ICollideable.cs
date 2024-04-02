@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Interfaces.Base
 {

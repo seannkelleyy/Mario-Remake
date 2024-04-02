@@ -25,8 +25,6 @@ namespace Mario.Entities.Blocks
 
         public override void GetHit()
         {
-            Logger.Instance.LogInformation("brick block hit");
-
             if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
         }
     }

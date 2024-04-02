@@ -25,7 +25,6 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
 
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
             LevelLoader.Instance.Initialize(Content);
 
@@ -34,9 +33,13 @@ namespace Mario
 
         protected override void LoadContent()
         {
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
+
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            LevelLoader.Instance.LoadLevel("../../../Levels/Sprint3.json");
+            LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
 
             keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
 

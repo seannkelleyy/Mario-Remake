@@ -22,6 +22,7 @@
     <None Remove="Interfaces\Entities\Projectiles\" />
     <None Remove="Entities\Abstract\" />
     <None Remove="Levels\Data\" />
+    <None Remove="Global\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -43,6 +44,8 @@
     <Folder Include="Interfaces\Entities\Projectiles\" />
     <Folder Include="Entities\Abstract\" />
     <Folder Include="Levels\Data\" />
+    <Folder Include="Global\Settings\" />
+    <Folder Include="Global\Settings\Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />
