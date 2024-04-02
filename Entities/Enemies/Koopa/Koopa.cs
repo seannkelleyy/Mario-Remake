@@ -4,11 +4,10 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using System;
-using static Mario.Global.CollisionVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
 {
+    public EntityPhysics physics { get; }
     public bool isShell = false;
 
     public Koopa(Vector2 position)
@@ -66,5 +65,10 @@ public class Koopa : AbstractCollideable, IEnemy
     public bool ReportIsAlive()
     {
         return true;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
     }
 }

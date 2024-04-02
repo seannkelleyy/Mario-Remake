@@ -1,14 +1,12 @@
 using Mario.Collisions;
 using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
-using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using static Mario.Global.CollisionVariables;
 using static Mario.Global.HeroVariables;
 
@@ -17,6 +15,7 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
+        public HeroPhysics physics { get; } 
         private HeroStateManager stateManager; // Strategy Pattern
         private int health;
         private int lives;
@@ -231,6 +230,11 @@ namespace Mario.Entities.Character
         public int ReportHealth()
         {
             return health;
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
         }
     }
 }

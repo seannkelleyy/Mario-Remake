@@ -5,6 +5,7 @@ namespace Mario.Entities.Projectiles
 {
     public class Fireball : AbstractCollideable, IFireball
     {
+        public FireballPhysics physics { get; }
         bool exploded = false;
         public Fireball(Vector2 position)
         {
