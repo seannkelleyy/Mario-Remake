@@ -17,6 +17,7 @@ namespace Mario.Entities.Character
     public class Hero : AbstractCollideable, IHero
     {
         private HeroStateManager stateManager; // Strategy Pattern
+        private MediaManager mediaManager;
         private int health;
         private int lives;
         private bool isInvunerable;
@@ -31,6 +32,7 @@ namespace Mario.Entities.Character
             this.position = position;
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
+            mediaManager = MediaManager.Instance;
             this.lives = lives;
 
             switch (startingPower)
@@ -136,7 +138,7 @@ namespace Mario.Entities.Character
         public void Jump()
         {
             physics.Jump();
-
+            //mediaManager.PlayEffect(MediaManager.EffectNames.bigJump);
             if (physics.isRight)
             {
                 stateManager.SetState(HeroStateType.JumpingRight, health);

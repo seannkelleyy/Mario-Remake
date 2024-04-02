@@ -40,7 +40,7 @@ namespace Mario
             SpriteFactory.Instance.LoadAllTextures(Content);
             LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            mediaManager =  new MediaManager();
+            mediaManager = MediaManager.Instance;
             mediaManager.LoadContent(Content);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
@@ -87,6 +87,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            mediaManager.Draw(spriteBatch, MediaManager.Levels.level1);
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 entity.Draw(spriteBatch);
