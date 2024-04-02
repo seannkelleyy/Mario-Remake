@@ -8,9 +8,6 @@ namespace Mario.Physics
 {
     public class HeroPhysics : AbstractEntityPhysics
     {
-        private float jumpCounter = 0;
-        private float smallJumpCounter = 0;
-
         public HeroPhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
@@ -108,7 +105,15 @@ namespace Mario.Physics
 
         private void HandleUpwardMovement()
         {
-            if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsVariables.minimumJump)
+            {
+                jumpCounter = PhysicsVariables.regularJumpLimit;
+                smallJumpCounter = PhysicsVariables.smallJumpLimit;
+                isFalling = true;
+                isMininumJump = false;
+                isDecelerating = true;
+            }
+            else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
                 velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
                 smallJumpCounter++;
@@ -117,13 +122,6 @@ namespace Mario.Physics
             {
                 velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
                 jumpCounter++;
-            }
-            else if (entity.GetCollisionState(CollisionDirection.Top))
-            {
-                StopVertical();
-                jumpCounter = PhysicsVariables.regularJumpLimit;
-                smallJumpCounter = PhysicsVariables.smallJumpLimit;
-                isFalling = true;
             }
             else
             {
@@ -140,6 +138,18 @@ namespace Mario.Physics
             else
             {
                 HandleUpwardMovement();
+            }
+
+            if (isDecelerating)
+            {
+                velocity.Y += PhysicsVariables.decelerationFactor;
+                if (velocity.Y >= 0)
+                {
+                    // Once upward velocity reaches 0, start falling and stop decelerating
+                    velocity.Y = 0;
+                    isFalling = true;
+                    isDecelerating = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
             StopVertical();

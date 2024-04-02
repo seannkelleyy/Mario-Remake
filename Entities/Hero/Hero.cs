@@ -1,6 +1,7 @@
 using Mario.Collisions;
 using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -19,9 +20,9 @@ namespace Mario.Entities.Character
         private HeroStateManager stateManager; // Strategy Pattern
         private int health;
         private int lives;
-        private bool isInvunerable;
-        private double iFrames;
-        private const double invincibleTime = 3.0;
+        private bool isInvulnerable;
+        private double invulnerableFrames;
+        private const double invulnerableTime = 3.0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
         private const double flashDuration = 0.05;
@@ -46,8 +47,8 @@ namespace Mario.Entities.Character
                     break;
             }
             stateManager.SetState(HeroStateType.StandingRight, health);
-            isInvunerable = false;
-            iFrames = 0;
+            isInvulnerable = false;
+            invulnerableFrames = 0;
             this.lives = lives;
         }
 
@@ -58,10 +59,26 @@ namespace Mario.Entities.Character
             {
                 SetCollisionState((CollisionDirection)direction, false);
             }
+
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
-            // Check if Mario is invunerable 
-            if (isInvunerable)
+
+            HandleInvulnerability(gameTime);
+
+            physics.Update();
+        }
+
+        public new virtual void Draw(SpriteBatch spriteBatch)
+        {
+            if (!isFlashing || !isInvulnerable)
+            {
+                currentState.Draw(spriteBatch, position);
+            }
+        }
+
+        private void HandleInvulnerability(GameTime gameTime)
+        {
+            if (isInvulnerable)
             {
                 flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
                 if (flashIntervalTimer > flashDuration)
@@ -69,22 +86,12 @@ namespace Mario.Entities.Character
                     isFlashing = !isFlashing;
                     flashIntervalTimer = 0.0;
                 }
-                iFrames += gameTime.ElapsedGameTime.TotalSeconds;
-                if (iFrames > invincibleTime)
+                invulnerableFrames += gameTime.ElapsedGameTime.TotalSeconds;
+                if (invulnerableFrames > invulnerableTime)
                 {
-                    isInvunerable = false;
-                    iFrames = 0.0;
+                    isInvulnerable = false;
+                    invulnerableFrames = 0.0;
                 }
-            }
-
-            physics.Update();
-        }
-
-        public new virtual void Draw(SpriteBatch spriteBatch)
-        {
-            if (!isFlashing || !isInvunerable)
-            {
-                currentState.Draw(spriteBatch, position);
             }
         }
 
@@ -147,6 +154,11 @@ namespace Mario.Entities.Character
             }
         }
 
+        public void StopJump()
+        {
+            physics.StopJump();
+        }
+
         public void SmallJump()
         {
             physics.SmallJump();
@@ -177,9 +189,9 @@ namespace Mario.Entities.Character
 
         public void TakeDamage()
         {
-            if (!isInvunerable)
+            if (!isInvulnerable)
             {
-                isInvunerable = true;
+                isInvulnerable = true;
                 health--;
                 if (health == 0)
                 {
