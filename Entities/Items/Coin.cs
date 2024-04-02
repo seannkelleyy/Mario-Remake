@@ -5,10 +5,15 @@ namespace Mario.Entities.Items
 {
     public class Coin : AbstractItem
     {
-        public Coin(Vector2 position)
+        public Coin(Vector2 position, bool isUnderground = false)
         {
             this.position = position;
-            currentState = new CoinState();
+            if (isUnderground) {
+                currentState = new UndergroundCoinState();
+            } else
+            {
+                currentState = new CoinState();
+            }
         }
 
         public override void MakeVisible()

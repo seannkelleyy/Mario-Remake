@@ -12,6 +12,10 @@ namespace Mario.Physics
         public enum horizontalDirection { left, right };
         public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
         public bool isFalling = true;
+        public bool isMininumJump = false;
+        public bool isDecelerating = false;
+        public float jumpCounter = 0;
+        public float smallJumpCounter = 0;
         public ICollideable entity;
 
         public AbstractEntityPhysics(ICollideable entity)
@@ -88,5 +92,21 @@ namespace Mario.Physics
         {
             velocity.Y = 0;
         }
+
+        public void StopJump()
+        {
+            if (jumpCounter < PhysicsVariables.minimumJump)
+            {
+                isMininumJump = true;
+                isDecelerating = true;
+                return;
+            }
+            else if (!isFalling)
+            {
+                // Start decelerating
+                isDecelerating = true;
+            }
+        }
+
     }
 }

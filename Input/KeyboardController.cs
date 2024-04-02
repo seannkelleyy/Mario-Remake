@@ -11,9 +11,7 @@ namespace Mario.Input
     public class KeyboardController : IController
     {
         private Dictionary<Keys, Action> Commands;
-
-        // We will probably just instantiate these here for Spint 2 purposes,
-        // but they will be gone after that.
+        private KeyboardState previousKeyboardState;
         private IHero mario;
         private Keys[] keysPressed;
         float updateInterval = 0.1f;
@@ -25,8 +23,6 @@ namespace Mario.Input
             Commands = new Dictionary<Keys, Action>();
         }
 
-        // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
-        // to assign the functions to call when keys are pressed.
         public void LoadCommands(MarioRemake game, IHero hero)
         {
             mario = hero;
@@ -102,7 +98,8 @@ namespace Mario.Input
             if (elapsedSeconds >= updateInterval)
             {
                 elapsedSeconds = 0;
-                keysPressed = Keyboard.GetState().GetPressedKeys();
+                KeyboardState currentKeyboardState = Keyboard.GetState();
+                keysPressed = currentKeyboardState.GetPressedKeys();
                 foreach (Keys key in keysPressed)
                 {
                     if (Commands.ContainsKey(key))
@@ -110,6 +107,10 @@ namespace Mario.Input
                         Commands[key].Invoke();
                     }
                 }
+
+                CheckForStopJump(currentKeyboardState);
+
+                previousKeyboardState = currentKeyboardState; // Save the current state for the next frame
             }
         }
 
@@ -124,6 +125,17 @@ namespace Mario.Input
                 {
                     Commands[Keys.P].Invoke();
                 }
+            }
+        }
+
+        public void CheckForStopJump(KeyboardState currentKeyboardState)
+        {
+            // Check if the jump key was released
+            if (previousKeyboardState.IsKeyDown(Keys.W) && currentKeyboardState.IsKeyUp(Keys.W)
+                || previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space)
+                || previousKeyboardState.IsKeyDown(Keys.Up) && currentKeyboardState.IsKeyUp(Keys.Up))
+            {
+                mario.StopJump();
             }
         }
     }
