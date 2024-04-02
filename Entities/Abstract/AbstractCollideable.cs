@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mario.Entities.Abstract;
 using Mario.Interfaces.Base;
 using Mario.Physics;
@@ -23,6 +24,15 @@ namespace Mario.Entities
         };
 
         public abstract void Update(GameTime gameTime);
+
+        internal void ClearCollisions()
+        {
+            // Reset all collision states to false at the start of each update
+            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+            {
+                SetCollisionState((CollisionDirection)direction, false);
+            }
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

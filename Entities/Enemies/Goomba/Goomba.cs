@@ -20,11 +20,8 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public override void Update(GameTime gameTime)
     {
-        // Reset all collision states to false at the start of each update
-        foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-        {
-            SetCollisionState((CollisionDirection)direction, false);
-        }
+        ClearCollisions();
+
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         if (deadTimer > 0)

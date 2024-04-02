@@ -15,6 +15,8 @@ namespace Mario.Entities.Projectiles
 
         public override void Update(GameTime gameTime)
         {
+            ClearCollisions();
+
             currentState.Update(gameTime);
         }
 
