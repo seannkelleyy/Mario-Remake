@@ -1,7 +1,4 @@
 using Mario.Collisions;
-using Mario.Entities.Hero;
-using Mario.Entities.Projectiles;
-using Mario.Global;
 using Mario.Entities.Abstract;
 using Mario.Entities.Items;
 using Mario.Interfaces;
@@ -46,8 +43,8 @@ namespace Mario.Entities.Character
                     currentHealth = health.FireMario;
                     break;
             }
-            isInvunerable = false;
-            iFrames = 0;
+            isInvulnerable = false;
+            invulnerableFrames = 0;
             this.lives = lives;
             this.position = position;
             physics = new HeroPhysics(this);
@@ -143,6 +140,10 @@ namespace Mario.Entities.Character
         {
             physics.SmallJump();
         }
+        public void StopJump()
+        {
+            physics.StopJump();
+        }
 
         public void Crouch()
         {
@@ -187,7 +188,7 @@ namespace Mario.Entities.Character
                     Die();
                     return;
                 }
-                isInvunerable = true;
+                isInvulnerable = true;
                 if (currentHealth == health.BigMario)
                 {
                     currentHealth = health.Mario;
