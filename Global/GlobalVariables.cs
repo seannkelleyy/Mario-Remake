@@ -12,9 +12,9 @@
 
         public static int heroMaxHealth = 3;
 
-        public static float spriteUpdateInterval = .2f;
+        public static float spriteUpdateInterval = 0.175f;
 
-        public static float keyboardUpdateInterval = .1f;
+        public static float keyboardUpdateInterval = 0.05f;
 
         public enum CollisionDirection { Top, Bottom, Left, Right, None}
 

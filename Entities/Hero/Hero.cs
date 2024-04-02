@@ -15,7 +15,7 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        private HeroStateManager stateManager; // Strategy Pattern
+        private HeroStateManager stateManager;
         private int health;
         private int startingLives;
         private int lives;
@@ -57,10 +57,25 @@ namespace Mario.Entities.Character
             {
                 SetCollisionState((CollisionDirection)direction, false);
             }
+
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
 
-            // Check if Mario is invunerable 
+            HandleInvulnerability(gameTime);
+
+            physics.Update();
+        }
+
+        public new virtual void Draw(SpriteBatch spriteBatch)
+        {
+            if (!isFlashing || !isInvulnerable)
+            {
+                currentState.Draw(spriteBatch, position);
+            }
+        }
+
+        private void HandleInvulnerability(GameTime gameTime)
+        {
             if (isInvulnerable)
             {
                 flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -78,14 +93,6 @@ namespace Mario.Entities.Character
             }
 
             physics.Update();
-        }
-
-        public new virtual void Draw(SpriteBatch spriteBatch)
-        {
-            if (!isFlashing || !isInvulnerable)
-            {
-                currentState.Draw(spriteBatch, position);
-            }
         }
 
         public void WalkLeft()
@@ -145,6 +152,11 @@ namespace Mario.Entities.Character
             {
                 stateManager.SetState(HeroStateType.JumpingLeft, health);
             }
+        }
+
+        public void StopJump()
+        {
+            physics.StopJump();
         }
 
         public void SmallJump()
@@ -223,6 +235,11 @@ namespace Mario.Entities.Character
         public int ReportHealth()
         {
             return health;
+        }
+
+        public int GetStartingLives()
+        {
+            return startingLives;
         }
     }
 }

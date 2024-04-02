@@ -7,13 +7,13 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": -7,
+    "lives": 1,
     "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 5,
+      "startingX": 10,
       "startingY": 1,
       "isRight": false
     },
@@ -99,7 +99,7 @@
       "y": 9,
       "collidable": true,
       "breakable": true,
-      "item":  "1up"
+      "item": "1up"
     },
     {
       "type": "mystery",

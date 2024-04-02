@@ -28,6 +28,8 @@ public static class GameSettingsLoader
         PhysicsSettings.koopaShellSpeed = Convert.ToSingle(settings["Physics"]["koopaShellSpeed"]);
         PhysicsSettings.regularJumpLimit = Convert.ToInt32(settings["Physics"]["regularJumpLimit"]);
         PhysicsSettings.smallJumpLimit = Convert.ToInt32(settings["Physics"]["smallJumpLimit"]);
+        PhysicsSettings.minimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
+        PhysicsSettings.decelerationFactor = Convert.ToSingle(settings["Physics"]["decelerationFactor"]);
         PhysicsSettings.fireballHorizontalSpeed = Convert.ToSingle(settings["Physics"]["fireballHorizontalSpeed"]);
         PhysicsSettings.fireballVerticalSpeed = Convert.ToSingle(settings["Physics"]["fireballVerticalSpeed"]);
         PhysicsSettings.fireballBounceForce = Convert.ToSingle(settings["Physics"]["fireballBounceForce"]);

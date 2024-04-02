@@ -10,6 +10,8 @@
     public static float koopaShellSpeed { get; set; }
     public static int regularJumpLimit { get; set; }
     public static int smallJumpLimit { get; set; }
+    public static int minimumJumpLimit { get; set; }
+    public static float decelerationFactor { get; set; }
     public static float fireballHorizontalSpeed { get; set; }
     public static float fireballVerticalSpeed { get; set; }
     public static float fireballBounceForce { get; set; }

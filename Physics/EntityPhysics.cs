@@ -14,8 +14,8 @@ namespace Mario.Physics
 
         public override void Update()
         {
+            UpdateVertical();
             if (!isFalling) UpdateHorizontal();
-            else UpdateVertical();
         }
 
         internal override void UpdateHorizontal()

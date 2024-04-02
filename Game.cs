@@ -25,7 +25,6 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
 
-
             LevelLoader.Instance.Initialize(Content);
 
             base.Initialize();
