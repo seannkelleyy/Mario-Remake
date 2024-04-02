@@ -14,6 +14,8 @@
 
         public static float spriteUpdateInterval = .2f;
 
+        public static float keyboardUpdateInterval = .1f;
+
         public enum CollisionDirection { Top, Bottom, Left, Right, None}
 
         public enum HeroStateType

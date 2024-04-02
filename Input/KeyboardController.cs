@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
@@ -16,7 +17,6 @@ namespace Mario.Input
         // but they will be gone after that.
         private IHero mario;
         private Keys[] keysPressed;
-        float updateInterval = 0.1f;
         float elapsedSeconds = 0;
 
 
@@ -99,7 +99,7 @@ namespace Mario.Input
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 keysPressed = Keyboard.GetState().GetPressedKeys();
@@ -116,7 +116,7 @@ namespace Mario.Input
         public void UpdatePause(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 keysPressed = Keyboard.GetState().GetPressedKeys();

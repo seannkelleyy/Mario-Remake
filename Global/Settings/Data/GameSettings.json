@@ -28,6 +28,6 @@
     "enemyDespawnTime": 3,
     "enemyInvulnerabilityTime": 3,
     "heroInvulnerabilityTime": 3,
-    "heroFlashDuration": 0.05,
+    "heroFlashDuration": 0.05
   }
 }
