@@ -36,7 +36,7 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
-            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
+            LevelLoader.Instance.LoadLevel($"../../../Levels/1-1.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
             base.LoadContent();
@@ -61,7 +61,8 @@ namespace Mario
                 keyboardController.Update(gameTime);
                 base.Update(gameTime);
 
-            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
+            }
+            else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
                 if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
                 {
@@ -73,7 +74,9 @@ namespace Mario
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this, gameContentManager.GetHero());
                 }
-            } else { // Update during a pause
+            }
+            else
+            { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
             }
         }

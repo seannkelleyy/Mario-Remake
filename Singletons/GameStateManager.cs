@@ -1,7 +1,5 @@
-﻿using Mario.Input;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace Mario.Singletons
 {
@@ -46,7 +44,7 @@ namespace Mario.Singletons
         {
             SetResetTime(0.0);
             LevelLoader.Instance.UnloadLevel();
-            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
+            LevelLoader.Instance.LoadLevel($"../../../Levels/1-1.json");
             isResetting = false;
             Pause();
         }

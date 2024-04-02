@@ -1,7 +1,6 @@
 using Mario.Collisions;
 using Mario.Entities.Hero;
 using Mario.Entities.Projectiles;
-using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -218,7 +217,7 @@ namespace Mario.Entities.Character
         {
             lives--;
             stateManager.SetState(HeroStateType.Dead, health);
-            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
+            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/1-1.json", lives);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
             if (lives != 0)
@@ -227,7 +226,8 @@ namespace Mario.Entities.Character
             }
             else
             {
-                lives = 10;
+                lives = 3;
+                LevelLoader.Instance.ChangeMarioLives($"../../../Levels/1-1.json", lives);
                 GameStateManager.Instance.Restart();
             }
         }
