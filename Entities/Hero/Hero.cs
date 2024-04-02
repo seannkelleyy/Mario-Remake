@@ -1,23 +1,21 @@
 using Mario.Collisions;
-using Mario.Entities.Hero;
-using Mario.Entities.Projectiles;
-using Mario.Entities.Character.HeroStates;
-using Mario.Entities.Projectiles;
-using Mario.Entities.Projectiles;
+using Mario.Entities.Abstract;
+using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using static Mario.Global.CollisionVariables;
-using static Mario.Physics.HeroPhysics;
+using static Mario.Physics.AbstractEntityPhysics;
 
 
 namespace Mario.Entities.Character
 {
-        private HeroStateManager stateManager; // Strategy Pattern
-        private int health;
+    public class Hero : AbstractCollideable, IHero
+    {
         private int lives;
         private bool isInvunerable;
         private double iFrames;
@@ -26,56 +24,31 @@ namespace Mario.Entities.Character
         private double flashIntervalTimer = 0.0;
         private const double flashDuration = 0.05;
 
-        public Hero(string startingPower, int lives, Vector2 position)
-        private HeroPhysics physics; // Strategy Pattern
-        public HeroState currentState { get; set; }
-        private Vector2 position;
+        public new HeroState currentState { get; set; }
         public enum health { Mario, BigMario, FireMario };
         public health currentHealth = health.Mario;
         // True is right, false is left
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
-        private Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
-            { CollisionDirection.Top, false },
-            { CollisionDirection.Bottom, false },
-            { CollisionDirection.Left, false },
-            { CollisionDirection.Right, false },
-            { CollisionDirection.None, true }
-        };
-        public Hero(string startingPower, Vector2 position)
-        {
-            this.position = position;
-            stateManager = new HeroStateManager(this);
-            this.position = position;
-            this.lives = lives;
 
+        public Hero(string startingPower, int lives, Vector2 position)
+        {
             switch (startingPower)
             {
                 case "small":
-                    health = 1;
+                    currentHealth = health.Mario;
                     break;
                 case "big":
-                    health = 2;
+                    currentHealth = health.BigMario;
                     break;
                 case "fire":
-                    health = 3;
+                    currentHealth = health.FireMario;
                     break;
             }
-            stateManager.SetState(HeroStateType.StandingRight, health);
             isInvunerable = false;
             iFrames = 0;
             this.lives = lives;
-        }
-            currentState = new StandState(this);
-        }
-        public Hero(string startingPower, Vector2 position)
-        {
-            currentHealth = health.FireMario;
             this.position = position;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
-        }
-        }
         }
 
         public override void Update(GameTime gameTime)
@@ -102,8 +75,7 @@ namespace Mario.Entities.Character
                     iFrames = 0.0;
                 }
             }
-
-
+            currentState.Update(gameTime);
             physics.Update();
         }
 
@@ -118,19 +90,17 @@ namespace Mario.Entities.Character
         {
             return physics.getHorizontalDirection();
         }
-
+        public void WalkLeft()
+        {
             currentState.WalkLeft();
         }
-        }
-        }
-
+        public void WalkRight()
+        {
             currentState.WalkRight();
         }
         public void Stand()
         {
             currentState.Stand();
-
-
         }
 
         public void StopHorizontal()
@@ -154,72 +124,82 @@ namespace Mario.Entities.Character
                 position.Y += 5;
             }
         }
-
+        public void Jump()
+        {
             currentState.Jump();
-            physics.Jump();
-
-            if (physics.isRight)
-            {
-                stateManager.SetState(HeroStateType.JumpingRight, health);
-            }
-            else
-            {
-                stateManager.SetState(HeroStateType.JumpingLeft, health);
-            }
         }
 
         public void SmallJump()
         {
             physics.SmallJump();
-
-            if (physics.isRight)
-            {
-                stateManager.SetState(HeroStateType.JumpingRight, health);
-            }
-            else
-            {
-                stateManager.SetState(HeroStateType.JumpingLeft, health);
-            }
-            }
-            }
         }
 
         public void Crouch()
         {
             currentState.Crouch();
-        void IHero.PowerUp(IItem item)
-        {
-            currentState.PowerUp();
-            }
-            }
         }
+        void IHero.Collect(IItem item)
+        {
+            if (item.GetType().Name.Equals("FireFlower") && currentHealth != health.FireMario)
+            {
+                bool wasSmall = currentHealth == health.Mario;
+                currentHealth = health.FireMario;
+                currentState.PowerUp(wasSmall);
+            }
+            else if (item.GetType().Name.Equals("Mushroom"))
+            {
+                if (((Mushroom)item).is1up())
+                {
+                    lives++;
+                }
+                else if (currentHealth == health.Mario)
+                {
+                    currentHealth = health.BigMario;
+                    currentState.PowerUp(true);
+                }
+            }
+            else if (item.GetType().Name.Equals("Coin"))
+            {
+                //adds to the coin count (needs to be implemented with scoreboard or coin tracker)
+            }
+            else if (item.GetType().Name.Equals("Star"))
+            {
+                //activate star mode (needs star mode to be implemented)
+            }
 
+        }
+        public void TakeDamage()
+        {
             if (!isInvunerable)
             {
-                isInvunerable = true;
-                health--;
-                if (health == 0)
+                if (currentHealth == health.Mario)
                 {
                     Die();
+                    return;
                 }
-                else if (health == 1)
+                isInvunerable = true;
+                if (currentHealth == health.BigMario)
                 {
+                    currentHealth = health.Mario;
                     position.Y += 16;
                 }
-                stateManager.SetState(stateManager.GetStateType(), health);
+                else
+                {
+                    currentHealth = health.BigMario;
+                }
+                currentState.TakeDamage();
             }
-            currentState.TakeDamage();
-            }
-            }
-        void IHero.Attack()
-        {
-            currentState.Attack();
-
-
         }
 
+
+        public void Attack()
+        {
+            currentState.Attack();
+        }
+        public void Die()
+        {
             lives--;
-            stateManager.SetState(HeroStateType.Dead, health);
+            currentState.Die();
             LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
@@ -232,17 +212,15 @@ namespace Mario.Entities.Character
                 lives = 10;
                 GameStateManager.Instance.Restart();
             }
-            currentState.Die();
         }
         public health ReportHealth()
         {
             return this.currentHealth;
-            GameContentManager.Instance.RemoveEntity(this);
-            GameContentManager.Instance.RemoveEntity(this);
         }
-        public HeroPhysics GetPhysics()
+        public override Rectangle GetRectangle()
         {
-            return physics;
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
+
     }
 }

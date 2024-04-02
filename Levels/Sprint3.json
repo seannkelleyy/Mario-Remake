@@ -12,12 +12,6 @@
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 5,
-      "startingY": 1,
-      "isRight": false
-    },
-    {
-      "type": "goomba",
       "startingX": 12,
       "startingY": 12,
       "isRight": false

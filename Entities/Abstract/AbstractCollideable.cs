@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using Mario.Entities.Abstract;
+﻿using Mario.Entities.Abstract;
 using Mario.Interfaces.Base;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using static Mario.Global.CollisionVariables;
 
 namespace Mario.Entities
 {
-	public abstract class AbstractCollideable : IEntityBase, ICollideable
+    public abstract class AbstractCollideable : IEntityBase, ICollideable
     {
         internal AbstractEntityPhysics physics; // Strategy Pattern
         internal Vector2 position;
-        public AbstractEntityState currentState; 
+        public AbstractEntityState currentState;
         internal Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -57,6 +57,10 @@ namespace Mario.Entities
         public Vector2 GetVelocity()
         {
             return physics.GetVelocity();
+        }
+        internal AbstractEntityPhysics GetPhysics()
+        {
+            return physics;
         }
     }
 }

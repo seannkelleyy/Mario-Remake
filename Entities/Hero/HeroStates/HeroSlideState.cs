@@ -1,5 +1,5 @@
-﻿using Mario.Entities.Character;
-using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
 
 
 internal class SlideState : HeroState
@@ -8,7 +8,7 @@ internal class SlideState : HeroState
     public override void WalkLeft()
     {
         mario.GetPhysics().WalkLeft();
-        if (mario.GetVelocity().X < 0)
+        if (mario.GetVelocity().X <= 0)
         {
             mario.currentState = new RunState(mario);
         }
@@ -16,10 +16,11 @@ internal class SlideState : HeroState
     public override void WalkRight()
     {
         mario.GetPhysics().WalkRight();
-        if (mario.GetVelocity().X > 0)
+        if (mario.GetVelocity().X >= 0)
         {
             mario.currentState = new RunState(mario);
         }
     }
+
 }
 

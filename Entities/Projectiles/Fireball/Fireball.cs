@@ -1,32 +1,30 @@
 ﻿using Mario.Physics;
 using Microsoft.Xna.Framework;
+using static Mario.Global.CollisionVariables;
+using static Mario.Physics.AbstractEntityPhysics;
 
 namespace Mario.Entities.Projectiles
 {
     public class Fireball : AbstractCollideable, IFireball
     {
         bool exploded = false;
-        public Fireball(Vector2 position)
+        public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
             currentState = new FireballMovingState();
             this.position = position;
-            physics = new FireballPhysics(this);
+            physics = new FireballPhysics(this, currentHorizontalDirection);
         }
 
         public override void Update(GameTime gameTime)
         {
             currentState.Update(gameTime);
-        }
-
-        public void Bounce()
-        {
-        }
-        public void Explode()
-        {
+            if (this.GetCollisionState(CollisionDirection.Left) || this.GetCollisionState(CollisionDirection.Right))
+            {
+                exploded = true;
+            }
             if (!exploded)
             {
-                currentState = new FireballExplosionState();
-                exploded = true;
+                physics.Update();
             }
         }
     }

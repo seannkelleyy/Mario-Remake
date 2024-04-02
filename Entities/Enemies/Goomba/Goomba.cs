@@ -6,6 +6,7 @@ using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using System;
 using static Mario.Global.CollisionVariables;
+using static Mario.Physics.AbstractEntityPhysics;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
@@ -58,14 +59,14 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.isRight)
+        if (physics.currentHorizontalDirection == horizontalDirection.right)
         {
-            physics.isRight = false;
+            physics.currentHorizontalDirection = horizontalDirection.left;
             currentState = new LeftMovingGoombaState();
         }
         else
         {
-            physics.isRight = true;
+            physics.currentHorizontalDirection = horizontalDirection.right;
             currentState = new RightMovingGoombaState();
         }
     }

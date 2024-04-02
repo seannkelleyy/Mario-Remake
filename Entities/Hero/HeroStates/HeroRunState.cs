@@ -1,6 +1,5 @@
-﻿using Mario.Entities.Character;
-using Mario.Entities.Character.HeroStates;
-
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
 public class RunState : HeroState
 {
     public RunState(Hero mario) : base(mario) { }
@@ -20,4 +19,5 @@ public class RunState : HeroState
             mario.currentState = new SlideState(mario);
         }
     }
+
 }

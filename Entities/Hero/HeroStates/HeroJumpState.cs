@@ -1,5 +1,5 @@
-﻿using Mario.Entities.Character;
-using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
 using static Mario.Global.CollisionVariables;
 
 public class JumpState : HeroState

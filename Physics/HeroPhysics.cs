@@ -1,4 +1,5 @@
-﻿using Mario.Global;
+﻿using Mario.Entities.Character;
+using Mario.Global;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
@@ -26,7 +27,7 @@ namespace Mario.Physics
         #region horizontal movement
         public override void WalkRight()
         {
-            isRight = true;
+            currentHorizontalDirection = horizontalDirection.right;
             if (!entity.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsVariables.maxRunSpeed)
@@ -39,7 +40,7 @@ namespace Mario.Physics
         public override void WalkLeft()
         {
             currentHorizontalDirection = horizontalDirection.left;
-            if (!hero.GetCollisionState(CollisionDirection.Left))
+            if (!entity.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsVariables.maxRunSpeed)
                 {
@@ -63,7 +64,7 @@ namespace Mario.Physics
             if (Math.Abs(velocity.X) < PhysicsVariables.friction)
             {
                 velocity.X = 0;
-                hero.Stand();
+                ((Hero)entity).Stand();
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -101,6 +102,7 @@ namespace Mario.Physics
             }
             else
             {
+                ((Hero)entity).Stand();
                 smallJumpCounter = 0;
                 jumpCounter = 0;
                 StopVertical();

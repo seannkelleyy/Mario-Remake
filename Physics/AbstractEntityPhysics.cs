@@ -1,15 +1,16 @@
 ﻿using Mario.Global;
-using System;
-using Microsoft.Xna.Framework;
 using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace Mario.Physics
 {
-	public abstract class AbstractEntityPhysics
-	{
+    public abstract class AbstractEntityPhysics
+    {
 
         public Vector2 velocity;
-        public bool isRight = true;
+        public enum horizontalDirection { left, right };
+        public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
         public bool isFalling = true;
         public ICollideable entity;
 
@@ -38,14 +39,14 @@ namespace Mario.Physics
             return velocity;
         }
 
-        public bool getHorizontalDirection()
+        public horizontalDirection getHorizontalDirection()
         {
-            return isRight;
+            return currentHorizontalDirection;
         }
 
-        public void setHorizontalDirection(bool horizontalDirection)
+        public void setHorizontalDirection(horizontalDirection currentHorizontalDirection)
         {
-            isRight = horizontalDirection;
+            this.currentHorizontalDirection = currentHorizontalDirection;
         }
 
         public float ApplyGravity()

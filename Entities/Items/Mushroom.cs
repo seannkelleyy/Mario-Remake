@@ -31,6 +31,10 @@ namespace Mario.Entities.Items
             isVisible = true;
             isCollidable = true;
         }
+        public bool is1up()
+        {
+            return is1up();
+        }
 
         public void Move()
         {

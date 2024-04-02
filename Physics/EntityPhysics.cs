@@ -21,7 +21,7 @@ namespace Mario.Physics
 
         internal override void UpdateHorizontal()
         {
-            if (isRight && !entity.GetCollisionState(CollisionDirection.Right))
+            if (currentHorizontalDirection == horizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
             {
                 if (entity is Koopa koopa && koopa.isShell)
                 {
@@ -32,7 +32,7 @@ namespace Mario.Physics
                     velocity.X = PhysicsVariables.enemySpeed;
                 }
             }
-            else if (!isRight && !entity.GetCollisionState(CollisionDirection.Left))
+            else if (currentHorizontalDirection == horizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
             {
                 if (entity is Koopa koopa && koopa.isShell)
                 {

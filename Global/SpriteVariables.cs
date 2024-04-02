@@ -57,7 +57,8 @@ public class SpriteVariables
             { "leftJumpStateMario", new int[] { 0, 0, 16, 16, 1, 1, 3 } },
             { "rightRunStateMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
             { "leftStandStateMario", new int[] { 64, 0, 16, 16, 1, 1, 3 } },
-            { "deadStateMario", new int[] { 80, 0, 16, 16, 1, 1, 3 } },
+            { "leftDeadStateMario", new int[] { 80, 0, 16, 16, 1, 1, 3 } },
+            { "rightDeadStateMario", new int[] { 80, 0, 16, 16, 1, 1, 3 } },
             { "rightSlideStateMario", new int[] { 96, 16, 16, 16, 1, 1, 3 } },
             { "leftSlideStateMario", new int[] { 96, 0, 16, 16, 1, 1, 3 } },
 
@@ -65,15 +66,15 @@ public class SpriteVariables
             { "leftJumpStateBigMario", new int[] { 0, 32, 16, 32, 1, 1, 3 } },
             { "leftRunStateBigMario", new int[] { 16, 32, 16, 32, 3, 1, 3 } },
             { "leftStandStateBigMario", new int[] { 64, 32, 16, 32, 1, 1, 3 } },
-            { "leftCrouchStateBigMario", new int[] { 80, 32, 16, 22, 1, 1, 3 } },
-            { "rightJumpStateBigMario", new int[] { 0, 64, 16, 32, 1, 1, 3 } },
+            { "leftCrouchStateBigMario", new int[] { 80, 32, 16, 32, 1, 1, 3 } },
+            { "rightJumpStateBigMario", new int[] { 0, 64, 16, 31, 1, 1, 3 } },
             { "rightRunStateBigMario", new int[] { 16, 64, 16, 32, 3, 1, 3 } },
             { "rightStandStateBigMario", new int[] { 64, 64, 16, 32, 1, 1, 3 } },
-            { "rightCrouchStateBigMario", new int[] { 80, 64, 16, 22, 1, 1, 3 } },
+            { "rightCrouchStateBigMario", new int[] { 80, 64, 16, 32, 1, 1, 3 } },
             { "leftSlideStateBigMario", new int[] { 96, 32, 16, 32, 1, 1, 3 } },
             { "rightSlideStateBigMario", new int[] { 96, 64, 16, 32, 1, 1, 3 } },
             //fire mario
-            { "rightJumpStateFireMario", new int[] { 0, 96, 16, 32, 1, 1, 3 } },
+            { "rightJumpStateFireMario", new int[] { 0, 96, 16, 31, 1, 1, 3 } },
             { "rightRunStateFireMario", new int[] { 16, 96, 16, 32, 3, 1, 3 } },
             { "rightStandStateFireMario", new int[] { 64, 96, 16, 32, 1, 1, 3 } },
             { "rightCrouchStateFireMario", new int[] { 80, 96, 16, 32, 1, 1, 3 } },
@@ -85,7 +86,11 @@ public class SpriteVariables
             { "rightSlideStateFireMario",new int[] { 96, 96, 16, 32, 1, 1, 3 }},
             { "leftAttackStateFireMario", new int[] { 16, 128, 16, 32, 1, 1, 3 }  },
             { "rightAttackStateFireMario",new int[] { 16, 96, 16, 32, 1, 1, 3 }  },
-
+            //power Up animations
+            {"leftPowerUpStateBigMario",new int[] {0, 0, 16, 32, 7, 1, 5 } },
+            {"rightPowerUpStateBigMario",new int[] {0, 32, 16, 32, 7, 1, 5 } },
+            {"rightPowerUpStateFireMario",new int[] {0, 64, 16, 32, 7, 1, 5 } },
+            {"leftPowerUpStateFireMario",new int[] {0, 96, 16, 32, 7, 1, 5 } },
              //fireball
             { "fireball", new int[] { 0, 0, 8, 8, 2, 1, 4 } } ,
             { "fireballExplosion", new int[] { 0, 8, 16, 16, 3, 1, 4 } }

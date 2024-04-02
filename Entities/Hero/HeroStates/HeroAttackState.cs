@@ -1,5 +1,5 @@
-﻿using Mario.Entities.Character;
-using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
 using Mario.Entities.Projectiles;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
@@ -30,10 +30,11 @@ internal class AttackState : HeroState
     {
     }
     public override void Crouch() { }
-
-
-
-
+    public override void TakeDamage()
+    {
+        mario.currentState = new StandState(mario);
+        mario.currentState.TakeDamage();
+    }
 
     public override void Update(GameTime gameTime)
     {
