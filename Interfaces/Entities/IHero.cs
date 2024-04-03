@@ -20,6 +20,7 @@ namespace Mario.Interfaces.Entities
         public void Attack();
         public void Die();
         public int ReportHealth();
+        public int GetStartingLives();
         public Vector2 GetVelocity();
     }
 }

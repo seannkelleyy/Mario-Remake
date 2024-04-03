@@ -4,7 +4,7 @@ using Mario.Entities.Abstract;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities
 {

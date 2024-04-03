@@ -7,8 +7,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Mario.Global.CollisionVariables;
-using static Mario.Global.HeroVariables;
+using static Mario.Global.GlobalVariables;
 
 
 namespace Mario.Entities.Character
@@ -18,19 +17,19 @@ namespace Mario.Entities.Character
         public HeroPhysics physics { get; } 
         private HeroStateManager stateManager; // Strategy Pattern
         private int health;
+        private int startingLives;
         private int lives;
         private bool isInvulnerable;
-        private double invulnerableFrames;
-        private const double invulnerableTime = 3.0;
+        private double invulnerabilityFrames;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
-        private const double flashDuration = 0.05;
 
         public Hero(string startingPower, int lives, Vector2 position)
         {
             physics = new HeroPhysics(this);
             stateManager = new HeroStateManager(this);
             this.position = position;
+            startingLives = lives;
             this.lives = lives;
 
             switch (startingPower)
@@ -47,7 +46,7 @@ namespace Mario.Entities.Character
             }
             stateManager.SetState(HeroStateType.StandingRight, health);
             isInvulnerable = false;
-            invulnerableFrames = 0;
+            invulnerabilityFrames = 0;
             this.lives = lives;
         }
 
@@ -76,18 +75,20 @@ namespace Mario.Entities.Character
             if (isInvulnerable)
             {
                 flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                if (flashIntervalTimer > flashDuration)
+                if (flashIntervalTimer > EntitySettings.heroFlashDuration)
                 {
                     isFlashing = !isFlashing;
                     flashIntervalTimer = 0.0;
                 }
-                invulnerableFrames += gameTime.ElapsedGameTime.TotalSeconds;
-                if (invulnerableFrames > invulnerableTime)
+                invulnerabilityFrames += gameTime.ElapsedGameTime.TotalSeconds;
+                if (invulnerabilityFrames > EntitySettings.heroInvulnerabilityTime)
                 {
                     isInvulnerable = false;
-                    invulnerableFrames = 0.0;
+                    invulnerabilityFrames = 0.0;
                 }
             }
+
+            physics.Update();
         }
 
         public void WalkLeft()
@@ -118,11 +119,11 @@ namespace Mario.Entities.Character
             physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
-                position.X += 2;
+                position.X += horizontalBlockCollisionAdjustment;
             }
             else if (collisions[CollisionDirection.Right])
             {
-                position.X -= 2;
+                position.X -= horizontalBlockCollisionAdjustment;
             }
         }
 
@@ -131,7 +132,7 @@ namespace Mario.Entities.Character
             physics.StopVertical();
             if (collisions[CollisionDirection.Top])
             {
-                position.Y += 5;
+                position.Y += topBlockCollisionAdjustment;
             }
         }
 
@@ -175,7 +176,7 @@ namespace Mario.Entities.Character
 
         public void Collect(IItem item)
         {
-            if (health < 3)
+            if (health < heroMaxHealth)
             {
                 health++;
             }
@@ -192,9 +193,9 @@ namespace Mario.Entities.Character
                 {
                     Die();
                 }
-                else if (health == 1)
+                else if (health == 1) // mario becomes small and his height needs adjsuted.
                 {
-                    position.Y += 16;
+                    position.Y += blockHeightWidth;
                 }
                 stateManager.SetState(stateManager.GetStateType(), health);
             }
@@ -202,7 +203,7 @@ namespace Mario.Entities.Character
 
         public void Attack()
         {
-            if (health == 3) // this will need changed if we add new power-ups.
+            if (health == heroMaxHealth) // this will need changed if we add new power-ups.
             {
                 GameContentManager.Instance.AddEntity(new Fireball(position));
                 stateManager.SetState(HeroStateType.AttackingRight, health);
@@ -213,7 +214,7 @@ namespace Mario.Entities.Character
         {
             lives--;
             stateManager.SetState(HeroStateType.Dead, health);
-            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, lives);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
             if (lives != 0)
@@ -222,7 +223,7 @@ namespace Mario.Entities.Character
             }
             else
             {
-                lives = 10;
+                lives = startingLives;
                 GameStateManager.Instance.Restart();
             }
         }
@@ -230,6 +231,11 @@ namespace Mario.Entities.Character
         public int ReportHealth()
         {
             return health;
+        }
+
+        public int GetStartingLives()
+        {
+            return startingLives;
         }
 
         public Vector2 GetVelocity()
