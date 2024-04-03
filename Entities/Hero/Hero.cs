@@ -1,6 +1,4 @@
 using Mario.Collisions;
-using Mario.Entities.Hero;
-using Mario.Entities.Projectiles;
 using Mario.Entities.Abstract;
 using Mario.Entities.Items;
 using Mario.Interfaces;
@@ -17,9 +15,7 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        public HeroPhysics physics { get; } 
-        private HeroStateManager stateManager; // Strategy Pattern
-        private int health;
+        public HeroPhysics physics { get; }
         private int lives;
         private bool isInvulnerable;
         private double invulnerableFrames;
@@ -236,6 +232,10 @@ namespace Mario.Entities.Character
         public Vector2 GetVelocity()
         {
             return physics.GetVelocity();
+        }
+        public HeroPhysics GetPhysics()
+        {
+            return physics;
         }
     }
 }

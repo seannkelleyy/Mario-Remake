@@ -4,6 +4,7 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using static Mario.Physics.AbstractEntityPhysics;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
