@@ -7,6 +7,7 @@ namespace Mario.Entities.Projectiles
 {
     public class Fireball : AbstractCollideable, IFireball
     {
+        public FireballPhysics physics { get; }
         bool exploded = false;
         public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
@@ -17,6 +18,8 @@ namespace Mario.Entities.Projectiles
 
         public override void Update(GameTime gameTime)
         {
+            ClearCollisions();
+
             currentState.Update(gameTime);
             if (this.GetCollisionState(CollisionDirection.Left) || this.GetCollisionState(CollisionDirection.Right))
             {

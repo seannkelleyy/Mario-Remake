@@ -6,6 +6,7 @@ namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
+        public HeroPhysics physics { get; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();

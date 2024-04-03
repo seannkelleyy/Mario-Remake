@@ -30,14 +30,6 @@ namespace Mario.Physics
 
         internal abstract void UpdateVertical();
 
-        public abstract void WalkLeft();
-
-        public abstract void WalkRight();
-
-        public abstract void Jump();
-
-        public abstract void SmallJump();
-
         public Vector2 GetVelocity()
         {
             return velocity;

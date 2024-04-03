@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces;
+using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -8,6 +9,8 @@ namespace Mario.Entities.Items
 {
     public abstract class AbstractItem : AbstractCollideable, IItem
     {
+        public EntityPhysics physics { get; set; }
+
         public bool isVisible { get; set; } = false;
         public bool isCollidable { get; set; } = false;
 

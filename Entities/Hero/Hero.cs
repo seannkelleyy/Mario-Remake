@@ -1,4 +1,6 @@
 using Mario.Collisions;
+using Mario.Entities.Hero;
+using Mario.Entities.Projectiles;
 using Mario.Entities.Abstract;
 using Mario.Entities.Items;
 using Mario.Interfaces;
@@ -7,7 +9,6 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using static Mario.Global.CollisionVariables;
 using static Mario.Physics.AbstractEntityPhysics;
 
@@ -16,6 +17,9 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
+        public HeroPhysics physics { get; } 
+        private HeroStateManager stateManager; // Strategy Pattern
+        private int health;
         private int lives;
         private bool isInvulnerable;
         private double invulnerableFrames;
@@ -53,11 +57,7 @@ namespace Mario.Entities.Character
 
         public override void Update(GameTime gameTime)
         {
-            // Reset all collision states to false at the start of each update
-            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-            {
-                SetCollisionState((CollisionDirection)direction, false);
-            }
+            ClearCollisions();
 
             currentState.Update(gameTime);
             CollisionManager.Instance.Run(this);
@@ -233,5 +233,9 @@ namespace Mario.Entities.Character
             return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
 
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
+        }
     }
 }
