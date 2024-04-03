@@ -10,27 +10,13 @@
 
         public static int topBlockCollisionAdjustment = 5;
 
-        public static int heroMaxHealth = 3;
-
         public static float spriteUpdateInterval = 0.175f;
+
 
         public static float keyboardUpdateInterval = 0.05f;
 
-        public enum CollisionDirection { Top, Bottom, Left, Right, None}
-
-        public enum HeroStateType
-        {
-            StandingRight,
-            StandingLeft,
-            MovingRight,
-            MovingLeft,
-            JumpingRight,
-            JumpingLeft,
-            AttackingRight,
-            AttackingLeft,
-            Crouching,
-            Dead
-        }
+        public enum CollisionDirection { Top, Bottom, Left, Right, None }
+        public enum horizontalDirection { left, right };
 
         public enum BlockType
         {

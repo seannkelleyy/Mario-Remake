@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 
 internal class AttackState : HeroState
 {
-    private float updateInterval = .25f;
     private float elapsedSeconds = 0;
     private HeroState previousState;
     public AttackState(Hero mario, HeroState previousState) : base(mario)
@@ -40,7 +39,7 @@ internal class AttackState : HeroState
     {
         base.Update(gameTime);
         elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (elapsedSeconds >= updateInterval)
+        if (elapsedSeconds >= EntitySettings.heroAttackTime)
         {
             mario.currentState = previousState;
         }

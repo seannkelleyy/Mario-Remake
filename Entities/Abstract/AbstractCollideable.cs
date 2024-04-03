@@ -2,6 +2,8 @@
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities

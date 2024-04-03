@@ -1,5 +1,6 @@
 ﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -9,13 +10,13 @@ namespace Mario.Physics
         {
             if (currentHorizontalDirection == horizontalDirection.left)
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(0, 16));
-                velocity = new Vector2(-6.25f, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(0, blockHeightWidth));
+                velocity = new Vector2(-PhysicsSettings.fireballHorizontalSpeed, 0);
             }
             else
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(16, 16));
-                velocity = new Vector2(6.25f, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(blockHeightWidth, blockHeightWidth));
+                velocity = new Vector2(PhysicsSettings.fireballHorizontalSpeed, 0);
             }
             this.entity = entity;
         }
@@ -28,17 +29,17 @@ namespace Mario.Physics
 
         internal override void UpdateHorizontal()
         {
-
+            entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
 
         internal override void UpdateVertical()
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
-                velocity.Y = -3.75f;
+                velocity.Y = -PhysicsSettings.fireballBounceForce;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y += .9375f;
+            velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
         }
     }
 }

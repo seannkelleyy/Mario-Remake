@@ -7,7 +7,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 using static Mario.Physics.AbstractEntityPhysics;
 
 
@@ -15,10 +15,9 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        public HeroPhysics physics { get; } 
-        private HeroStateManager stateManager; // Strategy Pattern
-        private int health;
+        public HeroPhysics physics { get; }
         private int lives;
+        private int startingLives;
         private bool isInvulnerable;
         private double invulnerabilityFrames;
         private bool isFlashing = false;
@@ -46,6 +45,7 @@ namespace Mario.Entities.Character
             isInvulnerable = false;
             invulnerabilityFrames = 0;
             this.lives = lives;
+            startingLives = lives;
             this.position = position;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
@@ -209,7 +209,7 @@ namespace Mario.Entities.Character
         {
             lives--;
             currentState.Die();
-            LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, lives);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
             if (lives != 0)

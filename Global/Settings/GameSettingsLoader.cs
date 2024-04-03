@@ -31,7 +31,7 @@ public static class GameSettingsLoader
         PhysicsSettings.minimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
         PhysicsSettings.decelerationFactor = Convert.ToSingle(settings["Physics"]["decelerationFactor"]);
         PhysicsSettings.fireballHorizontalSpeed = Convert.ToSingle(settings["Physics"]["fireballHorizontalSpeed"]);
-        PhysicsSettings.fireballVerticalSpeed = Convert.ToSingle(settings["Physics"]["fireballVerticalSpeed"]);
+        PhysicsSettings.fireballVerticalAcceleration = Convert.ToSingle(settings["Physics"]["fireballVerticalAcceleration"]);
         PhysicsSettings.fireballBounceForce = Convert.ToSingle(settings["Physics"]["fireballBounceForce"]);
         PhysicsSettings.fireballDeleteInterval = Convert.ToSingle(settings["Physics"]["fireballDeleteInterval"]);
 
@@ -43,5 +43,8 @@ public static class GameSettingsLoader
         EntitySettings.enemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
         EntitySettings.heroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
         EntitySettings.heroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
+        EntitySettings.heroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
+        EntitySettings.heroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
+
     }
 }

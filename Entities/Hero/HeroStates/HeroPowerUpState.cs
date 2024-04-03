@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 
 public class PowerUpState : HeroState
 {
-    private float updateInterval = 1.8f;
     private float elapsedSeconds = 0;
     private HeroState previousState;
     public PowerUpState(Hero mario, HeroState previousState) : base(mario)
@@ -37,7 +36,7 @@ public class PowerUpState : HeroState
     {
         base.Update(gameTime);
         elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (elapsedSeconds >= updateInterval)
+        if (elapsedSeconds >= EntitySettings.heroAnimationLength)
         {
             mario.currentState = previousState;
         }

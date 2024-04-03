@@ -24,6 +24,7 @@ namespace Mario.Interfaces.Entities
         public void Die();
 
         public health ReportHealth();
+        public int GetStartingLives();
         public Vector2 GetVelocity();
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Mario.Interfaces.Base;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -10,7 +9,6 @@ namespace Mario.Physics
     {
 
         public Vector2 velocity;
-        public enum horizontalDirection { left, right };
         public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
         public bool isFalling = true;
         public bool isMininumJump = false;

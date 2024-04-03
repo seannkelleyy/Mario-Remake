@@ -18,7 +18,7 @@
     "minimumJumpLimit": 40,
     "decelerationFactor": 1.25,
     "fireballHorizontalSpeed": 6.25,
-    "fireballVerticalSpeed": 0.9375,
+    "fireballVerticalAcceleration": 0.9375,
     "fireballBounceForce": 3.75,
     "fireballDeleteInterval": 0.6
   },
@@ -30,6 +30,8 @@
     "enemyDespawnTime": 3,
     "enemyInvulnerabilityTime": 3,
     "heroInvulnerabilityTime": 3,
-    "heroFlashDuration": 0.05
+    "heroFlashDuration": 0.05,
+    "heroAttackTime": 0.25,
+    "heroAnimationLength": 1.3
   }
 }
