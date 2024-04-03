@@ -3,7 +3,7 @@ using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
 using System.Collections.Generic;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class HeroCollisionHandler
 {

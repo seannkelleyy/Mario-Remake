@@ -1,4 +1,5 @@
-﻿using Mario.Global;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
@@ -47,30 +48,30 @@ namespace Mario.Physics
 
         public float ApplyGravity()
         {
-            if (velocity.Y < Math.Abs(PhysicsVariables.maxVerticalSpeed))
+            if (velocity.Y < Math.Abs(PhysicsSettings.maxVerticalSpeed))
             {
-                velocity.Y += PhysicsVariables.gravity;
+                velocity.Y += PhysicsSettings.gravity;
             }
             else
             {
-                velocity.Y = PhysicsVariables.maxVerticalSpeed;
+                velocity.Y = PhysicsSettings.maxVerticalSpeed;
             }
             return velocity.Y;
         }
 
         public float ApplyFriction()
         {
-            if (velocity.X < PhysicsVariables.friction && velocity.X > -PhysicsVariables.friction)
+            if (velocity.X < PhysicsSettings.friction && velocity.X > -PhysicsSettings.friction)
             {
                 return 0;
             }
             else if (velocity.X > 0)
             {
-                velocity.X -= PhysicsVariables.friction;
+                velocity.X -= PhysicsSettings.friction;
             }
             else if (velocity.X < 0)
             {
-                velocity.X += PhysicsVariables.friction;
+                velocity.X += PhysicsSettings.friction;
             }
             return velocity.X;
         }
@@ -87,7 +88,7 @@ namespace Mario.Physics
 
         public void StopJump()
         {
-            if (jumpCounter < PhysicsVariables.minimumJump)
+            if (jumpCounter < PhysicsSettings.minimumJumpLimit)
             {
                 isMininumJump = true;
                 isDecelerating = true;

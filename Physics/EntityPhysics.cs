@@ -1,7 +1,6 @@
-﻿using Mario.Global;
-using Mario.Interfaces.Base;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -25,22 +24,22 @@ namespace Mario.Physics
             {
                 if (entity is Koopa koopa && koopa.isShell)
                 {
-                    velocity.X = 2 * PhysicsVariables.enemySpeed;
+                    velocity.X = PhysicsSettings.koopaShellSpeed;
                 }
                 else
                 {
-                    velocity.X = PhysicsVariables.enemySpeed;
+                    velocity.X = PhysicsSettings.enemySpeed;
                 }
             }
             else if (currentHorizontalDirection == horizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
             {
                 if (entity is Koopa koopa && koopa.isShell)
                 {
-                    velocity.X = -2 * PhysicsVariables.enemySpeed;
+                    velocity.X = -PhysicsSettings.koopaShellSpeed;
                 }
                 else
                 {
-                    velocity.X = -PhysicsVariables.enemySpeed;
+                    velocity.X = -PhysicsSettings.enemySpeed;
                 }
             }
 

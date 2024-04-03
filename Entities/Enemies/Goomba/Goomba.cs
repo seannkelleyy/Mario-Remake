@@ -4,7 +4,7 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using static Mario.Physics.AbstractEntityPhysics;
+using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
@@ -27,7 +27,7 @@ public class Goomba : AbstractCollideable, IEnemy
         if (deadTimer > 0)
         {
             deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (deadTimer > 3)
+            if (deadTimer > EntitySettings.enemyDespawnTime)
             {
                 GameContentManager.Instance.RemoveEntity(this);
             }
@@ -43,7 +43,7 @@ public class Goomba : AbstractCollideable, IEnemy
     {
         if (deadTimer > 0) return;
         currentState = new StompedGoombaState();
-        position.Y += 8;
+        position.Y += halfBlockAdjustment;
         deadTimer = 1;
     }
 

@@ -1,6 +1,5 @@
 ﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
 
 namespace Mario.Physics
 {
@@ -30,7 +29,6 @@ namespace Mario.Physics
         internal override void UpdateHorizontal()
         {
 
-            entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
 
         internal override void UpdateVertical()

@@ -15,14 +15,14 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        public HeroPhysics physics { get; }
+        public HeroPhysics physics { get; } 
+        private HeroStateManager stateManager; // Strategy Pattern
+        private int health;
         private int lives;
         private bool isInvulnerable;
-        private double invulnerableFrames;
-        private const double invulnerableTime = 3.0;
+        private double invulnerabilityFrames;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
-        private const double flashDuration = 0.05;
 
         public new HeroState currentState { get; set; }
         public enum health { Mario, BigMario, FireMario };
@@ -44,7 +44,7 @@ namespace Mario.Entities.Character
                     break;
             }
             isInvulnerable = false;
-            invulnerableFrames = 0;
+            invulnerabilityFrames = 0;
             this.lives = lives;
             this.position = position;
             physics = new HeroPhysics(this);
@@ -76,18 +76,20 @@ namespace Mario.Entities.Character
             if (isInvulnerable)
             {
                 flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                if (flashIntervalTimer > flashDuration)
+                if (flashIntervalTimer > EntitySettings.heroFlashDuration)
                 {
                     isFlashing = !isFlashing;
                     flashIntervalTimer = 0.0;
                 }
-                invulnerableFrames += gameTime.ElapsedGameTime.TotalSeconds;
-                if (invulnerableFrames > invulnerableTime)
+                invulnerabilityFrames += gameTime.ElapsedGameTime.TotalSeconds;
+                if (invulnerabilityFrames > EntitySettings.heroInvulnerabilityTime)
                 {
                     isInvulnerable = false;
-                    invulnerableFrames = 0.0;
+                    invulnerabilityFrames = 0.0;
                 }
             }
+
+            physics.Update();
         }
         public horizontalDirection getHorizontalDirection()
         {
@@ -111,11 +113,11 @@ namespace Mario.Entities.Character
             physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
-                position.X += 2;
+                position.X += horizontalBlockCollisionAdjustment;
             }
             else if (collisions[CollisionDirection.Right])
             {
-                position.X -= 2;
+                position.X -= horizontalBlockCollisionAdjustment;
             }
         }
 
@@ -124,7 +126,7 @@ namespace Mario.Entities.Character
             physics.StopVertical();
             if (collisions[CollisionDirection.Top])
             {
-                position.Y += 5;
+                position.Y += topBlockCollisionAdjustment;
             }
         }
         public void Jump()
@@ -216,7 +218,7 @@ namespace Mario.Entities.Character
             }
             else
             {
-                lives = 10;
+                lives = startingLives;
                 GameStateManager.Instance.Restart();
             }
         }
@@ -227,6 +229,11 @@ namespace Mario.Entities.Character
         public override Rectangle GetRectangle()
         {
             return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
+        }
+
+        public int GetStartingLives()
+        {
+            return startingLives;
         }
 
         public Vector2 GetVelocity()
