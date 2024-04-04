@@ -15,6 +15,8 @@ public static class GameSettingsLoader
 
         // Load GameSettings
         GameSettings.frameRate = Convert.ToInt32(settings["GameSettings"]["frameRate"]);
+        GameSettings.cameraStartingX = Convert.ToSingle(settings["GameSettings"]["cameraStartingX"]);
+        GameSettings.cameraStartingY = Convert.ToSingle(settings["GameSettings"]["cameraStartingY"]);
         GameSettings.isDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
 
         // Load PhysicsSettings
