@@ -77,7 +77,8 @@ namespace Mario.Singletons
             List<IBlock> blocks = new List<IBlock>();
             foreach (IBlock block in entities[typeof(IBlock)])
             {
-                if (block.GetPosition().X <= position.X + 48 && block.GetPosition().X >= position.X - 48 && block.isCollidable)
+                if (block.GetPosition().X <= position.X + CollisionSettings.collisionPixelRadius
+                    && block.GetPosition().X >= position.X - CollisionSettings.collisionPixelRadius && block.isCollidable)
                 {
                     blocks.Add(block);
                 }

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using Mario.Entities.Abstract;
+﻿using Mario.Entities.Abstract;
 using Mario.Interfaces.Base;
-using Mario.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Mario.Global.CollisionVariables;
+using System;
+using System.Collections.Generic;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities
 {
-	public abstract class AbstractCollideable : IEntityBase, ICollideable
+    public abstract class AbstractCollideable : IEntityBase, ICollideable
     {
-        internal AbstractEntityPhysics physics; // Strategy Pattern
         internal Vector2 position;
-        public AbstractEntityState currentState; 
+        public AbstractEntityState currentState;
         internal Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },
@@ -23,6 +22,15 @@ namespace Mario.Entities
         };
 
         public abstract void Update(GameTime gameTime);
+
+        internal void ClearCollisions()
+        {
+            // Reset all collision states to false at the start of each update
+            foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
+            {
+                SetCollisionState((CollisionDirection)direction, false);
+            }
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -52,11 +60,6 @@ namespace Mario.Entities
         public virtual Rectangle GetRectangle()
         {
             return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
-        }
-
-        public Vector2 GetVelocity()
-        {
-            return physics.GetVelocity();
         }
     }
 }

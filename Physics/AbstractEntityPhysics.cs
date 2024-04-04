@@ -1,15 +1,15 @@
-﻿using Mario.Global;
-using System;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using Mario.Interfaces.Base;
+using System;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
-	public abstract class AbstractEntityPhysics
-	{
+    public abstract class AbstractEntityPhysics
+    {
 
         public Vector2 velocity;
-        public bool isRight = true;
+        public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
         public bool isFalling = true;
         public bool isMininumJump = false;
         public bool isDecelerating = false;
@@ -29,55 +29,47 @@ namespace Mario.Physics
 
         internal abstract void UpdateVertical();
 
-        public abstract void WalkLeft();
-
-        public abstract void WalkRight();
-
-        public abstract void Jump();
-
-        public abstract void SmallJump();
-
         public Vector2 GetVelocity()
         {
             return velocity;
         }
 
-        public bool getHorizontalDirection()
+        public horizontalDirection GetHorizontalDirection()
         {
-            return isRight;
+            return currentHorizontalDirection;
         }
 
-        public void setHorizontalDirection(bool horizontalDirection)
+        public void setHorizontalDirection(horizontalDirection currentHorizontalDirection)
         {
-            isRight = horizontalDirection;
+            this.currentHorizontalDirection = currentHorizontalDirection;
         }
 
         public float ApplyGravity()
         {
-            if (velocity.Y < Math.Abs(PhysicsVariables.maxVerticalSpeed))
+            if (velocity.Y < Math.Abs(PhysicsSettings.maxVerticalSpeed))
             {
-                velocity.Y += PhysicsVariables.gravity;
+                velocity.Y += PhysicsSettings.gravity;
             }
             else
             {
-                velocity.Y = PhysicsVariables.maxVerticalSpeed;
+                velocity.Y = PhysicsSettings.maxVerticalSpeed;
             }
             return velocity.Y;
         }
 
         public float ApplyFriction()
         {
-            if (velocity.X < PhysicsVariables.friction && velocity.X > -PhysicsVariables.friction)
+            if (velocity.X < PhysicsSettings.friction && velocity.X > -PhysicsSettings.friction)
             {
                 return 0;
             }
             else if (velocity.X > 0)
             {
-                velocity.X -= PhysicsVariables.friction;
+                velocity.X -= PhysicsSettings.friction;
             }
             else if (velocity.X < 0)
             {
-                velocity.X += PhysicsVariables.friction;
+                velocity.X += PhysicsSettings.friction;
             }
             return velocity.X;
         }
@@ -94,7 +86,7 @@ namespace Mario.Physics
 
         public void StopJump()
         {
-            if (jumpCounter < PhysicsVariables.minimumJump)
+            if (jumpCounter < PhysicsSettings.minimumJumpLimit)
             {
                 isMininumJump = true;
                 isDecelerating = true;
