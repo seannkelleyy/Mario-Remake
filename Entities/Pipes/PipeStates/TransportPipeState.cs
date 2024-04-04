@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Mario.Entities.Abstract;
 
-public class Class1
+namespace Mario.Entities.Pipes.PipeStates
 {
-	public Class1()
-	{
-	}
+    public class TransportPipeState : AbstractEntityState
+    {
+        public TransportPipeState() : base()
+        {
+            sprite = spriteFactory.CreateSprite("pipe");
+        }
+    }
 }
