@@ -11,11 +11,11 @@ namespace Mario
         public PlayerCamera(IHero target)
         {
             this.target = target;
-            var position = Matrix.CreateTranslation(-target.GetPosition().X - (target.GetRectangle().Width / 2),
-                    0,
+            var position = Matrix.CreateTranslation(-376,
+                    -48,
                     0);
             var offSet = Matrix.CreateTranslation(MarioRemake.ScreenWidth / 2,
-                0,
+                MarioRemake.ScreenHeight / 2,
                 0);
             cameraX = target.GetPosition().X + (target.GetRectangle().Width / 2);
             Transform = position * offSet;
@@ -26,10 +26,10 @@ namespace Mario
             {
                 cameraX = target.GetPosition().X + (target.GetRectangle().Width / 2);
                 var position = Matrix.CreateTranslation(-target.GetPosition().X - (target.GetRectangle().Width / 2),
-                    0,
+                    -48,
                     0);
                 var offSet = Matrix.CreateTranslation(MarioRemake.ScreenWidth / 2,
-                     0,
+                     MarioRemake.ScreenHeight / 2,
                     0);
                 Transform = position * offSet;
             }
