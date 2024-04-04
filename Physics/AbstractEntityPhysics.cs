@@ -34,7 +34,7 @@ namespace Mario.Physics
             return velocity;
         }
 
-        public horizontalDirection getHorizontalDirection()
+        public horizontalDirection GetHorizontalDirection()
         {
             return currentHorizontalDirection;
         }
