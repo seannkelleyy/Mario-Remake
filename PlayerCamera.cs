@@ -12,10 +12,10 @@ namespace Mario
         {
             this.target = target;
             var position = Matrix.CreateTranslation(-target.GetPosition().X - (target.GetRectangle().Width / 2),
-                    -target.GetPosition().Y - (target.GetRectangle().Height / 2),
+                    0,
                     0);
             var offSet = Matrix.CreateTranslation(MarioRemake.ScreenWidth / 2,
-                MarioRemake.ScreenHeight / 2,
+                0,
                 0);
             cameraX = target.GetPosition().X + (target.GetRectangle().Width / 2);
             Transform = position * offSet;
@@ -29,10 +29,14 @@ namespace Mario
                     0,
                     0);
                 var offSet = Matrix.CreateTranslation(MarioRemake.ScreenWidth / 2,
-                    0,
+                     0,
                     0);
                 Transform = position * offSet;
             }
+        }
+        public float GetLeftEdge()
+        {
+            return cameraX - (MarioRemake.ScreenWidth / 2);
         }
     }
 }

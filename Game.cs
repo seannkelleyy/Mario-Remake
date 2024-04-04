@@ -1,5 +1,4 @@
-﻿using Mario.Global;
-using Mario.Input;
+﻿using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Singletons;
@@ -30,10 +29,8 @@ namespace Mario
 
             LevelLoader.Instance.Initialize(Content);
 
-            gameContentManager = GameContentManager.Instance;
             ScreenWidth = graphics.PreferredBackBufferWidth;
             ScreenHeight = graphics.PreferredBackBufferHeight;
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
             base.Initialize();
         }
 
@@ -44,12 +41,11 @@ namespace Mario
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, gameContentManager.GetHero());
-            _camera = new PlayerCamera(gameContentManager.GetHero());
 
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
 
             keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+            _camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
             base.LoadContent();
         }
@@ -98,10 +94,8 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             spriteBatch.Begin(transformMatrix: _camera.Transform);
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             {
                 entity.Draw(spriteBatch);
             }
