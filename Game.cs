@@ -63,7 +63,7 @@ namespace Mario
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
-                _camera.Follow();
+                _camera.UpdatePosition();
                 base.Update(gameTime);
 
             }
