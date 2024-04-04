@@ -21,7 +21,6 @@ namespace Mario.Singletons
 
         public IEnemy CreateEnemy(string type, Vector2 position)
         {
-            type = type.ToLower();
             switch (type)
             {
                 case "goomba":

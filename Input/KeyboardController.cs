@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,6 @@ namespace Mario.Input
         private KeyboardState previousKeyboardState;
         private IHero mario;
         private Keys[] keysPressed;
-        float updateInterval = 0.1f;
         float elapsedSeconds = 0;
 
 
@@ -62,7 +62,7 @@ namespace Mario.Input
             Action[] actions = new Action[8];
             actions[0] = new Action(() =>
             {
-                LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", 10);
+                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, mario.GetStartingLives());
                 game.Exit();
             });
             actions[1] = new Action(GameStateManager.Instance.Restart);
@@ -95,7 +95,7 @@ namespace Mario.Input
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 KeyboardState currentKeyboardState = Keyboard.GetState();
@@ -117,7 +117,7 @@ namespace Mario.Input
         public void UpdatePause(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 keysPressed = Keyboard.GetState().GetPressedKeys();

@@ -1,9 +1,12 @@
 ﻿using Mario.Interfaces.Base;
+using Mario.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
+        public HeroPhysics physics { get; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
@@ -17,6 +20,8 @@ namespace Mario.Interfaces.Entities
         public void Attack();
         public void Die();
         public int ReportHealth();
+        public int GetStartingLives();
+        public Vector2 GetVelocity();
     }
 }
 

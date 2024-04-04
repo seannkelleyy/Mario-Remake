@@ -3,7 +3,6 @@ using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Singletons;
-using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -16,7 +15,6 @@ namespace Mario
         public static int ScreenWidth;
         public static int ScreenHeight;
         private GraphicsDeviceManager graphics;
-        private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
         public MarioRemake()
@@ -29,6 +27,9 @@ namespace Mario
         protected override void Initialize()
         {
             keyboardController = new KeyboardController();
+
+            LevelLoader.Instance.Initialize(Content);
+
             gameContentManager = GameContentManager.Instance;
             ScreenWidth = graphics.PreferredBackBufferWidth;
             ScreenHeight = graphics.PreferredBackBufferHeight;
@@ -38,11 +39,18 @@ namespace Mario
 
         protected override void LoadContent()
         {
-            SpriteFactory.Instance.LoadAllTextures(Content);
-            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
+
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
             _camera = new PlayerCamera(gameContentManager.GetHero());
+
+            LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
+
+            keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+
             base.LoadContent();
         }
 
@@ -58,7 +66,7 @@ namespace Mario
                 Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
             if (!GameStateManager.Instance.isPaused) // Normal update
             {
-                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
                 {
                     entity.Update(gameTime);
                 }
@@ -77,7 +85,7 @@ namespace Mario
                 {
                     GameStateManager.Instance.EndReset();
                     keyboardController = new KeyboardController();
-                    keyboardController.LoadCommands(this, gameContentManager.GetHero());
+                    keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
                 }
             }
             else
@@ -90,6 +98,8 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
+            foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             spriteBatch.Begin(transformMatrix: _camera.Transform);
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {

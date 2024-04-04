@@ -1,7 +1,7 @@
 ﻿using Mario.Entities.Abstract;
 using System;
 using System.Collections.Generic;
-using static Mario.Global.HeroVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Hero
 {
