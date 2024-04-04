@@ -9,9 +9,11 @@ namespace Mario.Entities.Items
         public Coin(Vector2 position, bool isUnderground = false)
         {
             this.position = position;
-            if (isUnderground) {
+            if (isUnderground)
+            {
                 currentState = new UndergroundCoinState();
-            } else
+            }
+            else
             {
                 currentState = new CoinState();
             }
@@ -21,6 +23,15 @@ namespace Mario.Entities.Items
         {
             position.Y -= GlobalVariables.blockHeightWidth;
             isVisible = true;
+        }
+
+        public override void ChangeDirection()
+        {
+            Logger.Instance.LogInformation("ChangeDirection not implemented in Coin");
+        }
+        public override Vector2 GetVelocity()
+        {
+            return Vector2.Zero;
         }
     }
 }

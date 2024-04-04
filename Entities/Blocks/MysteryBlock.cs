@@ -9,11 +9,10 @@ namespace Mario.Entities.Blocks
     {
         private IItem item;
 
-        public MysteryBlock(Vector2 position, bool breakable, bool collidable, string itemName)
+        public MysteryBlock(Vector2 position, bool collidable, string itemName)
         {
             this.position = position;
             isCollidable = collidable;
-            isBreakable = breakable;
             currentState = new GoldenBlockState();
             canBeCombined = false;
 
@@ -23,8 +22,8 @@ namespace Mario.Entities.Blocks
                 case "none":
                     item = null;
                     break;
-                case "mushroom":
-                    item = ObjectFactory.Instance.CreateItem("mushroom", position);
+                case "redMushroom":
+                    item = ObjectFactory.Instance.CreateItem("redMushroom", position);
                     break;
                 case "fireflower":
                     item = ObjectFactory.Instance.CreateItem("fireflower", position);
@@ -59,7 +58,6 @@ namespace Mario.Entities.Blocks
                 }
                 currentState = new HardBlockState();
             }
-            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
         }
     }
 }

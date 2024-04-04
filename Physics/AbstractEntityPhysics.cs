@@ -39,7 +39,7 @@ namespace Mario.Physics
             return currentHorizontalDirection;
         }
 
-        public void setHorizontalDirection(horizontalDirection currentHorizontalDirection)
+        public void SetHorizontalDirection(horizontalDirection currentHorizontalDirection)
         {
             this.currentHorizontalDirection = currentHorizontalDirection;
         }
