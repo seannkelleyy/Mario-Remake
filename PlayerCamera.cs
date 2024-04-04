@@ -11,13 +11,13 @@ namespace Mario
         public PlayerCamera(IHero target)
         {
             this.target = target;
-            var position = Matrix.CreateTranslation(-376,
-                    -48,
+            var position = Matrix.CreateTranslation(-GameSettings.cameraStartingX,
+                    -GameSettings.cameraStartingY,
                     0);
             var offSet = Matrix.CreateTranslation(MarioRemake.ScreenWidth / 2,
                 MarioRemake.ScreenHeight / 2,
                 0);
-            cameraX = target.GetPosition().X + (target.GetRectangle().Width / 2);
+            cameraX = GameSettings.cameraStartingX;
             Transform = position * offSet;
         }
         public void UpdatePosition()
