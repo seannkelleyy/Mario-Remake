@@ -1,0 +1,35 @@
+﻿{
+  "GameSettings": {
+    "frameRate": 60,
+    "isDevelopment": true,
+    "levelJsonFilePath": "../../../Levels/Sprint3.json"
+  },
+  "Physics": {
+    "gravity": 1.325,
+    "friction": 0.025,
+    "jumpForce": 2.65,
+    "maxVerticalSpeed": 30.0,
+    "maxRunSpeed": 1.15,
+    "runAcceleration": 0.30,
+    "enemySpeed": 1.0,
+    "koopaShellSpeed": 2.0,
+    "regularJumpLimit": 55,
+    "smallJumpLimit": 13,
+    "minimumJumpLimit": 40,
+    "decelerationFactor": 1.25,
+    "fireballHorizontalSpeed": 6.25,
+    "fireballVerticalSpeed": 0.9375,
+    "fireballBounceForce": 3.75,
+    "fireballDeleteInterval": 0.6
+  },
+  "Collisions": {
+    "buffer": 4,
+    "collisionPixelRadius": 48
+  },
+  "Entity": {
+    "enemyDespawnTime": 3,
+    "enemyInvulnerabilityTime": 3,
+    "heroInvulnerabilityTime": 3,
+    "heroFlashDuration": 0.05
+  }
+}

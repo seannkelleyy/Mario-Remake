@@ -32,6 +32,9 @@ namespace Mario.Entities.Blocks
                 case "coin":
                     item = ObjectFactory.Instance.CreateItem("coin", position);
                     break;
+                case "coinUnderground":
+                    item = ObjectFactory.Instance.CreateItem("coinUnderground", position);
+                    break;
                 case "1up":
                     item = ObjectFactory.Instance.CreateItem("1up", position);
                     break;

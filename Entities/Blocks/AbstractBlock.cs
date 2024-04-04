@@ -1,7 +1,7 @@
 ﻿using Mario.Interfaces;
 using Microsoft.Xna.Framework;
 using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Blocks
 {
