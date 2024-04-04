@@ -8,10 +8,11 @@ namespace Mario.Entities.Projectiles
 {
     public class Fireball : AbstractCollideable, IProjectile
     {
-        public FireballPhysics physics { get; }
+        private FireballPhysics physics { get; }
+        private bool isExploded = false;
         public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
-            currentState = new FireballMovingState(this, isRight);
+            currentState = new FireballMovingState(this);
             this.position = position;
             physics = new FireballPhysics(this, currentHorizontalDirection);
         }
