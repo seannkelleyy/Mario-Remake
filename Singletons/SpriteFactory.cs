@@ -35,7 +35,8 @@ namespace Mario.Sprites
                 content.Load<Texture2D>("tileSpriteSheet"),
                 content.Load<Texture2D>("enemySpriteSheet"),
                 content.Load<Texture2D>("marioSpriteSheet"),
-                content.Load<Texture2D>("projectileSpriteSheet")
+                content.Load<Texture2D>("projectileSpriteSheet"),
+                content.Load<Texture2D>("powerUpSpriteSheet")
             };
         }
         public ISprite CreateSprite(string type)

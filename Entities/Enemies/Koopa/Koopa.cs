@@ -49,15 +49,15 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.isRight)
+        if (physics.currentHorizontalDirection == horizontalDirection.right)
         {
-            physics.isRight = false;
+            physics.currentHorizontalDirection = horizontalDirection.left;
             if (!isShell)
                 currentState = new LeftMovingKoopaState();
         }
         else
         {
-            physics.isRight = true;
+            physics.currentHorizontalDirection = horizontalDirection.right;
             if (!isShell)
                 currentState = new RightMovingKoopaState();
         }
