@@ -1,12 +1,9 @@
-﻿using Mario.Entities.Character;
-using Mario.Interfaces;
+﻿using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
-using Mario.Singletons;
 using System;
 using System.Collections.Generic;
-using static Mario.Global.CollisionVariables;
-
+using static Mario.Global.GlobalVariables;
 public class ProjectileCollisionHandler
 {
     public IProjectile projectile { get; set; }
@@ -23,39 +20,46 @@ public class ProjectileCollisionHandler
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => {
-            projectile.SetCollisionState(CollisionDirection.Left, true);
-            projectile.UpdateHorizontal();
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            projectile.Destroy();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
-            projectile.SetCollisionState(CollisionDirection.Right, true);
-            projectile.UpdateHorizontal();
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            projectile.Destroy();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
-            projectile.SetCollisionState(CollisionDirection.Top, true);
-            projectile.UpdateVertical();
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            projectile.Destroy();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
             projectile.SetCollisionState(CollisionDirection.Bottom, true);
-            projectile.UpdateVertical();
         }));
 
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => {
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
+        {
             enemy.Flip();
-            projectile.Explode();
+            projectile.Destroy();
         }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() => {
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
+        {
             enemy.Flip();
-            projectile.Explode();
+            projectile.Destroy();
+
         }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() => {
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
+        {
             enemy.Flip();
-            projectile.Explode();
+            projectile.Destroy();
+
         }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() => {
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
             enemy.Flip();
-            projectile.Explode();
+            projectile.Destroy();
+
         }));
     }
 

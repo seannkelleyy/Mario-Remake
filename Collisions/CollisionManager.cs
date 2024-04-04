@@ -3,7 +3,6 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
 using Mario.Singletons;
-using Microsoft.Xna.Framework;
 
 namespace Mario.Collisions
 {
@@ -87,7 +86,6 @@ namespace Mario.Collisions
         private void ManageProjectileCollisions(IProjectile projectile)
         {
             ProjectileCollisionHandler projectileHandler = new ProjectileCollisionHandler(projectile);
-
             foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(projectile.GetPosition()))
             {
                 if (projectile.GetRectangle().Intersects(block.GetRectangle()))

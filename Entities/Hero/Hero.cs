@@ -14,7 +14,7 @@ namespace Mario.Entities.Character
 {
     public class Hero : AbstractCollideable, IHero
     {
-        public HeroPhysics physics { get; } 
+        public HeroPhysics physics { get; }
         private HeroStateManager stateManager; // Strategy Pattern
         private int health;
         private int startingLives;
@@ -205,7 +205,7 @@ namespace Mario.Entities.Character
         {
             if (health == heroMaxHealth) // this will need changed if we add new power-ups.
             {
-                GameContentManager.Instance.AddEntity(new Fireball(position));
+                GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirection()));
                 stateManager.SetState(HeroStateType.AttackingRight, health);
             }
         }
