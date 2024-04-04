@@ -91,7 +91,7 @@ namespace Mario.Entities.Character
 
             physics.Update();
         }
-        public horizontalDirection getHorizontalDirection()
+        public horizontalDirection GetHorizontalDirection()
         {
             return physics.getHorizontalDirection();
         }
