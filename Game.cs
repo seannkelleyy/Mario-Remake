@@ -12,6 +12,9 @@ namespace Mario
 {
     public class MarioRemake : Game
     {
+        private PlayerCamera _camera;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
         private GraphicsDeviceManager graphics;
         private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
@@ -27,9 +30,9 @@ namespace Mario
         {
             keyboardController = new KeyboardController();
             gameContentManager = GameContentManager.Instance;
-
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            ScreenHeight = graphics.PreferredBackBufferHeight;
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
-
             base.Initialize();
         }
 
@@ -39,6 +42,7 @@ namespace Mario
             LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
+            _camera = new PlayerCamera(gameContentManager.GetHero());
             base.LoadContent();
         }
 
@@ -59,9 +63,11 @@ namespace Mario
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
+                _camera.Follow();
                 base.Update(gameTime);
 
-            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
+            }
+            else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
                 if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
                 {
@@ -73,7 +79,9 @@ namespace Mario
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this, gameContentManager.GetHero());
                 }
-            } else { // Update during a pause
+            }
+            else
+            { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
             }
         }
@@ -82,7 +90,7 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 entity.Draw(spriteBatch);
