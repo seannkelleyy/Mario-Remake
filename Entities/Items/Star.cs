@@ -1,14 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Mario.Collisions;
 using Mario.Entities.Items.ItemStates;
 using Mario.Physics;
-using Mario.Collisions;
-using static Mario.Global.CollisionVariables;
+using Microsoft.Xna.Framework;
 using System;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Items
 {
     public class Star : AbstractItem
     {
+        public StarPhysics physics { get; set; }
         public Star(Vector2 position)
         {
             this.position = position;
@@ -36,14 +37,18 @@ namespace Mario.Entities.Items
 
         public override void ChangeDirection()
         {
-            if (physics.isRight)
+            if (physics.GetHorizontalDirection() == horizontalDirection.right)
             {
-                physics.isRight = false;
+                physics.SetHorizontalDirection(horizontalDirection.left);
             }
             else
             {
-                physics.isRight = true;
+                physics.SetHorizontalDirection(horizontalDirection.right);
             }
+        }
+        public override Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
         }
     }
 }

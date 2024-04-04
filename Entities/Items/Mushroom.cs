@@ -1,14 +1,16 @@
-﻿using Mario.Entities.Items.ItemStates;
+﻿using Mario.Collisions;
+using Mario.Entities.Items.ItemStates;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
 using System;
-using Mario.Collisions;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Items
 {
     public class Mushroom : AbstractItem
     {
+        public EntityPhysics physics { get; set; }
+        private bool is1up = false;
         public Mushroom(Vector2 position, string mushroomType)
         {
             physics = new EntityPhysics(this);
@@ -21,6 +23,7 @@ namespace Mario.Entities.Items
             else if (mushroomType.CompareTo("1up") == 0)
             {
                 currentState = new OneUpState();
+                is1up = true;
             }
             else
             {
@@ -35,9 +38,9 @@ namespace Mario.Entities.Items
             isVisible = true;
             isCollidable = true;
         }
-        public bool is1up()
+        public bool Is1up()
         {
-            return is1up();
+            return is1up;
         }
 
         public override void Update(GameTime gameTime)
@@ -53,14 +56,18 @@ namespace Mario.Entities.Items
 
         public override void ChangeDirection()
         {
-            if (physics.isRight)
+            if (physics.GetHorizontalDirection() == horizontalDirection.right)
             {
-                physics.isRight = false;
+                physics.SetHorizontalDirection(horizontalDirection.left);
             }
             else
             {
-                physics.isRight = true;
+                physics.SetHorizontalDirection(horizontalDirection.right);
             }
+        }
+        public override Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
         }
     }
 }

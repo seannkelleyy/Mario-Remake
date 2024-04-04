@@ -156,7 +156,7 @@ namespace Mario.Entities.Character
             }
             else if (item.GetType().Name.Equals("Mushroom"))
             {
-                if (((Mushroom)item).is1up())
+                if (((Mushroom)item).Is1up())
                 {
                     lives++;
                 }

@@ -1,7 +1,6 @@
-﻿using Mario.Global;
-using Mario.Interfaces.Base;
+﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -22,13 +21,13 @@ namespace Mario.Physics
 
         internal override void UpdateHorizontal()
         {
-            if (isRight && !entity.GetCollisionState(CollisionDirection.Right))
+            if (currentHorizontalDirection == horizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
             {
-                    velocity.X = PhysicsVariables.enemySpeed;
+                velocity.X = PhysicsSettings.enemySpeed;
             }
-            else if (!isRight && !entity.GetCollisionState(CollisionDirection.Left))
+            else if (currentHorizontalDirection == horizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
             {
-                    velocity.X = -PhysicsVariables.enemySpeed;
+                velocity.X = -PhysicsSettings.enemySpeed;
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -40,7 +39,7 @@ namespace Mario.Physics
             {
                 HandleDownwardMovement();
             }
-            else 
+            else
             {
                 if (jumpCounter == 0)
                 {
@@ -54,7 +53,7 @@ namespace Mario.Physics
 
             if (isDecelerating)
             {
-                velocity.Y += PhysicsVariables.decelerationFactor;
+                velocity.Y += PhysicsSettings.decelerationFactor;
                 if (velocity.Y >= 0)
                 {
                     // Once upward velocity reaches 0, start falling and stop decelerating
@@ -67,36 +66,27 @@ namespace Mario.Physics
             StopVertical();
         }
 
-        public override void WalkLeft()
-        {
-            Logger.Instance.LogInformation("Walk left not implemented in Entity Physics");
-        }
 
-        public override void WalkRight()
-        {
-            Logger.Instance.LogInformation("Walk right not implemented in Entity Physics");
 
-        }
-
-        public override void Jump()
+        public void Jump()
         {
             isFalling = false;
-            velocity.Y = -PhysicsVariables.jumpForce;
+            velocity.Y = -PhysicsSettings.jumpForce;
             jumpCounter = 1;
         }
 
         private void HandleUpwardMovement()
         {
-            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsVariables.minimumJump)
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.minimumJumpLimit)
             {
-                jumpCounter = PhysicsVariables.regularJumpLimit;
+                jumpCounter = PhysicsSettings.regularJumpLimit;
                 isFalling = true;
                 isMininumJump = false;
                 isDecelerating = true;
             }
-            else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter < PhysicsSettings.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
+                velocity.Y = -PhysicsSettings.jumpForce * (1 - jumpCounter / PhysicsSettings.regularJumpLimit);
                 jumpCounter++;
             }
             else
@@ -117,11 +107,6 @@ namespace Mario.Physics
                 StopVertical();
                 isFalling = false;
             }
-        }
-
-        public override void SmallJump()
-        {
-            Logger.Instance.LogInformation("Small Jump left not implemented in Entity Physics");
         }
     }
 }

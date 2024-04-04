@@ -1,8 +1,7 @@
 ﻿using Mario.Interfaces;
-using Mario.Interfaces.Entities;
 using System;
 using System.Collections.Generic;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class ItemCollisionHandler
 {
@@ -26,7 +25,7 @@ public class ItemCollisionHandler
             mainItem.SetCollisionState(CollisionDirection.Left, true);
             mainItem.ChangeDirection();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => 
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
         {
             mainItem.SetCollisionState(CollisionDirection.Right, true);
             mainItem.ChangeDirection();

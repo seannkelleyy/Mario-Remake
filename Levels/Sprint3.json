@@ -7,7 +7,7 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 0,
+    "lives": -1,
     "startingPower": "fire"
   },
   "enemies": [
@@ -24,10 +24,10 @@
       "isRight": false
     },
     {
-        "type": "koopa",
-        "startingX": 20,
-        "startingY": 11,
-        "isRight": false
+      "type": "koopa",
+      "startingX": 20,
+      "startingY": 11,
+      "isRight": false
     }
   ],
   "blockSections": [
