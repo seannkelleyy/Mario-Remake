@@ -21,5 +21,10 @@ namespace Mario.Entities.Items
             position.Y -= 16;
             isVisible = true;
         }
+
+        public override void ChangeDirection()
+        {
+            Logger.Instance.LogInformation("ChangeDirection not implemented in Coin");
+        }
     }
 }

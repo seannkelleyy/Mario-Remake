@@ -6,7 +6,7 @@
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 1,
+    "lives": 0,
     "startingPower": "fire"
   },
   "enemies": [
@@ -17,16 +17,16 @@
       "isRight": false
     },
     {
-      "type": "goomba",
-      "startingX": 12,
-      "startingY": 12,
-      "isRight": false
+        "type": "goomba",
+        "startingX": 12,
+        "startingY": 12,
+        "isRight": false
     },
     {
-      "type": "koopa",
-      "startingX": 20,
-      "startingY": 11.5,
-      "isRight": false
+        "type": "koopa",
+        "startingX": 20,
+        "startingY": 11,
+        "isRight": false
     }
   ],
   "blockSections": [
@@ -104,8 +104,8 @@
       "x": 21,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "redMushroom"
     },
     {
       "type": "mystery",
@@ -120,15 +120,15 @@
       "x": 23,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coinUnderground"
+      "breakable": false,
+      "item": "redMushroom"
     },
     {
       "type": "mystery",
       "x": 24,
       "y": 9,
       "collidable": true,
-      "breakable": true,
+      "breakable": false,
       "item": "coinUnderground"
     },
     {
@@ -136,7 +136,7 @@
       "x": 25,
       "y": 9,
       "collidable": true,
-      "breakable": true,
+      "breakable": false,
       "item": "coin"
     }
   ]

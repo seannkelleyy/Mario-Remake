@@ -1,0 +1,66 @@
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Entities;
+using System;
+using System.Collections.Generic;
+using static Mario.Global.CollisionVariables;
+
+public class ItemCollisionHandler
+{
+    public IItem mainItem { get; set; }
+    public IItem collidingItem { get; set; }
+
+    private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
+
+    public ItemCollisionHandler(IItem item)
+    {
+        mainItem = item;
+
+        collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
+        {
+            { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
+        };
+
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            mainItem.SetCollisionState(CollisionDirection.Left, true);
+            mainItem.ChangeDirection();
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => 
+        {
+            mainItem.SetCollisionState(CollisionDirection.Right, true);
+            mainItem.ChangeDirection();
+        }));
+
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainItem.SetCollisionState(CollisionDirection.Top, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainItem.SetCollisionState(CollisionDirection.Bottom, true)));
+
+        collisionDictionary[typeof(IItem)].Add(CollisionDirection.Left, new Action(HandleItemItemCollision));
+        collisionDictionary[typeof(IItem)].Add(CollisionDirection.Right, new Action(HandleItemItemCollision));
+    }
+
+    public void ItemItemCollision(IItem item)
+    {
+        collidingItem = item;
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainItem.GetRectangle(), item.GetRectangle(), mainItem.GetVelocity());
+        if (collisionDictionary[typeof(IItem)].ContainsKey(direction))
+        {
+            collisionDictionary[typeof(IItem)][direction].Invoke();
+        }
+    }
+
+    public void ItemBlockCollision(IBlock block)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainItem.GetRectangle(), block.GetRectangle(), mainItem.GetVelocity());
+        if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
+        {
+            collisionDictionary[typeof(IBlock)][direction].Invoke();
+        }
+    }
+
+    public void HandleItemItemCollision()
+    {
+        mainItem.ChangeDirection();
+        collidingItem.ChangeDirection();
+    }
+}

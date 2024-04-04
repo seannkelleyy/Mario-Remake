@@ -33,6 +33,8 @@ namespace Mario.Entities.Items
             }
         }
 
+        public abstract void ChangeDirection();
+
         public abstract void MakeVisible();
     }
 }

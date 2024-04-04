@@ -17,5 +17,10 @@ namespace Mario.Entities.Items
             isVisible = true;
             isCollidable = true;
         }
+
+        public override void ChangeDirection()
+        {
+            Logger.Instance.LogInformation("ChangeDirection not implemented in FireFlower");
+        }
     }
 }

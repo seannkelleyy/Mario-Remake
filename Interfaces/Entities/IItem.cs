@@ -7,6 +7,7 @@ namespace Mario.Interfaces
     {
         public bool isVisible { get; }
         public void MakeVisible();
+        public void ChangeDirection();
     }
 }
 
