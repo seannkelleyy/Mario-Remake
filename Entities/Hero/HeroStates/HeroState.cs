@@ -13,7 +13,7 @@ namespace Mario.Entities.Abstract
         {
             this.mario = mario;
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite((mario.getHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+            sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
         }
         public virtual void Jump()
         {
@@ -53,7 +53,7 @@ namespace Mario.Entities.Abstract
             }
             else
             {
-                sprite = spriteFactory.CreateSprite((mario.getHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+                sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
             }
         }
         public virtual void Attack()
@@ -65,7 +65,7 @@ namespace Mario.Entities.Abstract
         }
         public virtual void TakeDamage()
         {
-            sprite = spriteFactory.CreateSprite((mario.getHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+            sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
         }
         public virtual void Die()
         {

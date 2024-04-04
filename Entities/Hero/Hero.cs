@@ -8,7 +8,6 @@ using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static Mario.Global.GlobalVariables;
-using static Mario.Physics.AbstractEntityPhysics;
 
 
 namespace Mario.Entities.Character
@@ -93,7 +92,7 @@ namespace Mario.Entities.Character
         }
         public horizontalDirection GetHorizontalDirection()
         {
-            return physics.getHorizontalDirection();
+            return physics.GetHorizontalDirection();
         }
         public void WalkLeft()
         {
