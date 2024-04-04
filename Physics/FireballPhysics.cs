@@ -6,17 +6,17 @@ namespace Mario.Physics
 {
     public class FireballPhysics : AbstractEntityPhysics
     {
-        public FireballPhysics(ICollideable entity, bool isRight) : base(entity)
+        public FireballPhysics(ICollideable entity, horizontalDirection currentHorizontalDirection) : base(entity)
         {
-            if (isRight)
-            {
-                entity.SetPosition(entity.GetPosition() + new Vector2(blockHeightWidth, blockHeightWidth));
-                velocity = new Vector2(PhysicsSettings.fireballHorizontalSpeed, 0);
-            }
-            else
+            if (currentHorizontalDirection == horizontalDirection.left)
             {
                 entity.SetPosition(entity.GetPosition() + new Vector2(0, blockHeightWidth));
                 velocity = new Vector2(-PhysicsSettings.fireballHorizontalSpeed, 0);
+            }
+            else
+            {
+                entity.SetPosition(entity.GetPosition() + new Vector2(blockHeightWidth, blockHeightWidth));
+                velocity = new Vector2(PhysicsSettings.fireballHorizontalSpeed, 0);
             }
             this.entity = entity;
         }
@@ -39,7 +39,7 @@ namespace Mario.Physics
                 velocity.Y = -PhysicsSettings.fireballBounceForce;
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y += PhysicsSettings.fireballVerticalSpeed;
+            velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
         }
     }
 }

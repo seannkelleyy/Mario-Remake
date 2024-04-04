@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Character;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
 using static Mario.Global.GlobalVariables;
@@ -22,7 +23,7 @@ namespace Mario.Physics
         #region horizontal movement
         public void WalkRight()
         {
-            isRight = true;
+            currentHorizontalDirection = horizontalDirection.right;
             if (!entity.GetCollisionState(CollisionDirection.Right))
             {
                 if (velocity.X < PhysicsSettings.maxRunSpeed)
@@ -34,7 +35,7 @@ namespace Mario.Physics
 
         public void WalkLeft()
         {
-            isRight = false;
+            currentHorizontalDirection = horizontalDirection.left;
             if (!entity.GetCollisionState(CollisionDirection.Left))
             {
                 if (velocity.X > -PhysicsSettings.maxRunSpeed)
@@ -47,11 +48,11 @@ namespace Mario.Physics
         internal override void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (isRight && velocity.X > 0)
+            if (currentHorizontalDirection == horizontalDirection.right && velocity.X > 0)
             {
                 velocity.X -= PhysicsSettings.friction;
             }
-            else if (!isRight && velocity.X < 0)
+            else if (currentHorizontalDirection == horizontalDirection.left && velocity.X < 0)
             {
                 velocity.X += PhysicsSettings.friction;
             }
@@ -59,6 +60,7 @@ namespace Mario.Physics
             if (Math.Abs(velocity.X) < PhysicsSettings.friction)
             {
                 velocity.X = 0;
+                ((Hero)entity).Stand();
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -96,6 +98,7 @@ namespace Mario.Physics
             }
             else
             {
+                ((Hero)entity).Stand();
                 smallJumpCounter = 0;
                 jumpCounter = 0;
                 StopVertical();

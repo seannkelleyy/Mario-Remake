@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Mario.Entities.Abstract;
+﻿using Mario.Entities.Abstract;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities
 {
-	public abstract class AbstractCollideable : IEntityBase, ICollideable
+    public abstract class AbstractCollideable : IEntityBase, ICollideable
     {
         internal Vector2 position;
-        public AbstractEntityState currentState; 
+        public AbstractEntityState currentState;
         internal Dictionary<CollisionDirection, bool> collisions = new Dictionary<CollisionDirection, bool>()
         {
             { CollisionDirection.Top, false },

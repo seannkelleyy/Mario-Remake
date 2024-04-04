@@ -13,7 +13,7 @@
     public static int minimumJumpLimit { get; set; }
     public static float decelerationFactor { get; set; }
     public static float fireballHorizontalSpeed { get; set; }
-    public static float fireballVerticalSpeed { get; set; }
+    public static float fireballVerticalAcceleration { get; set; }
     public static float fireballBounceForce { get; set; }
     public static float fireballDeleteInterval { get; set; }
 }

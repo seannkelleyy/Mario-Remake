@@ -1,6 +1,6 @@
 using Mario.Collisions;
-using Mario.Entities.Hero;
-using Mario.Entities.Projectiles;
+using Mario.Entities.Abstract;
+using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -15,39 +15,39 @@ namespace Mario.Entities.Character
     public class Hero : AbstractCollideable, IHero
     {
         public HeroPhysics physics { get; }
-        private HeroStateManager stateManager; // Strategy Pattern
-        private int health;
-        private int startingLives;
         private int lives;
+        private int startingLives;
         private bool isInvulnerable;
         private double invulnerabilityFrames;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
 
+        public new HeroState currentState { get; set; }
+        public enum health { Mario, BigMario, FireMario };
+        public health currentHealth = health.Mario;
+        // True is right, false is left
+
         public Hero(string startingPower, int lives, Vector2 position)
         {
-            physics = new HeroPhysics(this);
-            stateManager = new HeroStateManager(this);
-            this.position = position;
-            startingLives = lives;
-            this.lives = lives;
-
             switch (startingPower)
             {
                 case "small":
-                    health = 1;
+                    currentHealth = health.Mario;
                     break;
                 case "big":
-                    health = 2;
+                    currentHealth = health.BigMario;
                     break;
                 case "fire":
-                    health = 3;
+                    currentHealth = health.FireMario;
                     break;
             }
-            stateManager.SetState(HeroStateType.StandingRight, health);
             isInvulnerable = false;
             invulnerabilityFrames = 0;
             this.lives = lives;
+            startingLives = lives;
+            this.position = position;
+            physics = new HeroPhysics(this);
+            currentState = new StandState(this);
         }
 
         public override void Update(GameTime gameTime)
@@ -90,28 +90,21 @@ namespace Mario.Entities.Character
 
             physics.Update();
         }
-
+        public horizontalDirection GetHorizontalDirection()
+        {
+            return physics.GetHorizontalDirection();
+        }
         public void WalkLeft()
         {
-            if (stateManager.GetStateType() == HeroStateType.MovingLeft)
-            {
-                physics.WalkLeft();
-                return;
-            }
-            physics.setHorizontalDirection(false);
-            stateManager.SetState(HeroStateType.MovingLeft, health);
+            currentState.WalkLeft();
         }
-
         public void WalkRight()
         {
-            if (stateManager.GetStateType() == HeroStateType.MovingRight)
-            {
-                physics.WalkRight();
-                return;
-            }
-            physics.setHorizontalDirection(true);
-            stateManager.SetState(HeroStateType.MovingRight, health);
-
+            currentState.WalkRight();
+        }
+        public void Stand()
+        {
+            currentState.Stand();
         }
 
         public void StopHorizontal()
@@ -135,85 +128,86 @@ namespace Mario.Entities.Character
                 position.Y += topBlockCollisionAdjustment;
             }
         }
-
         public void Jump()
         {
-            physics.Jump();
-
-            if (physics.isRight)
-            {
-                stateManager.SetState(HeroStateType.JumpingRight, health);
-            }
-            else
-            {
-                stateManager.SetState(HeroStateType.JumpingLeft, health);
-            }
-        }
-
-        public void StopJump()
-        {
-            physics.StopJump();
+            currentState.Jump();
         }
 
         public void SmallJump()
         {
             physics.SmallJump();
-
-            if (physics.isRight)
-            {
-                stateManager.SetState(HeroStateType.JumpingRight, health);
-            }
-            else
-            {
-                stateManager.SetState(HeroStateType.JumpingLeft, health);
-            }
+        }
+        public void StopJump()
+        {
+            physics.StopJump();
         }
 
         public void Crouch()
         {
-            stateManager.SetState(HeroStateType.Crouching, health);
+            currentState.Crouch();
         }
-
-        public void Collect(IItem item)
+        void IHero.Collect(IItem item)
         {
-            if (health < heroMaxHealth)
+            if (item.GetType().Name.Equals("FireFlower") && currentHealth != health.FireMario)
             {
-                health++;
+                bool wasSmall = currentHealth == health.Mario;
+                currentHealth = health.FireMario;
+                currentState.PowerUp(wasSmall);
             }
-            stateManager.SetState(stateManager.GetStateType(), health);
-        }
+            else if (item.GetType().Name.Equals("Mushroom"))
+            {
+                if (((Mushroom)item).is1up())
+                {
+                    lives++;
+                }
+                else if (currentHealth == health.Mario)
+                {
+                    currentHealth = health.BigMario;
+                    currentState.PowerUp(true);
+                }
+            }
+            else if (item.GetType().Name.Equals("Coin"))
+            {
+                //adds to the coin count (needs to be implemented with scoreboard or coin tracker)
+            }
+            else if (item.GetType().Name.Equals("Star"))
+            {
+                //activate star mode (needs star mode to be implemented)
+            }
 
+        }
         public void TakeDamage()
         {
             if (!isInvulnerable)
             {
-                isInvulnerable = true;
-                health--;
-                if (health == 0)
+                if (currentHealth == health.Mario)
                 {
                     Die();
+                    return;
                 }
-                else if (health == 1) // mario becomes small and his height needs adjsuted.
+                isInvulnerable = true;
+                if (currentHealth == health.BigMario)
                 {
-                    position.Y += blockHeightWidth;
+                    currentHealth = health.Mario;
+                    position.Y += 16;
                 }
-                stateManager.SetState(stateManager.GetStateType(), health);
+                else
+                {
+                    currentHealth = health.BigMario;
+                }
+                currentState.TakeDamage();
             }
         }
+
 
         public void Attack()
         {
-            if (health == heroMaxHealth) // this will need changed if we add new power-ups.
-            {
-                GameContentManager.Instance.AddEntity(new Fireball(position, physics.getHorizontalDirection()));
-                stateManager.SetState(HeroStateType.AttackingRight, health);
-            }
+            currentState.Attack();
         }
-
         public void Die()
         {
             lives--;
-            stateManager.SetState(HeroStateType.Dead, health);
+            currentState.Die();
             LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, lives);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
@@ -227,10 +221,13 @@ namespace Mario.Entities.Character
                 GameStateManager.Instance.Restart();
             }
         }
-
-        public int ReportHealth()
+        public health ReportHealth()
         {
-            return health;
+            return this.currentHealth;
+        }
+        public override Rectangle GetRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
         }
 
         public int GetStartingLives()
@@ -241,6 +238,10 @@ namespace Mario.Entities.Character
         public Vector2 GetVelocity()
         {
             return physics.GetVelocity();
+        }
+        public HeroPhysics GetPhysics()
+        {
+            return physics;
         }
     }
 }

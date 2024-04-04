@@ -2,18 +2,18 @@
 using Mario.Interfaces.Entities.Projectiles;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Projectiles
 {
     public class Fireball : AbstractCollideable, IProjectile
     {
         public FireballPhysics physics { get; }
-        bool isExploded = false;
-        public Fireball(Vector2 position, bool isRight)
+        public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
         {
             currentState = new FireballMovingState(this, isRight);
             this.position = position;
-            physics = new FireballPhysics(this, isRight);
+            physics = new FireballPhysics(this, currentHorizontalDirection);
         }
 
         public override void Update(GameTime gameTime)
