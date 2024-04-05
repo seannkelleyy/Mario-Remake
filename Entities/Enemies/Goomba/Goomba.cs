@@ -3,6 +3,7 @@ using Mario.Entities;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
@@ -42,6 +43,7 @@ public class Goomba : AbstractCollideable, IEnemy
     public void Stomp()
     {
         if (deadTimer > 0) return;
+        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
         currentState = new StompedGoombaState();
         position.Y += halfBlockAdjustment;
         deadTimer = 1;
@@ -49,6 +51,7 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void Flip()
     {
+        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
         currentState = new FlippedGoombaState();
         GameContentManager.Instance.RemoveEntity(this);
     }

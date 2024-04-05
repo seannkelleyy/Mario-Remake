@@ -30,6 +30,13 @@ namespace Mario.Singletons
         {
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
+            MediaManager mediaManager = MediaManager.Instance;
+
+            // set background for the level
+            mediaManager.SetCurrentBackground(level.level);
+
+            // Set default theme
+            mediaManager.SetDefaultTheme(level.song);
 
             SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 

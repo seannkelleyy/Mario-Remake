@@ -1,6 +1,7 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
 using Mario.Interfaces;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
@@ -51,6 +52,7 @@ namespace Mario.Entities.Blocks
         {
             if (currentState is not HardBlockState)
             {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
                 GameContentManager.Instance.AddEntity(item);
                 if (item != null)
                 {

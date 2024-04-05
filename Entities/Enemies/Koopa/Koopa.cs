@@ -3,6 +3,7 @@ using Mario.Entities;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
@@ -31,10 +32,12 @@ public class Koopa : AbstractCollideable, IEnemy
     {
         if (isShell)
         {
+            MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
             GameContentManager.Instance.RemoveEntity(this);
         }
         else
         {
+            MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
             currentState = new StompedKoopaState();
             isShell = true;
             position.Y += halfBlockAdjustment;
@@ -43,6 +46,7 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void Flip()
     {
+        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
         currentState = new FlippedKoopaState();
         GameContentManager.Instance.RemoveEntity(this);
     }

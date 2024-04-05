@@ -1,13 +1,14 @@
 {
-  "level": "Sprint 3",
+  "level": "1",
   "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 26,
   "height": 18,
+  "song": "ground",
   "hero": {
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": -2,
+    "lives": -3,
     "startingPower": "fire"
   },
   "enemies": [
@@ -134,12 +135,12 @@
       "item": "coinUnderground"
     },
     {
-        "type": "mystery",
-        "x": 25,
-        "y": 9,
-        "collidable": true,
-        "breakable": false,
-        "item": "coinUnderground"
+      "type": "mystery",
+      "x": 25,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "1up"
     }
   ]
 }
