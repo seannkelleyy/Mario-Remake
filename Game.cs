@@ -1,19 +1,20 @@
-﻿using Mario.Global;
-using Mario.Input;
+﻿using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Singletons;
-using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace Mario
 {
     public class MarioRemake : Game
     {
+        private PlayerCamera _camera;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
         private GraphicsDeviceManager graphics;
-        private GameContentManager gameContentManager;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
         public MarioRemake()
@@ -26,19 +27,29 @@ namespace Mario
         protected override void Initialize()
         {
             keyboardController = new KeyboardController();
-            gameContentManager = GameContentManager.Instance;
 
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+            LevelLoader.Instance.Initialize(Content);
 
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            ScreenHeight = graphics.PreferredBackBufferHeight;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            SpriteFactory.Instance.LoadAllTextures(Content);
-            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
+            MediaManager.Instance.LoadContent(Content);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
+
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            keyboardController.LoadCommands(this, gameContentManager.GetHero());
+
+            LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
+
+            keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+            MediaManager.Instance.PlayDefaultTheme();
+            _camera = new PlayerCamera(GameContentManager.Instance.GetHero());
+
             base.LoadContent();
         }
 
@@ -54,14 +65,16 @@ namespace Mario
                 Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
             if (!GameStateManager.Instance.isPaused) // Normal update
             {
-                foreach (IEntityBase entity in gameContentManager.GetEntities())
+                foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
                 {
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
+                _camera.UpdatePosition();
                 base.Update(gameTime);
 
-            } else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
+            }
+            else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
                 if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
                 {
@@ -71,9 +84,11 @@ namespace Mario
                 {
                     GameStateManager.Instance.EndReset();
                     keyboardController = new KeyboardController();
-                    keyboardController.LoadCommands(this, gameContentManager.GetHero());
+                    keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
                 }
-            } else { // Update during a pause
+            }
+            else
+            { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
             }
         }
@@ -82,8 +97,9 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            foreach (IEntityBase entity in gameContentManager.GetEntities())
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
+            MediaManager.Instance.Draw(spriteBatch);
+            foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             {
                 entity.Draw(spriteBatch);
             }

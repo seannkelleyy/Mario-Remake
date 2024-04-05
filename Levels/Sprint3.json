@@ -1,18 +1,20 @@
 {
-  "level": "Sprint 3",
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 26,
   "height": 18,
+  "song": "ground",
   "hero": {
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 3,
+    "lives": -3,
     "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 5,
+      "startingX": 10,
       "startingY": 1,
       "isRight": false
     },
@@ -25,13 +27,13 @@
     {
       "type": "koopa",
       "startingX": 20,
-      "startingY": 11.5,
+      "startingY": 11,
       "isRight": false
     }
   ],
   "blockSections": [
     {
-      "type": "floor",
+      "type": "floorUnderground",
       "startingX": 0,
       "startingY": 14,
       "endingX": 60,
@@ -41,7 +43,7 @@
       "item": "none"
     },
     {
-      "type": "floor",
+      "type": "floorUnderground",
       "startingX": 0,
       "startingY": 13,
       "endingX": 60,
@@ -93,20 +95,20 @@
       "item": "1up"
     },
     {
-      "type": "mystery",
+      "type": "brickUnderground",
       "x": 10,
       "y": 9,
       "collidable": true,
-      "breakable": false,
-      "item": "fireflower"
+      "breakable": true,
+      "item": "1up"
     },
     {
       "type": "mystery",
       "x": 21,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "fireflower"
     },
     {
       "type": "mystery",
@@ -121,24 +123,24 @@
       "x": 23,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "redMushroom"
     },
     {
       "type": "mystery",
       "x": 24,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "coinUnderground"
     },
     {
       "type": "mystery",
       "x": 25,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "1up"
     }
   ]
 }

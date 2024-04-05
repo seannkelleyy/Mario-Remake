@@ -1,5 +1,6 @@
 ﻿
 using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces
 {
@@ -7,6 +8,8 @@ namespace Mario.Interfaces
     {
         public bool isVisible { get; }
         public void MakeVisible();
+        public void ChangeDirection();
+        public Vector2 GetVelocity();
     }
 }
 

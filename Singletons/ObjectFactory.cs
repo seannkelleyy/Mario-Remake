@@ -21,7 +21,6 @@ namespace Mario.Singletons
 
         public IEnemy CreateEnemy(string type, Vector2 position)
         {
-            type = type.ToLower();
             switch (type)
             {
                 case "goomba":
@@ -35,16 +34,18 @@ namespace Mario.Singletons
 
         public IBlock CreateBlock(string type, Vector2 position, bool breakeable, bool collideable, string item)
         {
-            type = type.ToLower();
-            item = item.ToLower();
             switch (type)
             {
                 case "floor":
                     return new FloorBlock(position, breakeable, collideable);
+                case "floorUnderground":
+                    return new FloorBlock(position, breakeable, collideable, true);
                 case "brick":
-                    return new BrickBlock(position, breakeable, collideable, item);
+                    return new BrickBlock(position, breakeable, collideable);
+                case "brickUnderground":
+                    return new BrickBlock(position, breakeable, collideable, true);
                 case "mystery":
-                    return new MysteryBlock(position, breakeable, collideable, item);
+                    return new MysteryBlock(position, collideable, item);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
@@ -52,18 +53,19 @@ namespace Mario.Singletons
 
         public IItem CreateItem(string type, Vector2 position)
         {
-            type = type.ToLower();
             switch (type)
             {
                 case "none":
                     return null;
                 case "coin":
                     return new Coin(position);
+                case "coinUnderground":
+                    return new Coin(position, true);
                 case "fireflower":
                     return new FireFlower(position);
                 case "star":
                     return new Star(position);
-                case "mushroom":
+                case "redMushroom":
                     return new Mushroom(position, "red");
                 case "1up":
                     return new Mushroom(position, "1up");
