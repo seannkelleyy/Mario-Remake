@@ -13,6 +13,60 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 01-main-theme-overworld.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:01-main-theme-overworld.mp3
+
+#begin 1up.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:1up.mp3
+
+#begin background1-1withoutEnd.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:background1-1withoutEnd.png
+
+#begin bigJump.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:bigJump.mp3
+
+#begin blockbreak.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:blockbreak.mp3
+
+#begin bump.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:bump.mp3
+
+#begin coin.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:coin.mp3
+
+#begin enemyFire.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:enemyFire.mp3
+
 #begin enemySpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -24,6 +78,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
+
+#begin fireball.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:fireball.mp3
+
+#begin flag.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:flag.mp3
+
+#begin item.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:item.mp3
 
 #begin itemSpriteSheet.png
 /importer:TextureImporter
@@ -37,6 +109,12 @@
 /processorParam:TextureFormat=Color
 /build:itemSpriteSheet.png
 
+#begin kick.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:kick.mp3
+
 #begin marioSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +127,25 @@
 /processorParam:TextureFormat=Color
 /build:marioSpriteSheet.png
 
-#begin PowerUp.png
+#begin pause.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pause.mp3
+
+#begin pipe.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pipe.mp3
+
+#begin powerUp.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:powerUp.mp3
+
+#begin powerUpSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,7 +155,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PowerUp.png;powerUpSpriteSheet.png
+/build:powerUpSpriteSheet.png
 
 #begin projectileSpriteSheet.png
 /importer:TextureImporter
@@ -73,6 +169,18 @@
 /processorParam:TextureFormat=Color
 /build:projectileSpriteSheet.png
 
+#begin smallJump.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:smallJump.mp3
+
+#begin stomp.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:stomp.mp3
+
 #begin tileSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,4 +192,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tileSpriteSheet.png
+
+#begin vine.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:vine.mp3
 

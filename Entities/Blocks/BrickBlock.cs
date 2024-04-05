@@ -1,5 +1,6 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
@@ -25,9 +26,16 @@ namespace Mario.Entities.Blocks
         // Block will be broken
         public override void GetHit()
         {
-
-            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
-            else currentState = new BrickBlockBrokenState();
+            if (isBreakable)
+            {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.breakBlock);
+                GameContentManager.Instance.RemoveEntity(this);
+            }
+            else
+            {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
+                currentState = new BrickBlockBrokenState();
+            }
         }
     }
 }

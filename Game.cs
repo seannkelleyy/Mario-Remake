@@ -4,6 +4,7 @@ using Mario.Interfaces.Base;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace Mario
@@ -36,6 +37,7 @@ namespace Mario
 
         protected override void LoadContent()
         {
+            MediaManager.Instance.LoadContent(Content);
             GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
@@ -45,6 +47,7 @@ namespace Mario
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
 
             keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+            MediaManager.Instance.PlayDefaultTheme();
             _camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
             base.LoadContent();
@@ -95,6 +98,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(transformMatrix: _camera.Transform);
+            MediaManager.Instance.Draw(spriteBatch);
             foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             {
                 entity.Draw(spriteBatch);

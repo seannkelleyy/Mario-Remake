@@ -48,11 +48,11 @@ namespace Mario.Physics
         internal override void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (currentHorizontalDirection == horizontalDirection.right && velocity.X > 0)
+            if (velocity.X > 0)
             {
                 velocity.X -= PhysicsSettings.friction;
             }
-            else if (currentHorizontalDirection == horizontalDirection.left && velocity.X < 0)
+            else if (velocity.X < 0)
             {
                 velocity.X += PhysicsSettings.friction;
             }
