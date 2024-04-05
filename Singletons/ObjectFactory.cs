@@ -73,5 +73,18 @@ namespace Mario.Singletons
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
             }
         }
+
+        public IBlock CreatePipe(string type, Vector2 position, bool isTransportable)
+        {
+            switch (type)
+            {
+                case "verticalPipeNormal":
+                    return new PipeTube(position);
+                case "verticalPipeTile":
+                    return new PipeTile(position);
+                default:
+                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
+            }
+        }
     }
 }

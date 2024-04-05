@@ -3,20 +3,18 @@ using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
-    public class TransportPipe : AbstractBlock
+    public class PipeTube : AbstractBlock
     {
-        private bool isTransportable;
-        public TransportPipe(Vector2 position, bool isTransportable)
+        public PipeTube(Vector2 position)
         {
             this.position = position;
             currentState = new PipeTubeState();
             isCollidable = true;
             isBreakable = false;
-            this.isTransportable = isTransportable;
         }
         public override void GetHit()
         {
-            //Pipes aren't breakable could be utilized for transportation
+            // Nothing to do here since this is a normal pipe
         }
     }
 }

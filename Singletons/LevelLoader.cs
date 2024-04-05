@@ -88,11 +88,28 @@ namespace Mario.Singletons
                 GameContentManager.Instance.AddEntity(blockObject);
             }
 
+            // Create pipes
+            foreach (LevelPipe pipe in level.pipes)
+            {
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreatePipe(
+                   pipe.type,
+                   new Vector2(pipe.x * GlobalVariables.blockHeightWidth, pipe.startingY * GlobalVariables.blockHeightWidth),
+                   pipe.isTransportable));
+
+                for (int y = pipe.startingY+1; y <= pipe.endingY; y++)
+                {
+                        IBlock pipeObject = ObjectFactory.Instance.CreatePipe(
+                            "verticalPipeTile",
+                            new Vector2(pipe.x * GlobalVariables.blockHeightWidth, y * GlobalVariables.blockHeightWidth),
+                            pipe.isTransportable);
+                        GameContentManager.Instance.AddEntity(pipeObject);
+                }
+            }
         }
 
         // Removes all entities from the GCM to prepare for reloading the level
         public void UnloadLevel()
-        {
+        { 
             List<IEntityBase> allEntities = GameContentManager.Instance.GetEntities();
             foreach (IEntityBase entity in allEntities)
             {

@@ -19,12 +19,6 @@
       "isRight": false
     },
     {
-      "type": "goomba",
-      "startingX": 12,
-      "startingY": 12,
-      "isRight": false
-    },
-    {
       "type": "koopa",
       "startingX": 20,
       "startingY": 11,
@@ -53,6 +47,22 @@
       "item": "none"
     }
   ],
+    "pipes": [
+        {
+            "type": "verticalPipeNormal",
+            "x": 8,
+            "startingY": 9,
+            "endingY": 12,
+            "transportable": false
+        },
+        {
+            "type": "verticalPipeNormal",
+            "x": 10,
+            "startingY": 11,
+            "endingY": 12,
+            "transportable": false
+        }
+    ],
   "blocks": [
     {
       "type": "floor",
