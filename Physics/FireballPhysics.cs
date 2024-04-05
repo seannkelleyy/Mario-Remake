@@ -48,7 +48,10 @@ namespace Mario.Physics
                 }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+            if (velocity.Y < PhysicsSettings.fireballBounceForce)
+            {
+                velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+            }
             if (velocity.Y > 0)
             {
                 isFalling = true;
