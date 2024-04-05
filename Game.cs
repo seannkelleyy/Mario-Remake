@@ -38,7 +38,6 @@ namespace Mario
 
         protected override void LoadContent()
         {
-
             mediaManager = MediaManager.Instance;
             mediaManager.LoadContent(Content);
             GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
