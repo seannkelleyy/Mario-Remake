@@ -49,6 +49,7 @@ namespace Mario.Entities.Abstract
         {
             if (wasSmall)
             {
+                mario.SetPosition(mario.GetPosition() - new Vector2(0, 16));
                 mario.currentState = new PowerUpState(mario, mario.currentState);
             }
             else

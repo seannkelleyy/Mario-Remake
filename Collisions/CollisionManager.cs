@@ -3,6 +3,8 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace Mario.Collisions
 {
@@ -24,6 +26,11 @@ namespace Mario.Collisions
             {
                 ManageEnemyCollisions(entity as IEnemy);
             }
+            else if (entity is IItem)
+            {
+                ManageItemCollisions(entity as IItem);
+            }
+        }
             else if (entity is IProjectile)
             {
                 ManageProjectileCollisions(entity as IProjectile);
@@ -81,6 +88,28 @@ namespace Mario.Collisions
                     enemyHandler.EnemyEnemyCollision(collidingEnemy);
                 }
             }
+        }
+
+        private void ManageItemCollisions(IItem item)
+        {
+            ItemCollisionHandler itemHandler = new ItemCollisionHandler(item);
+
+            foreach (IBlock block in GameContentManager.Instance.GetBlocksInProximity(item.GetPosition()))
+            {
+                if (item.GetRectangle().Intersects(block.GetRectangle()))
+                {
+                    itemHandler.ItemBlockCollision(block);
+                }
+            }
+
+            foreach (IItem collidingItem in GameContentManager.Instance.GetItems())
+            {
+                if (item != collidingItem && item.GetRectangle().Intersects(collidingItem.GetRectangle()))
+                {
+                    itemHandler.ItemItemCollision(collidingItem);
+                }
+            }
+
         }
 
         private void ManageProjectileCollisions(IProjectile projectile)
