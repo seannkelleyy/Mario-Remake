@@ -10,6 +10,7 @@ using static Mario.Global.CollisionVariables;
 public class Koopa : AbstractCollideable, IEnemy
 {
     public bool isShell = false;
+    private MediaManager mediaManager = MediaManager.Instance;
 
     public Koopa(Vector2 position)
     {
@@ -34,10 +35,12 @@ public class Koopa : AbstractCollideable, IEnemy
     {
         if (isShell)
         {
+            mediaManager.PlayEffect(MediaManager.EffectNames.kick);
             GameContentManager.Instance.RemoveEntity(this);
         }
         else
         {
+            mediaManager.PlayEffect(MediaManager.EffectNames.stomp);
             currentState = new StompedKoopaState();
             isShell = true;
             position.Y += 8;
@@ -46,6 +49,7 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void Flip()
     {
+        mediaManager.PlayEffect(MediaManager.EffectNames.kick);
         currentState = new FlippedKoopaState();
         GameContentManager.Instance.RemoveEntity(this);
     }

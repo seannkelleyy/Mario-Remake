@@ -10,6 +10,7 @@ using static Mario.Global.CollisionVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     private double deadTimer = 0f;
+    private MediaManager mediaManager = MediaManager.Instance;
 
     public Goomba(Vector2 position)
     {
@@ -45,6 +46,7 @@ public class Goomba : AbstractCollideable, IEnemy
     public void Stomp()
     {
         if (deadTimer > 0) return;
+        mediaManager.PlayEffect(MediaManager.EffectNames.stomp);
         currentState = new StompedGoombaState();
         position.Y += 8;
         deadTimer = 1;
@@ -52,6 +54,7 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void Flip()
     {
+        mediaManager.PlayEffect(MediaManager.EffectNames.kick);
         currentState = new FlippedGoombaState();
         GameContentManager.Instance.RemoveEntity(this);
     }

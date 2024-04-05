@@ -38,11 +38,12 @@ namespace Mario
         protected override void LoadContent()
         {
             SpriteFactory.Instance.LoadAllTextures(Content);
-            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             mediaManager = MediaManager.Instance;
             mediaManager.LoadContent(Content);
+            LevelLoader.Instance.LoadLevel($"../../../Levels/Sprint3.json");
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             keyboardController.LoadCommands(this, gameContentManager.GetHero());
+            mediaManager.PlayDefaultTheme();
             base.LoadContent();
         }
 
@@ -87,7 +88,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            mediaManager.Draw(spriteBatch, MediaManager.Levels.level1);
+            mediaManager.Draw(spriteBatch);
             foreach (IEntityBase entity in gameContentManager.GetEntities())
             {
                 entity.Draw(spriteBatch);

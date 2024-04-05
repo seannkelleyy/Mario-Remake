@@ -25,6 +25,13 @@ namespace Mario.Singletons
         {
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
+            MediaManager mediaManager = MediaManager.Instance;
+
+            // set background for the level
+            mediaManager.SetCurrentBackground(level.level);
+
+            // Set default theme
+            mediaManager.SetDefaultTheme(level.song);
 
             // Create the hero
             IHero hero = ObjectFactory.Instance.CreateHero(level.hero.startingPower, level.hero.lives, new Vector2(level.hero.startingX * 16, level.hero.startingY * 16));

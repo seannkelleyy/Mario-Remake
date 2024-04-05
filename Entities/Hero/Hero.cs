@@ -137,8 +137,15 @@ namespace Mario.Entities.Character
 
         public void Jump()
         {
+            if (health > 1)
+            {
+                mediaManager.PlayEffect(MediaManager.EffectNames.bigJump);
+            }
+            else
+            {
+                mediaManager.PlayEffect(MediaManager.EffectNames.smallJump);
+            }
             physics.Jump();
-            //mediaManager.PlayEffect(MediaManager.EffectNames.bigJump);
             if (physics.isRight)
             {
                 stateManager.SetState(HeroStateType.JumpingRight, health);
@@ -170,6 +177,7 @@ namespace Mario.Entities.Character
 
         void IHero.Collect(IItem item)
         {
+            mediaManager.PlayEffect(MediaManager.EffectNames.powerup);
             if (health < 3)
             {
                 health++;
@@ -188,6 +196,7 @@ namespace Mario.Entities.Character
                 }
                 else if (health == 1)
                 {
+                    mediaManager.PlayEffect(MediaManager.EffectNames.pipe);
                     position.Y += 16;
                 }
                 stateManager.SetState(stateManager.GetStateType(), health);
@@ -196,6 +205,7 @@ namespace Mario.Entities.Character
 
         void IHero.Attack()
         {
+            mediaManager.PlayEffect(MediaManager.EffectNames.fireball);
             GameContentManager.Instance.AddEntity(new Fireball(position));
             stateManager.SetState(HeroStateType.AttackingRight, health);
         }
@@ -203,6 +213,7 @@ namespace Mario.Entities.Character
         public void Die()
         {
             lives--;
+            //mediaManager.
             stateManager.SetState(HeroStateType.Dead, health);
             LevelLoader.Instance.ChangeMarioLives($"../../../Levels/Sprint3.json", lives);
 

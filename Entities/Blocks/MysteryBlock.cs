@@ -8,6 +8,7 @@ namespace Mario.Entities.Blocks
     public class MysteryBlock : AbstractBlock
     {
         private IItem item;
+        private MediaManager mediaManager = MediaManager.Instance;
 
         public MysteryBlock(Vector2 position, bool breakable, bool collidable, string itemName)
         {
@@ -49,6 +50,7 @@ namespace Mario.Entities.Blocks
         {
             if (currentState is not HardBlockState)
             {
+                mediaManager.PlayEffect(MediaManager.EffectNames.bumpBlock);
                 GameContentManager.Instance.AddEntity(item);
                 if (item != null)
                 {
@@ -56,7 +58,11 @@ namespace Mario.Entities.Blocks
                 }
                 currentState = new HardBlockState();
             }
-            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
+            if (isBreakable)
+            {
+                mediaManager.PlayEffect(MediaManager.EffectNames.breakBlock);
+                GameContentManager.Instance.RemoveEntity(this);
+            }
         }
     }
 }
