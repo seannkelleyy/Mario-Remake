@@ -1,26 +1,37 @@
-﻿using System.Collections.Generic;
-
-public class GlobalVariables
+﻿namespace Mario.Global
 {
-    public static Dictionary<string, int[]> spriteNumbers = new Dictionary<string, int[]> {
-            { "fireFlower", new int[] { 0, 0, 16, 16, 4, 1, 0 } },
-            { "star", new int[] { 0, 16, 16, 16, 4, 1, 0 } },
-            { "coin", new int[] { 0, 32, 16, 16, 4, 1, 0 } },
-            { "mushroom", new int[] { 0, 48, 16, 16, 1, 1, 0 } },
-            { "1up", new int[] { 0, 64, 16, 16, 1, 1, 0 } },
-            { "questionMarkTile", new int[] { 0, 0, 16, 16, 3, 1, 1 } },
-            { "brickTile", new int[] { 0, 16, 16, 16, 1, 1, 1 } },
-            { "emptyTile", new int[] { 16, 16, 16, 16, 1, 1, 1 } },
-            { "rockTile", new int[] { 32, 16, 16, 16, 1, 1, 1 } },
-            { "stoneTile", new int[] { 0, 32, 16, 16, 1, 1, 1 } },
-            { "pipeTile", new int[] { 16, 32, 32, 32, 1, 1, 1 } },
-            { "goomba", new int[] { 0, 0, 16, 16, 2, 1, 2 } },
-            { "rightKoopa", new int[] { 0, 16, 16, 24, 2, 1, 2 } },
-            { "leftKoopa", new int[] { 0, 40, 16, 24, 2, 1, 2 } },
-            { "rightJumpMario", new int[] { 0, 0, 16, 16, 1, 1, 3 } },
-            { "leftRunMario", new int[] { 16, 0, 16, 16, 3, 1, 3 } },
-            { "rightStandMario", new int[] { 64, 0, 16, 16, 1, 1, 3 } },
-            { "leftJumpMario", new int[] { 0, 16, 16, 16, 1, 1, 3 } },
-            { "rightRunMario", new int[] { 16, 16, 16, 16, 3, 1, 3 } },
-            { "leftStandMario", new int[] { 64, 16, 16, 16, 1, 1, 3 } } };
+    public class GlobalVariables
+    {
+        public static int blockHeightWidth = 16;
+
+        public static int halfBlockAdjustment = 8;
+
+        public static int horizontalBlockCollisionAdjustment = 2;
+
+        public static int topBlockCollisionAdjustment = 5;
+
+        public static float spriteUpdateInterval = 0.175f;
+
+
+        public static float keyboardUpdateInterval = 0.05f;
+
+        public enum CollisionDirection { Top, Bottom, Left, Right, None }
+        public enum horizontalDirection { left, right };
+
+        public enum BlockType
+        {
+            Brick,
+            Floor,
+            Mystery,
+        }
+
+        public enum ItemTypes
+        {
+            Coin,
+            FireFlower,
+            Star,
+            Mushroom,
+            OneUp
+        }
+    }
 }

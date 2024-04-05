@@ -1,21 +1,20 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace Mario.Input
 {
     public class KeyboardController : IController
     {
         private Dictionary<Keys, Action> Commands;
-
-        // We will probably just instantiate these here for Spint 2 purposes,
-        // but they will be gone after that.
+        private KeyboardState previousKeyboardState;
         private IHero mario;
         private Keys[] keysPressed;
-        float updateInterval = 0.1f;
         float elapsedSeconds = 0;
 
 
@@ -24,11 +23,9 @@ namespace Mario.Input
             Commands = new Dictionary<Keys, Action>();
         }
 
-        // NOTE: When we start saving the state for the character, we will pass in the GameContentManager
-        // to assign the functions to call when keys are pressed.
-        public void LoadCommands(MarioRemake game, IEntityBase[] entities)
+        public void LoadCommands(MarioRemake game, IHero hero)
         {
-            mario = (IHero)entities[0];
+            mario = hero;
 
             Action[] actions = LoadActions(game);
 
@@ -44,6 +41,7 @@ namespace Mario.Input
             Commands.Add(Keys.S, actions[4]);
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
+            Commands.Add(Keys.G, hero.TakeDamage);
 
             // Arrow commands
             Commands.Add(Keys.Left, actions[3]);
@@ -62,8 +60,12 @@ namespace Mario.Input
         private Action[] LoadActions(MarioRemake game)
         {
             Action[] actions = new Action[8];
-            actions[0] = new Action(game.Exit);
-            actions[1] = new Action(game.Restart);
+            actions[0] = new Action(() =>
+            {
+                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, mario.GetStartingLives());
+                game.Exit();
+            });
+            actions[1] = new Action(GameStateManager.Instance.Restart);
             actions[2] = new Action(() =>
             {
                 // This allows for mario to move up and to the left or right
@@ -86,16 +88,18 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
+            actions[7] = new Action(GameStateManager.Instance.Pause);
             return actions;
         }
 
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
-                keysPressed = Keyboard.GetState().GetPressedKeys();
+                KeyboardState currentKeyboardState = Keyboard.GetState();
+                keysPressed = currentKeyboardState.GetPressedKeys();
                 foreach (Keys key in keysPressed)
                 {
                     if (Commands.ContainsKey(key))
@@ -103,6 +107,35 @@ namespace Mario.Input
                         Commands[key].Invoke();
                     }
                 }
+
+                CheckForStopJump(currentKeyboardState);
+
+                previousKeyboardState = currentKeyboardState; // Save the current state for the next frame
+            }
+        }
+
+        public void UpdatePause(GameTime gameTime)
+        {
+            elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
+            {
+                elapsedSeconds = 0;
+                keysPressed = Keyboard.GetState().GetPressedKeys();
+                if (keysPressed.Contains(Keys.P) || keysPressed.Contains(Keys.Escape))
+                {
+                    Commands[Keys.P].Invoke();
+                }
+            }
+        }
+
+        public void CheckForStopJump(KeyboardState currentKeyboardState)
+        {
+            // Check if the jump key was released
+            if (previousKeyboardState.IsKeyDown(Keys.W) && currentKeyboardState.IsKeyUp(Keys.W)
+                || previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space)
+                || previousKeyboardState.IsKeyDown(Keys.Up) && currentKeyboardState.IsKeyUp(Keys.Up))
+            {
+                mario.StopJump();
             }
         }
     }

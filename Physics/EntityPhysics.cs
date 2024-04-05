@@ -1,0 +1,66 @@
+﻿using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
+using static Mario.Global.GlobalVariables;
+
+namespace Mario.Physics
+{
+    public class EntityPhysics : AbstractEntityPhysics
+    {
+        public EntityPhysics(ICollideable entity) : base(entity)
+        {
+            this.entity = entity;
+            velocity = new Vector2(0, 0);
+        }
+
+        public override void Update()
+        {
+            UpdateVertical();
+            UpdateHorizontal();
+        }
+
+        internal override void UpdateHorizontal()
+        {
+            if (currentHorizontalDirection == horizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
+            {
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = PhysicsSettings.koopaShellSpeed;
+                }
+                else
+                {
+                    velocity.X = PhysicsSettings.enemySpeed;
+                }
+            }
+            else if (currentHorizontalDirection == horizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
+            {
+                if (entity is Koopa koopa && koopa.isShell)
+                {
+                    velocity.X = -PhysicsSettings.koopaShellSpeed;
+                }
+                else
+                {
+                    velocity.X = -PhysicsSettings.enemySpeed;
+                }
+            }
+
+            entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
+        }
+
+        internal override void UpdateVertical()
+        {
+
+            if (!entity.GetCollisionState(CollisionDirection.Bottom))
+            {
+                isFalling = true;
+                velocity.Y += ApplyGravity();
+            }
+            else if (entity.GetCollisionState(CollisionDirection.Bottom))
+            {
+                velocity.Y = 0;
+                isFalling = false;
+            }
+            entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
+            velocity.Y = 0;
+        }
+    }
+}

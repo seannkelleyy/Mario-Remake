@@ -16,6 +16,13 @@
     <None Remove="Interfaces\Patterns\" />
     <None Remove="Interfaces\Entities\" />
     <None Remove="Singletons\" />
+    <None Remove="Logging\logs\" />
+    <None Remove="Entities\Projectiles\Fireball\" />
+    <None Remove="Entities\Projectiles\Fireball\FireballStates\" />
+    <None Remove="Interfaces\Entities\Projectiles\" />
+    <None Remove="Entities\Abstract\" />
+    <None Remove="Levels\Data\" />
+    <None Remove="Global\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -24,11 +31,21 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
-    <Folder Include="Singletons\" />
+    <Folder Include="Entities\Projectiles\Fireball\" />
+    <Folder Include="Entities\Projectiles\Fireball\FireballStates\" />
+    <Folder Include="Interfaces\Entities\Projectiles\" />
+    <Folder Include="Entities\Abstract\" />
+    <Folder Include="Levels\Data\" />
+    <Folder Include="Global\Settings\" />
+    <Folder Include="Global\Settings\Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\pull_request_template.md" />

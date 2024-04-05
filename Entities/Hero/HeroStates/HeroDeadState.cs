@@ -1,9 +1,8 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
 
 public class DeadState : HeroState
 {
-    public DeadState() : base()
-    {
-        // add dead sprite
-    }
+    public DeadState(Hero mario) : base(mario) { }
+
 }

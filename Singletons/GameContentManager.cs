@@ -1,52 +1,159 @@
-﻿using Mario.Entities.Character;
+﻿using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
-using Mario.Sprites;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mario.Singletons
 {
     public class GameContentManager
     {
-        private SpriteFactory spriteFactory;
-        private IHero mario;
         private static GameContentManager instance = new GameContentManager();
+        private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
+        {
+            { typeof(IEnemy), new List<IEnemy>() },
+            { typeof(IItem), new List<IItem>() },
+            { typeof(IBlock), new List<IBlock>() },
+            { typeof(IProjectile), new List<IProjectile>() },
+            { typeof(IHero), new List<IHero>() }
+        };
 
         // This code follows the singleton pattern
         // When you need a GCM, you call GameContentManager.Instance
-        public static GameContentManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static GameContentManager Instance => instance;
 
         // This is a private constructor, so no one can create a new GameContentManager
         private GameContentManager() { }
 
-        public void Initialize()
+        public List<IEntityBase> GetEntities()
         {
-            spriteFactory = SpriteFactory.Instance;
+            List<IEntityBase> allEntities = new List<IEntityBase>();
+            foreach (var entityList in entities.Values)
+            {
+                allEntities.AddRange((IEnumerable<IEntityBase>)entityList);
+            }
+            return allEntities;
         }
 
-        public void Load()
+        public List<IEnemy> GetEnemies()
         {
-            // Will call level loader 
-            mario = new Hero(new Vector2(300, 100));
+            List<IEnemy> allCollideables = new List<IEnemy>();
+            foreach (IEnemy enemy in entities[typeof(IEnemy)])
+            {
+                allCollideables.Add(enemy);
+            }
+            return allCollideables;
         }
 
-        public IEntityBase[] GetEntities()
+
+        public List<IItem> GetItems()
         {
-            IEntityBase[] entities = new IEntityBase[1];
-            entities[0] = mario;
-            return entities;
+            List<IItem> allCollideables = new List<IItem>();
+            foreach (IItem item in entities[typeof(IItem)])
+            {
+                allCollideables.Add(item);
+            }
+            return allCollideables;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public List<IProjectile> GetProjectiles()
         {
-            mario.Draw(spriteBatch);
+            List<IProjectile> allCollideables = new List<IProjectile>();
+            foreach (IProjectile projetile in entities[typeof(IProjectile)])
+            {
+                allCollideables.Add(projetile);
+            }
+            return allCollideables;
+        }
+
+        // Gets all blocks within a certain position of mario that are collideable
+        public List<IBlock> GetBlocksInProximity(Vector2 position)
+        {
+
+            List<IBlock> blocks = new List<IBlock>();
+            foreach (IBlock block in entities[typeof(IBlock)])
+            {
+                if (block.GetPosition().X <= position.X + CollisionSettings.collisionPixelRadius
+                    && block.GetPosition().X >= position.X - CollisionSettings.collisionPixelRadius && block.isCollidable)
+                {
+                    blocks.Add(block);
+                }
+            }
+            
+            return CombineBlocks(blocks);
+        }
+
+        public List<IBlock> CombineBlocks(List<IBlock> blocks)
+        {
+            blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
+
+            List<IBlock> combinedBlocks = new List<IBlock>();
+            List<IBlock> nonCombinableBlocks = blocks.Where(block => block.canBeCombined == false).ToList();
+
+            blocks.RemoveAll(block => block.canBeCombined == false);
+
+            for (int i = 0; i < blocks.Count;)
+            {
+                IBlock currentBlock = blocks[i];
+
+                List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
+
+                if (sameLevelBlocks.Count > 0)
+                {
+                    int combinedWidth = sameLevelBlocks.Sum(block => block.GetRectangle().Width);
+                    int combinedHeight = sameLevelBlocks[0].GetRectangle().Height;
+
+                    IBlock combinedBlock = new Block(currentBlock.GetPosition(), combinedWidth, combinedHeight, blocks[i].isBreakable);
+
+                    combinedBlocks.Add(combinedBlock);
+                }
+
+                i += sameLevelBlocks.Count;
+            }
+
+            // Add the non-combinable blocks at the end
+            combinedBlocks.AddRange(nonCombinableBlocks);
+
+            return combinedBlocks;
+        }
+
+        public IHero GetHero()
+        {
+            return (IHero)entities[typeof(IHero)][0];
+        }
+
+        public void AddEntity(IEntityBase entity)
+        {
+            if (entity == null)
+            {
+                return;
+            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Add(entity);
+        }
+
+        public void RemoveEntity(IEntityBase entity)
+        {
+            if (entity == null)
+            {
+                return;
+            }
+            Type entityType = GetEntityType(entity);
+            entities[entityType].Remove(entity);
+        }
+
+        // Helper method to get the type of the entitys
+        private Type GetEntityType(IEntityBase entity)
+        {
+            return entity is IHero ? typeof(IHero) :
+                   entity is IEnemy ? typeof(IEnemy) :
+                   entity is IItem ? typeof(IItem) :
+                   entity is IBlock ? typeof(IBlock) :
+                   entity is IProjectile ? typeof(IProjectile) : null;
         }
     }
 }
-

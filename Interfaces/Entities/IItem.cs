@@ -1,11 +1,15 @@
 ﻿
-using Mario.Interfaces.Entities;
+using Mario.Interfaces.Base;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces
 {
-    // TODO: Add rest of methods here
-    public interface IItem : IEntityBase
+    public interface IItem : IEntityBase, ICollideable
     {
+        public bool isVisible { get; }
+        public void MakeVisible();
+        public void ChangeDirection();
+        public Vector2 GetVelocity();
     }
 }
 

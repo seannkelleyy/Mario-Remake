@@ -1,66 +1,145 @@
 {
   "level": "Sprint 3",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 26,
   "height": 18,
   "hero": {
     "type": "mario",
-    "starting-x": 5,
-    "starting-y": 12,
-    "direction": true,
-    "starting-power": "small"
+    "startingX": 5,
+    "startingY": 1,
+    "lives": -2,
+    "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
-      "starting-x": 10,
-      "starting-y": 12,
-      "direction": false
+      "startingX": 10,
+      "startingY": 1,
+      "isRight": false
     },
     {
-      "type": "Koopa",
-      "starting-x": 20,
-      "starting-y": 12,
-      "direction": false
+      "type": "goomba",
+      "startingX": 12,
+      "startingY": 12,
+      "isRight": false
+    },
+    {
+      "type": "koopa",
+      "startingX": 20,
+      "startingY": 11,
+      "isRight": false
     }
   ],
-  "block-sections": [
+  "blockSections": [
     {
-      "type": "ground",
-      "starting-x": 0,
-      "starting-y": 14,
-      "ending-x": 60,
-      "ending-y": 18,
-      "item": "none",
-      "collideable": false,
-      "breakable": false
+      "type": "floorUnderground",
+      "startingX": 0,
+      "startingY": 14,
+      "endingX": 60,
+      "endingY": 18,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
     },
     {
-      "type": "ground",
-      "starting-x": 0,
-      "starting-y": 13,
-      "ending-x": 60,
-      "ending-y": 13,
-      "item": "none",
-      "collideable": true,
-      "breakable": false
+      "type": "floorUnderground",
+      "startingX": 0,
+      "startingY": 13,
+      "endingX": 60,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     }
   ],
   "blocks": [
     {
-      "type": "brick",
-      "x": 12,
-      "y": 3,
-      "item": "none",
-      "collideable": true,
-      "breakable": false
+      "type": "floor",
+      "x": 4,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "x": 19,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "x": 30,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 17,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     },
     {
       "type": "brick",
+      "x": 14,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "1up"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "1up"
+    },
+    {
+      "type": "mystery",
       "x": 21,
-      "y": 12,
-      "item": "none",
-      "collideable": true,
-      "breakable": false
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "fireflower"
+    },
+    {
+      "type": "mystery",
+      "x": 22,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "star"
+    },
+    {
+      "type": "mystery",
+      "x": 23,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "redMushroom"
+    },
+    {
+      "type": "mystery",
+      "x": 24,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coinUnderground"
+    },
+    {
+      "type": "mystery",
+      "x": 25,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "1up"
     }
   ]
 }

@@ -1,119 +1,247 @@
-using Mario.Entities.Character.HeroStates;
+using Mario.Collisions;
+using Mario.Entities.Abstract;
+using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Physics;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using static Mario.Global.GlobalVariables;
+
 
 namespace Mario.Entities.Character
 {
-    public class Hero : IHero
+    public class Hero : AbstractCollideable, IHero
     {
-        public HeroState currentState { get; set; }
-        private SpriteBatch spriteBatch;
-        private Vector2 position;
-        private int health = 1;
+        public HeroPhysics physics { get; }
+        private int lives;
+        private int startingLives;
+        private bool isInvulnerable;
+        private double invulnerabilityFrames;
+        private bool isFlashing = false;
+        private double flashIntervalTimer = 0.0;
+
+        public new HeroState currentState { get; set; }
+        public enum health { Mario, BigMario, FireMario };
+        public health currentHealth = health.Mario;
         // True is right, false is left
-        private Boolean direction = true;
 
-        public Hero(Vector2 position)
+        public Hero(string startingPower, int lives, Vector2 position)
         {
+            switch (startingPower)
+            {
+                case "small":
+                    currentHealth = health.Mario;
+                    break;
+                case "big":
+                    currentHealth = health.BigMario;
+                    break;
+                case "fire":
+                    currentHealth = health.FireMario;
+                    break;
+            }
+            isInvulnerable = false;
+            invulnerabilityFrames = 0;
+            this.lives = lives;
+            startingLives = lives;
             this.position = position;
-            currentState = new StandingRightState();
+            physics = new HeroPhysics(this);
+            currentState = new StandState(this);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            ClearCollisions();
+
             currentState.Update(gameTime);
+            CollisionManager.Instance.Run(this);
+
+            HandleInvulnerability(gameTime);
+
+            physics.Update();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public new virtual void Draw(SpriteBatch spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
-            currentState.Draw(spriteBatch, position);
+            if (!isFlashing || !isInvulnerable)
+            {
+                currentState.Draw(spriteBatch, position);
+            }
         }
 
+        private void HandleInvulnerability(GameTime gameTime)
+        {
+            if (isInvulnerable)
+            {
+                flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (flashIntervalTimer > EntitySettings.heroFlashDuration)
+                {
+                    isFlashing = !isFlashing;
+                    flashIntervalTimer = 0.0;
+                }
+                invulnerabilityFrames += gameTime.ElapsedGameTime.TotalSeconds;
+                if (invulnerabilityFrames > EntitySettings.heroInvulnerabilityTime)
+                {
+                    isInvulnerable = false;
+                    invulnerabilityFrames = 0.0;
+                }
+            }
+
+            physics.Update();
+        }
+        public horizontalDirection GetHorizontalDirection()
+        {
+            return physics.GetHorizontalDirection();
+        }
         public void WalkLeft()
         {
-            if (currentState is LeftMovingState)
-            {
-                position.X -= 3;
-                return;
-            }
-            currentState = new LeftMovingState();
+            currentState.WalkLeft();
         }
-
         public void WalkRight()
         {
-            if (currentState is RightMovingState)
-            {
-                position.X += 3;
-                return;
-            }
-            currentState = new RightMovingState();
+            currentState.WalkRight();
+        }
+        public void Stand()
+        {
+            currentState.Stand();
         }
 
+        public void StopHorizontal()
+        {
+            physics.StopHorizontal();
+            if (collisions[CollisionDirection.Left])
+            {
+                position.X += horizontalBlockCollisionAdjustment;
+            }
+            else if (collisions[CollisionDirection.Right])
+            {
+                position.X -= horizontalBlockCollisionAdjustment;
+            }
+        }
+
+        public void StopVertical()
+        {
+            physics.StopVertical();
+            if (collisions[CollisionDirection.Top])
+            {
+                position.Y += topBlockCollisionAdjustment;
+            }
+        }
         public void Jump()
         {
-            if (currentState is JumpStateRight || currentState is JumpStateLeft)
-            {
-                position.Y -= 5;
+            currentState.Jump();
+        }
 
-                return;
-            }
-            position.Y -= 5;
-            if (direction)
-            {
-                currentState = new JumpStateRight();
-            }
-            else
-            {
-                currentState = new JumpStateLeft();
-            }
+        public void SmallJump()
+        {
+            physics.SmallJump();
+        }
+        public void StopJump()
+        {
+            physics.StopJump();
         }
 
         public void Crouch()
         {
-            // If mario is already crouching, move him down
-            // This is just for sprint 2 to be able to move mario around more
-            // In sprint 3, we will have a crouch sprite and he will actually crouch
-            if (currentState is CrouchState)
-            {
-                position.Y += 5;
-                return;
-            }
-            position.Y += 5;
-
-            currentState = new CrouchState();
+            currentState.Crouch();
         }
-
         void IHero.Collect(IItem item)
         {
-            currentState = new CollectState();
-            if (health < 3)
+            if (item.GetType().Name.Equals("FireFlower") && currentHealth != health.FireMario)
             {
-                health++;
+                bool wasSmall = currentHealth == health.Mario;
+                currentHealth = health.FireMario;
+                currentState.PowerUp(wasSmall);
+            }
+            else if (item.GetType().Name.Equals("Mushroom"))
+            {
+                if (((Mushroom)item).Is1up())
+                {
+                    lives++;
+                }
+                else if (currentHealth == health.Mario)
+                {
+                    currentHealth = health.BigMario;
+                    currentState.PowerUp(true);
+                }
+            }
+            else if (item.GetType().Name.Equals("Coin"))
+            {
+                //adds to the coin count (needs to be implemented with scoreboard or coin tracker)
+            }
+            else if (item.GetType().Name.Equals("Star"))
+            {
+                //activate star mode (needs star mode to be implemented)
+            }
+
+        }
+        public void TakeDamage()
+        {
+            if (!isInvulnerable)
+            {
+                if (currentHealth == health.Mario)
+                {
+                    Die();
+                    return;
+                }
+                isInvulnerable = true;
+                if (currentHealth == health.BigMario)
+                {
+                    currentHealth = health.Mario;
+                    position.Y += 16;
+                }
+                else
+                {
+                    currentHealth = health.BigMario;
+                }
+                currentState.TakeDamage();
             }
         }
 
-        void IHero.TakeDamage()
+
+        public void Attack()
         {
-            health--;
-            if (health == 0)
-            {
-                Die();
-            }
+            currentState.Attack();
         }
-
-        void IHero.Attack()
-        {
-            // Make mario shoot fireball
-        }
-
-
         public void Die()
         {
-            currentState = new DeadState();
+            lives--;
+            currentState.Die();
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, lives);
+
+            // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
+            if (lives != 0)
+            {
+                GameStateManager.Instance.BeginReset();
+            }
+            else
+            {
+                lives = startingLives;
+                GameStateManager.Instance.Restart();
+            }
+        }
+        public health ReportHealth()
+        {
+            return this.currentHealth;
+        }
+        public override Rectangle GetRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, (int)currentState.GetVector().X, (int)currentState.GetVector().Y);
+        }
+
+        public int GetStartingLives()
+        {
+            return startingLives;
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return physics.GetVelocity();
+        }
+        public HeroPhysics GetPhysics()
+        {
+            return physics;
         }
     }
 }

@@ -1,10 +1,31 @@
-﻿using Mario.Entities.Character.HeroStates;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Character;
+using Microsoft.Xna.Framework;
 
-public class CrouchState : HeroState
+
+internal class CrouchState : HeroState
+
 {
-    public CrouchState() : base()
+    private float updateInterval = .25f;
+    private float elapsedSeconds = 0;
+    public CrouchState(Hero mario) : base(mario) { }
+    public override void Stand() { }
+
+    public override void WalkLeft()
     {
-        // Need to add crouching sprite
-        // sprite = spriteFactory.CreateSprite("crouchingMario");
     }
+    public override void WalkRight()
+    {
+    }
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (elapsedSeconds >= updateInterval)
+        {
+            mario.currentState = new StandState(mario);
+        }
+    }
+
 }
+
