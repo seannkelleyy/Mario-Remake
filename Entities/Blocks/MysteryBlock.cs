@@ -1,6 +1,7 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
 using Mario.Interfaces;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
@@ -8,7 +9,6 @@ namespace Mario.Entities.Blocks
     public class MysteryBlock : AbstractBlock
     {
         private IItem item;
-        private MediaManager mediaManager = MediaManager.Instance;
 
         public MysteryBlock(Vector2 position, bool collidable, string itemName)
         {
@@ -52,7 +52,7 @@ namespace Mario.Entities.Blocks
         {
             if (currentState is not HardBlockState)
             {
-                mediaManager.PlayEffect(MediaManager.EffectNames.bumpBlock);
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
                 GameContentManager.Instance.AddEntity(item);
                 if (item != null)
                 {

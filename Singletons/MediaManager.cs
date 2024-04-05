@@ -4,96 +4,51 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
-using System.Numerics;
+using Mario.Global;
 
 namespace Mario.Singletons
 {
     internal class MediaManager
     {
         private static MediaManager instance = new();
-        private Dictionary<SongThemes, Song> themes;
-        private Dictionary<EffectNames, SoundEffectInstance> soundEffects;
-        private Dictionary<Levels, Texture2D> backgrounds;
+        private Dictionary<GlobalVariables.SongThemes, Song> themes;
+        private Dictionary<GlobalVariables.EffectNames, SoundEffectInstance> soundEffects;
+        private Dictionary<GlobalVariables.Levels, Texture2D> backgrounds;
         private Song defaultTheme;
-        private Levels currentBackground;
-        
-        public enum Levels
-        {
-            level1 = 1,
-            level2 = 2,
-            level3 = 3,
-            level4 = 4,
-            level5 = 5,
-            level6 = 6,
-            level7 = 7,
-            level8 = 8
-        }
-        public enum EffectNames
-        {
-            oneUp,
-            bigJump,
-            breakBlock,
-            bumpBlock,
-            coin,
-            enemyFire,
-            fireball,
-            flag,
-            itemFromBlock,
-            kick,
-            smallJump,
-            stomp,
-            pause,
-            powerup,
-            vine, // Most likely will be unused.
-            pipe
-        }
-        public enum SongThemes
-        {
-            ground,
-            underground,
-            invincibility,
-            levelComplete,
-            lostLife,
-            gameOver
-        };
-
+        private GlobalVariables.Levels currentBackground;
 
         public static MediaManager Instance => instance;
         public void LoadContent(ContentManager content)
         {
-            backgrounds = new Dictionary<Levels, Texture2D>
+            backgrounds = new Dictionary<GlobalVariables.Levels, Texture2D>
             {
-                { Levels.level1, (content.Load<Texture2D>("background1-1withoutEnd")) }
+                { GlobalVariables.Levels.level1, (content.Load<Texture2D>("background1-1withoutEnd")) }
             };
 
-            soundEffects = new Dictionary<EffectNames, SoundEffectInstance>
+            soundEffects = new Dictionary<GlobalVariables.EffectNames, SoundEffectInstance>
             {
-                { EffectNames.oneUp, (content.Load<SoundEffect>("1up")).CreateInstance() },
-                { EffectNames.bigJump, (content.Load<SoundEffect>("bigJump")).CreateInstance() },
-                { EffectNames.breakBlock, (content.Load<SoundEffect>("blockbreak")).CreateInstance() },
-                { EffectNames.bumpBlock, (content.Load<SoundEffect>("bump")).CreateInstance() },
-                { EffectNames.coin, (content.Load<SoundEffect>("coin")).CreateInstance() },
-                { EffectNames.enemyFire, (content.Load<SoundEffect>("enemyFire")).CreateInstance() },
-                { EffectNames.fireball, (content.Load<SoundEffect>("fireball")).CreateInstance() },
-                { EffectNames.flag, (content.Load<SoundEffect>("flag")).CreateInstance() },
-                { EffectNames.itemFromBlock, (content.Load<SoundEffect>("item")).CreateInstance() },
-                { EffectNames.kick, (content.Load<SoundEffect>("kick")).CreateInstance() },
-                { EffectNames.pause, (content.Load<SoundEffect>("pause")).CreateInstance() },
-                { EffectNames.pipe, (content.Load<SoundEffect>("pipe")).CreateInstance() },
-                { EffectNames.powerup, (content.Load< SoundEffect >("powerUp")).CreateInstance() },
-                { EffectNames.smallJump, (content.Load<SoundEffect>("smallJump")).CreateInstance() },
-                { EffectNames.stomp, (content.Load<SoundEffect>("stomp")).CreateInstance() },
-                { EffectNames.vine, (content.Load<SoundEffect>("Vine")).CreateInstance() }
+                { GlobalVariables.EffectNames.oneUp, (content.Load<SoundEffect>("1up")).CreateInstance() },
+                { GlobalVariables.EffectNames.bigJump, (content.Load<SoundEffect>("bigJump")).CreateInstance() },
+                { GlobalVariables.EffectNames.breakBlock, (content.Load<SoundEffect>("blockbreak")).CreateInstance() },
+                { GlobalVariables.EffectNames.bumpBlock, (content.Load<SoundEffect>("bump")).CreateInstance() },
+                { GlobalVariables.EffectNames.coin, (content.Load<SoundEffect>("coin")).CreateInstance() },
+                { GlobalVariables.EffectNames.enemyFire, (content.Load<SoundEffect>("enemyFire")).CreateInstance() },
+                { GlobalVariables.EffectNames.fireball, (content.Load<SoundEffect>("fireball")).CreateInstance() },
+                { GlobalVariables.EffectNames.flag, (content.Load<SoundEffect>("flag")).CreateInstance() },
+                { GlobalVariables.EffectNames.itemFromBlock, (content.Load<SoundEffect>("item")).CreateInstance() },
+                { GlobalVariables.EffectNames.kick, (content.Load<SoundEffect>("kick")).CreateInstance() },
+                { GlobalVariables.EffectNames.pause, (content.Load<SoundEffect>("pause")).CreateInstance() },
+                { GlobalVariables.EffectNames.pipe, (content.Load<SoundEffect>("pipe")).CreateInstance() },
+                { GlobalVariables.EffectNames.powerup, (content.Load< SoundEffect >("powerUp")).CreateInstance() },
+                { GlobalVariables.EffectNames.smallJump, (content.Load<SoundEffect>("smallJump")).CreateInstance() },
+                { GlobalVariables.EffectNames.stomp, (content.Load<SoundEffect>("stomp")).CreateInstance() },
+                { GlobalVariables.EffectNames.vine, (content.Load<SoundEffect>("Vine")).CreateInstance() }
             };
 
-            themes = new Dictionary<SongThemes, Song>
+            themes = new Dictionary<GlobalVariables.SongThemes, Song>
             {
-                { SongThemes.ground, (content.Load<Song>("01-main-theme-overworld")) }
+                { GlobalVariables.SongThemes.ground, (content.Load<Song>("01-main-theme-overworld")) }
                 //{ SongThemes.underground, (content.Load<Song>("02. Underground Theme")) },
                 //{ SongThemes.invincibility, (content.Load<Song>("05. Invincibility Theme")) },
                 //{ SongThemes.levelComplete, (content.Load<Song>("06. Level Complete")) },
@@ -104,7 +59,7 @@ namespace Mario.Singletons
 
         public void SetDefaultTheme(string theme)
         {
-            SongThemes check = (SongThemes) Enum.Parse(typeof(SongThemes), theme);
+            GlobalVariables.SongThemes check = (GlobalVariables.SongThemes) Enum.Parse(typeof(GlobalVariables.SongThemes), theme);
             defaultTheme = themes[check];
         }
         public void PlayDefaultTheme()
@@ -112,20 +67,20 @@ namespace Mario.Singletons
             MediaPlayer.Play(defaultTheme);
             MediaPlayer.IsRepeating = true;
         }
-        public void PlayTheme(SongThemes theme, Boolean repeat)
+        public void PlayTheme(GlobalVariables.SongThemes theme, Boolean repeat)
         {
             MediaPlayer.Play(themes[theme]);
             MediaPlayer.IsRepeating = repeat;
         }
 
-        public void PlayEffect(EffectNames name)
+        public void PlayEffect(GlobalVariables.EffectNames name)
         {
             soundEffects[name].Play();
         }
 
         public void SetCurrentBackground(string level)
         {
-            currentBackground = (Levels)Enum.Parse(typeof(Levels), level);
+            currentBackground = (GlobalVariables.Levels)Enum.Parse(typeof(GlobalVariables.Levels), level);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

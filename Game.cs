@@ -17,7 +17,6 @@ namespace Mario
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private MediaManager mediaManager;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,8 +37,7 @@ namespace Mario
 
         protected override void LoadContent()
         {
-            mediaManager = MediaManager.Instance;
-            mediaManager.LoadContent(Content);
+            MediaManager.Instance.LoadContent(Content);
             GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
 
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
@@ -49,7 +47,7 @@ namespace Mario
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
 
             keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
-            mediaManager.PlayDefaultTheme();
+            MediaManager.Instance.PlayDefaultTheme();
             _camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
             base.LoadContent();
@@ -100,7 +98,7 @@ namespace Mario
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(transformMatrix: _camera.Transform);
-            mediaManager.Draw(spriteBatch);
+            MediaManager.Instance.Draw(spriteBatch);
             foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             {
                 entity.Draw(spriteBatch);

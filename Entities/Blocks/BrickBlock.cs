@@ -1,12 +1,12 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
     public class BrickBlock : AbstractBlock
     {
-        private MediaManager mediaManager = MediaManager.Instance;
         public BrickBlock(Vector2 position, bool breakable, bool collidable, bool isUnderground = false)
         {
             this.position = position;
@@ -28,12 +28,12 @@ namespace Mario.Entities.Blocks
         {
             if (isBreakable)
             {
-                mediaManager.PlayEffect(MediaManager.EffectNames.breakBlock);
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.breakBlock);
                 GameContentManager.Instance.RemoveEntity(this);
             }
             else
             {
-                mediaManager.PlayEffect(MediaManager.EffectNames.bumpBlock);
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
                 currentState = new BrickBlockBrokenState();
             }
         }

@@ -33,5 +33,49 @@
             Mushroom,
             OneUp
         }
+
+        #region MediaManagerVariables
+
+        public enum Levels
+        {
+            level1 = 1,
+            level2 = 2,
+            level3 = 3,
+            level4 = 4,
+            level5 = 5,
+            level6 = 6,
+            level7 = 7,
+            level8 = 8
+        }
+        public enum EffectNames
+        {
+            oneUp,
+            bigJump,
+            breakBlock,
+            bumpBlock,
+            coin,
+            enemyFire,
+            fireball,
+            flag,
+            itemFromBlock,
+            kick,
+            smallJump,
+            stomp,
+            pause,
+            powerup,
+            vine, // Most likely will be unused.
+            pipe
+        }
+        public enum SongThemes
+        {
+            ground,
+            underground,
+            invincibility,
+            levelComplete,
+            lostLife,
+            gameOver
+        }
+
+        #endregion MediaManagerVariables
     }
 }
