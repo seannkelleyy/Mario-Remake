@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
@@ -36,10 +37,25 @@ namespace Mario.Physics
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
-                velocity.Y = -PhysicsSettings.fireballBounceForce;
+                if (!isFalling)
+                {
+                    ((IProjectile)entity).Destroy();
+                }
+                else
+                {
+                    velocity.Y = -PhysicsSettings.fireballBounceForce;
+                    isFalling = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+            if (velocity.Y < PhysicsSettings.fireballBounceForce)
+            {
+                velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+            }
+            if (velocity.Y > 0)
+            {
+                isFalling = true;
+            }
         }
     }
 }
