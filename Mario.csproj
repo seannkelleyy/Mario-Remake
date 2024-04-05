@@ -39,8 +39,6 @@
   <ItemGroup>
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include="Interfaces\Patterns\" />
-    <Folder Include="Entities\Projectiles\Fireball\" />
-    <Folder Include="Entities\Projectiles\Fireball\FireballStates\" />
     <Folder Include="Interfaces\Entities\Projectiles\" />
     <Folder Include="Entities\Abstract\" />
     <Folder Include="Levels\Data\" />

@@ -16,15 +16,7 @@ namespace Mario.Entities.Projectiles
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (fireball.GetCollisionState(CollisionDirection.Left) || fireball.GetCollisionState(CollisionDirection.Right))
-            {
-                fireball.currentState = new FireballExplosionState(fireball);
-            }
-            else
-            {
-                fireball.GetPhysics().Update();
-            }
-
+            fireball.GetPhysics().Update();
         }
     }
 }
