@@ -2,12 +2,12 @@
 
 public class Statistics
 {
-    public int coins { get; set; }
-    public int lives { get; set; }
-    public int score { get; set; }
-    public int time { get; set; }
-    public string level { get; set; }
-    public int LeftEdgeOfScreen { get; set; }
+    public int coins;
+    public int lives;
+    public int score;
+    public int time;
+    public string level;
+    public int LeftEdgeOfScreen;
 
     public Statistics()
     {
@@ -52,9 +52,15 @@ public class Statistics
         return scoreText;
     }
 
-    public void Draw(SpriteBatch spriteBatch, SpriteFont font)
+    public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(font, "Mario      Coins    Lives    Time    World", new Vector2(10, 10), Color.White);
-        spriteBatch.Draw(font, ScoreAsText(score) + "   " + coins + "       " + lives + "        " + time + "     1-1", new Vector2(10, 25), Color.White);)
+        spriteBatch.Draw("Mario      Coins    Lives    Time    World", new Vector2(LeftEdgeOfScreen + 10, 10), Color.White);
+        spriteBatch.Draw(ScoreAsText(score) + "   " + coins + "       " + lives + "        " + time + "     1-1", new Vector2(LeftEdgeOfScreen + 10, 25), Color.White);)
+    }
+
+    pubic void Update(GameTime gameTime)
+    {
+        LeftEdgeOfScreen = PlayerCamera.GetLeftEdge();
+        time = gameTime.ElapsedGameTime;
     }
 }
