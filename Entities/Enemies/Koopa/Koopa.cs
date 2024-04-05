@@ -4,11 +4,11 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
 {
+    public EntityPhysics physics { get; }
     public bool isShell = false;
     private MediaManager mediaManager = MediaManager.Instance;
 
@@ -21,11 +21,8 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public override void Update(GameTime gameTime)
     {
-        // Reset all collision states to false at the start of each update
-        foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-        {
-            SetCollisionState((CollisionDirection)direction, false);
-        }
+        ClearCollisions();
+
         CollisionManager.Instance.Run(this);
         physics.Update();
         currentState.Update(gameTime);
@@ -43,7 +40,7 @@ public class Koopa : AbstractCollideable, IEnemy
             mediaManager.PlayEffect(MediaManager.EffectNames.stomp);
             currentState = new StompedKoopaState();
             isShell = true;
-            position.Y += 8;
+            position.Y += halfBlockAdjustment;
         }
     }
 
@@ -56,15 +53,15 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.isRight)
+        if (physics.currentHorizontalDirection == horizontalDirection.right)
         {
-            physics.isRight = false;
+            physics.currentHorizontalDirection = horizontalDirection.left;
             if (!isShell)
                 currentState = new LeftMovingKoopaState();
         }
         else
         {
-            physics.isRight = true;
+            physics.currentHorizontalDirection = horizontalDirection.right;
             if (!isShell)
                 currentState = new RightMovingKoopaState();
         }
@@ -73,5 +70,10 @@ public class Koopa : AbstractCollideable, IEnemy
     public bool ReportIsAlive()
     {
         return true;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
     }
 }

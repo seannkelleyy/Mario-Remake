@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mario.Entities.Abstract
 {
-	public abstract class AbstractEntityState
-	{
+    public abstract class AbstractEntityState
+    {
         protected SpriteFactory spriteFactory;
         public ISprite sprite;
 
@@ -25,7 +25,7 @@ namespace Mario.Entities.Abstract
             sprite.Draw(spriteBatch, position);
         }
 
-        public Vector2 GetVector()
+        public virtual Vector2 GetVector()
         {
             return sprite.GetVector();
         }

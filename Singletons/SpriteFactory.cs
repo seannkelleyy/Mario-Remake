@@ -2,33 +2,41 @@
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace Mario.Sprites
 {
     public class SpriteFactory
     {
+        // top left x pixel of sprite,
+        // top left y pixel of the sprite, 
+        // width of the sprite,
+        // height of the sprite, 
+        // number of frames for sprite, 
+        // scalar size variable, 
+        // spritesheet number
         private Dictionary<string, int[]> spriteNumbers;
         private Texture2D[] spriteSheets;
         private static SpriteFactory instance = new SpriteFactory();
 
-        // This code follows the singleton pattern
-        // When you need a SpriteFactory, you call SpriteFactory.Instance
         public static SpriteFactory Instance => instance;
-        // This is a private constructor, so no one can create a new SpriteFactory
-        private SpriteFactory()
+
+        private SpriteFactory() { }
+
+        public void LoadAllTextures(ContentManager content, string pathToJson)
         {
-            spriteNumbers = SpriteVariables.spriteNumbers;
-        }
-        public void LoadAllTextures(ContentManager content)
-        {
+            string jsonString = File.ReadAllText(pathToJson);
+            spriteNumbers = JsonConvert.DeserializeObject<Dictionary<string, int[]>>(jsonString);
+
             spriteSheets = new Texture2D[] {
                 content.Load<Texture2D>("itemSpriteSheet"),
                 content.Load<Texture2D>("tileSpriteSheet"),
                 content.Load<Texture2D>("enemySpriteSheet"),
                 content.Load<Texture2D>("marioSpriteSheet"),
-                content.Load<Texture2D>("projectileSpriteSheet")
+                content.Load<Texture2D>("projectileSpriteSheet"),
+                content.Load<Texture2D>("powerUpSpriteSheet")
             };
         }
         public ISprite CreateSprite(string type)

@@ -3,7 +3,7 @@ using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
 using System.Collections.Generic;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class HeroCollisionHandler
 {
@@ -22,20 +22,24 @@ public class HeroCollisionHandler
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() => {
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
+        {
             hero.SetCollisionState(CollisionDirection.Left, true);
             hero.StopHorizontal();
-            }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
+        }));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
+        {
             hero.SetCollisionState(CollisionDirection.Right, true);
             hero.StopHorizontal();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => {
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
+        {
             hero.SetCollisionState(CollisionDirection.Top, true);
             hero.StopVertical();
             block.GetHit();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => {
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
             hero.SetCollisionState(CollisionDirection.Bottom, true);
         }));
 

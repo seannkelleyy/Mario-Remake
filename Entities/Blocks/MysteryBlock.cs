@@ -10,11 +10,10 @@ namespace Mario.Entities.Blocks
         private IItem item;
         private MediaManager mediaManager = MediaManager.Instance;
 
-        public MysteryBlock(Vector2 position, bool breakable, bool collidable, string itemName)
+        public MysteryBlock(Vector2 position, bool collidable, string itemName)
         {
             this.position = position;
             isCollidable = collidable;
-            isBreakable = breakable;
             currentState = new GoldenBlockState();
             canBeCombined = false;
 
@@ -24,14 +23,17 @@ namespace Mario.Entities.Blocks
                 case "none":
                     item = null;
                     break;
-                case "mushroom":
-                    item = ObjectFactory.Instance.CreateItem("mushroom", position);
+                case "redMushroom":
+                    item = ObjectFactory.Instance.CreateItem("redMushroom", position);
                     break;
                 case "fireflower":
                     item = ObjectFactory.Instance.CreateItem("fireflower", position);
                     break;
                 case "coin":
                     item = ObjectFactory.Instance.CreateItem("coin", position);
+                    break;
+                case "coinUnderground":
+                    item = ObjectFactory.Instance.CreateItem("coinUnderground", position);
                     break;
                 case "1up":
                     item = ObjectFactory.Instance.CreateItem("1up", position);
@@ -57,11 +59,6 @@ namespace Mario.Entities.Blocks
                     item.MakeVisible();
                 }
                 currentState = new HardBlockState();
-            }
-            if (isBreakable)
-            {
-                mediaManager.PlayEffect(MediaManager.EffectNames.breakBlock);
-                GameContentManager.Instance.RemoveEntity(this);
             }
         }
     }

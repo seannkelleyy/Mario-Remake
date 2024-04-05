@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Interfaces.Base
 {
@@ -10,6 +10,5 @@ namespace Mario.Interfaces.Base
         public bool GetCollisionState(CollisionDirection direction);
         public void SetCollisionState(CollisionDirection direction, bool state);
         public Rectangle GetRectangle();
-        public Vector2 GetVelocity();
     }
 }
