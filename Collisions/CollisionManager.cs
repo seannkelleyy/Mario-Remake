@@ -3,8 +3,6 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
 using Mario.Singletons;
-using Microsoft.Xna.Framework;
-using System;
 
 namespace Mario.Collisions
 {
@@ -30,7 +28,7 @@ namespace Mario.Collisions
             {
                 ManageItemCollisions(entity as IItem);
             }
-        }
+
             else if (entity is IProjectile)
             {
                 ManageProjectileCollisions(entity as IProjectile);
