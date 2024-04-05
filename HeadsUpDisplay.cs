@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Numerics;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 public class Statistics
 {
@@ -7,7 +11,7 @@ public class Statistics
     public int score;
     public int time;
     public string level;
-    public int LeftEdgeOfScreen;
+    public float LeftEdgeOfScreen;
 
     public Statistics()
     {
@@ -18,8 +22,6 @@ public class Statistics
         level = "1-1";
         LeftEdgeOfScreen = 0;
     }
-
-
     public void CoinCollected()
     {
         coins++;
@@ -40,7 +42,7 @@ public class Statistics
     {
         score += 100;
     }
-    public void ScoreAsText(int score)
+    public String ScoreAsText(int score)
     {
         int gameScore = score;
         string scoreText = "";
@@ -52,15 +54,15 @@ public class Statistics
         return scoreText;
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, SpriteFont font)
     {
-        spriteBatch.Draw("Mario      Coins    Lives    Time    World", new Vector2(LeftEdgeOfScreen + 10, 10), Color.White);
-        spriteBatch.Draw(ScoreAsText(score) + "   " + coins + "       " + lives + "        " + time + "     1-1", new Vector2(LeftEdgeOfScreen + 10, 25), Color.White);)
+        spriteBatch.DrawString(font, "Mario      Coins    Lives    Time    World", new Vector2(LeftEdgeOfScreen + 10, 10), Color.White);
+        spriteBatch.DrawString(font, ScoreAsText(score) + "   " + coins + "       " + lives + "        " + time + "     1-1", new Vector2(LeftEdgeOfScreen + 10, 25), Color.White);
     }
 
-    pubic void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
-        LeftEdgeOfScreen = PlayerCamera.GetLeftEdge();
-        time = gameTime.ElapsedGameTime;
+        LeftEdgeOfScreen = Mario.PlayerCamera.GetLeftEdge();
+        time = (int)gameTime.ElapsedGameTime.TotalSeconds;
     }
 }
