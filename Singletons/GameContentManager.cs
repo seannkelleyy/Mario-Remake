@@ -99,8 +99,13 @@ namespace Mario.Singletons
             for (int i = 0; i < blocks.Count;)
             {
                 IBlock currentBlock = blocks[i];
-
-                List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
+                List<IBlock> sameLevelBlocks = new List<IBlock>();
+                sameLevelBlocks.Add(currentBlock);
+                int j = i + 1;
+                while (currentBlock.GetPosition().Y == blocks[j].GetPosition().Y)
+                {
+                    sameLevelBlocks.Add(blocks[j]);
+                }
 
                 if (sameLevelBlocks.Count > 0)
                 {
