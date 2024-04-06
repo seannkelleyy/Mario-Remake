@@ -33,7 +33,7 @@ namespace Mario.Singletons
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
             MediaManager mediaManager = MediaManager.Instance;
 
-            GlobalVariables.LevelName = level.levelName;
+            GlobalVariables.LevelName = level.level;
             // set background for the level
             mediaManager.SetCurrentBackground(level.level);
 

@@ -7,7 +7,6 @@ namespace Mario.Levels.Level
     {
         public string pathToSpriteJson { get; set; }
         public string level { get; set; }
-        public string levelName { get; set; }
         public int width { get; set; }
         public int height { get; set; }
         public int timeLimit { get; set; }

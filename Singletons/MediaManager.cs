@@ -67,7 +67,7 @@ namespace Mario.Singletons
             MediaPlayer.Play(defaultTheme);
             MediaPlayer.IsRepeating = true;
         }
-        public void PlayTheme(GlobalVariables.SongThemes theme, Boolean repeat)
+        public void PlayTheme(GlobalVariables.SongThemes theme, bool repeat)
         {
             MediaPlayer.Play(themes[theme]);
             MediaPlayer.IsRepeating = repeat;
@@ -84,7 +84,7 @@ namespace Mario.Singletons
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(backgrounds[currentBackground], new Microsoft.Xna.Framework.Vector2(0, 0), Color.White);
+            spriteBatch.Draw(backgrounds[currentBackground], new Vector2(0, 0), Color.White);
         }
     }
 }
