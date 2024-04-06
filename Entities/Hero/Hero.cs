@@ -55,7 +55,7 @@ namespace Mario.Entities.Character
 
             stats.Update(gameTime);
 
-            CollisionManager.Instance.Run(this);
+            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             HandleInvulnerability(gameTime);
 
@@ -191,8 +191,9 @@ namespace Mario.Entities.Character
             else if (item.GetType().Name.Equals("Star"))
             {
                 stats.AddScore(1000);
-                //add sound theme changes here
-                //activate star mode (needs star mode to be implemented)
+                //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
+                GameContentManager.Instance.RemoveEntity(this);
+                GameContentManager.Instance.AddEntity(new StarHero(this));
             }
 
         }
@@ -271,6 +272,11 @@ namespace Mario.Entities.Character
         public HeroPhysics GetPhysics()
         {
             return physics;
+        }
+
+        public HeroStatTracker GetStats()
+        {
+            return stats;
         }
     }
 }

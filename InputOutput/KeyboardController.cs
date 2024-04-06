@@ -42,7 +42,7 @@ namespace Mario.Input
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
             Commands.Add(Keys.LeftShift, actions[6]);
-            Commands.Add(Keys.G, hero.TakeDamage);
+            Commands.Add(Keys.G, actions[8]);
 
             // Arrow commands
             Commands.Add(Keys.Left, actions[3]);
@@ -60,7 +60,7 @@ namespace Mario.Input
 
         private Action[] LoadActions(MarioRemake game)
         {
-            Action[] actions = new Action[8];
+            Action[] actions = new Action[9];
             actions[0] = new Action(() =>
             {
                 LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, mario.GetStartingLives());
@@ -90,6 +90,10 @@ namespace Mario.Input
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
             actions[7] = new Action(GameStateManager.Instance.Pause);
+            actions[8] = new Action(() =>
+            {
+                GameContentManager.Instance.GetHero().TakeDamage();
+            });
             return actions;
         }
 
