@@ -17,7 +17,7 @@ namespace Mario.Entities.Character
     public class StarHero : IHero
     {
         private IHero decoratorHero;
-        private float starTimer = 10.6f;
+        private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = true;
         public ISprite starParticleSprite;
 
@@ -101,7 +101,7 @@ namespace Mario.Entities.Character
         {
             if (item.GetType().Name.Equals("Star"))
             {
-                starTimer = 10.6f;
+                starTimer = EntitySettings.HeroStarTimer;
                 decoratorHero.GetStats().AddScore(1000);
             }
             else
