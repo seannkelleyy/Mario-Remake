@@ -65,6 +65,7 @@ public class HeroCollisionHandler
     public void HeroEnemyCollision(IEnemy enemy)
     {
         this.enemy = enemy;
+        if (!enemy.ReportIsAlive()) return;
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), enemy.GetRectangle(), hero.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {

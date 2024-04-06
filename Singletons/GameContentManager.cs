@@ -49,6 +49,25 @@ namespace Mario.Singletons
             return allCollideables;
         }
 
+        public List<IEnemy> GetEnemiesInProximity(Vector2 position)
+        {
+
+            List<IEnemy> enemies = new List<IEnemy>();
+            foreach (IEnemy enemy in entities[typeof(IEnemy)])
+            {
+                if (enemy.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
+                    && enemy.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && enemy.ReportIsAlive())
+                {
+                    if (enemy.ReportIsAlive())
+                    {
+                        enemies.Add(enemy);
+                    }
+                }
+            }
+
+            return enemies;
+        }
+
 
         public List<IItem> GetItems()
         {
@@ -58,6 +77,22 @@ namespace Mario.Singletons
                 allCollideables.Add(item);
             }
             return allCollideables;
+        }
+
+        public List<IItem> GetItemsInProximity(Vector2 position)
+        {
+
+            List<IItem> items = new List<IItem>();
+            foreach (IItem item in entities[typeof(IItem)])
+            {
+                if (item.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
+                    && item.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && item.isVisible)
+                {
+                    items.Add(item);
+                }
+            }
+
+            return items;
         }
 
         public List<IProjectile> GetProjectiles()

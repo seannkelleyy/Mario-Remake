@@ -120,7 +120,7 @@ namespace Mario.Physics
                 velocity.Y = -PhysicsSettings.JumpForce * (1 - smallJumpCounter / PhysicsSettings.SmallJumpLimit);
                 smallJumpCounter++;
             }
-            else if (jumpCounter < PhysicsSettings.RegularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter > 0 && jumpCounter < PhysicsSettings.RegularJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
                 velocity.Y = -PhysicsSettings.JumpForce * (1 - jumpCounter / PhysicsSettings.RegularJumpLimit);
                 jumpCounter++;
