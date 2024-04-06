@@ -17,7 +17,6 @@ namespace Mario.Input
         private IHero mario;
         private Keys[] keysPressed;
         float elapsedSeconds = 0;
-        bool unpause = true;
 
 
         public KeyboardController()
@@ -94,17 +93,17 @@ namespace Mario.Input
             actions[7] = new Action(() =>
             {
                 GameStateManager.Instance.Pause();
-                if (unpause)
+                if (MediaManager.Instance.isPaused)
                 {
                     MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
                     MediaPlayer.Pause();
-                    unpause = !unpause;
+                    MediaManager.Instance.isPaused = !MediaManager.Instance.isPaused;
                 }
                 else
                 {
                     MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
                     MediaPlayer.Resume();
-                    unpause = !unpause;
+                    MediaManager.Instance.isPaused = !MediaManager.Instance.isPaused;
                 }
             });
             return actions;

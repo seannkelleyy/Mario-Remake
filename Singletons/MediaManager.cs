@@ -17,6 +17,7 @@ namespace Mario.Singletons
         private Dictionary<GlobalVariables.Levels, Texture2D> backgrounds;
         private Song defaultTheme;
         private GlobalVariables.Levels currentBackground;
+        public bool isPaused = true;
 
         public static MediaManager Instance => instance;
         public void LoadContent(ContentManager content)
