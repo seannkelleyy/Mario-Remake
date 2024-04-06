@@ -31,7 +31,6 @@ namespace Mario.Entities.Pipes
             {
                 mario.SetPosition(transportDestination);
                 MediaManager.Instance.PlayEffect(EffectNames.pipe);
-                mario.SetTransportState(true);
             }
         }
     }

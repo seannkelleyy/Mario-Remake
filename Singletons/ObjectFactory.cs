@@ -7,6 +7,7 @@ using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Mario.Entities.Pipes;
+using System;
 
 namespace Mario.Singletons
 {
@@ -82,6 +83,8 @@ namespace Mario.Singletons
             {
                 case "pipeTubeVertical":
                     return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTubeUpsideDown":
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable, true);
                 case "pipeTubeHorizontal":
                     return new PipeTubeHorizontal(position, transportPosition, isCollidable, isTransportable);
                 case "pipeTile":

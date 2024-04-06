@@ -49,8 +49,8 @@
             "startingY": 11,
             "endingY": 12,
             "transportable": true,
-            "transportDestinationX": 10,
-            "transportDestinationY": 8,
+            "transportDestinationX": 25,
+            "transportDestinationY": 4,
             "collidable": true,
             "breakable": false
         },
@@ -73,6 +73,17 @@
             "transportable": true,
             "transportDestinationX": 10,
             "transportDestinationY": 8,
+            "collidable": true,
+            "breakable": false
+        },
+        {
+            "type": "pipeTubeUpsideDown",
+            "x": 25,
+            "startingY": 2,
+            "endingY": 4,
+            "transportable": false,
+            "transportDestinationX": -1,
+            "transportDestinationY": -1,
             "collidable": true,
             "breakable": false
         }

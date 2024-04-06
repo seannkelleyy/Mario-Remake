@@ -12,11 +12,17 @@ namespace Mario.Entities.Pipes
     {
         private bool isTransportable;
         private Vector2 transportDestination;
-        public PipeTubeVertical(Vector2 position, Vector2 transportDestination, bool isCollidable, bool isTransportable)
+        public PipeTubeVertical(Vector2 position, Vector2 transportDestination, bool isCollidable, bool isTransportable, bool isUpsideDown = false)
         {
             this.position = position;
             this.transportDestination = transportDestination;
-            currentState = new PipeTubeVerticalState();
+            if (isUpsideDown )
+            {
+                currentState = new PipeTubeVerticalUpsideDownState();
+            } else
+            {
+                currentState = new PipeTubeVerticalState();
+            }
             this.isCollidable = isCollidable;
             this.isTransportable = isTransportable;
             type = GlobalVariables.PipeType.vertical;
@@ -28,7 +34,6 @@ namespace Mario.Entities.Pipes
             {
                 mario.SetPosition(transportDestination);
                 MediaManager.Instance.PlayEffect(EffectNames.pipe);
-                mario.SetTransportState(true);
             }
         }
     }
