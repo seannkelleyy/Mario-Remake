@@ -1,6 +1,8 @@
 using Mario.Collisions;
 using Mario.Entities.Abstract;
+using Mario.Entities.Hero;
 using Mario.Entities.Items;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -15,39 +17,34 @@ namespace Mario.Entities.Character
     public class Hero : AbstractCollideable, IHero
     {
         public HeroPhysics physics { get; }
-        private int lives;
+        public HeroStatTracker stats { get; }
         private int startingLives;
-        private bool isInvulnerable;
-        private double invulnerabilityFrames;
+        private bool isInvulnerable = false;
+        private double invulnerabilityFrames = 0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
-
         public new HeroState currentState { get; set; }
-        public enum health { Mario, BigMario, FireMario };
-        public health currentHealth = health.Mario;
-        // True is right, false is left
+        public HeroHealth currentHealth = HeroHealth.Mario;
 
-        public Hero(string startingPower, int lives, Vector2 position)
+        public Hero(string startingPower, Vector2 position, HeroStatTracker stats)
         {
             switch (startingPower)
             {
                 case "small":
-                    currentHealth = health.Mario;
+                    currentHealth = HeroHealth.Mario;
                     break;
                 case "big":
-                    currentHealth = health.BigMario;
+                    currentHealth = HeroHealth.BigMario;
                     break;
                 case "fire":
-                    currentHealth = health.FireMario;
+                    currentHealth = HeroHealth.FireMario;
                     break;
             }
-            isInvulnerable = false;
-            invulnerabilityFrames = 0;
-            this.lives = lives;
-            startingLives = lives;
             this.position = position;
+            this.stats = stats;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
+            startingLives = stats.GetLives();
         }
 
         public override void Update(GameTime gameTime)
@@ -55,6 +52,9 @@ namespace Mario.Entities.Character
             ClearCollisions();
 
             currentState.Update(gameTime);
+
+            stats.Update(gameTime);
+
             CollisionManager.Instance.Run(this);
 
             HandleInvulnerability(gameTime);
@@ -75,13 +75,13 @@ namespace Mario.Entities.Character
             if (isInvulnerable)
             {
                 flashIntervalTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                if (flashIntervalTimer > EntitySettings.heroFlashDuration)
+                if (flashIntervalTimer > EntitySettings.HeroFlashDuration)
                 {
                     isFlashing = !isFlashing;
                     flashIntervalTimer = 0.0;
                 }
                 invulnerabilityFrames += gameTime.ElapsedGameTime.TotalSeconds;
-                if (invulnerabilityFrames > EntitySettings.heroInvulnerabilityTime)
+                if (invulnerabilityFrames > EntitySettings.HeroInvulnerabilityTime)
                 {
                     isInvulnerable = false;
                     invulnerabilityFrames = 0.0;
@@ -89,10 +89,6 @@ namespace Mario.Entities.Character
             }
 
             physics.Update();
-        }
-        public horizontalDirection GetHorizontalDirection()
-        {
-            return physics.GetHorizontalDirection();
         }
         public void WalkLeft()
         {
@@ -112,11 +108,11 @@ namespace Mario.Entities.Character
             physics.StopHorizontal();
             if (collisions[CollisionDirection.Left])
             {
-                position.X += horizontalBlockCollisionAdjustment;
+                position.X += HorizontalBlockCollisionAdjustment;
             }
             else if (collisions[CollisionDirection.Right])
             {
-                position.X -= horizontalBlockCollisionAdjustment;
+                position.X -= HorizontalBlockCollisionAdjustment;
             }
         }
 
@@ -125,11 +121,19 @@ namespace Mario.Entities.Character
             physics.StopVertical();
             if (collisions[CollisionDirection.Top])
             {
-                position.Y += topBlockCollisionAdjustment;
+                position.Y += TopBlockCollisionAdjustment;
             }
         }
         public void Jump()
         {
+            if (currentHealth == HeroHealth.BigMario || currentHealth == HeroHealth.FireMario)
+            {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bigJump);
+            }
+            else
+            {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.smallJump);
+            }
             currentState.Jump();
         }
 
@@ -146,32 +150,48 @@ namespace Mario.Entities.Character
         {
             currentState.Crouch();
         }
-        void IHero.Collect(IItem item)
+        public void Collect(IItem item)
         {
-            if (item.GetType().Name.Equals("FireFlower") && currentHealth != health.FireMario)
+            if (item.GetType().Name.Equals("FireFlower"))
             {
-                bool wasSmall = currentHealth == health.Mario;
-                currentHealth = health.FireMario;
-                currentState.PowerUp(wasSmall);
+                stats.AddScore(1000);
+                if (currentHealth != HeroHealth.FireMario)
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
+                    bool wasSmall = currentHealth == HeroHealth.Mario;
+                    currentHealth = HeroHealth.FireMario;
+                    currentState.PowerUp(wasSmall);
+                }
             }
             else if (item.GetType().Name.Equals("Mushroom"))
             {
+                stats.AddScore(1000);
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
                 if (((Mushroom)item).Is1up())
                 {
-                    lives++;
+                    stats.AddLives(1);
                 }
-                else if (currentHealth == health.Mario)
+                else if (currentHealth == HeroHealth.Mario)
                 {
-                    currentHealth = health.BigMario;
+                    currentHealth = HeroHealth.BigMario;
                     currentState.PowerUp(true);
                 }
             }
             else if (item.GetType().Name.Equals("Coin"))
             {
-                //adds to the coin count (needs to be implemented with scoreboard or coin tracker)
+                stats.AddScore(200);
+                stats.AddCoins(1);
+                if (stats.GetCoins() % 100 == 0)
+                {
+                    stats.AddLives(1);
+                    stats.SetCoins(0);
+                }
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.coin);
             }
             else if (item.GetType().Name.Equals("Star"))
             {
+                stats.AddScore(1000);
+                //add sound theme changes here
                 //activate star mode (needs star mode to be implemented)
             }
 
@@ -180,50 +200,55 @@ namespace Mario.Entities.Character
         {
             if (!isInvulnerable)
             {
-                if (currentHealth == health.Mario)
+                // Pipe is the same sfx as taking damage.
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pipe);
+                if (currentHealth == HeroHealth.Mario)
                 {
                     Die();
                     return;
                 }
                 isInvulnerable = true;
-                if (currentHealth == health.BigMario)
+                if (currentHealth == HeroHealth.BigMario)
                 {
-                    currentHealth = health.Mario;
-                    position.Y += 16;
+                    currentHealth = HeroHealth.Mario;
+                    position.Y += BlockHeightWidth;
                 }
                 else
                 {
-                    currentHealth = health.BigMario;
+                    currentHealth = HeroHealth.BigMario;
                 }
                 currentState.TakeDamage();
             }
         }
 
-
         public void Attack()
         {
+            if (currentHealth == HeroHealth.FireMario)
+            {
+                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.fireball);
+            }
             currentState.Attack();
         }
         public void Die()
         {
-            lives--;
+            stats.AddLives(-1);
             currentState.Die();
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, lives);
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
-            if (lives != 0)
+            if (stats.GetLives() != 0)
             {
                 GameStateManager.Instance.BeginReset();
             }
             else
             {
-                lives = startingLives;
+                stats.SetLives(startingLives);
                 GameStateManager.Instance.Restart();
             }
         }
-        public health ReportHealth()
+        public HeroHealth ReportHealth()
         {
-            return this.currentHealth;
+            return currentHealth;
         }
         public override Rectangle GetRectangle()
         {
@@ -238,6 +263,10 @@ namespace Mario.Entities.Character
         public Vector2 GetVelocity()
         {
             return physics.GetVelocity();
+        }
+        public HorizontalDirection GetHorizontalDirection()
+        {
+            return physics.GetHorizontalDirection();
         }
         public HeroPhysics GetPhysics()
         {

@@ -1,4 +1,5 @@
 ﻿using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
@@ -6,17 +7,17 @@ namespace Mario.Physics
 {
     public class FireballPhysics : AbstractEntityPhysics
     {
-        public FireballPhysics(ICollideable entity, horizontalDirection currentHorizontalDirection) : base(entity)
+        public FireballPhysics(ICollideable entity, HorizontalDirection currentHorizontalDirection) : base(entity)
         {
-            if (currentHorizontalDirection == horizontalDirection.left)
+            if (currentHorizontalDirection == HorizontalDirection.left)
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(0, blockHeightWidth));
-                velocity = new Vector2(-PhysicsSettings.fireballHorizontalSpeed, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(0, BlockHeightWidth));
+                velocity = new Vector2(-PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             else
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(blockHeightWidth, blockHeightWidth));
-                velocity = new Vector2(PhysicsSettings.fireballHorizontalSpeed, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(BlockHeightWidth, BlockHeightWidth));
+                velocity = new Vector2(PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             this.entity = entity;
         }
@@ -36,10 +37,25 @@ namespace Mario.Physics
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
-                velocity.Y = -PhysicsSettings.fireballBounceForce;
+                if (!isFalling)
+                {
+                    ((IProjectile)entity).Destroy();
+                }
+                else
+                {
+                    velocity.Y = -PhysicsSettings.FireballBounceForce;
+                    isFalling = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+            if (velocity.Y < PhysicsSettings.FireballBounceForce)
+            {
+                velocity.Y += PhysicsSettings.FireballVerticalAcceleration;
+            }
+            if (velocity.Y > 0)
+            {
+                isFalling = true;
+            }
         }
     }
 }

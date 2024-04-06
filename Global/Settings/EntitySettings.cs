@@ -1,9 +1,10 @@
 ﻿public static class EntitySettings
 {
-    public static float enemyDespawnTime { get; set; }
-    public static float heroInvulnerabilityTime { get; set; }
-    public static float heroFlashDuration { get; set; }
-    public static float heroAttackTime { get; set; }
-    public static float heroAnimationLength { get; set; }
+    // Capitalized because they are static
+    public static float EnemyDespawnTime { get; set; }
+    public static float HeroInvulnerabilityTime { get; set; }
+    public static float HeroFlashDuration { get; set; }
+    public static float HeroAttackTime { get; set; }
+    public static float HeroAnimationLength { get; set; }
 }
 

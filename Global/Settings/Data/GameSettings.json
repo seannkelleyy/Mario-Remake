@@ -1,7 +1,7 @@
 ﻿{
   "GameSettings": {
     "frameRate": 60,
-    "cameraStartingX": 376,
+    "cameraStartingX": 400,
     "cameraStartingY":  48,
     "isDevelopment": true,
     "levelJsonFilePath": "../../../Levels/Sprint3.json"
@@ -13,15 +13,15 @@
     "maxVerticalSpeed": 30.0,
     "maxRunSpeed": 1.15,
     "runAcceleration": 0.30,
-    "enemySpeed": 1.0,
+    "enemySpeed": 0.5,
     "koopaShellSpeed": 2.0,
     "regularJumpLimit": 55,
     "smallJumpLimit": 13,
     "minimumJumpLimit": 40,
     "decelerationFactor": 1.25,
     "fireballHorizontalSpeed": 6.25,
-    "fireballVerticalAcceleration": 0.9375,
-    "fireballBounceForce": 3.75,
+    "fireballVerticalAcceleration": 0.975,
+    "fireballBounceForce": 3.125,
     "fireballDeleteInterval": 0.6
   },
   "Collisions": {
