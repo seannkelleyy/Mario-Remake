@@ -77,16 +77,16 @@ namespace Mario.Physics
 
         private void HandleUpwardMovement()
         {
-            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.MinimumJumpLimit)
+            if (entity.GetCollisionState(CollisionDirection.Top) || (isMininumJump && jumpCounter >= PhysicsSettings.MinimumJumpLimit))
             {
-                jumpCounter = PhysicsSettings.RegularJumpLimit;
+                jumpCounter = PhysicsSettings.StarJumpLimit;
                 isFalling = true;
                 isMininumJump = false;
                 isDecelerating = true;
             }
-            else if (jumpCounter < PhysicsSettings.RegularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter < PhysicsSettings.StarJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsSettings.JumpForce * (1 - jumpCounter / PhysicsSettings.RegularJumpLimit);
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - (jumpCounter / PhysicsSettings.StarJumpLimit));
                 jumpCounter++;
             }
             else

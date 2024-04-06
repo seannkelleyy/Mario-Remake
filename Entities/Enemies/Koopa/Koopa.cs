@@ -1,9 +1,9 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
+using Mario.Global;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
-using Mario.Global;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 

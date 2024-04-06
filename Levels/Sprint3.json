@@ -15,8 +15,8 @@
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 10,
-      "startingY": 1,
+      "startingX": 11,
+      "startingY": 12,
       "isRight": false
     },
     {
@@ -92,16 +92,16 @@
       "x": 14,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "1up"
+      "breakable": false,
+      "item": "oneUp"
     },
     {
       "type": "brickUnderground",
       "x": 10,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "1up"
+      "breakable": false,
+      "item": "oneUp"
     },
     {
       "type": "mystery",
@@ -141,7 +141,7 @@
       "y": 9,
       "collidable": true,
       "breakable": false,
-      "item": "1up"
+      "item": "oneUp"
     }
   ]
 }

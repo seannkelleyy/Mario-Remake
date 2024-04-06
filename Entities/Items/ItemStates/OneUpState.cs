@@ -6,6 +6,6 @@ public class OneUpState : AbstractEntityState
 {
     public OneUpState() : base()
     {
-        sprite = spriteFactory.CreateSprite("1up");
+        sprite = spriteFactory.CreateSprite("oneUp");
     }
 }

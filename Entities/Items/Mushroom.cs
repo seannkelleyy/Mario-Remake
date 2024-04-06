@@ -10,7 +10,7 @@ namespace Mario.Entities.Items
     public class Mushroom : AbstractItem
     {
         public EntityPhysics physics { get; set; }
-        private bool is1up = false;
+        private bool isOneUp = false;
         public Mushroom(Vector2 position, string mushroomType)
         {
             physics = new EntityPhysics(this);
@@ -20,10 +20,10 @@ namespace Mario.Entities.Items
             {
                 currentState = new MushroomState();
             }
-            else if (mushroomType.CompareTo("1up") == 0)
+            else if (mushroomType.CompareTo("oneUp") == 0)
             {
                 currentState = new OneUpState();
-                is1up = true;
+                isOneUp = true;
             }
             else
             {
@@ -34,13 +34,13 @@ namespace Mario.Entities.Items
 
         public override void MakeVisible()
         {
-            position.Y -= 16;
+            position.Y -= BlockHeightWidth;
             isVisible = true;
             isCollidable = true;
         }
-        public bool Is1up()
+        public bool IsOneUp()
         {
-            return is1up;
+            return isOneUp;
         }
 
         public override void Update(GameTime gameTime)

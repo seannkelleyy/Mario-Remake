@@ -2,7 +2,6 @@ using Mario.Collisions;
 using Mario.Entities.Abstract;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
-using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -128,11 +127,11 @@ namespace Mario.Entities.Character
         {
             if (currentHealth == HeroHealth.BigMario || currentHealth == HeroHealth.FireMario)
             {
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bigJump);
+                MediaManager.Instance.PlayEffect(EffectNames.bigJump);
             }
             else
             {
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.smallJump);
+                MediaManager.Instance.PlayEffect(EffectNames.smallJump);
             }
             currentState.Jump();
         }
@@ -152,45 +151,43 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item.GetType().Name.Equals("FireFlower"))
+            if (item is FireFlower)
             {
-                stats.AddScore(1000);
                 if (currentHealth != HeroHealth.FireMario)
                 {
-                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
+                    MediaManager.Instance.PlayEffect(EffectNames.powerup);
                     bool wasSmall = currentHealth == HeroHealth.Mario;
                     currentHealth = HeroHealth.FireMario;
                     currentState.PowerUp(wasSmall);
                 }
             }
-            else if (item.GetType().Name.Equals("Mushroom"))
+            else if (item is Mushroom)
             {
-                stats.AddScore(1000);
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
-                if (((Mushroom)item).Is1up())
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                if (((Mushroom)item).IsOneUp())
                 {
                     stats.AddLives(1);
+                    return;
                 }
                 else if (currentHealth == HeroHealth.Mario)
                 {
                     currentHealth = HeroHealth.BigMario;
+                    position.Y += BlockHeightWidth;
                     currentState.PowerUp(true);
                 }
             }
-            else if (item.GetType().Name.Equals("Coin"))
+            else if (item is Coin)
             {
-                stats.AddScore(200);
                 stats.AddCoins(1);
                 if (stats.GetCoins() % 100 == 0)
                 {
                     stats.AddLives(1);
                     stats.SetCoins(0);
                 }
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.coin);
+                MediaManager.Instance.PlayEffect(EffectNames.coin);
             }
-            else if (item.GetType().Name.Equals("Star"))
+            else if (item is Star)
             {
-                stats.AddScore(1000);
                 //add sound theme changes here
                 //activate star mode (needs star mode to be implemented)
             }
@@ -201,7 +198,7 @@ namespace Mario.Entities.Character
             if (!isInvulnerable)
             {
                 // Pipe is the same sfx as taking damage.
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pipe);
+                MediaManager.Instance.PlayEffect(EffectNames.pipe);
                 if (currentHealth == HeroHealth.Mario)
                 {
                     Die();
@@ -225,7 +222,7 @@ namespace Mario.Entities.Character
         {
             if (currentHealth == HeroHealth.FireMario)
             {
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.fireball);
+                MediaManager.Instance.PlayEffect(EffectNames.fireball);
             }
             currentState.Attack();
         }

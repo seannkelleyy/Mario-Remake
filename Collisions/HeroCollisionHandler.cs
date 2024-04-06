@@ -1,3 +1,4 @@
+using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
@@ -34,6 +35,7 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
         {
+            if (block.isBreakable) GameContentManager.Instance.GetHero().stats.AddScore(ScoreSettings.BreakBlockScore);
             hero.SetCollisionState(CollisionDirection.Top, true);
             hero.StopVertical();
             block.GetHit();
@@ -49,17 +51,20 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.SmallJump();
-            hero.SetCollisionState(CollisionDirection.Bottom, false);
-            enemy.Stomp();
+            if (hero.physics.isFalling)
+            {
+                GameContentManager.Instance.GetHero().stats.AddScore(ScoreSettings.GetScore(enemy));
+                hero.SetCollisionState(CollisionDirection.Bottom, true);
+                hero.SmallJump();
+                hero.SetCollisionState(CollisionDirection.Bottom, false);
+                enemy.Stomp();
+            }
         }));
     }
 
     public void HeroEnemyCollision(IEnemy enemy)
     {
         this.enemy = enemy;
-
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), enemy.GetRectangle(), hero.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
@@ -73,6 +78,7 @@ public class HeroCollisionHandler
         if (direction != CollisionDirection.None)
         {
             hero.Collect(item);
+            hero.stats.AddScore(ScoreSettings.GetScore(item));
             GameContentManager.Instance.RemoveEntity(item);
         }
     }
