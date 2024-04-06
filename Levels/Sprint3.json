@@ -1,14 +1,16 @@
 {
   "level": "1",
   "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
+  "levelName": "Level 1-1",
   "width": 26,
   "height": 18,
+  "timeLimit": 300,
   "song": "ground",
   "hero": {
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": -3,
+    "lives": 3,
     "startingPower": "fire"
   },
   "enemies": [

@@ -1,8 +1,10 @@
-﻿public static class GameSettings
-{
-    public static int frameRate { get; set; }
-    public static float cameraStartingX { get; set; }
-    public static float cameraStartingY { get; set; }
+﻿using Microsoft.Xna.Framework;
 
-    public static bool isDevelopment { get; set; }
+public static class GameSettings
+{
+    // Capitalized because they are static
+    public static int FrameRate { get; set; }
+    public static Vector2 CameraStarting { get; set; }
+    public static Vector2 ScreenSize { get; set; }
+    public static bool IsDevelopment { get; set; }
 }

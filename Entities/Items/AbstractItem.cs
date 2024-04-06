@@ -34,7 +34,6 @@ namespace Mario.Entities.Items
         }
 
         public abstract void ChangeDirection();
-
         public abstract void MakeVisible();
         public abstract Vector2 GetVelocity();
     }

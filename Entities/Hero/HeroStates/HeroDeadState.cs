@@ -1,8 +1,7 @@
 ﻿using Mario.Entities.Abstract;
-using Mario.Entities.Character;
+using Mario.Interfaces.Entities;
 
 public class DeadState : HeroState
 {
-    public DeadState(Hero mario) : base(mario) { }
-
+    public DeadState(IHero mario) : base(mario) { }
 }
