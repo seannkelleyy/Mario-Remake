@@ -31,7 +31,6 @@ namespace Mario.Singletons
         {
             string jsonString = File.ReadAllText(levelName);
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
-            MediaManager mediaManager = MediaManager.Instance;
 
             GlobalVariables.LevelName = level.level;
             // set background for the level
