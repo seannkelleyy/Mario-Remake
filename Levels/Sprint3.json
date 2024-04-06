@@ -49,18 +49,22 @@
   ],
     "pipes": [
         {
-            "type": "verticalPipeNormal",
+            "type": "pipeTubeVertical",
             "x": 8,
             "startingY": 9,
             "endingY": 12,
-            "transportable": false
+            "transportable": true,
+            "collidable": true,
+            "breakable": false
         },
         {
-            "type": "verticalPipeNormal",
+            "type": "pipeTubeVertical",
             "x": 10,
             "startingY": 11,
             "endingY": 12,
-            "transportable": false
+            "transportable": true,
+            "collidable": true,
+            "breakable": false
         }
     ],
   "blocks": [

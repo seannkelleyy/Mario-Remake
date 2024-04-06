@@ -74,14 +74,14 @@ namespace Mario.Singletons
             }
         }
 
-        public IBlock CreatePipe(string type, Vector2 position, bool isTransportable)
+        public IBlock CreatePipe(string type, Vector2 position, bool isCollidable, bool isBreakable, bool isTransportable)
         {
             switch (type)
             {
-                case "verticalPipeNormal":
-                    return new PipeTube(position);
-                case "verticalPipeTile":
-                    return new PipeTile(position);
+                case "pipeTubeVertical":
+                    return new PipeTubeVertical(position, isCollidable, isBreakable, isTransportable);
+                case "pipeTile":
+                    return new PipeTile(position, isCollidable, isBreakable);
                 default:
                     throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
             }

@@ -6,6 +6,8 @@
         public int x { get; set; }
         public int startingY { get; set; }
         public int endingY { get; set; }
-        public bool isTransportable { get; set; }
+        public bool transportable { get; set; }
+        public bool collidable { get; set; }
+        public bool breakable { get; set; }
     }
 }

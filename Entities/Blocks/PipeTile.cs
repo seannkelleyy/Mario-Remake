@@ -1,20 +1,21 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
 {
     public class PipeTile : AbstractBlock
     {
-        public PipeTile(Vector2 position)
+        public PipeTile(Vector2 position, bool isCollidable, bool isBreakable)
         {
             this.position = position;
             currentState = new PipeTileState();
-            isCollidable = true;
-            isBreakable = false;
+            this.isCollidable = isCollidable;
+            this.isBreakable = isBreakable;
         }
         public override void GetHit()
         {
-            // Nothing to do here since this is a normal pipe
+            if (isBreakable) GameContentManager.Instance.RemoveEntity(this);
         }
     }
 }
