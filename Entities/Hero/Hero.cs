@@ -2,6 +2,7 @@ using Mario.Collisions;
 using Mario.Entities.Abstract;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
+using Mario.Global;
 using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -9,6 +10,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 
@@ -199,6 +201,9 @@ namespace Mario.Entities.Character
             {
                 stats.AddScore(ScoreSettings.StarScore);
                 //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
+                stats.AddScore(1000);
+                MediaPlayer.Pause();
+                MediaManager.Instance.PlayTheme(SongThemes.invincibility, true);
                 GameContentManager.Instance.RemoveEntity(this);
                 GameContentManager.Instance.AddEntity(new StarHero(this));
             }
