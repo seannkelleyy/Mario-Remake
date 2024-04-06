@@ -1,4 +1,5 @@
 using Mario.Entities.Blocks;
+using Mario.Entities.Character;
 using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -80,10 +81,10 @@ public class HeroCollisionHandler
             hero.StopVertical();
         }));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => { if (hero.GetType().Name.Equals("StarHero")) { enemy.Flip(); } else { hero.TakeDamage(); } }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => { if (hero is StarHero) { enemy.Flip(); } else { hero.TakeDamage(); } }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
@@ -94,7 +95,7 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
@@ -105,7 +106,7 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
