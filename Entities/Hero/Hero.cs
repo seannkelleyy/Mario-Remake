@@ -9,6 +9,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 
@@ -191,7 +192,8 @@ namespace Mario.Entities.Character
             else if (item is Star)
             {
                 stats.AddScore(1000);
-                //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
+                MediaPlayer.Pause();
+                MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true);
                 GameContentManager.Instance.RemoveEntity(this);
                 GameContentManager.Instance.AddEntity(new StarHero(this));
             }

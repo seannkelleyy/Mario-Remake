@@ -80,10 +80,14 @@
         {
             ground,
             underground,
+            underwater,
+            castle,
             invincibility,
             levelComplete,
+            castleComplete,
             lostLife,
-            gameOver
+            gameOver,
+            ending
         }
 
         #endregion MediaManagerVariables
