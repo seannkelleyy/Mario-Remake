@@ -114,6 +114,14 @@ namespace Mario.Collisions
                 }
             }
 
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(item.GetPosition()))
+            {
+                if (item.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    itemHandler.ItemPipeCollision(pipe);
+                }
+            }
+
             foreach (IItem collidingItem in GameContentManager.Instance.GetItems())
             {
                 if (item != collidingItem && item.GetRectangle().Intersects(collidingItem.GetRectangle()))
@@ -132,6 +140,13 @@ namespace Mario.Collisions
                 if (projectile.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     projectileHandler.ProjectileBlockCollision(block);
+                }
+            }
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(projectile.GetPosition()))
+            {
+                if (projectile.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    projectileHandler.ProjectilePipeCollision(pipe);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
