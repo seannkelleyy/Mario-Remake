@@ -48,9 +48,9 @@
             "x": 8,
             "startingY": 11,
             "endingY": 12,
-            "transportable": false,
+            "transportable": true,
             "transportDestinationX": 10,
-            "transportDestinationY": 11,
+            "transportDestinationY": 8,
             "collidable": true,
             "breakable": false
         },
@@ -59,7 +59,7 @@
             "x": 10,
             "startingY": 10,
             "endingY": 12,
-            "transportable": true,
+            "transportable": false,
             "transportDestinationX": -1,
             "transportDestinationY": -1,
             "collidable": true,
@@ -72,7 +72,7 @@
             "endingY": 7,
             "transportable": true,
             "transportDestinationX": 10,
-            "transportDestinationY": 11,
+            "transportDestinationY": 8,
             "collidable": true,
             "breakable": false
         }

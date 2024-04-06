@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Mario.Interfaces.Entities;
 using Mario.Entities.Blocks;
 using Mario.Global;
+using Mario.Singletons;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Pipes
 {
@@ -25,6 +27,7 @@ namespace Mario.Entities.Pipes
             if (isTransportable)
             {
                 mario.SetPosition(transportDestination);
+                MediaManager.Instance.PlayEffect(EffectNames.pipe);
                 mario.SetTransportState(true);
             }
         }

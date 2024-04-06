@@ -96,7 +96,7 @@ namespace Mario.Singletons
                 GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreatePipe(
                    pipe.type,
                    new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, pipe.startingY * GlobalVariables.BlockHeightWidth),
-                   new Vector2(pipe.transportDestinationX, pipe.transportDestinationY),
+                   new Vector2(pipe.transportDestinationX * GlobalVariables.BlockHeightWidth, pipe.transportDestinationY * GlobalVariables.BlockHeightWidth),
                    pipe.collidable,
                    pipe.transportable));
                 if (pipe.type.Equals("pipeTubeVertical"))
@@ -106,7 +106,7 @@ namespace Mario.Singletons
                         IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
                             "pipeTile",
                             new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
-                            new Vector2(pipe.transportDestinationX, pipe.transportDestinationY),
+                            new Vector2(0, 0),
                             pipe.collidable,
                             pipe.transportable);
                         GameContentManager.Instance.AddEntity(pipeObject);
@@ -119,7 +119,7 @@ namespace Mario.Singletons
                         IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
                             "pipeTile",
                             new Vector2((pipe.x + 2) * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
-                            new Vector2(pipe.transportDestinationX, pipe.transportDestinationY),
+                            new Vector2(0, 0),
                             pipe.collidable,
                             pipe.transportable);
                         GameContentManager.Instance.AddEntity(pipeObject);

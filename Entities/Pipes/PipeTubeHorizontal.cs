@@ -6,6 +6,7 @@ using Mario.Interfaces.Entities;
 using Mario.Entities.Blocks;
 using static Mario.Interfaces.IPipe;
 using Mario.Global;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Pipes
 {
@@ -29,6 +30,7 @@ namespace Mario.Entities.Pipes
             if (isTransportable)
             {
                 mario.SetPosition(transportDestination);
+                MediaManager.Instance.PlayEffect(EffectNames.pipe);
                 mario.SetTransportState(true);
             }
         }
