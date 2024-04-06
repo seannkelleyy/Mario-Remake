@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Abstract;
 
-public class RightMovingGoombaState : AbstractEntityState
+public class MovingGoombaState : AbstractEntityState
 {
-    public RightMovingGoombaState() : base()
+    public MovingGoombaState() : base()
     {
         sprite = spriteFactory.CreateSprite("goomba");
     }

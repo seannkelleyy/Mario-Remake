@@ -9,13 +9,13 @@ using static Mario.Global.GlobalVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
-    private double deadTimer = 0f;
+    private double deadTimer = 0.0f;
 
     public Goomba(Vector2 position)
     {
         physics = new EntityPhysics(this);
         this.position = position;
-        currentState = new LeftMovingGoombaState();
+        currentState = new MovingGoombaState();
     }
 
     public override void Update(GameTime gameTime)
@@ -36,7 +36,6 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             physics.Update();
         }
-
     }
 
     public void Stomp()
@@ -60,12 +59,10 @@ public class Goomba : AbstractCollideable, IEnemy
         if (physics.currentHorizontalDirection == HorizontalDirection.right)
         {
             physics.currentHorizontalDirection = HorizontalDirection.left;
-            currentState = new LeftMovingGoombaState();
         }
         else
         {
             physics.currentHorizontalDirection = HorizontalDirection.right;
-            currentState = new RightMovingGoombaState();
         }
     }
 

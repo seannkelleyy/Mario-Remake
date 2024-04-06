@@ -163,9 +163,9 @@ namespace Mario.Entities.Character
             }
             else if (item is Mushroom)
             {
-                MediaManager.Instance.PlayEffect(EffectNames.powerup);
                 if (((Mushroom)item).IsOneUp())
                 {
+                    MediaManager.Instance.PlayEffect(EffectNames.oneUp);
                     stats.AddLives(1);
                     return;
                 }
@@ -175,6 +175,7 @@ namespace Mario.Entities.Character
                     position.Y += BlockHeightWidth;
                     currentState.PowerUp(true);
                 }
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
             }
             else if (item is Coin)
             {

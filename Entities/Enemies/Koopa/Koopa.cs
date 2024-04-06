@@ -1,4 +1,5 @@
-﻿using Mario.Collisions;
+﻿using System;
+using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
 using Mario.Interfaces.Entities;
@@ -27,7 +28,11 @@ public class Koopa : AbstractCollideable, IEnemy
 
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
+        HandleShellTime(gameTime);
+    }
 
+    private void HandleShellTime(GameTime gameTime)
+    {
         if (shellTimer > 0)
         {
             if (physics.GetVelocity().X == 0)
@@ -44,13 +49,14 @@ public class Koopa : AbstractCollideable, IEnemy
                 currentState = previousState;
                 position.Y -= BlockHeightWidth / 2;
                 shellTimer = 0;
-                isShell = false; 
+                isShell = false;
             }
             else if (shellTimer > EntitySettings.KoopaShellTime / 2)
             {
                 currentState = new ArmsOutOfShellKoopaState();
             }
-        }else
+        }
+        else
         {
             physics.Update();
         }
@@ -61,16 +67,15 @@ public class Koopa : AbstractCollideable, IEnemy
         if (isShell)
         {
             MediaManager.Instance.PlayEffect(EffectNames.kick);
-            physics.StopHorizontal();
+            physics.ToggleIsStationary();
         }
         else
         {
+            isShell = true;
             shellTimer = 1;
             MediaManager.Instance.PlayEffect(EffectNames.stomp);
             previousState = currentState;
             currentState = new StompedKoopaState();
-            physics.StopHorizontal();
-            isShell = true;
             position.Y += HalfBlockAdjustment;
         }
     }

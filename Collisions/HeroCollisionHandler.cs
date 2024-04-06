@@ -46,20 +46,10 @@ public class HeroCollisionHandler
         }));
 
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleHeroEnemySideCollision));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleHeroEnemySideCollision));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
-        {
-            if (hero.physics.isFalling)
-            {
-                GameContentManager.Instance.GetHero().stats.AddScore(ScoreSettings.GetScore(enemy));
-                hero.SetCollisionState(CollisionDirection.Bottom, true);
-                hero.SmallJump();
-                hero.SetCollisionState(CollisionDirection.Bottom, false);
-                enemy.Stomp();
-            }
-        }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(HandleHeroEnemyBottomCollision));
     }
 
     public void HeroEnemyCollision(IEnemy enemy)
@@ -91,6 +81,30 @@ public class HeroCollisionHandler
         {
             this.block = block;
             collisionDictionary[typeof(IBlock)][direction].Invoke();
+        }
+    }
+
+    public void HandleHeroEnemySideCollision()
+    {
+        if (enemy is Koopa koopa && koopa.isShell && koopa.physics.IsStationary())
+        {
+            koopa.physics.currentHorizontalDirection = hero.GetHorizontalDirection();
+            koopa.physics.ToggleIsStationary();
+        } else
+        {
+            hero.TakeDamage();
+        }
+    }
+
+    public void HandleHeroEnemyBottomCollision()
+    {
+        if (hero.physics.isFalling)
+        {
+            GameContentManager.Instance.GetHero().stats.AddScore(ScoreSettings.GetScore(enemy));
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            hero.SmallJump();
+            hero.SetCollisionState(CollisionDirection.Bottom, false);
+            enemy.Stomp();
         }
     }
 }

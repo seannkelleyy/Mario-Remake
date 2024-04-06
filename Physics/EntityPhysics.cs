@@ -6,6 +6,7 @@ namespace Mario.Physics
 {
     public class EntityPhysics : AbstractEntityPhysics
     {
+        private bool isStationary = false;
         public EntityPhysics(ICollideable entity) : base(entity)
         {
             this.entity = entity;
@@ -18,8 +19,19 @@ namespace Mario.Physics
             UpdateHorizontal();
         }
 
+        public void ToggleIsStationary()
+        {
+            isStationary = !isStationary;
+        }
+
+        public bool IsStationary()
+        {
+            return isStationary;
+        }
+
         internal override void UpdateHorizontal()
         {
+            if (isStationary) return;
             if (currentHorizontalDirection == HorizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
             {
                 if (entity is Koopa koopa && koopa.isShell)
