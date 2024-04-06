@@ -18,7 +18,7 @@ namespace Mario.Entities.Projectiles
         {
             base.Update(gameTime);
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds > PhysicsSettings.fireballDeleteInterval)
+            if (elapsedSeconds > PhysicsSettings.FireballDeleteInterval)
             {
                 GameContentManager.Instance.RemoveEntity(fireball);
             }

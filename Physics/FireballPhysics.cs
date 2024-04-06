@@ -7,17 +7,17 @@ namespace Mario.Physics
 {
     public class FireballPhysics : AbstractEntityPhysics
     {
-        public FireballPhysics(ICollideable entity, horizontalDirection currentHorizontalDirection) : base(entity)
+        public FireballPhysics(ICollideable entity, HorizontalDirection currentHorizontalDirection) : base(entity)
         {
-            if (currentHorizontalDirection == horizontalDirection.left)
+            if (currentHorizontalDirection == HorizontalDirection.left)
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(0, blockHeightWidth));
-                velocity = new Vector2(-PhysicsSettings.fireballHorizontalSpeed, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(0, BlockHeightWidth));
+                velocity = new Vector2(-PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             else
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(blockHeightWidth, blockHeightWidth));
-                velocity = new Vector2(PhysicsSettings.fireballHorizontalSpeed, 0);
+                entity.SetPosition(entity.GetPosition() + new Vector2(BlockHeightWidth, BlockHeightWidth));
+                velocity = new Vector2(PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             this.entity = entity;
         }
@@ -43,14 +43,14 @@ namespace Mario.Physics
                 }
                 else
                 {
-                    velocity.Y = -PhysicsSettings.fireballBounceForce;
+                    velocity.Y = -PhysicsSettings.FireballBounceForce;
                     isFalling = false;
                 }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            if (velocity.Y < PhysicsSettings.fireballBounceForce)
+            if (velocity.Y < PhysicsSettings.FireballBounceForce)
             {
-                velocity.Y += PhysicsSettings.fireballVerticalAcceleration;
+                velocity.Y += PhysicsSettings.FireballVerticalAcceleration;
             }
             if (velocity.Y > 0)
             {

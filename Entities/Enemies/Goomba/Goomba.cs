@@ -28,7 +28,7 @@ public class Goomba : AbstractCollideable, IEnemy
         if (deadTimer > 0)
         {
             deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (deadTimer > EntitySettings.enemyDespawnTime)
+            if (deadTimer > EntitySettings.EnemyDespawnTime)
             {
                 GameContentManager.Instance.RemoveEntity(this);
             }
@@ -45,7 +45,7 @@ public class Goomba : AbstractCollideable, IEnemy
         if (deadTimer > 0) return;
         MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
         currentState = new StompedGoombaState();
-        position.Y += halfBlockAdjustment;
+        position.Y += HalfBlockAdjustment;
         deadTimer = 1;
     }
 
@@ -58,14 +58,14 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == horizontalDirection.right)
+        if (physics.currentHorizontalDirection == HorizontalDirection.right)
         {
-            physics.currentHorizontalDirection = horizontalDirection.left;
+            physics.currentHorizontalDirection = HorizontalDirection.left;
             currentState = new LeftMovingGoombaState();
         }
         else
         {
-            physics.currentHorizontalDirection = horizontalDirection.right;
+            physics.currentHorizontalDirection = HorizontalDirection.right;
             currentState = new RightMovingGoombaState();
         }
     }

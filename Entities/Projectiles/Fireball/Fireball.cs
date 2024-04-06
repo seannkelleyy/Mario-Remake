@@ -10,7 +10,7 @@ namespace Mario.Entities.Projectiles
     {
         private FireballPhysics physics { get; }
         private bool isExploded = false;
-        public Fireball(Vector2 position, horizontalDirection currentHorizontalDirection)
+        public Fireball(Vector2 position, HorizontalDirection currentHorizontalDirection)
         {
             currentState = new FireballMovingState(this);
             this.position = position;

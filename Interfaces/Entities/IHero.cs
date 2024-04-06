@@ -1,13 +1,17 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Hero;
+using Mario.Global;
+using Mario.Interfaces.Base;
 using Mario.Physics;
 using Microsoft.Xna.Framework;
-using static Mario.Entities.Character.Hero;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
         public HeroPhysics physics { get; }
+        public HeroStatTracker stats { get; }
+        public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
@@ -17,15 +21,15 @@ namespace Mario.Interfaces.Entities
         public void StopVertical();
         public void Stand();
         public void Crouch();
-        // Function to power up Hero. i.e.make big, firepower...
-        void Collect(IItem item);
-        void TakeDamage();
+        public void Collect(IItem item);
+        public void TakeDamage();
         public void Attack();
         public void Die();
-
-        public health ReportHealth();
+        public GlobalVariables.HeroHealth ReportHealth();
         public int GetStartingLives();
         public Vector2 GetVelocity();
+        public HeroPhysics GetPhysics();
+        public GlobalVariables.HorizontalDirection GetHorizontalDirection();
     }
 }
 

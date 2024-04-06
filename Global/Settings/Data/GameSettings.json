@@ -1,7 +1,7 @@
 ﻿{
   "GameSettings": {
     "frameRate": 60,
-    "cameraStartingX": 376,
+    "cameraStartingX": 400,
     "cameraStartingY":  48,
     "isDevelopment": true,
     "levelJsonFilePath": "../../../Levels/Sprint3.json"
@@ -13,7 +13,7 @@
     "maxVerticalSpeed": 30.0,
     "maxRunSpeed": 1.15,
     "runAcceleration": 0.30,
-    "enemySpeed": 1.0,
+    "enemySpeed": 0.5,
     "koopaShellSpeed": 2.0,
     "regularJumpLimit": 55,
     "smallJumpLimit": 13,

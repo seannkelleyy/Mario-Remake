@@ -33,7 +33,7 @@ namespace Mario.Entities.Sprites
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= GlobalVariables.spriteUpdateInterval)
+            if (elapsedSeconds >= GlobalVariables.SpriteUpdateInterval)
             {
                 currentFrame = (currentFrame + 1) % totalFrames;
                 elapsedSeconds = 0;

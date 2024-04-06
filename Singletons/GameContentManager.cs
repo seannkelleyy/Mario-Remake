@@ -77,13 +77,13 @@ namespace Mario.Singletons
             List<IBlock> blocks = new List<IBlock>();
             foreach (IBlock block in entities[typeof(IBlock)])
             {
-                if (block.GetPosition().X <= position.X + CollisionSettings.collisionPixelRadius
-                    && block.GetPosition().X >= position.X - CollisionSettings.collisionPixelRadius && block.isCollidable)
+                if (block.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
+                    && block.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && block.isCollidable)
                 {
                     blocks.Add(block);
                 }
             }
-            
+
             return CombineBlocks(blocks);
         }
 

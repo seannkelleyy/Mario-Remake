@@ -9,7 +9,7 @@ namespace Mario.Physics
     {
 
         public Vector2 velocity;
-        public horizontalDirection currentHorizontalDirection = horizontalDirection.right;
+        public HorizontalDirection currentHorizontalDirection = HorizontalDirection.right;
         public bool isFalling = true;
         public bool isMininumJump = false;
         public bool isDecelerating = false;
@@ -34,42 +34,42 @@ namespace Mario.Physics
             return velocity;
         }
 
-        public horizontalDirection GetHorizontalDirection()
+        public HorizontalDirection GetHorizontalDirection()
         {
             return currentHorizontalDirection;
         }
 
-        public void SetHorizontalDirection(horizontalDirection currentHorizontalDirection)
+        public void SetHorizontalDirection(HorizontalDirection currentHorizontalDirection)
         {
             this.currentHorizontalDirection = currentHorizontalDirection;
         }
 
         public float ApplyGravity()
         {
-            if (velocity.Y < Math.Abs(PhysicsSettings.maxVerticalSpeed))
+            if (velocity.Y < Math.Abs(PhysicsSettings.MaxVerticalSpeed))
             {
-                velocity.Y += PhysicsSettings.gravity;
+                velocity.Y += PhysicsSettings.Gravity;
             }
             else
             {
-                velocity.Y = PhysicsSettings.maxVerticalSpeed;
+                velocity.Y = PhysicsSettings.MaxVerticalSpeed;
             }
             return velocity.Y;
         }
 
         public float ApplyFriction()
         {
-            if (velocity.X < PhysicsSettings.friction && velocity.X > -PhysicsSettings.friction)
+            if (velocity.X < PhysicsSettings.Friction && velocity.X > -PhysicsSettings.Friction)
             {
                 return 0;
             }
             else if (velocity.X > 0)
             {
-                velocity.X -= PhysicsSettings.friction;
+                velocity.X -= PhysicsSettings.Friction;
             }
             else if (velocity.X < 0)
             {
-                velocity.X += PhysicsSettings.friction;
+                velocity.X += PhysicsSettings.Friction;
             }
             return velocity.X;
         }
@@ -86,7 +86,7 @@ namespace Mario.Physics
 
         public void StopJump()
         {
-            if (jumpCounter < PhysicsSettings.minimumJumpLimit)
+            if (jumpCounter < PhysicsSettings.MinimumJumpLimit)
             {
                 isMininumJump = true;
                 isDecelerating = true;

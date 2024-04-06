@@ -43,6 +43,7 @@ namespace Mario.Input
             Commands.Add(Keys.S, actions[4]);
             Commands.Add(Keys.D, actions[5]);
             Commands.Add(Keys.E, actions[6]);
+            Commands.Add(Keys.LeftShift, actions[6]);
             Commands.Add(Keys.G, hero.TakeDamage);
 
             // Arrow commands
@@ -112,7 +113,7 @@ namespace Mario.Input
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
+            if (elapsedSeconds >= GlobalVariables.KeyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 KeyboardState currentKeyboardState = Keyboard.GetState();
@@ -134,7 +135,7 @@ namespace Mario.Input
         public void UpdatePause(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= GlobalVariables.keyboardUpdateInterval)
+            if (elapsedSeconds >= GlobalVariables.KeyboardUpdateInterval)
             {
                 elapsedSeconds = 0;
                 keysPressed = Keyboard.GetState().GetPressedKeys();
@@ -148,9 +149,9 @@ namespace Mario.Input
         public void CheckForStopJump(KeyboardState currentKeyboardState)
         {
             // Check if the jump key was released
-            if (previousKeyboardState.IsKeyDown(Keys.W) && currentKeyboardState.IsKeyUp(Keys.W)
-                || previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space)
-                || previousKeyboardState.IsKeyDown(Keys.Up) && currentKeyboardState.IsKeyUp(Keys.Up))
+            if ((previousKeyboardState.IsKeyDown(Keys.W) && currentKeyboardState.IsKeyUp(Keys.W))
+                || (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space))
+                || (previousKeyboardState.IsKeyDown(Keys.Up) && currentKeyboardState.IsKeyUp(Keys.Up)))
             {
                 mario.StopJump();
             }
