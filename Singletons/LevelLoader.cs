@@ -1,4 +1,5 @@
-﻿using Mario.Global;
+﻿using Mario.Entities.Hero;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
@@ -19,7 +20,7 @@ namespace Mario.Singletons
         public static LevelLoader Instance => instance;
         private ContentManager content;
 
-        private LevelLoader() {}
+        private LevelLoader() { }
 
         public void Initialize(ContentManager content)
         {
@@ -32,20 +33,21 @@ namespace Mario.Singletons
             Level level = JsonSerializer.Deserialize<Level>(jsonString)!;
             MediaManager mediaManager = MediaManager.Instance;
 
+            GlobalVariables.LevelName = level.level;
             // set background for the level
-            mediaManager.SetCurrentBackground(level.level);
+            MediaManager.Instance.SetCurrentBackground(level.level);
 
             // Set default theme
-            mediaManager.SetDefaultTheme(level.song);
+            MediaManager.Instance.SetDefaultTheme(level.song);
 
             SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 
             // Create the hero
             IHero hero = ObjectFactory.Instance.CreateHero(
                 level.hero.startingPower,
-                level.hero.lives,
-                new Vector2(level.hero.startingX * GlobalVariables.blockHeightWidth,
-                level.hero.startingY * GlobalVariables.blockHeightWidth));
+                new Vector2(level.hero.startingX * GlobalVariables.BlockHeightWidth,
+                level.hero.startingY * GlobalVariables.BlockHeightWidth),
+                new HeroStatTracker(level.timeLimit, level.hero.lives));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies
@@ -53,8 +55,8 @@ namespace Mario.Singletons
             {
                 IEnemy enemyObject = ObjectFactory.Instance.CreateEnemy(
                     enemy.type,
-                    new Vector2(enemy.startingX * GlobalVariables.blockHeightWidth,
-                    enemy.startingY * GlobalVariables.blockHeightWidth));
+                    new Vector2(enemy.startingX * GlobalVariables.BlockHeightWidth,
+                    enemy.startingY * GlobalVariables.BlockHeightWidth));
                 GameContentManager.Instance.AddEntity(enemyObject);
             }
 
@@ -67,7 +69,7 @@ namespace Mario.Singletons
                     {
                         IBlock block = ObjectFactory.Instance.CreateBlock(
                             blockSection.type,
-                            new Vector2(x * GlobalVariables.blockHeightWidth, y * GlobalVariables.blockHeightWidth),
+                            new Vector2(x * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
                             blockSection.breakable,
                             blockSection.collidable,
                             blockSection.item);
@@ -81,7 +83,7 @@ namespace Mario.Singletons
             {
                 IBlock blockObject = ObjectFactory.Instance.CreateBlock(
                     block.type,
-                    new Vector2(block.x * GlobalVariables.blockHeightWidth, block.y * GlobalVariables.blockHeightWidth),
+                    new Vector2(block.x * GlobalVariables.BlockHeightWidth, block.y * GlobalVariables.BlockHeightWidth),
                     block.breakable,
                     block.collidable,
                     block.item);
@@ -129,7 +131,7 @@ namespace Mario.Singletons
             // Change the number of lives in the JSON string
             var jsonLives = JsonNode.Parse(jsonString);
             jsonLives["hero"]["lives"] = lives;
-            
+
             // Save the new number of lives to the JSON file
             jsonString = jsonLives.ToString();
             File.WriteAllText(levelName, jsonString);

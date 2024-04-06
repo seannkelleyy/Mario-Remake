@@ -1,24 +1,24 @@
 ﻿using Mario.Entities.Abstract;
-using Mario.Entities.Character;
+using Mario.Interfaces.Entities;
 
 
 internal class SlideState : HeroState
 {
-    public SlideState(Hero mario) : base(mario) { }
+    public SlideState(IHero mario) : base(mario) { }
     public override void WalkLeft()
     {
-        mario.GetPhysics().WalkLeft();
-        if (mario.GetVelocity().X <= 0)
+        hero.GetPhysics().WalkLeft();
+        if (hero.GetVelocity().X <= 0)
         {
-            mario.currentState = new RunState(mario);
+            hero.currentState = new RunState(hero);
         }
     }
     public override void WalkRight()
     {
-        mario.GetPhysics().WalkRight();
-        if (mario.GetVelocity().X >= 0)
+        hero.GetPhysics().WalkRight();
+        if (hero.GetVelocity().X >= 0)
         {
-            mario.currentState = new RunState(mario);
+            hero.currentState = new RunState(hero);
         }
     }
 

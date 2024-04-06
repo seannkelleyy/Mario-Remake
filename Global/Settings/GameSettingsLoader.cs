@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,46 +8,46 @@ public static class GameSettingsLoader
 {
     public static string LevelJsonFilePath { get; set; }
 
-    public static void LoadGameSettings(string jsonFilePath, string levelJsonFilePath)
+    public static void LoadGameSettings(string jsonFilePath, string levelJsonFilePath, GraphicsDeviceManager graphics)
     {
         LevelJsonFilePath = levelJsonFilePath;
         string jsonString = File.ReadAllText(jsonFilePath);
         var settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(jsonString);
 
         // Load GameSettings
-        GameSettings.frameRate = Convert.ToInt32(settings["GameSettings"]["frameRate"]);
-        GameSettings.cameraStartingX = Convert.ToSingle(settings["GameSettings"]["cameraStartingX"]);
-        GameSettings.cameraStartingY = Convert.ToSingle(settings["GameSettings"]["cameraStartingY"]);
-        GameSettings.isDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
+        GameSettings.FrameRate = Convert.ToInt32(settings["GameSettings"]["frameRate"]);
+        GameSettings.CameraStarting = new Vector2(Convert.ToSingle(settings["GameSettings"]["cameraStartingX"]), Convert.ToSingle(settings["GameSettings"]["cameraStartingY"]));
+        GameSettings.ScreenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+        GameSettings.IsDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
 
         // Load PhysicsSettings
-        PhysicsSettings.gravity = Convert.ToSingle(settings["Physics"]["gravity"]);
-        PhysicsSettings.friction = Convert.ToSingle(settings["Physics"]["friction"]);
-        PhysicsSettings.jumpForce = Convert.ToSingle(settings["Physics"]["jumpForce"]);
-        PhysicsSettings.maxVerticalSpeed = Convert.ToSingle(settings["Physics"]["maxVerticalSpeed"]);
-        PhysicsSettings.maxRunSpeed = Convert.ToSingle(settings["Physics"]["maxRunSpeed"]);
-        PhysicsSettings.runAcceleration = Convert.ToSingle(settings["Physics"]["runAcceleration"]);
-        PhysicsSettings.enemySpeed = Convert.ToSingle(settings["Physics"]["enemySpeed"]);
-        PhysicsSettings.koopaShellSpeed = Convert.ToSingle(settings["Physics"]["koopaShellSpeed"]);
-        PhysicsSettings.regularJumpLimit = Convert.ToInt32(settings["Physics"]["regularJumpLimit"]);
-        PhysicsSettings.smallJumpLimit = Convert.ToInt32(settings["Physics"]["smallJumpLimit"]);
-        PhysicsSettings.minimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
-        PhysicsSettings.decelerationFactor = Convert.ToSingle(settings["Physics"]["decelerationFactor"]);
-        PhysicsSettings.fireballHorizontalSpeed = Convert.ToSingle(settings["Physics"]["fireballHorizontalSpeed"]);
-        PhysicsSettings.fireballVerticalAcceleration = Convert.ToSingle(settings["Physics"]["fireballVerticalAcceleration"]);
-        PhysicsSettings.fireballBounceForce = Convert.ToSingle(settings["Physics"]["fireballBounceForce"]);
-        PhysicsSettings.fireballDeleteInterval = Convert.ToSingle(settings["Physics"]["fireballDeleteInterval"]);
+        PhysicsSettings.Gravity = Convert.ToSingle(settings["Physics"]["gravity"]);
+        PhysicsSettings.Friction = Convert.ToSingle(settings["Physics"]["friction"]);
+        PhysicsSettings.JumpForce = Convert.ToSingle(settings["Physics"]["jumpForce"]);
+        PhysicsSettings.MaxVerticalSpeed = Convert.ToSingle(settings["Physics"]["maxVerticalSpeed"]);
+        PhysicsSettings.MaxRunSpeed = Convert.ToSingle(settings["Physics"]["maxRunSpeed"]);
+        PhysicsSettings.RunAcceleration = Convert.ToSingle(settings["Physics"]["runAcceleration"]);
+        PhysicsSettings.EnemySpeed = Convert.ToSingle(settings["Physics"]["enemySpeed"]);
+        PhysicsSettings.KoopaShellSpeed = Convert.ToSingle(settings["Physics"]["koopaShellSpeed"]);
+        PhysicsSettings.RegularJumpLimit = Convert.ToInt32(settings["Physics"]["regularJumpLimit"]);
+        PhysicsSettings.SmallJumpLimit = Convert.ToInt32(settings["Physics"]["smallJumpLimit"]);
+        PhysicsSettings.MinimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
+        PhysicsSettings.DecelerationFactor = Convert.ToSingle(settings["Physics"]["decelerationFactor"]);
+        PhysicsSettings.FireballHorizontalSpeed = Convert.ToSingle(settings["Physics"]["fireballHorizontalSpeed"]);
+        PhysicsSettings.FireballVerticalAcceleration = Convert.ToSingle(settings["Physics"]["fireballVerticalAcceleration"]);
+        PhysicsSettings.FireballBounceForce = Convert.ToSingle(settings["Physics"]["fireballBounceForce"]);
+        PhysicsSettings.FireballDeleteInterval = Convert.ToSingle(settings["Physics"]["fireballDeleteInterval"]);
 
         // Load CollisionSettings
-        CollisionSettings.buffer = Convert.ToInt32(settings["Collisions"]["buffer"]);
-        CollisionSettings.collisionPixelRadius = Convert.ToInt32(settings["Collisions"]["collisionPixelRadius"]);
+        CollisionSettings.Buffer = Convert.ToInt32(settings["Collisions"]["buffer"]);
+        CollisionSettings.CollisionPixelRadius = Convert.ToInt32(settings["Collisions"]["collisionPixelRadius"]);
 
         // Load entity setting
-        EntitySettings.enemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
-        EntitySettings.heroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
-        EntitySettings.heroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
-        EntitySettings.heroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
-        EntitySettings.heroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
+        EntitySettings.EnemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
+        EntitySettings.HeroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
+        EntitySettings.HeroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
+        EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
+        EntitySettings.HeroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
 
     }
 }

@@ -1,22 +1,22 @@
-﻿using Mario.Input;
+﻿using Mario.Global;
+using Mario.Input;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Singletons;
+using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace Mario
 {
     public class MarioRemake : Game
     {
-        private PlayerCamera _camera;
-        public static int ScreenWidth;
-        public static int ScreenHeight;
+        private PlayerCamera camera;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        private HeadsUpDisplay HUD;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,25 +30,25 @@ namespace Mario
 
             LevelLoader.Instance.Initialize(Content);
 
-            ScreenWidth = graphics.PreferredBackBufferWidth;
-            ScreenHeight = graphics.PreferredBackBufferHeight;
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json", graphics);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             MediaManager.Instance.LoadContent(Content);
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/Sprint3.json");
 
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.frameRate);
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / GameSettings.FrameRate);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
 
+            HUD = new HeadsUpDisplay();
+
             keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
             MediaManager.Instance.PlayDefaultTheme();
-            _camera = new PlayerCamera(GameContentManager.Instance.GetHero());
+            camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
             base.LoadContent();
         }
@@ -61,7 +61,7 @@ namespace Mario
 
         protected override void Update(GameTime gameTime)
         {
-            if (GameSettings.isDevelopment)
+            if (GameSettings.IsDevelopment)
                 Logger.Instance.LogInformation($"----- Update @ {gameTime.ElapsedGameTime} -----");
             if (!GameStateManager.Instance.isPaused) // Normal update
             {
@@ -70,19 +70,19 @@ namespace Mario
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
-                _camera.UpdatePosition();
+                camera.UpdatePosition();
                 base.Update(gameTime);
-
+                HUD.Update(gameTime, camera);
             }
             else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
-                if (GameStateManager.Instance.resetTime < GameStateManager.maxResetTime)
+                if (GameStateManager.Instance.resetTime < GlobalVariables.MaxResetTime)
                 {
                     GameStateManager.Instance.SetResetTime(GameStateManager.Instance.resetTime + gameTime.ElapsedGameTime.TotalSeconds);
                 }
-                else
+                else if (GameStateManager.Instance.resetTime >= GlobalVariables.MaxResetTime)
                 {
-                    GameStateManager.Instance.EndReset();
+                    GameStateManager.Instance.EndReset(camera);
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
                 }
@@ -97,12 +97,13 @@ namespace Mario
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(transformMatrix: _camera.Transform);
+            spriteBatch.Begin(transformMatrix: camera.Transform);
             MediaManager.Instance.Draw(spriteBatch);
             foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
             {
                 entity.Draw(spriteBatch);
             }
+            HUD.Draw(spriteBatch, SpriteFactory.Instance.GetMainFont());
             spriteBatch.End();
 
             base.Draw(gameTime);

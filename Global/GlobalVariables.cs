@@ -2,21 +2,26 @@
 {
     public class GlobalVariables
     {
-        public static int blockHeightWidth = 16;
+        // Static members are capitalized
+        public static string LevelName { get; set; }
+        public static int BlockHeightWidth = 16;
 
-        public static int halfBlockAdjustment = 8;
+        public static int HalfBlockAdjustment = 8;
 
-        public static int horizontalBlockCollisionAdjustment = 2;
+        public static int HorizontalBlockCollisionAdjustment = 2;
 
-        public static int topBlockCollisionAdjustment = 5;
+        public static int TopBlockCollisionAdjustment = 5;
 
-        public static float spriteUpdateInterval = 0.175f;
+        public static float SpriteUpdateInterval = 0.175f;
 
+        public static float KeyboardUpdateInterval = 0.05f;
 
-        public static float keyboardUpdateInterval = 0.05f;
+        public static float MaxResetTime = 4.0f;
 
+        public static int HUDBuffer = 50;
         public enum CollisionDirection { Top, Bottom, Left, Right, None }
-        public enum horizontalDirection { left, right };
+        public enum HorizontalDirection { left, right };
+        public enum HeroHealth { Mario, BigMario, FireMario };
 
         public enum BlockType
         {

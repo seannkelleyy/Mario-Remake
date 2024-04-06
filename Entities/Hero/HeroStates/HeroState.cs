@@ -1,4 +1,5 @@
-﻿using Mario.Entities.Character;
+﻿using Mario.Global;
+using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,70 +8,69 @@ namespace Mario.Entities.Abstract
 {
     public abstract class HeroState : AbstractEntityState
     {
-        protected Hero mario;
+        protected IHero hero;
 
-        public HeroState(Hero mario)
+        public HeroState(IHero hero)
         {
-            this.mario = mario;
+            this.hero = hero;
             spriteFactory = SpriteFactory.Instance;
-            sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+            sprite = spriteFactory.CreateSprite(hero.GetHorizontalDirection().ToString() + this.GetType().Name + hero.ReportHealth().ToString());
         }
         public virtual void Jump()
         {
-            mario.GetPhysics().Jump();
-            mario.currentState = new JumpState(mario);
+            hero.GetPhysics().Jump();
+            hero.currentState = new JumpState(hero);
         }
         public virtual void Crouch()
         {
-            if (mario.currentHealth != Hero.health.Mario)
+            if (hero.ReportHealth() != GlobalVariables.HeroHealth.Mario)
             {
-                mario.currentState = new CrouchState(mario);
-
+                hero.currentState = new CrouchState(hero);
             }
         }
         public virtual void WalkLeft()
         {
-            mario.GetPhysics().WalkLeft();
-            mario.currentState = new RunState(mario);
+            hero.GetPhysics().WalkLeft();
+            hero.currentState = new RunState(hero);
         }
         public virtual void Stand()
         {
-            if (mario.GetVelocity().X == 0)
+            if (hero.GetVelocity().X == 0)
             {
-                mario.currentState = new StandState(mario);
+                hero.currentState = new StandState(hero);
             }
         }
         public virtual void WalkRight()
         {
-            mario.GetPhysics().WalkRight();
-            mario.currentState = new RunState(mario);
+            hero.GetPhysics().WalkRight();
+            hero.currentState = new RunState(hero);
         }
         public virtual void PowerUp(bool wasSmall)
         {
             if (wasSmall)
             {
-                mario.SetPosition(mario.GetPosition() - new Vector2(0, 16));
-                mario.currentState = new PowerUpState(mario, mario.currentState);
+                hero.SetPosition(hero.GetPosition() - new Vector2(0, 16));
+                hero.currentState = new PowerUpState(hero, hero.currentState);
             }
             else
             {
-                sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+                sprite = spriteFactory.CreateSprite(hero.GetHorizontalDirection().ToString() + GetType().Name + hero.ReportHealth().ToString());
             }
         }
         public virtual void Attack()
         {
-            if (mario.currentHealth == Hero.health.FireMario)
+            if (hero.ReportHealth() == GlobalVariables.HeroHealth.FireMario)
             {
-                mario.currentState = new AttackState(mario, mario.currentState);
+                hero.currentState = new AttackState(hero, hero.currentState);
             }
         }
         public virtual void TakeDamage()
         {
-            sprite = spriteFactory.CreateSprite((mario.GetHorizontalDirection()).ToString() + this.GetType().Name + (mario.currentHealth).ToString());
+            sprite = spriteFactory.CreateSprite(hero.GetHorizontalDirection().ToString() + GetType().Name + hero.ReportHealth().ToString());
         }
         public virtual void Die()
         {
-            mario.currentState = new DeadState(mario);
+            hero.currentState = new DeadState(hero);
         }
         public override void Update(GameTime gameTime)
         {

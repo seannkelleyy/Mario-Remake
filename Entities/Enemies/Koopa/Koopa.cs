@@ -40,7 +40,7 @@ public class Koopa : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
             currentState = new StompedKoopaState();
             isShell = true;
-            position.Y += halfBlockAdjustment;
+            position.Y += HalfBlockAdjustment;
         }
     }
 
@@ -53,15 +53,15 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == horizontalDirection.right)
+        if (physics.currentHorizontalDirection == HorizontalDirection.right)
         {
-            physics.currentHorizontalDirection = horizontalDirection.left;
+            physics.currentHorizontalDirection = HorizontalDirection.left;
             if (!isShell)
                 currentState = new LeftMovingKoopaState();
         }
         else
         {
-            physics.currentHorizontalDirection = horizontalDirection.right;
+            physics.currentHorizontalDirection = HorizontalDirection.right;
             if (!isShell)
                 currentState = new RightMovingKoopaState();
         }

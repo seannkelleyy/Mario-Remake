@@ -1,5 +1,6 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -14,9 +15,9 @@ namespace Mario.Singletons
         public static ObjectFactory Instance => instance;
         private ObjectFactory() { }
 
-        public IHero CreateHero(string startingPower, int lives, Vector2 position)
+        public IHero CreateHero(string startingPower, Vector2 position, HeroStatTracker stats)
         {
-            return new Hero(startingPower, lives, position);
+            return new Hero(startingPower, position, stats);
         }
 
         public IEnemy CreateEnemy(string type, Vector2 position)

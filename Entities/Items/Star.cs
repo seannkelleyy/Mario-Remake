@@ -19,7 +19,7 @@ namespace Mario.Entities.Items
 
         public override void MakeVisible()
         {
-            position.Y -= 16;
+            position.Y -= BlockHeightWidth;
             isVisible = true;
             isCollidable = true;
         }
@@ -37,13 +37,13 @@ namespace Mario.Entities.Items
 
         public override void ChangeDirection()
         {
-            if (physics.GetHorizontalDirection() == horizontalDirection.right)
+            if (physics.GetHorizontalDirection() == HorizontalDirection.right)
             {
-                physics.SetHorizontalDirection(horizontalDirection.left);
+                physics.SetHorizontalDirection(HorizontalDirection.left);
             }
             else
             {
-                physics.SetHorizontalDirection(horizontalDirection.right);
+                physics.SetHorizontalDirection(HorizontalDirection.right);
             }
         }
         public override Vector2 GetVelocity()

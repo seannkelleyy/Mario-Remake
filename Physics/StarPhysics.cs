@@ -21,13 +21,13 @@ namespace Mario.Physics
 
         internal override void UpdateHorizontal()
         {
-            if (currentHorizontalDirection == horizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
+            if (currentHorizontalDirection == HorizontalDirection.right && !entity.GetCollisionState(CollisionDirection.Right))
             {
-                velocity.X = PhysicsSettings.enemySpeed;
+                velocity.X = PhysicsSettings.EnemySpeed;
             }
-            else if (currentHorizontalDirection == horizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
+            else if (currentHorizontalDirection == HorizontalDirection.left && !entity.GetCollisionState(CollisionDirection.Left))
             {
-                velocity.X = -PhysicsSettings.enemySpeed;
+                velocity.X = -PhysicsSettings.EnemySpeed;
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -53,7 +53,7 @@ namespace Mario.Physics
 
             if (isDecelerating)
             {
-                velocity.Y += PhysicsSettings.decelerationFactor;
+                velocity.Y += PhysicsSettings.DecelerationFactor;
                 if (velocity.Y >= 0)
                 {
                     // Once upward velocity reaches 0, start falling and stop decelerating
@@ -71,22 +71,22 @@ namespace Mario.Physics
         public void Jump()
         {
             isFalling = false;
-            velocity.Y = -PhysicsSettings.jumpForce;
+            velocity.Y = -PhysicsSettings.JumpForce;
             jumpCounter = 1;
         }
 
         private void HandleUpwardMovement()
         {
-            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.minimumJumpLimit)
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.MinimumJumpLimit)
             {
-                jumpCounter = PhysicsSettings.regularJumpLimit;
+                jumpCounter = PhysicsSettings.RegularJumpLimit;
                 isFalling = true;
                 isMininumJump = false;
                 isDecelerating = true;
             }
-            else if (jumpCounter < PhysicsSettings.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter < PhysicsSettings.RegularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsSettings.jumpForce * (1 - jumpCounter / PhysicsSettings.regularJumpLimit);
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - jumpCounter / PhysicsSettings.RegularJumpLimit);
                 jumpCounter++;
             }
             else

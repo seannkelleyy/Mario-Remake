@@ -1,8 +1,8 @@
 ﻿using Mario.Entities.Abstract;
-using Mario.Entities.Character;
+using Mario.Interfaces.Entities;
 
 public class StandState : HeroState
 {
-    public StandState(Hero mario) : base(mario) { }
+    public StandState(IHero mario) : base(mario) { }
 
 }
