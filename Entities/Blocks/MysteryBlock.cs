@@ -1,7 +1,7 @@
 ﻿using Mario.Entities.Blocks.BlockStates;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Singletons;
-using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Blocks
@@ -35,8 +35,8 @@ namespace Mario.Entities.Blocks
                 case "coinUnderground":
                     item = ObjectFactory.Instance.CreateItem("coinUnderground", position);
                     break;
-                case "1up":
-                    item = ObjectFactory.Instance.CreateItem("1up", position);
+                case "oneUp":
+                    item = ObjectFactory.Instance.CreateItem("oneUp", position);
                     break;
                 case "star":
                     item = ObjectFactory.Instance.CreateItem("star", position);

@@ -12,6 +12,7 @@
     public static int RegularJumpLimit { get; set; }
     public static int SmallJumpLimit { get; set; }
     public static int MinimumJumpLimit { get; set; }
+    public static int StarJumpLimit { get; set; }
     public static float DecelerationFactor { get; set; }
     public static float FireballHorizontalSpeed { get; set; }
     public static float FireballVerticalAcceleration { get; set; }

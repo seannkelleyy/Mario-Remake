@@ -18,6 +18,10 @@
 
         public static float MaxResetTime = 4.0f;
 
+        public static float CameraLeftEdge = 0;
+
+        public static float CameraBottomEdge = GameSettings.ScreenSize.Y;
+
         public static int HUDBuffer = 50;
         public enum CollisionDirection { Top, Bottom, Left, Right, None }
         public enum HorizontalDirection { left, right };
@@ -29,6 +33,11 @@
             Floor,
             Mystery,
         }
+
+        public enum PipeType
+        {
+            horizontal, vertical, tile,
+        };
 
         public enum ItemTypes
         {
@@ -75,10 +84,14 @@
         {
             ground,
             underground,
+            underwater,
+            castle,
             invincibility,
             levelComplete,
+            castleComplete,
             lostLife,
-            gameOver
+            gameOver,
+            ending
         }
 
         #endregion MediaManagerVariables

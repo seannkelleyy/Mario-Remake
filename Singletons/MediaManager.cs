@@ -1,4 +1,5 @@
 ﻿using Mario.Global;
+using Mario.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -18,14 +19,17 @@ namespace Mario.Singletons
         private Song defaultTheme;
         private GlobalVariables.Levels currentBackground;
 
+        // Uses Singleton pattern.
         public static MediaManager Instance => instance;
         public void LoadContent(ContentManager content)
         {
+            // Initialize dictionary containing level backgrounds.
             backgrounds = new Dictionary<GlobalVariables.Levels, Texture2D>
             {
                 { GlobalVariables.Levels.level1, content.Load<Texture2D>("background1-1withoutEnd") }
             };
 
+            // Initialize dictionary containing all Sfx.
             soundEffects = new Dictionary<GlobalVariables.EffectNames, SoundEffectInstance>
             {
                 { GlobalVariables.EffectNames.oneUp, content.Load<SoundEffect>("1up").CreateInstance() },
@@ -46,14 +50,19 @@ namespace Mario.Singletons
                 { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() }
             };
 
+            // Initialize dictionary containing all songs.
             themes = new Dictionary<GlobalVariables.SongThemes, Song>
             {
-                { GlobalVariables.SongThemes.ground, content.Load<Song>("01-main-theme-overworld") }
-                //{ SongThemes.underground, (content.Load<Song>("02. Underground Theme")) },
-                //{ SongThemes.invincibility, (content.Load<Song>("05. Invincibility Theme")) },
-                //{ SongThemes.levelComplete, (content.Load<Song>("06. Level Complete")) },
-                //{ SongThemes.lostLife, (content.Load<Song>("08. Lost a Life")) },
-                //{ SongThemes.gameOver, (content.Load<Song>("09. Game Over")) }
+                { GlobalVariables.SongThemes.ground, content.Load<Song>("01-main-theme-overworld") },
+                { GlobalVariables.SongThemes.underground, content.Load<Song>("02-underworld") },
+                { GlobalVariables.SongThemes.underwater, content.Load<Song>("03-underwater") },
+                { GlobalVariables.SongThemes.castle, content.Load<Song>("04-castle") },
+                { GlobalVariables.SongThemes.invincibility, content.Load<Song>("05-starman") },
+                { GlobalVariables.SongThemes.levelComplete, content.Load<Song>("06-level-complete") },
+                { GlobalVariables.SongThemes.castleComplete, content.Load<Song>("07-castle-complete") },
+                { GlobalVariables.SongThemes.lostLife, content.Load<Song>("08-you-re-dead") },
+                { GlobalVariables.SongThemes.gameOver, content.Load<Song>("09-game-over") },
+                { GlobalVariables.SongThemes.ending, content.Load<Song>("12-ending") }
             };
         }
 

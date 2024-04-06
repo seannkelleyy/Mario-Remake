@@ -9,8 +9,6 @@ namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
-        public HeroPhysics physics { get; }
-        public HeroStatTracker stats { get; }
         public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
@@ -29,6 +27,7 @@ namespace Mario.Interfaces.Entities
         public int GetStartingLives();
         public Vector2 GetVelocity();
         public HeroPhysics GetPhysics();
+        public HeroStatTracker GetStats();
         public GlobalVariables.HorizontalDirection GetHorizontalDirection();
     }
 }

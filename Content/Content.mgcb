@@ -19,6 +19,60 @@
 /processorParam:Quality=Best
 /build:01-main-theme-overworld.mp3
 
+#begin 02-underworld.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:02-underworld.mp3
+
+#begin 03-underwater.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:03-underwater.mp3
+
+#begin 04-castle.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:04-castle.mp3
+
+#begin 05-starman.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:05-starman.mp3
+
+#begin 06-level-complete.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:06-level-complete.mp3
+
+#begin 07-castle-complete.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:07-castle-complete.mp3
+
+#begin 08-you-re-dead.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:08-you-re-dead.mp3
+
+#begin 09-game-over.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:09-game-over.mp3
+
+#begin 12-ending.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:12-ending.mp3
+
 #begin 1up.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor

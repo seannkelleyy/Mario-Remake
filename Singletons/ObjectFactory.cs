@@ -6,6 +6,8 @@ using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Mario.Entities.Pipes;
+using System;
 
 namespace Mario.Singletons
 {
@@ -42,9 +44,9 @@ namespace Mario.Singletons
                 case "floorUnderground":
                     return new FloorBlock(position, breakeable, collideable, true);
                 case "brick":
-                    return new BrickBlock(position, breakeable, collideable);
+                    return new BrickBlock(position, breakeable, collideable, item);
                 case "brickUnderground":
-                    return new BrickBlock(position, breakeable, collideable, true);
+                    return new BrickBlock(position, breakeable, collideable, item, true);
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
                 default:
@@ -68,10 +70,27 @@ namespace Mario.Singletons
                     return new Star(position);
                 case "redMushroom":
                     return new Mushroom(position, "red");
-                case "1up":
-                    return new Mushroom(position, "1up");
+                case "oneUp":
+                    return new Mushroom(position, "oneUp");
                 default:
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
+            }
+        }
+
+        public IPipe CreatePipe(string type, Vector2 position, Vector2 transportPosition, bool isCollidable, bool isTransportable)
+        {
+            switch (type)
+            {
+                case "pipeTubeVertical":
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTubeUpsideDown":
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable, true);
+                case "pipeTubeHorizontal":
+                    return new PipeTubeHorizontal(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTile":
+                    return new PipeTile(position, isCollidable);
+                default:
+                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
             }
         }
     }

@@ -72,7 +72,6 @@ namespace Mario
                 keyboardController.Update(gameTime);
                 camera.UpdatePosition();
                 base.Update(gameTime);
-                HUD.Update(gameTime, camera);
             }
             else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {

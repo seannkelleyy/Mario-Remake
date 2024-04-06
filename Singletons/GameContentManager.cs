@@ -8,6 +8,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Transactions;
 
 namespace Mario.Singletons
 {
@@ -19,6 +21,7 @@ namespace Mario.Singletons
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
+            { typeof(IPipe), new List<IPipe>() },
             { typeof(IProjectile), new List<IProjectile>() },
             { typeof(IHero), new List<IHero>() }
         };
@@ -50,6 +53,25 @@ namespace Mario.Singletons
             return allCollideables;
         }
 
+        public List<IEnemy> GetEnemiesInProximity(Vector2 position)
+        {
+
+            List<IEnemy> enemies = new List<IEnemy>();
+            foreach (IEnemy enemy in entities[typeof(IEnemy)])
+            {
+                if (enemy.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
+                    && enemy.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && enemy.ReportIsAlive())
+                {
+                    if (enemy.ReportIsAlive())
+                    {
+                        enemies.Add(enemy);
+                    }
+                }
+            }
+
+            return enemies;
+        }
+
 
         public List<IItem> GetItems()
         {
@@ -59,6 +81,22 @@ namespace Mario.Singletons
                 allCollideables.Add(item);
             }
             return allCollideables;
+        }
+
+        public List<IItem> GetItemsInProximity(Vector2 position)
+        {
+
+            List<IItem> items = new List<IItem>();
+            foreach (IItem item in entities[typeof(IItem)])
+            {
+                if (item.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
+                    && item.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && item.isVisible)
+                {
+                    items.Add(item);
+                }
+            }
+
+            return items;
         }
 
         public List<IProjectile> GetProjectiles()
@@ -86,6 +124,17 @@ namespace Mario.Singletons
             }
 
             return CombineBlocks(blocks);
+        }
+
+        // Gets all pipes 
+        public List<IPipe> GetPipes(Vector2 position)
+        {
+            List<IPipe> allCollideables = new List<IPipe>();
+            foreach (IPipe pipe in entities[typeof(IPipe)])
+            {
+                allCollideables.Add(pipe);
+            }
+            return allCollideables;
         }
 
         public List<IBlock> CombineBlocks(List<IBlock> blocks)
@@ -160,6 +209,7 @@ namespace Mario.Singletons
                    entity is IEnemy ? typeof(IEnemy) :
                    entity is IItem ? typeof(IItem) :
                    entity is IBlock ? typeof(IBlock) :
+                   entity is IPipe ? typeof(IPipe) :
                    entity is IProjectile ? typeof(IProjectile) : null;
         }
     }

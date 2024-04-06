@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Mario.Global.Settings;
+using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ public static class GameSettingsLoader
         PhysicsSettings.RegularJumpLimit = Convert.ToInt32(settings["Physics"]["regularJumpLimit"]);
         PhysicsSettings.SmallJumpLimit = Convert.ToInt32(settings["Physics"]["smallJumpLimit"]);
         PhysicsSettings.MinimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
+        PhysicsSettings.StarJumpLimit = Convert.ToInt32(settings["Physics"]["starJumpLimit"]);
         PhysicsSettings.DecelerationFactor = Convert.ToSingle(settings["Physics"]["decelerationFactor"]);
         PhysicsSettings.FireballHorizontalSpeed = Convert.ToSingle(settings["Physics"]["fireballHorizontalSpeed"]);
         PhysicsSettings.FireballVerticalAcceleration = Convert.ToSingle(settings["Physics"]["fireballVerticalAcceleration"]);
@@ -44,10 +46,24 @@ public static class GameSettingsLoader
 
         // Load entity setting
         EntitySettings.EnemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
+        EntitySettings.KoopaShellTime = Convert.ToSingle(settings["Entity"]["koopaShellTime"]);
         EntitySettings.HeroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
         EntitySettings.HeroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
         EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
         EntitySettings.HeroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
+        EntitySettings.HeroStarTimer = Convert.ToSingle(settings["Entity"]["heroStarTimer"]);
 
+        //Scores
+        ScoreSettings.KoopaScore = Convert.ToInt32(settings["Scores"]["koopaScore"]);
+        ScoreSettings.GoombaScore = Convert.ToInt32(settings["Scores"]["goombaScore"]);
+        ScoreSettings.PiranhaScore = Convert.ToInt32(settings["Scores"]["piranhaScore"]);
+        ScoreSettings.BulletScore = Convert.ToInt32(settings["Scores"]["bulletScore"]);
+        ScoreSettings.CoinScore = Convert.ToInt32(settings["Scores"]["coinScore"]);
+        ScoreSettings.FireFlowerScore = Convert.ToInt32(settings["Scores"]["fireFlowerScore"]);
+        ScoreSettings.StarScore = Convert.ToInt32(settings["Scores"]["starScore"]);
+        ScoreSettings.MushroomScore = Convert.ToInt32(settings["Scores"]["mushroomScore"]);
+        ScoreSettings.TimeScore = Convert.ToInt32(settings["Scores"]["timeScore"]);
+        ScoreSettings.FlagScore = Convert.ToInt32(settings["Scores"]["flagScore"]);
+        ScoreSettings.BreakBlockScore = Convert.ToInt32(settings["Scores"]["breakBlockScore"]);
     }
 }

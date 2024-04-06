@@ -49,7 +49,7 @@ namespace Mario.Entities.Abstract
         {
             if (wasSmall)
             {
-                hero.SetPosition(hero.GetPosition() - new Vector2(0, 16));
+                hero.SetPosition(hero.GetPosition() - new Vector2(0, GlobalVariables.BlockHeightWidth * 2));
                 hero.currentState = new PowerUpState(hero, hero.currentState);
             }
             else
