@@ -36,7 +36,8 @@
     "heroInvulnerabilityTime": 3,
     "heroFlashDuration": 0.05,
     "heroAttackTime": 0.25,
-    "heroAnimationLength": 1.3
+    "heroAnimationLength": 1.3,
+    "heroStarTimer": 10.6
   },
   "Scores": {
     "koopaScore": 1000,

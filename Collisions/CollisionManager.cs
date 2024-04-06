@@ -29,7 +29,6 @@ namespace Mario.Collisions
             {
                 ManageItemCollisions(entity as IItem);
             }
-
             else if (entity is IProjectile)
             {
                 ManageProjectileCollisions(entity as IProjectile);
@@ -47,7 +46,14 @@ namespace Mario.Collisions
                     heroHandler.HeroBlockCollision(block);
                 }
             }
-            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemiesInProximity(hero.GetPosition()))
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(hero.GetPosition()))
+            {
+                if (hero.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    heroHandler.HeroPipeCollision(pipe);
+                }
+            }
+            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
@@ -75,7 +81,15 @@ namespace Mario.Collisions
                 }
             }
 
-            foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemiesInProximity(enemy.GetPosition()))
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(enemy.GetPosition()))
+            {
+                if (enemy.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    enemyHandler.EnemyPipeCollision(pipe);
+                }
+            }
+
+            foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {
@@ -96,7 +110,15 @@ namespace Mario.Collisions
                 }
             }
 
-            foreach (IItem collidingItem in GameContentManager.Instance.GetItemsInProximity(item.GetPosition())) 
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(item.GetPosition()))
+            {
+                if (item.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    itemHandler.ItemPipeCollision(pipe);
+                }
+            }
+
+            foreach (IItem collidingItem in GameContentManager.Instance.GetItems())
             {
                 if (item != collidingItem && item.GetRectangle().Intersects(collidingItem.GetRectangle()))
                 {
@@ -116,7 +138,14 @@ namespace Mario.Collisions
                     projectileHandler.ProjectileBlockCollision(block);
                 }
             }
-            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemiesInProximity(projectile.GetPosition()))
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(projectile.GetPosition()))
+            {
+                if (projectile.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    projectileHandler.ProjectilePipeCollision(pipe);
+                }
+            }
+            foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
                 if (projectile.GetRectangle().Intersects(enemy.GetRectangle()))
                 {

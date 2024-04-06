@@ -34,6 +34,11 @@
             Mystery,
         }
 
+        public enum PipeType
+        {
+            horizontal, vertical, tile,
+        };
+
         public enum ItemTypes
         {
             Coin,

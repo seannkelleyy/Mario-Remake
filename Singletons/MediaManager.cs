@@ -49,9 +49,9 @@ namespace Mario.Singletons
 
             themes = new Dictionary<GlobalVariables.SongThemes, Song>
             {
-                { GlobalVariables.SongThemes.ground, content.Load<Song>("01-main-theme-overworld") }
+                { GlobalVariables.SongThemes.ground, content.Load<Song>("01-main-theme-overworld") },
                 //{ SongThemes.underground, (content.Load<Song>("02. Underground Theme")) },
-                //{ SongThemes.invincibility, (content.Load<Song>("05. Invincibility Theme")) },
+                //{ GlobalVariables.SongThemes.invincibility, (content.Load<Song>("05. Invincibility Theme")) }
                 //{ SongThemes.levelComplete, (content.Load<Song>("06. Level Complete")) },
                 //{ SongThemes.lostLife, (content.Load<Song>("08. Lost a Life")) },
                 //{ SongThemes.gameOver, (content.Load<Song>("09. Game Over")) }
@@ -65,18 +65,18 @@ namespace Mario.Singletons
         }
         public void PlayDefaultTheme()
         {
-            //MediaPlayer.Play(defaultTheme);
+            MediaPlayer.Play(defaultTheme);
             MediaPlayer.IsRepeating = true;
         }
         public void PlayTheme(GlobalVariables.SongThemes theme, bool repeat)
         {
-            //MediaPlayer.Play(themes[theme]);
+            MediaPlayer.Play(themes[theme]);
             MediaPlayer.IsRepeating = repeat;
         }
 
         public void PlayEffect(GlobalVariables.EffectNames name)
         {
-            //soundEffects[name].Play();
+            soundEffects[name].Play();
         }
 
         public void SetCurrentBackground(string level)

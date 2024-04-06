@@ -18,9 +18,11 @@ public class EnemyCollisionHandler
         collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
         };
 
+        // Block stuff
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
         {
             mainEnemy.SetCollisionState(CollisionDirection.Left, true);
@@ -33,6 +35,20 @@ public class EnemyCollisionHandler
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 
+        // Pipe stuff
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            mainEnemy.SetCollisionState(CollisionDirection.Left, true);
+            mainEnemy.ChangeDirection();
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() => {
+            mainEnemy.SetCollisionState(CollisionDirection.Right, true);
+            mainEnemy.ChangeDirection();
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
+
+        // Enemy stuff
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleEnemyEnemyCollision));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleEnemyEnemyCollision));
     }
@@ -53,6 +69,15 @@ public class EnemyCollisionHandler
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IBlock)][direction].Invoke();
+        }
+    }
+
+    public void EnemyPipeCollision(IPipe pipe)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), pipe.GetRectangle(), mainEnemy.GetVelocity());
+        if (collisionDictionary[typeof(IPipe)].ContainsKey(direction))
+        {
+            collisionDictionary[typeof(IPipe)][direction].Invoke();
         }
     }
 

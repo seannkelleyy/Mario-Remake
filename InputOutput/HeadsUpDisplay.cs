@@ -18,7 +18,7 @@ public class HeadsUpDisplay
     public void Draw(SpriteBatch spriteBatch, SpriteFont font)
     {
         string[] headers = new string[] { "Score", "Coins", "Lives", "Time", "World" };
-        string[] values = new string[] { player.stats.GetScore().ToString(), player.stats.GetCoins().ToString(), player.stats.GetLives().ToString(), player.stats.GetTime().ToString(), $"1-{GlobalVariables.LevelName}" };
+        string[] values = new string[] { player.GetStats().GetScore().ToString(), player.GetStats().GetCoins().ToString(), player.GetStats().GetLives().ToString(), player.GetStats().GetTime().ToString(), $"1-{GlobalVariables.LevelName}" };
 
         float totalWidth = 0;
         for (int i = 0; i < headers.Length; i++)

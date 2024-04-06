@@ -51,6 +51,7 @@ public static class GameSettingsLoader
         EntitySettings.HeroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
         EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
         EntitySettings.HeroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
+        EntitySettings.HeroStarTimer = Convert.ToSingle(settings["Entity"]["heroStarTimer"]);
 
         //Scores
         ScoreSettings.KoopaScore = Convert.ToInt32(settings["Scores"]["koopaScore"]);

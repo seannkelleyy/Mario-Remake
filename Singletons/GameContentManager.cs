@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Transactions;
 
 namespace Mario.Singletons
 {
@@ -18,6 +20,7 @@ namespace Mario.Singletons
             { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
+            { typeof(IPipe), new List<IPipe>() },
             { typeof(IProjectile), new List<IProjectile>() },
             { typeof(IHero), new List<IHero>() }
         };
@@ -122,6 +125,17 @@ namespace Mario.Singletons
             return CombineBlocks(blocks);
         }
 
+        // Gets all pipes 
+        public List<IPipe> GetPipes(Vector2 position)
+        {
+            List<IPipe> allCollideables = new List<IPipe>();
+            foreach (IPipe pipe in entities[typeof(IPipe)])
+            {
+                allCollideables.Add(pipe);
+            }
+            return allCollideables;
+        }
+
         public List<IBlock> CombineBlocks(List<IBlock> blocks)
         {
             blocks.Sort((a, b) => a.GetPosition().Y.CompareTo(b.GetPosition().Y));
@@ -188,6 +202,7 @@ namespace Mario.Singletons
                    entity is IEnemy ? typeof(IEnemy) :
                    entity is IItem ? typeof(IItem) :
                    entity is IBlock ? typeof(IBlock) :
+                   entity is IPipe ? typeof(IPipe) :
                    entity is IProjectile ? typeof(IProjectile) : null;
         }
     }
