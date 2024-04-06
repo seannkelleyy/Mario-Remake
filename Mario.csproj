@@ -42,7 +42,6 @@
     <Folder Include="Interfaces\Entities\Projectiles\" />
     <Folder Include="Entities\Abstract\" />
     <Folder Include="Levels\Data\" />
-    <Folder Include="Global\Settings\" />
     <Folder Include="Global\Settings\Data\" />
   </ItemGroup>
   <ItemGroup>

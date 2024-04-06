@@ -11,13 +11,14 @@
     "friction": 0.025,
     "jumpForce": 2.65,
     "maxVerticalSpeed": 30.0,
-    "maxRunSpeed": 1.15,
+    "maxRunSpeed": 1.0,
     "runAcceleration": 0.30,
     "enemySpeed": 0.5,
-    "koopaShellSpeed": 2.0,
+    "koopaShellSpeed": 1.5,
     "regularJumpLimit": 55,
-    "smallJumpLimit": 13,
+    "smallJumpLimit": 20,
     "minimumJumpLimit": 40,
+    "starJumpLimit": 35,
     "decelerationFactor": 1.25,
     "fireballHorizontalSpeed": 6.25,
     "fireballVerticalAcceleration": 0.975,
@@ -31,10 +32,24 @@
   "Entity": {
     "enemyDespawnTime": 3,
     "enemyInvulnerabilityTime": 3,
+    "koopaShellTime": 8.0,
     "heroInvulnerabilityTime": 3,
     "heroFlashDuration": 0.05,
     "heroAttackTime": 0.25,
     "heroAnimationLength": 1.3,
     "heroStarTimer": 10.6
+  },
+  "Scores": {
+    "koopaScore": 1000,
+    "goombaScore": 1000,
+    "piranhaScore": 1000,
+    "bulletScore": 1000,
+    "coinScore": 200,
+    "fireFlowerScore": 1000,
+    "starScore": 1000,
+    "mushroomScore": 1000,
+    "timeScore": 1000,
+    "flagScore": 1000,
+    "breakBlockScore": 50
   }
 }

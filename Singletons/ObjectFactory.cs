@@ -44,9 +44,9 @@ namespace Mario.Singletons
                 case "floorUnderground":
                     return new FloorBlock(position, breakeable, collideable, true);
                 case "brick":
-                    return new BrickBlock(position, breakeable, collideable);
+                    return new BrickBlock(position, breakeable, collideable, item);
                 case "brickUnderground":
-                    return new BrickBlock(position, breakeable, collideable, true);
+                    return new BrickBlock(position, breakeable, collideable, item, true);
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
                 default:
@@ -70,8 +70,8 @@ namespace Mario.Singletons
                     return new Star(position);
                 case "redMushroom":
                     return new Mushroom(position, "red");
-                case "1up":
-                    return new Mushroom(position, "1up");
+                case "oneUp":
+                    return new Mushroom(position, "oneUp");
                 default:
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
             }

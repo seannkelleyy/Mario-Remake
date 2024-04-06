@@ -110,7 +110,7 @@ namespace Mario.Entities.Character
             }
             else
             {
-                if (!isBig && ((item is Mushroom && !((Mushroom)item).Is1up()) || item is FireFlower))
+                if (!isBig && ((item is Mushroom && !((Mushroom)item).IsOneUp()) || item is FireFlower))
                 {
                     isBig = true;
                     starParticleSprite = SpriteFactory.Instance.CreateSprite(isBig.ToString() + this.GetType().Name);

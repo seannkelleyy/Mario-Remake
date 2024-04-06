@@ -1,15 +1,18 @@
-﻿using Mario.Collisions;
+﻿using System;
+using Mario.Collisions;
 using Mario.Entities;
+using Mario.Entities.Abstract;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
-using Mario.Global;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    private double shellTimer = 0.0;
+    private AbstractEntityState previousState;
     public bool isShell = false;
 
     public Koopa(Vector2 position)
@@ -24,29 +27,62 @@ public class Koopa : AbstractCollideable, IEnemy
         ClearCollisions();
 
         CollisionManager.Instance.Run(this);
-        physics.Update();
         currentState.Update(gameTime);
+        HandleShellTime(gameTime);
+    }
+
+    private void HandleShellTime(GameTime gameTime)
+    {
+        if (shellTimer > 0)
+        {
+            if (physics.GetVelocity().X == 0)
+            {
+                shellTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                physics.Update();
+                shellTimer = 0;
+            }
+            if (shellTimer > EntitySettings.KoopaShellTime)
+            {
+                currentState = previousState;
+                position.Y -= BlockHeightWidth / 2;
+                shellTimer = 0;
+                isShell = false;
+            }
+            else if (shellTimer > EntitySettings.KoopaShellTime / 2)
+            {
+                currentState = new ArmsOutOfShellKoopaState();
+            }
+        }
+        else
+        {
+            physics.Update();
+        }
     }
 
     public void Stomp()
     {
         if (isShell)
         {
-            MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
-            GameContentManager.Instance.RemoveEntity(this);
+            MediaManager.Instance.PlayEffect(EffectNames.kick);
+            physics.ToggleIsStationary();
         }
         else
         {
-            MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
-            currentState = new StompedKoopaState();
             isShell = true;
+            shellTimer = 1;
+            MediaManager.Instance.PlayEffect(EffectNames.stomp);
+            previousState = currentState;
+            currentState = new StompedKoopaState();
             position.Y += HalfBlockAdjustment;
         }
     }
 
     public void Flip()
     {
-        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
+        MediaManager.Instance.PlayEffect(EffectNames.kick);
         currentState = new FlippedKoopaState();
         GameContentManager.Instance.RemoveEntity(this);
     }

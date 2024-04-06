@@ -3,6 +3,7 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Collisions
 {
@@ -54,14 +55,12 @@ namespace Mario.Collisions
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
-                if (!enemy.ReportIsAlive())
-                    return;
                 if (hero.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
                     heroHandler.HeroEnemyCollision(enemy);
                 }
             }
-            foreach (IItem item in GameContentManager.Instance.GetItems())
+            foreach (IItem item in GameContentManager.Instance.GetItemsInProximity(hero.GetPosition()))
             {
                 if (hero.GetRectangle().Intersects(item.GetRectangle()))
                 {
@@ -79,7 +78,6 @@ namespace Mario.Collisions
                 if (enemy.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     enemyHandler.EnemyBlockCollision(block);
-
                 }
             }
 
@@ -93,8 +91,6 @@ namespace Mario.Collisions
 
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
-                if (!collidingEnemy.ReportIsAlive())
-                    return;
                 if (enemy != collidingEnemy && enemy.GetRectangle().Intersects(collidingEnemy.GetRectangle()))
                 {
                     enemyHandler.EnemyEnemyCollision(collidingEnemy);
@@ -151,8 +147,6 @@ namespace Mario.Collisions
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
             {
-                if (!enemy.ReportIsAlive())
-                    return;
                 if (projectile.GetRectangle().Intersects(enemy.GetRectangle()))
                 {
                     projectileHandler.ProjectileEnemyCollision(enemy);

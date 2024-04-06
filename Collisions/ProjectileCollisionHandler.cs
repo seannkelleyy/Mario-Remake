@@ -1,6 +1,8 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global.Settings;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
+using Mario.Singletons;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -60,23 +62,28 @@ public class ProjectileCollisionHandler
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
         {
+            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
             enemy.Flip();
             projectile.Destroy();
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
         {
+            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
+            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
             enemy.Flip();
             projectile.Destroy();
 
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
         {
+            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
             enemy.Flip();
             projectile.Destroy();
 
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
+            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
             enemy.Flip();
             projectile.Destroy();
 
