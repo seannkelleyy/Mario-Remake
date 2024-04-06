@@ -4,6 +4,7 @@ using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Mario.Input
         private IHero mario;
         private Keys[] keysPressed;
         float elapsedSeconds = 0;
+        bool unpause = true;
 
 
         public KeyboardController()
@@ -88,7 +90,22 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
-            actions[7] = new Action(GameStateManager.Instance.Pause);
+            actions[7] = new Action(() =>
+            {
+                if (unpause)
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
+                    MediaPlayer.Pause();
+                    unpause = !unpause;
+                }
+                else
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
+                    MediaPlayer.Resume();
+                    unpause = !unpause;
+                }
+                GameStateManager.Instance.Pause();
+            });
             return actions;
         }
 
