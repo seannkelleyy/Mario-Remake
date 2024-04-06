@@ -46,6 +46,7 @@ public static class GameSettingsLoader
 
         // Load entity setting
         EntitySettings.EnemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
+        EntitySettings.KoopaShellTime = Convert.ToSingle(settings["Entity"]["koopaShellTime"]);
         EntitySettings.HeroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
         EntitySettings.HeroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
         EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
