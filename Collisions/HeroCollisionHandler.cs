@@ -80,16 +80,42 @@ public class HeroCollisionHandler
             hero.StopVertical();
         }));
 
-        // Enemy stuff
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => { if (hero.GetType().Name.Equals("StarHero")) { enemy.Flip(); } else { hero.TakeDamage(); } }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            if (hero.GetType().Name.Equals("StarHero"))
+            {
+                enemy.Flip();
+            }
+            else
+            {
+                hero.TakeDamage();
+            }
+        }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            if (hero.GetType().Name.Equals("StarHero"))
+            {
+                enemy.Flip();
+            }
+            else
+            {
+                hero.TakeDamage();
+            }
+        }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.SmallJump();
-            hero.SetCollisionState(CollisionDirection.Bottom, false);
-            enemy.Stomp();
+            if (hero.GetType().Name.Equals("StarHero"))
+            {
+                enemy.Flip();
+            }
+            else
+            {
+                hero.SetCollisionState(CollisionDirection.Bottom, true);
+                hero.SmallJump();
+                hero.SetCollisionState(CollisionDirection.Bottom, false);
+                enemy.Stomp();
+            }
         }));
     }
 
