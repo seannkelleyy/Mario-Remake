@@ -35,10 +35,10 @@ namespace Mario.Singletons
 
             GlobalVariables.LevelName = level.level;
             // set background for the level
-            mediaManager.SetCurrentBackground(level.level);
+            MediaManager.Instance.SetCurrentBackground(level.level);
 
             // Set default theme
-            mediaManager.SetDefaultTheme(level.song);
+            MediaManager.Instance.SetDefaultTheme(level.song);
 
             SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 
