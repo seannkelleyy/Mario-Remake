@@ -1,6 +1,6 @@
 ﻿using Mario.Entities.Abstract;
 
-namespace Mario.Entities.Blocks.BlockStates;
+namespace Mario.Entities.Pipes.PipeStates;
 
 public class PipeTileState : AbstractEntityState
 {

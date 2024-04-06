@@ -10,6 +10,7 @@ public class HeroCollisionHandler
     public IHero hero { get; set; }
     public IEnemy enemy { get; set; }
     public IBlock block { get; set; }
+    public IPipe pipe { get; set; }
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
     public HeroCollisionHandler(IHero hero)
@@ -19,7 +20,8 @@ public class HeroCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
         };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
@@ -43,6 +45,28 @@ public class HeroCollisionHandler
             hero.SetCollisionState(CollisionDirection.Bottom, true);
         }));
 
+        // Pipe stuff
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            hero.StopVertical();
+            pipe.Transport(hero);
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Left, true);
+            hero.StopHorizontal();
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Right, true);
+            hero.StopHorizontal();
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Top, true);
+            hero.StopVertical();
+        }));
 
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
@@ -84,6 +108,16 @@ public class HeroCollisionHandler
         {
             this.block = block;
             collisionDictionary[typeof(IBlock)][direction].Invoke();
+        }
+    }
+
+    public void HeroPipeCollision(IPipe pipe)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), pipe.GetRectangle(), hero.GetVelocity());
+        if (collisionDictionary[typeof (IPipe)].ContainsKey(direction))
+        {
+            this.pipe = pipe;
+            collisionDictionary[typeof(IPipe)][direction].Invoke();
         }
     }
 }

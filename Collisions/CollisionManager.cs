@@ -28,7 +28,6 @@ namespace Mario.Collisions
             {
                 ManageItemCollisions(entity as IItem);
             }
-
             else if (entity is IProjectile)
             {
                 ManageProjectileCollisions(entity as IProjectile);
@@ -44,6 +43,13 @@ namespace Mario.Collisions
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     heroHandler.HeroBlockCollision(block);
+                }
+            }
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(hero.GetPosition()))
+            {
+                if (hero.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    heroHandler.HeroPipeCollision(pipe);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())

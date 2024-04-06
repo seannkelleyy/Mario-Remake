@@ -95,18 +95,16 @@ namespace Mario.Singletons
             {
                 GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreatePipe(
                    pipe.type,
-                   new Vector2(pipe.x * GlobalVariables.blockHeightWidth, pipe.startingY * GlobalVariables.blockHeightWidth),
+                   new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, pipe.startingY * GlobalVariables.BlockHeightWidth),
                    pipe.collidable,
-                   pipe.breakable,
                    pipe.transportable));
 
                 for (int y = pipe.startingY+1; y <= pipe.endingY; y++)
                 {
-                        IBlock pipeObject = ObjectFactory.Instance.CreatePipe(
+                        IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
                             "pipeTile",
-                            new Vector2(pipe.x * GlobalVariables.blockHeightWidth, y * GlobalVariables.blockHeightWidth),
+                            new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
                             pipe.collidable,
-                            pipe.breakable,
                             pipe.transportable);
                         GameContentManager.Instance.AddEntity(pipeObject);
                 }

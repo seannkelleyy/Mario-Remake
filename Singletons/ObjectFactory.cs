@@ -6,6 +6,7 @@ using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Mario.Entities.Pipes;
 
 namespace Mario.Singletons
 {
@@ -75,14 +76,14 @@ namespace Mario.Singletons
             }
         }
 
-        public IBlock CreatePipe(string type, Vector2 position, bool isCollidable, bool isBreakable, bool isTransportable)
+        public IPipe CreatePipe(string type, Vector2 position, bool isCollidable, bool isTransportable)
         {
             switch (type)
             {
                 case "pipeTubeVertical":
-                    return new PipeTubeVertical(position, isCollidable, isBreakable, isTransportable);
+                    return new PipeTubeVertical(position, isCollidable, isTransportable);
                 case "pipeTile":
-                    return new PipeTile(position, isCollidable, isBreakable);
+                    return new PipeTile(position, isCollidable);
                 default:
                     throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
             }
