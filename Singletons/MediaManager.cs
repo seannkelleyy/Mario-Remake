@@ -59,7 +59,7 @@ namespace Mario.Singletons
                 { GlobalVariables.SongThemes.invincibility, content.Load<Song>("05-starman") },
                 { GlobalVariables.SongThemes.levelComplete, content.Load<Song>("06-level-complete") },
                 { GlobalVariables.SongThemes.castleComplete, content.Load<Song>("07-castle-complete") },
-                { GlobalVariables.SongThemes.lostLife, content.Load<Song>("08-you're dead") },
+                { GlobalVariables.SongThemes.lostLife, content.Load<Song>("08-you-re-dead") },
                 { GlobalVariables.SongThemes.gameOver, content.Load<Song>("09-game-over") },
                 { GlobalVariables.SongThemes.ending, content.Load<Song>("12-ending") }
             };
