@@ -93,17 +93,15 @@ namespace Mario.Input
             actions[7] = new Action(() =>
             {
                 GameStateManager.Instance.Pause();
-                if (MediaManager.Instance.isPaused)
+                if (GameStateManager.Instance.isPaused)
                 {
                     MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
                     MediaPlayer.Pause();
-                    MediaManager.Instance.isPaused = !MediaManager.Instance.isPaused;
                 }
                 else
                 {
                     MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
                     MediaPlayer.Resume();
-                    MediaManager.Instance.isPaused = !MediaManager.Instance.isPaused;
                 }
             });
             return actions;
