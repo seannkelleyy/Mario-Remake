@@ -17,6 +17,7 @@ public class HeadsUpDisplay
         leftEdgeOfScreen = 0;
     }
 
+    // This is jsut making it so the HUD is drawn in the center of the screen
     public void Draw(SpriteBatch spriteBatch, SpriteFont font)
     {
         string[] headers = new string[] { "Score", "Coins", "Lives", "Time", "World" };
@@ -25,7 +26,7 @@ public class HeadsUpDisplay
         float totalWidth = 0;
         for (int i = 0; i < headers.Length; i++)
         {
-            totalWidth += font.MeasureString(headers[i]).X + GlobalVariables.HUDBuffer; // Add some padding between items
+            totalWidth += font.MeasureString(headers[i]).X + GlobalVariables.HUDBuffer;
         }
 
         float currentX = leftEdgeOfScreen + ((GameSettings.ScreenSize.X - totalWidth) / 2);
@@ -43,7 +44,7 @@ public class HeadsUpDisplay
             spriteBatch.DrawString(font, header, new Vector2(headerX - (headerSize.X / 2), 25), Color.White);
             spriteBatch.DrawString(font, value, new Vector2(valueX, 10), Color.White);
 
-            currentX += headerSize.X + GlobalVariables.HUDBuffer; // Add some padding between items
+            currentX += headerSize.X + GlobalVariables.HUDBuffer;
         }
     }
 

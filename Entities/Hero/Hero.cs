@@ -152,13 +152,16 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item.GetType().Name.Equals("FireFlower") && currentHealth != HeroHealth.FireMario)
+            if (item.GetType().Name.Equals("FireFlower"))
             {
                 stats.AddScore(1000);
-                MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
-                bool wasSmall = currentHealth == HeroHealth.Mario;
-                currentHealth = HeroHealth.FireMario;
-                currentState.PowerUp(wasSmall);
+                if (currentHealth != HeroHealth.FireMario)
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
+                    bool wasSmall = currentHealth == HeroHealth.Mario;
+                    currentHealth = HeroHealth.FireMario;
+                    currentState.PowerUp(wasSmall);
+                }
             }
             else if (item.GetType().Name.Equals("Mushroom"))
             {
