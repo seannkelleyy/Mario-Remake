@@ -1,0 +1,605 @@
+﻿{
+  "locations": [
+    
+    { "area": 1 },
+    { "area": 2 }
+    
+  ],
+  "areas": [
+    {
+      "setting": "Overworld",
+      "creation": [
+        { "location": 0 },
+        {
+          "macro": "Floor",
+          "width": 69
+        },
+        {
+          "macro": "Floor",
+          "x": 71,
+          "width": 15
+        },
+        {
+          "macro": "Floor",
+          "x": 89,
+          "width": 64
+        },
+        {
+          "macro": "Floor",
+          "x": 155,
+          "width": 69
+        },
+
+        {
+          "thing": "MysteryBlock",
+          "x": 17,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 21,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 22,
+          "y": 10,
+          "contents": "Mushroom"
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 23,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 24,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 25,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 23,
+          "y": 6
+        },
+        {
+          "thing": "Goomba",
+          "x": 23,
+          "y": 13
+        },
+        {
+          "macro": "Pipe",
+          "x": 29,
+          "height": 2
+        },
+        {
+          "macro": "Pipe",
+          "x": 39,
+          "height": 3
+        },
+        {
+          "thing": "Goomba",
+          "x": 41,
+          "y": 13
+        },
+        {
+          "macro": "Pipe",
+          "x": 47,
+          "height": 4
+        },
+        {
+          "thing": "Goomba",
+          "x": 52,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 54,
+          "y": 13
+        },
+        {
+          "macro": "Pipe",
+          "x": 58,
+          "height": 4,
+          "entrance": 1
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 65,
+          "y": 9,
+          "contents": "Mushroom",
+          "visibility": "invisible"
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 78,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 79,
+          "y": 10,
+          "contents": "Mushroom"
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 80,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 81,
+          "y": 6
+        },
+        {
+          "thing": "Goomba",
+          "x": 81,
+          "y": 5
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 82,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 83,
+          "y": 6
+        },
+        {
+          "thing": "Goomba",
+          "x": 83,
+          "y": 5
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 84,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 85,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 86,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 87,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 88,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 92,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 93,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 94,
+          "y": 6
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 95,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 95,
+          "y": 10,
+          "content": "coin"
+        },
+        {
+          "thing": "Goomba",
+          "x": 98,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 100,
+          "y": 13
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 101,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 102,
+          "y": 10,
+          "content": "Starman"
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 107,
+          "y": 10
+        },
+        {
+          "thing": "Koopa",
+          "x": 108,
+          "y": 13
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 109,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 109,
+          "y": 6,
+          "content": "mushroom"
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 112,
+          "y": 10
+        },
+        {
+          "thing": "Goomba",
+          "x": 114,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 116,
+          "y": 13
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 118,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 121,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 122,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 123,
+          "y": 6
+        },
+        {
+          "thing": "Goomba",
+          "x": 124,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 126,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 128,
+          "y": 13
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 128,
+          "y": 6
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 129,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 129,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 130,
+          "y": 6
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 130,
+          "y": 10
+        },
+        {
+          "thing": "Goomba",
+          "x": 130,
+          "y": 13
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 131,
+          "y": 6
+        },
+
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 134,
+          "height": 1
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 135,
+          "height": 2
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 136,
+          "height": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 137,
+          "height": 4
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 138,
+          "height": 4
+        },
+
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 141,
+          "height": 4
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 142,
+          "height": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 143,
+          "height": 2
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 144,
+          "height": 1
+        },
+        {
+          "macro": "Pipe",
+          "x": 149,
+          "height": 2
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 154,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 155,
+          "y": 10
+        },
+        {
+          "thing": "MysteryBlock",
+          "x": 156,
+          "y": 10
+        },
+        {
+          "thing": "BrickBlock",
+          "x": 157,
+          "y": 10
+        },
+        {
+          "thing": "Goomba",
+          "x": 160,
+          "y": 13
+        },
+        {
+          "thing": "Goomba",
+          "x": 162,
+          "y": 13
+        },
+        {
+          "macro": "Pipe",
+          "x": 165,
+          "height": 2
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 167,
+          "height": 1
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 168,
+          "height": 2
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 169,
+          "height": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 170,
+          "height": 4
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 171,
+          "height": 5
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 172,
+          "height": 6
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 173,
+          "height": 7
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 174,
+          "height": 8
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 175,
+          "height": 8
+        },
+        {
+          "macro": "Fill",
+          "thing": "Stone",
+          "x": 184,
+          "height": 1
+        },
+        {
+          "thing": "flagpole",
+          "x": "184",
+          "y": "12"
+        }
+      ]
+    },
+    {
+      "setting": "Underworld",
+      "creation": [
+        { "location": 1 },
+        {
+          "macro": "Ceiling",
+          "x": 4,
+          "width": 7
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 1,
+          "y": 1,
+          "ynum": 12
+        },
+        {
+          "macro": "Floor",
+          "width": 17
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 5,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 6,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 7,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 8,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 9,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 10,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Brick",
+          "x": 11,
+          "y": 10,
+          "ynum": 3
+        },
+        {
+          "macro": "Fill",
+          "thing": "Coin",
+          "x": 6,
+          "y": 4,
+          "xnum": 5
+        },
+        {
+          "macro": "Fill",
+          "thing": "Coin",
+          "x": 5,
+          "y": 6,
+          "xnum": 7
+        },
+        {
+          "macro": "Fill",
+          "thing": "Coin",
+          "x": 5,
+          "y": 8,
+          "xnum": 7
+        },
+        {
+          "thing": "PipeHorizontal",
+          "x": 14,
+          "y": 11,
+          "entrance": 2
+        },
+        {
+          "thing": "PipeVertical",
+          "x": 16,
+          "y": 1,
+          "height": 12
+        }
+      ]
+    }
+    
+  ]
+}
