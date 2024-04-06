@@ -392,7 +392,8 @@
         {
           "macro": "Pipe",
           "x": 149,
-          "height": 2
+          "height": 2,
+          "exit": 2
         },
         {
           "thing": "BrickBlock",
