@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
@@ -148,8 +149,14 @@ namespace Mario.Singletons
             for (int i = 0; i < blocks.Count;)
             {
                 IBlock currentBlock = blocks[i];
-
-                List<IBlock> sameLevelBlocks = blocks.Where(block => block.GetPosition().Y == currentBlock.GetPosition().Y).ToList();
+                List<IBlock> sameLevelBlocks = new List<IBlock>();
+                sameLevelBlocks.Add(currentBlock);
+                int j = i;
+                while (j + 1 < blocks.Count && (currentBlock.GetPosition().Y == blocks[j + 1].GetPosition().Y) && (blocks[j].GetPosition().X + GlobalVariables.BlockHeightWidth == blocks[j + 1].GetPosition().X))
+                {
+                    sameLevelBlocks.Add(blocks[j + 1]);
+                    j++;
+                }
 
                 if (sameLevelBlocks.Count > 0)
                 {

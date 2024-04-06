@@ -4,6 +4,7 @@ using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Global;
 using Mario.Global.Settings;
+using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
