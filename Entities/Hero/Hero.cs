@@ -56,6 +56,13 @@ namespace Mario.Entities.Character
 
             CollisionManager.Instance.Run(this);
 
+            if (position.X - GetVelocity().X <= CameraLeftEdge)
+            {
+                StopHorizontal();
+                SetCollisionState(CollisionDirection.Left, true);
+                position.X += HorizontalBlockCollisionAdjustment;
+            }
+
             HandleInvulnerability(gameTime);
 
             physics.Update();

@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Entities;
+﻿using Mario.Global;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Input
@@ -33,6 +34,8 @@ namespace Mario.Input
                     0);
                 Transform = position * offSet;
             }
+            GlobalVariables.CameraLeftEdge = cameraX - (GameSettings.ScreenSize.X / 2);
+            GlobalVariables.CameraBottomEdge = target.GetPosition().Y + (target.GetRectangle().Height / 2);
         }
 
         public void ResetCamera()
@@ -45,10 +48,6 @@ namespace Mario.Input
                                GameSettings.ScreenSize.Y / 2,
                                               0);
             Transform = position * offSet;
-        }
-        public float GetLeftEdge()
-        {
-            return cameraX - (GameSettings.ScreenSize.X / 2);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Mario.Entities.Character;
+using Mario.Global;
 using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using static Mario.Global.GlobalVariables;

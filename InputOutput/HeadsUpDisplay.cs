@@ -1,5 +1,4 @@
 ﻿using Mario.Global;
-using Mario.Input;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
@@ -9,12 +8,10 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 public class HeadsUpDisplay
 {
     private IHero player;
-    public float leftEdgeOfScreen;
 
     public HeadsUpDisplay()
     {
         player = GameContentManager.Instance.GetHero();
-        leftEdgeOfScreen = 0;
     }
 
     // This is jsut making it so the HUD is drawn in the center of the screen
@@ -29,7 +26,7 @@ public class HeadsUpDisplay
             totalWidth += font.MeasureString(headers[i]).X + GlobalVariables.HUDBuffer;
         }
 
-        float currentX = leftEdgeOfScreen + ((GameSettings.ScreenSize.X - totalWidth) / 2);
+        float currentX = GlobalVariables.CameraLeftEdge + ((GameSettings.ScreenSize.X - totalWidth) / 2);
         for (int i = 0; i < headers.Length; i++)
         {
             string header = headers[i];
@@ -46,10 +43,5 @@ public class HeadsUpDisplay
 
             currentX += headerSize.X + GlobalVariables.HUDBuffer;
         }
-    }
-
-    public void Update(GameTime gameTime, PlayerCamera playerCamera)
-    {
-        leftEdgeOfScreen = playerCamera.GetLeftEdge();
     }
 }
