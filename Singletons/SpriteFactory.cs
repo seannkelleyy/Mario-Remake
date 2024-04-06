@@ -18,6 +18,7 @@ namespace Mario.Sprites
         // scalar size variable, 
         // spritesheet number
         private Dictionary<string, int[]> spriteNumbers;
+        private SpriteFont font;
         private Texture2D[] spriteSheets;
         private static SpriteFactory instance = new SpriteFactory();
 
@@ -38,11 +39,18 @@ namespace Mario.Sprites
                 content.Load<Texture2D>("projectileSpriteSheet"),
                 content.Load<Texture2D>("powerUpSpriteSheet")
             };
+
+            font = content.Load<SpriteFont>("mainFont");
         }
         public ISprite CreateSprite(string type)
         {
             int[] spriteParameters = spriteNumbers[type];
             return new Sprite(spriteSheets[spriteParameters[6]], spriteParameters);
+        }
+
+        public SpriteFont GetMainFont()
+        {
+            return font;
         }
     }
 }

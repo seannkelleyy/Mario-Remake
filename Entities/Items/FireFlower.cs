@@ -14,18 +14,16 @@ namespace Mario.Entities.Items
 
         public override void MakeVisible()
         {
-            position.Y -= GlobalVariables.blockHeightWidth;
+            position.Y -= GlobalVariables.BlockHeightWidth;
             isVisible = true;
             isCollidable = true;
         }
 
-        public override void ChangeDirection()
-        {
-            Logger.Instance.LogInformation("ChangeDirection not implemented in FireFlower");
-        }
+        public override void ChangeDirection() { }
+
         public override Vector2 GetVelocity()
         {
-            return Vector2.Zero;
+            return new Vector2(0, 0);
         }
     }
 }

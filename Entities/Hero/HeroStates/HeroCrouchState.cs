@@ -1,14 +1,13 @@
 ﻿using Mario.Entities.Abstract;
-using Mario.Entities.Character;
+using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
-
 
 internal class CrouchState : HeroState
 
 {
     private float updateInterval = .25f;
     private float elapsedSeconds = 0;
-    public CrouchState(Hero mario) : base(mario) { }
+    public CrouchState(IHero mario) : base(mario) { }
     public override void Stand() { }
 
     public override void WalkLeft()
@@ -23,7 +22,7 @@ internal class CrouchState : HeroState
         elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (elapsedSeconds >= updateInterval)
         {
-            mario.currentState = new StandState(mario);
+            hero.currentState = new StandState(hero);
         }
     }
 
