@@ -1,8 +1,12 @@
+using Mario.Entities.Blocks;
+using Mario.Entities.Character;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using static Mario.Global.GlobalVariables;
 
 public class HeroCollisionHandler
@@ -10,6 +14,7 @@ public class HeroCollisionHandler
     public IHero hero { get; set; }
     public IEnemy enemy { get; set; }
     public IBlock block { get; set; }
+    public IPipe pipe { get; set; }
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
     public HeroCollisionHandler(IHero hero)
@@ -19,7 +24,8 @@ public class HeroCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
         };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
@@ -43,11 +49,42 @@ public class HeroCollisionHandler
             hero.SetCollisionState(CollisionDirection.Bottom, true);
         }));
 
+        // Pipe stuff
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical)
+            {
+                pipe.Transport(hero);
+            }
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Left, true);
+            hero.StopHorizontal();
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Right, true);
+            if (pipe.GetPipeType() == GlobalVariables.PipeType.horizontal)
+            {
+                pipe.Transport(hero);
+            }
+            else
+            {
+                hero.StopHorizontal();
+            }
+        }));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            hero.SetCollisionState(CollisionDirection.Top, true);
+            hero.StopVertical();
+        }));
 
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => { if (hero.GetType().Name.Equals("StarHero")) { enemy.Flip(); } else { hero.TakeDamage(); } }));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() => { if (hero is StarHero) { enemy.Flip(); } else { hero.TakeDamage(); } }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
@@ -58,7 +95,7 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
@@ -69,7 +106,7 @@ public class HeroCollisionHandler
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            if (hero.GetType().Name.Equals("StarHero"))
+            if (hero is StarHero)
             {
                 enemy.Flip();
             }
@@ -111,6 +148,16 @@ public class HeroCollisionHandler
         {
             this.block = block;
             collisionDictionary[typeof(IBlock)][direction].Invoke();
+        }
+    }
+
+    public void HeroPipeCollision(IPipe pipe)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), pipe.GetRectangle(), hero.GetVelocity());
+        if (collisionDictionary[typeof (IPipe)].ContainsKey(direction))
+        {
+            this.pipe = pipe;
+            collisionDictionary[typeof(IPipe)][direction].Invoke();
         }
     }
 }

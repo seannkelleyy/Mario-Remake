@@ -6,6 +6,8 @@ using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Mario.Entities.Pipes;
+using System;
 
 namespace Mario.Singletons
 {
@@ -72,6 +74,23 @@ namespace Mario.Singletons
                     return new Mushroom(position, "1up");
                 default:
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
+            }
+        }
+
+        public IPipe CreatePipe(string type, Vector2 position, Vector2 transportPosition, bool isCollidable, bool isTransportable)
+        {
+            switch (type)
+            {
+                case "pipeTubeVertical":
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTubeUpsideDown":
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable, true);
+                case "pipeTubeHorizontal":
+                    return new PipeTubeHorizontal(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTile":
+                    return new PipeTile(position, isCollidable);
+                default:
+                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
             }
         }
     }

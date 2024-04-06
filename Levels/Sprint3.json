@@ -18,18 +18,6 @@
       "startingX": 10,
       "startingY": 1,
       "isRight": false
-    },
-    {
-      "type": "goomba",
-      "startingX": 12,
-      "startingY": 12,
-      "isRight": false
-    },
-    {
-      "type": "koopa",
-      "startingX": 20,
-      "startingY": 11,
-      "isRight": false
     }
   ],
   "blockSections": [
@@ -54,6 +42,52 @@
       "item": "none"
     }
   ],
+    "pipes": [
+        {
+            "type": "pipeTubeVertical",
+            "x": 8,
+            "startingY": 11,
+            "endingY": 12,
+            "transportable": true,
+            "transportDestinationX": 25,
+            "transportDestinationY": 4,
+            "collidable": true,
+            "breakable": false
+        },
+        {
+            "type": "pipeTubeVertical",
+            "x": 10,
+            "startingY": 10,
+            "endingY": 12,
+            "transportable": false,
+            "transportDestinationX": -1,
+            "transportDestinationY": -1,
+            "collidable": true,
+            "breakable": false
+        },
+        {
+            "type": "pipeTubeHorizontal",
+            "x": 30,
+            "startingY": 11,
+            "endingY": 7,
+            "transportable": true,
+            "transportDestinationX": 10,
+            "transportDestinationY": 8,
+            "collidable": true,
+            "breakable": false
+        },
+        {
+            "type": "pipeTubeUpsideDown",
+            "x": 25,
+            "startingY": 2,
+            "endingY": 4,
+            "transportable": false,
+            "transportDestinationX": -1,
+            "transportDestinationY": -1,
+            "collidable": true,
+            "breakable": false
+        }
+    ],
   "blocks": [
     {
       "type": "floor",
@@ -65,15 +99,7 @@
     },
     {
       "type": "floor",
-      "x": 19,
-      "y": 12,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
-    },
-    {
-      "type": "floor",
-      "x": 30,
+      "x": 13,
       "y": 12,
       "collidable": true,
       "breakable": false,
@@ -90,14 +116,6 @@
     {
       "type": "brick",
       "x": 14,
-      "y": 9,
-      "collidable": true,
-      "breakable": true,
-      "item": "1up"
-    },
-    {
-      "type": "brickUnderground",
-      "x": 10,
       "y": 9,
       "collidable": true,
       "breakable": true,
