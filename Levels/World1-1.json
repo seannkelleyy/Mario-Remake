@@ -1,0 +1,590 @@
+{
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
+  "width": 26,
+  "height": 18,
+  "timeLimit": 300,
+  "song": "ground",
+  "hero": {
+    "type": "mario",
+    "startingX": 5,
+    "startingY": 1,
+    "lives": 3,
+    "startingPower": "fire"
+  },
+  "enemies": [
+    {
+      "type": "goomba",
+      "startingX": 23,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 41,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 52,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 54,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 81,
+      "startingY": 4,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 83,
+      "startingY": 4,
+      "isRight": "False"
+    },
+    {
+      "type": "koopa",
+      "startingX": 108,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 114,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 116,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 124,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 126,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 126,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 128,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 130,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 130,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 160,
+      "startingY": 12,
+      "isRight": "False"
+    },
+    {
+      "type": "goomba",
+      "startingX": 162,
+      "startingY": 12,
+      "isRight": "False"
+    }
+  ],
+  "blockSections": [
+    {
+      "type": "floorUnderground",
+      "startingX": 0,
+      "startingY": 14,
+      "endingX": 60,
+      "endingY": 18,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floorUnderground",
+      "startingX": 0,
+      "startingY": 13,
+      "endingX": 60,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    }
+  ],
+
+  "pipes": [
+    {
+      "type": "pipeTubeVertical",
+      "x": 29,
+      "startingY": 10,
+      "endingY": 12,
+      "transportable": "False",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 39,
+      "startingY": 9,
+      "endingY": 12,
+      "transportable": "False",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 47,
+      "startingY": 8,
+      "endingY": 12,
+      "transportable": "False",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 47,
+      "startingY": 8,
+      "endingY": 12,
+      "transportable": "False",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 58,
+      "startingY": 8,
+      "endingY": 12,
+      "transportable": "True",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 149,
+      "startingY": 10,
+      "endingY": 12,
+      "transportable": "True",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 165,
+      "startingY": 10,
+      "endingY": 12,
+      "transportable": "False",
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": "True",
+      "breakable": "False"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "floor",
+      "x": 0,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "x": 71,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "x": 89,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "x": 155,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 17,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 21,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 22,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "mushroom"
+    },
+    {
+      "type": "brick",
+      "x": 23,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 24,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 25,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 23,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 87,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 88,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 92,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 93,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 94,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 112,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 118,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 121,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 122,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 123,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 134,
+      "y": 12,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 135,
+      "y": 12,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 135,
+      "y": 11,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 136,
+      "y": 12,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 136,
+      "y": 11,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "mystery",
+      "x": 129,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 129,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 130,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 130,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 131,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 131,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 154,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 155,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 156,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "False",
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 157,
+      "y": 10,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 175,
+      "y": 8,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 175,
+      "y": 7,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 175,
+      "y": 6,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 175,
+      "y": 5,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "stone",
+      "x": 184,
+      "y": 12,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "flagpole",
+      "x": 184,
+      "y": 12,
+      "collidable": "True",
+      "breakable": "False"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 1,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 2,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 3,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 4,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 5,
+      "collidable": "True",
+      "breakable": "True",
+      "item": "none"
+    }
+  ]
+
+}
