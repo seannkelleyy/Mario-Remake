@@ -30,6 +30,7 @@ namespace Mario.Interfaces.Entities
         public Vector2 GetVelocity();
         public HeroPhysics GetPhysics();
         public GlobalVariables.HorizontalDirection GetHorizontalDirection();
+        public void SetTransportState(bool isTransporting);
     }
 }
 

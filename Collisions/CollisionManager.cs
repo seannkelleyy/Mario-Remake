@@ -83,6 +83,14 @@ namespace Mario.Collisions
                 }
             }
 
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(enemy.GetPosition()))
+            {
+                if (enemy.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    enemyHandler.EnemyPipeCollision(pipe);
+                }
+            }
+
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
                 if (!collidingEnemy.ReportIsAlive())

@@ -23,6 +23,7 @@ namespace Mario.Entities.Character
         private double invulnerabilityFrames = 0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
+        private bool isTransporting = false;
         public new HeroState currentState { get; set; }
         public HeroHealth currentHealth = HeroHealth.Mario;
 
@@ -58,8 +59,15 @@ namespace Mario.Entities.Character
             CollisionManager.Instance.Run(this);
 
             HandleInvulnerability(gameTime);
-
-            physics.Update();
+            if (!isTransporting)
+            {
+                physics.Update();
+            } 
+            else
+            {
+                isTransporting = false;
+            }
+            
         }
 
         public new virtual void Draw(SpriteBatch spriteBatch)
@@ -271,6 +279,11 @@ namespace Mario.Entities.Character
         public HeroPhysics GetPhysics()
         {
             return physics;
+        }
+
+        public void SetTransportState(bool isTransporting)
+        {
+            this.isTransporting = isTransporting;
         }
     }
 }

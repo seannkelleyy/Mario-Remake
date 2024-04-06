@@ -1,4 +1,6 @@
-﻿namespace Mario.Levels.Level
+﻿using System.IO;
+
+namespace Mario.Levels.Level
 {
     public class LevelPipe
     {
@@ -7,6 +9,8 @@
         public int startingY { get; set; }
         public int endingY { get; set; }
         public bool transportable { get; set; }
+        public int transportDestinationX { get; set; }
+        public int transportDestinationY { get; set; }
         public bool collidable { get; set; }
         public bool breakable { get; set; }
     }

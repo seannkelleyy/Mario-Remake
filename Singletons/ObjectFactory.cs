@@ -76,12 +76,14 @@ namespace Mario.Singletons
             }
         }
 
-        public IPipe CreatePipe(string type, Vector2 position, bool isCollidable, bool isTransportable)
+        public IPipe CreatePipe(string type, Vector2 position, Vector2 transportPosition, bool isCollidable, bool isTransportable)
         {
             switch (type)
             {
                 case "pipeTubeVertical":
-                    return new PipeTubeVertical(position, isCollidable, isTransportable);
+                    return new PipeTubeVertical(position, transportPosition, isCollidable, isTransportable);
+                case "pipeTubeHorizontal":
+                    return new PipeTubeHorizontal(position, transportPosition, isCollidable, isTransportable);
                 case "pipeTile":
                     return new PipeTile(position, isCollidable);
                 default:

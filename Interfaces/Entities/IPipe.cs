@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Global;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 
 namespace Mario.Interfaces
@@ -7,6 +8,7 @@ namespace Mario.Interfaces
     {
         public bool isCollidable { get; set; }
         public void Transport(IHero mario);
+        public GlobalVariables.PipeType GetPipeType();
     }
 }
 

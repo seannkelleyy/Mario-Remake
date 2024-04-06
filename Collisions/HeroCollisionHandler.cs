@@ -1,8 +1,11 @@
+using Mario.Entities.Blocks;
+using Mario.Global;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using static Mario.Global.GlobalVariables;
 
 public class HeroCollisionHandler
@@ -49,8 +52,10 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
         {
             hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.StopVertical();
-            pipe.Transport(hero);
+            if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical)
+            {
+                pipe.Transport(hero);
+            }
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
         {
@@ -60,7 +65,14 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() =>
         {
             hero.SetCollisionState(CollisionDirection.Right, true);
-            hero.StopHorizontal();
+            if (pipe.GetPipeType() == GlobalVariables.PipeType.horizontal)
+            {
+                pipe.Transport(hero);
+            }
+            else
+            {
+                hero.StopHorizontal();
+            }
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() =>
         {
@@ -68,6 +80,7 @@ public class HeroCollisionHandler
             hero.StopVertical();
         }));
 
+        // Enemy stuff
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(hero.TakeDamage));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(hero.TakeDamage));

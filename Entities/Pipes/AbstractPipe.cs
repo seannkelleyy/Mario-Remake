@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Global;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System;
@@ -8,6 +9,7 @@ namespace Mario.Entities.Blocks
 {
     public abstract class AbstractPipe : AbstractCollideable, IPipe
     {
+        public GlobalVariables.PipeType type;
         public bool isCollidable {  get; set; }
         public abstract void Transport(IHero mario);
 
@@ -18,6 +20,11 @@ namespace Mario.Entities.Blocks
                 SetCollisionState((CollisionDirection)direction, false);
             }
             currentState.Update(gameTime);
+        }
+
+        public PipeType GetPipeType()
+        {
+            return type;
         }
     }
 }
