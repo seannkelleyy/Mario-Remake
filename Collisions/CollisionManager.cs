@@ -28,7 +28,6 @@ namespace Mario.Collisions
             {
                 ManageItemCollisions(entity as IItem);
             }
-
             else if (entity is IProjectile)
             {
                 ManageProjectileCollisions(entity as IProjectile);
@@ -44,6 +43,13 @@ namespace Mario.Collisions
                 if (hero.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     heroHandler.HeroBlockCollision(block);
+                }
+            }
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(hero.GetPosition()))
+            {
+                if (hero.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    heroHandler.HeroPipeCollision(pipe);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())
@@ -77,6 +83,14 @@ namespace Mario.Collisions
                 }
             }
 
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(enemy.GetPosition()))
+            {
+                if (enemy.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    enemyHandler.EnemyPipeCollision(pipe);
+                }
+            }
+
             foreach (IEnemy collidingEnemy in GameContentManager.Instance.GetEnemies())
             {
                 if (!collidingEnemy.ReportIsAlive())
@@ -100,6 +114,14 @@ namespace Mario.Collisions
                 }
             }
 
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(item.GetPosition()))
+            {
+                if (item.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    itemHandler.ItemPipeCollision(pipe);
+                }
+            }
+
             foreach (IItem collidingItem in GameContentManager.Instance.GetItems())
             {
                 if (item != collidingItem && item.GetRectangle().Intersects(collidingItem.GetRectangle()))
@@ -118,6 +140,13 @@ namespace Mario.Collisions
                 if (projectile.GetRectangle().Intersects(block.GetRectangle()))
                 {
                     projectileHandler.ProjectileBlockCollision(block);
+                }
+            }
+            foreach (IPipe pipe in GameContentManager.Instance.GetPipes(projectile.GetPosition()))
+            {
+                if (projectile.GetRectangle().Intersects(pipe.GetRectangle()))
+                {
+                    projectileHandler.ProjectilePipeCollision(pipe);
                 }
             }
             foreach (IEnemy enemy in GameContentManager.Instance.GetEnemies())

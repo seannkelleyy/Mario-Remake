@@ -89,11 +89,47 @@ namespace Mario.Singletons
                 GameContentManager.Instance.AddEntity(blockObject);
             }
 
+            // Create pipes
+            foreach (LevelPipe pipe in level.pipes)
+            {
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreatePipe(
+                   pipe.type,
+                   new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, pipe.startingY * GlobalVariables.BlockHeightWidth),
+                   new Vector2(pipe.transportDestinationX * GlobalVariables.BlockHeightWidth, pipe.transportDestinationY * GlobalVariables.BlockHeightWidth),
+                   pipe.collidable,
+                   pipe.transportable));
+                if (pipe.type.Equals("pipeTubeVertical"))
+                {
+                    for (int y = pipe.startingY + 1; y <= pipe.endingY; y++)
+                    {
+                        IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
+                            "pipeTile",
+                            new Vector2(pipe.x * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
+                            new Vector2(0, 0),
+                            pipe.collidable,
+                            pipe.transportable);
+                        GameContentManager.Instance.AddEntity(pipeObject);
+                    }
+                }
+                else
+                {
+                    for (int y = pipe.startingY - 1; y >= pipe.endingY; y--)
+                    {
+                        IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
+                            "pipeTile",
+                            new Vector2((pipe.x + 2) * GlobalVariables.BlockHeightWidth, y * GlobalVariables.BlockHeightWidth),
+                            new Vector2(0, 0),
+                            pipe.collidable,
+                            pipe.transportable);
+                        GameContentManager.Instance.AddEntity(pipeObject);
+                    }
+                } 
+            }
         }
 
         // Removes all entities from the GCM to prepare for reloading the level
         public void UnloadLevel()
-        {
+        { 
             List<IEntityBase> allEntities = GameContentManager.Instance.GetEntities();
             foreach (IEntityBase entity in allEntities)
             {
