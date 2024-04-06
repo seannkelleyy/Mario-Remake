@@ -1,5 +1,6 @@
 ﻿using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -14,14 +15,13 @@ namespace Mario.Singletons
         public static ObjectFactory Instance => instance;
         private ObjectFactory() { }
 
-        public IHero CreateHero(string startingPower, int lives, Vector2 position)
+        public IHero CreateHero(string startingPower, Vector2 position, HeroStatTracker stats)
         {
-            return new Hero(startingPower, lives, position);
+            return new Hero(startingPower, position, stats);
         }
 
         public IEnemy CreateEnemy(string type, Vector2 position)
         {
-            type = type.ToLower();
             switch (type)
             {
                 case "goomba":
@@ -46,7 +46,7 @@ namespace Mario.Singletons
                 case "brickUnderground":
                     return new BrickBlock(position, breakeable, collideable, true);
                 case "mystery":
-                    return new MysteryBlock(position, breakeable, collideable, item);
+                    return new MysteryBlock(position, collideable, item);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
@@ -66,7 +66,7 @@ namespace Mario.Singletons
                     return new FireFlower(position);
                 case "star":
                     return new Star(position);
-                case "mushroom":
+                case "redMushroom":
                     return new Mushroom(position, "red");
                 case "1up":
                     return new Mushroom(position, "1up");

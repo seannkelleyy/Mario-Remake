@@ -1,8 +1,8 @@
-﻿using Mario.Global;
+﻿using Mario.Entities.Character;
 using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
@@ -21,26 +21,26 @@ namespace Mario.Physics
         }
 
         #region horizontal movement
-        public override void WalkRight()
+        public void WalkRight()
         {
-            isRight = true;
+            currentHorizontalDirection = HorizontalDirection.right;
             if (!entity.GetCollisionState(CollisionDirection.Right))
             {
-                if (velocity.X < PhysicsVariables.maxRunSpeed)
+                if (velocity.X < PhysicsSettings.MaxRunSpeed)
                 {
-                    velocity.X += PhysicsVariables.runAcceleration;
+                    velocity.X += PhysicsSettings.RunAcceleration;
                 }
             }
         }
 
-        public override void WalkLeft()
+        public void WalkLeft()
         {
-            isRight = false;
+            currentHorizontalDirection = HorizontalDirection.left;
             if (!entity.GetCollisionState(CollisionDirection.Left))
             {
-                if (velocity.X > -PhysicsVariables.maxRunSpeed)
+                if (velocity.X > -PhysicsSettings.MaxRunSpeed)
                 {
-                    velocity.X -= PhysicsVariables.runAcceleration;
+                    velocity.X -= PhysicsSettings.RunAcceleration;
                 }
             }
         }
@@ -48,18 +48,19 @@ namespace Mario.Physics
         internal override void UpdateHorizontal()
         {
             // If the player is not pressing any keys, apply friction
-            if (isRight && velocity.X > 0)
+            if (velocity.X > 0)
             {
-                velocity.X -= PhysicsVariables.friction;
+                velocity.X -= PhysicsSettings.Friction;
             }
-            else if (!isRight && velocity.X < 0)
+            else if (velocity.X < 0)
             {
-                velocity.X += PhysicsVariables.friction;
+                velocity.X += PhysicsSettings.Friction;
             }
 
-            if (Math.Abs(velocity.X) < PhysicsVariables.friction)
+            if (Math.Abs(velocity.X) < PhysicsSettings.Friction)
             {
                 velocity.X = 0;
+                ((Hero)entity).Stand();
             }
 
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
@@ -69,22 +70,22 @@ namespace Mario.Physics
 
         #region vertical movement
 
-        public override void Jump()
+        public void Jump()
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 isFalling = false;
-                velocity.Y = -PhysicsVariables.jumpForce;
+                velocity.Y = -PhysicsSettings.JumpForce;
                 jumpCounter = 1;
             }
         }
 
-        public override void SmallJump()
+        public void SmallJump()
         {
             if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
                 isFalling = false;
-                velocity.Y = -PhysicsVariables.jumpForce;
+                velocity.Y = -PhysicsSettings.JumpForce;
                 smallJumpCounter = 1;
             }
         }
@@ -97,6 +98,7 @@ namespace Mario.Physics
             }
             else
             {
+                ((Hero)entity).Stand();
                 smallJumpCounter = 0;
                 jumpCounter = 0;
                 StopVertical();
@@ -105,22 +107,22 @@ namespace Mario.Physics
 
         private void HandleUpwardMovement()
         {
-            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsVariables.minimumJump)
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.MinimumJumpLimit)
             {
-                jumpCounter = PhysicsVariables.regularJumpLimit;
-                smallJumpCounter = PhysicsVariables.smallJumpLimit;
+                jumpCounter = PhysicsSettings.RegularJumpLimit;
+                smallJumpCounter = PhysicsSettings.SmallJumpLimit;
                 isFalling = true;
                 isMininumJump = false;
                 isDecelerating = true;
             }
-            else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsVariables.smallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsSettings.SmallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsVariables.jumpForce * (1 - smallJumpCounter / PhysicsVariables.smallJumpLimit);
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - smallJumpCounter / PhysicsSettings.SmallJumpLimit);
                 smallJumpCounter++;
             }
-            else if (jumpCounter < PhysicsVariables.regularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
+            else if (jumpCounter < PhysicsSettings.RegularJumpLimit && jumpCounter > 0 && !entity.GetCollisionState(CollisionDirection.Top))
             {
-                velocity.Y = -PhysicsVariables.jumpForce * (1 - jumpCounter / PhysicsVariables.regularJumpLimit);
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - jumpCounter / PhysicsSettings.RegularJumpLimit);
                 jumpCounter++;
             }
             else
@@ -142,7 +144,7 @@ namespace Mario.Physics
 
             if (isDecelerating)
             {
-                velocity.Y += PhysicsVariables.decelerationFactor;
+                velocity.Y += PhysicsSettings.DecelerationFactor;
                 if (velocity.Y >= 0)
                 {
                     // Once upward velocity reaches 0, start falling and stop decelerating

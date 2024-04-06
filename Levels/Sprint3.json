@@ -1,12 +1,15 @@
 {
-  "level": "Sprint 3",
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 26,
   "height": 18,
+  "timeLimit": 300,
+  "song": "ground",
   "hero": {
     "type": "mario",
     "startingX": 5,
     "startingY": 1,
-    "lives": 2,
+    "lives": 3,
     "startingPower": "fire"
   },
   "enemies": [
@@ -25,7 +28,7 @@
     {
       "type": "koopa",
       "startingX": 20,
-      "startingY": 11.5,
+      "startingY": 11,
       "isRight": false
     }
   ],
@@ -97,15 +100,16 @@
       "x": 10,
       "y": 9,
       "collidable": true,
-      "breakable": true
+      "breakable": true,
+      "item": "1up"
     },
     {
       "type": "mystery",
       "x": 21,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "fireflower"
     },
     {
       "type": "mystery",
@@ -120,15 +124,15 @@
       "x": 23,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coinUnderground"
+      "breakable": false,
+      "item": "redMushroom"
     },
     {
       "type": "mystery",
       "x": 24,
       "y": 9,
       "collidable": true,
-      "breakable": true,
+      "breakable": false,
       "item": "coinUnderground"
     },
     {
@@ -136,8 +140,8 @@
       "x": 25,
       "y": 9,
       "collidable": true,
-      "breakable": true,
-      "item": "coin"
+      "breakable": false,
+      "item": "1up"
     }
   ]
 }

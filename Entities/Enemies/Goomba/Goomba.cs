@@ -3,12 +3,13 @@ using Mario.Entities;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
+using Mario.Global;
 using Microsoft.Xna.Framework;
-using System;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
+    public EntityPhysics physics { get; }
     private double deadTimer = 0f;
 
     public Goomba(Vector2 position)
@@ -20,17 +21,14 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public override void Update(GameTime gameTime)
     {
-        // Reset all collision states to false at the start of each update
-        foreach (var direction in Enum.GetValues(typeof(CollisionDirection)))
-        {
-            SetCollisionState((CollisionDirection)direction, false);
-        }
+        ClearCollisions();
+
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         if (deadTimer > 0)
         {
             deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (deadTimer > 3)
+            if (deadTimer > EntitySettings.EnemyDespawnTime)
             {
                 GameContentManager.Instance.RemoveEntity(this);
             }
@@ -45,27 +43,29 @@ public class Goomba : AbstractCollideable, IEnemy
     public void Stomp()
     {
         if (deadTimer > 0) return;
+        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.stomp);
         currentState = new StompedGoombaState();
-        position.Y += 8;
+        position.Y += HalfBlockAdjustment;
         deadTimer = 1;
     }
 
     public void Flip()
     {
+        MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.kick);
         currentState = new FlippedGoombaState();
         GameContentManager.Instance.RemoveEntity(this);
     }
 
     public void ChangeDirection()
     {
-        if (physics.isRight)
+        if (physics.currentHorizontalDirection == HorizontalDirection.right)
         {
-            physics.isRight = false;
+            physics.currentHorizontalDirection = HorizontalDirection.left;
             currentState = new LeftMovingGoombaState();
         }
         else
         {
-            physics.isRight = true;
+            physics.currentHorizontalDirection = HorizontalDirection.right;
             currentState = new RightMovingGoombaState();
         }
     }
@@ -73,5 +73,10 @@ public class Goomba : AbstractCollideable, IEnemy
     public bool ReportIsAlive()
     {
         return deadTimer == 0 ? true : false;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
     }
 }

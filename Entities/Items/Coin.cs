@@ -1,4 +1,5 @@
 ﻿using Mario.Entities.Items.ItemStates;
+using Mario.Global;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Entities.Items
@@ -8,9 +9,11 @@ namespace Mario.Entities.Items
         public Coin(Vector2 position, bool isUnderground = false)
         {
             this.position = position;
-            if (isUnderground) {
+            if (isUnderground)
+            {
                 currentState = new UndergroundCoinState();
-            } else
+            }
+            else
             {
                 currentState = new CoinState();
             }
@@ -18,8 +21,15 @@ namespace Mario.Entities.Items
 
         public override void MakeVisible()
         {
-            position.Y -= 16;
+            position.Y -= GlobalVariables.BlockHeightWidth;
             isVisible = true;
+        }
+
+        public override void ChangeDirection() { }
+
+        public override Vector2 GetVelocity()
+        {
+            return new Vector2(0, 0);
         }
     }
 }

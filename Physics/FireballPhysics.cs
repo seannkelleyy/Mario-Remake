@@ -1,90 +1,61 @@
-﻿using Mario.Global;
-using Mario.Interfaces.Base;
+﻿using Mario.Interfaces.Base;
+using Mario.Interfaces.Entities.Projectiles;
 using Microsoft.Xna.Framework;
-using static Mario.Global.CollisionVariables;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Physics
 {
     public class FireballPhysics : AbstractEntityPhysics
     {
-        public FireballPhysics(ICollideable entity) : base(entity)
+        public FireballPhysics(ICollideable entity, HorizontalDirection currentHorizontalDirection) : base(entity)
         {
+            if (currentHorizontalDirection == HorizontalDirection.left)
+            {
+                entity.SetPosition(entity.GetPosition() + new Vector2(0, BlockHeightWidth));
+                velocity = new Vector2(-PhysicsSettings.FireballHorizontalSpeed, 0);
+            }
+            else
+            {
+                entity.SetPosition(entity.GetPosition() + new Vector2(BlockHeightWidth, BlockHeightWidth));
+                velocity = new Vector2(PhysicsSettings.FireballHorizontalSpeed, 0);
+            }
             this.entity = entity;
-            velocity = new Vector2(0, 0);
         }
 
         public override void Update()
         {
-            if (!isFalling) UpdateHorizontal();
-            else UpdateVertical();
+            UpdateHorizontal();
+            UpdateVertical();
         }
 
         internal override void UpdateHorizontal()
         {
-            if (isRight && !entity.GetCollisionState(CollisionDirection.Right))
-            {
-                if (entity is Koopa koopa && koopa.isShell)
-                {
-                    velocity.X = 2 * PhysicsVariables.enemySpeed;
-                }
-                else
-                {
-                    velocity.X = PhysicsVariables.enemySpeed;
-                }
-            }
-            else if (!isRight && !entity.GetCollisionState(CollisionDirection.Left))
-            {
-                if (entity is Koopa koopa && koopa.isShell)
-                {
-                    velocity.X = -2 * PhysicsVariables.enemySpeed;
-                }
-                else
-                {
-                    velocity.X = -PhysicsVariables.enemySpeed;
-                }
-            }
-
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
 
         internal override void UpdateVertical()
         {
-
-            if (!entity.GetCollisionState(CollisionDirection.Bottom))
+            if (entity.GetCollisionState(CollisionDirection.Bottom))
             {
-                isFalling = true;
-                velocity.Y += ApplyGravity();
-            }
-            else if (entity.GetCollisionState(CollisionDirection.Bottom))
-            {
-                velocity.Y = 0;
-                isFalling = false;
+                if (!isFalling)
+                {
+                    ((IProjectile)entity).Destroy();
+                }
+                else
+                {
+                    velocity.Y = -PhysicsSettings.FireballBounceForce;
+                    isFalling = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y = 0;
-        }
-
-        public override void WalkLeft()
-        {
-            Logger.Instance.LogInformation("Walk left not implemented in Projectile Physics");
-        }
-
-        public override void WalkRight()
-        {
-            Logger.Instance.LogInformation("Walk right not implemented in Projectile Physics");
-
-        }
-
-        public override void Jump()
-        {
-            Logger.Instance.LogInformation("Jump not implemented in Projectile Physics");
-
-        }
-
-        public override void SmallJump()
-        {
-            Logger.Instance.LogInformation("Small Jump left not implemented in Projectile Physics");
-
+            if (velocity.Y < PhysicsSettings.FireballBounceForce)
+            {
+                velocity.Y += PhysicsSettings.FireballVerticalAcceleration;
+            }
+            if (velocity.Y > 0)
+            {
+                isFalling = true;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Global;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,7 +16,6 @@ namespace Mario.Entities.Sprites
         private int spriteSheetStartingY;
         private int width;
         private int height;
-        private float updateInterval = .2f;
         private float elapsedSeconds = 0;
 
 
@@ -33,7 +33,7 @@ namespace Mario.Entities.Sprites
         public void Update(GameTime gameTime)
         {
             elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (elapsedSeconds >= updateInterval)
+            if (elapsedSeconds >= GlobalVariables.SpriteUpdateInterval)
             {
                 currentFrame = (currentFrame + 1) % totalFrames;
                 elapsedSeconds = 0;

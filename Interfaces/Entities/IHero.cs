@@ -1,9 +1,17 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Abstract;
+using Mario.Entities.Hero;
+using Mario.Global;
+using Mario.Interfaces.Base;
+using Mario.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Mario.Interfaces.Entities
 {
     public interface IHero : IEntityBase, ICollideable
     {
+        public HeroPhysics physics { get; }
+        public HeroStatTracker stats { get; }
+        public HeroState currentState { get; set; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();
@@ -11,12 +19,18 @@ namespace Mario.Interfaces.Entities
         public void SmallJump();
         public void StopHorizontal();
         public void StopVertical();
+        public void Stand();
         public void Crouch();
         public void Collect(IItem item);
         public void TakeDamage();
         public void Attack();
         public void Die();
-        public int ReportHealth();
+        public GlobalVariables.HeroHealth ReportHealth();
+        public int GetStartingLives();
+        public Vector2 GetVelocity();
+        public HeroPhysics GetPhysics();
+        public GlobalVariables.HorizontalDirection GetHorizontalDirection();
     }
 }
+
 
