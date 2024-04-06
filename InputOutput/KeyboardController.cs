@@ -104,7 +104,6 @@ namespace Mario.Input
                     MediaPlayer.Resume();
                 }
             });
-            actions[7] = new Action(GameStateManager.Instance.Pause);
             actions[8] = new Action(() =>
             {
                 GameContentManager.Instance.GetHero().TakeDamage();
