@@ -4,6 +4,7 @@ using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,20 @@ namespace Mario.Input
             actions[4] = new Action(mario.Crouch);
             actions[5] = new Action(mario.WalkRight);
             actions[6] = new Action(mario.Attack);
-            actions[7] = new Action(GameStateManager.Instance.Pause);
+            actions[7] = new Action(() =>
+            {
+                GameStateManager.Instance.Pause();
+                if (GameStateManager.Instance.isPaused)
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
+                    MediaPlayer.Pause();
+                }
+                else
+                {
+                    MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
+                    MediaPlayer.Resume();
+                }
+            });
             return actions;
         }
 
