@@ -93,6 +93,7 @@ namespace Mario.Input
             actions[6] = new Action(mario.Attack);
             actions[7] = new Action(() =>
             {
+                GameStateManager.Instance.Pause();
                 if (unpause)
                 {
                     MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.pause);
@@ -105,7 +106,6 @@ namespace Mario.Input
                     MediaPlayer.Resume();
                     unpause = !unpause;
                 }
-                GameStateManager.Instance.Pause();
             });
             return actions;
         }
