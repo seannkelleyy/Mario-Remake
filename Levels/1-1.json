@@ -1,7 +1,10 @@
 {
-  "level": "1-1",
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 224,
   "height": 30,
+  "timeLimit": 300,
+  "song": "ground",
   "hero": {
     "type": "mario",
     "startingX": 4,
@@ -13,14 +16,20 @@
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 10,
-      "startingY": 1,
+      "startingX": 23,
+      "startingY": 13,
       "isRight": false
     },
     {
       "type": "goomba",
-      "startingX": 12,
-      "startingY": 12,
+      "startingX": 41,
+      "startingY": 13,
+      "isRight": false
+    },
+    {
+      "type": "goomba",
+      "startingX": 52,
+      "startingY": 13,
       "isRight": false
     },
     {

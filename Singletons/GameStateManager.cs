@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mario.Input;
+using System;
 using System.Diagnostics;
 
 namespace Mario.Singletons
