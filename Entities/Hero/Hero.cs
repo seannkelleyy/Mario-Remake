@@ -152,7 +152,7 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item.GetType().Name.Equals("FireFlower"))
+            if (item is FireFlower)
             {
                 stats.AddScore(1000);
                 if (currentHealth != HeroHealth.FireMario)
@@ -163,7 +163,7 @@ namespace Mario.Entities.Character
                     currentState.PowerUp(wasSmall);
                 }
             }
-            else if (item.GetType().Name.Equals("Mushroom"))
+            else if (item is Mushroom)
             {
                 stats.AddScore(1000);
                 MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.powerup);
@@ -177,7 +177,7 @@ namespace Mario.Entities.Character
                     currentState.PowerUp(true);
                 }
             }
-            else if (item.GetType().Name.Equals("Coin"))
+            else if (item is Coin)
             {
                 stats.AddScore(200);
                 stats.AddCoins(1);
@@ -188,7 +188,7 @@ namespace Mario.Entities.Character
                 }
                 MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.coin);
             }
-            else if (item.GetType().Name.Equals("Star"))
+            else if (item is Star)
             {
                 stats.AddScore(1000);
                 //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)

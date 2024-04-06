@@ -99,14 +99,14 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item.GetType().Name.Equals("Star"))
+            if (item is Star)
             {
                 starTimer = EntitySettings.HeroStarTimer;
                 decoratorHero.GetStats().AddScore(1000);
             }
             else
             {
-                if (!isBig && ((item.GetType().Name.Equals("Mushroom") && !((Mushroom)item).Is1up()) || item.GetType().Name.Equals("FireFlower")))
+                if (!isBig && ((item is Mushroom && !((Mushroom)item).Is1up()) || item is FireFlower))
                 {
                     isBig = true;
                     starParticleSprite = SpriteFactory.Instance.CreateSprite(isBig.ToString() + this.GetType().Name);
