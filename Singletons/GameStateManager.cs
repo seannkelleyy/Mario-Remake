@@ -1,4 +1,5 @@
-﻿   nbusing Mario.Input;
+﻿using Mario.Input;
+
 using System;
 using System.Diagnostics;
 

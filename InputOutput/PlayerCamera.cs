@@ -40,9 +40,8 @@ namespace Mario.Input
 
         public void ResetCamera()
         {
-            cameraX = GameSettings.CameraStarting.X;
             var position = Matrix.CreateTranslation(-GameSettings.CameraStarting.X,
-                                   -GameSettings.CameraStarting.Y,
+                                 -48,
                                                       0);
             var offSet = Matrix.CreateTranslation(GameSettings.ScreenSize.X / 2,
                                GameSettings.ScreenSize.Y / 2,
