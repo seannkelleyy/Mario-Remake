@@ -44,4 +44,10 @@ public class HeadsUpDisplay
             currentX += headerSize.X + GlobalVariables.HUDBuffer;
         }
     }
+
+    public void GameOverDisplay(SpriteBatch spriteBatch, SpriteFont font)
+    {
+        spriteBatch.DrawString(font, "Game Over", new Vector2(GlobalVariables.CameraLeftEdge / 2, 50), Color.White);
+        spriteBatch.DrawString(font, "Hit Space to Play Again", new Vector2(GlobalVariables.CameraLeftEdge / 2, 70), Color.White);
+    }
 }
