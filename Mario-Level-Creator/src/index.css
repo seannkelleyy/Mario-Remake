@@ -1,0 +1,54 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-image: url("/mario-background.gif");
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: visible;
+}
+
+.level-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  padding: 1em;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0 2px 4px rgba(253, 253, 253, 0.1);
+  border-radius: 0.5em;
+}
+
+.level {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0 2px 4px rgba(253, 253, 253, 0.1);
+}
