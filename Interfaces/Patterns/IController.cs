@@ -11,8 +11,6 @@ namespace Mario.Interfaces
 
         void UpdatePause(GameTime gameTime);
 
-        void Add(Keys key, Action action);
-
-        void LoadCommands(MarioRemake game, IHero hero);
+        void LoadCommands(MarioRemake game);
     }
 }
