@@ -14,7 +14,7 @@
 
         public static float SpriteUpdateInterval = 0.175f;
 
-        public static float KeyboardUpdateInterval = 0.05f;
+        public static float InputControllerUpdateInterval = 0.05f;
 
         public static float MaxResetTime = 4.0f;
 
