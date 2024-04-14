@@ -26,6 +26,7 @@
         public enum CollisionDirection { Top, Bottom, Left, Right, None }
         public enum HorizontalDirection { left, right };
         public enum HeroHealth { Mario, BigMario, FireMario };
+        public enum EnemyHealth { Normal, Big, Fire };
 
         public enum BlockType
         {

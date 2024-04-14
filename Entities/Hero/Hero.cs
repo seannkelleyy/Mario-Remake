@@ -201,7 +201,6 @@ namespace Mario.Entities.Character
             else if (item is Star)
             {
                 stats.AddScore(ScoreSettings.StarScore);
-                //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
                 MediaPlayer.Pause();
                 MediaManager.Instance.PlayTheme(SongThemes.invincibility, true);
                 GameContentManager.Instance.RemoveEntity(this);
