@@ -17,6 +17,7 @@ public class Koopa : AbstractCollideable, IEnemy
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
     private double shellTimer = 0.0;
+    private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
 
@@ -33,7 +34,12 @@ public class Koopa : AbstractCollideable, IEnemy
 
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
-        Attack();
+        attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        if (attackCounter > EntitySettings.EnemyAttackCounter)
+        {
+            Attack();
+            attackCounter = 0.0f;
+        }
         HandleShellTime(gameTime);
     }
 

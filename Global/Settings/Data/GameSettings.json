@@ -4,7 +4,7 @@
     "cameraStartingX": 400,
     "cameraStartingY":  48,
     "isDevelopment": true,
-    "levelJsonFilePath": "../../../Levels/1-1.json"
+    "levelJsonFilePath": "../../../Levels/Sprint3.json"
   },
   "Physics": {
     "gravity": 1.325,
@@ -30,6 +30,7 @@
     "collisionPixelRadius": 48
   },
   "Entity": {
+    "enemyAttackCounter": 1.5,
     "enemyDespawnTime": 3,
     "enemyInvulnerabilityTime": 3,
     "koopaShellTime": 8.0,

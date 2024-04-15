@@ -16,6 +16,7 @@ public class Goomba : AbstractCollideable, IEnemy
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Fire;
     private double deadTimer = 0.0f;
+    private double attackCounter = 0.0f;
 
     public Goomba(Vector2 position)
     {
@@ -41,7 +42,12 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
-            Attack();
+            attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            if (attackCounter > EntitySettings.EnemyAttackCounter)
+            {
+                Attack();
+                attackCounter = 0.0f;
+            }
         }
     }
 

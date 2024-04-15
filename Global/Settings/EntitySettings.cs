@@ -1,6 +1,7 @@
 ﻿public static class EntitySettings
 {
     // Capitalized because they are static
+    public static float EnemyAttackCounter { get; set; }
     public static float EnemyDespawnTime { get; set; }
     public static float KoopaShellTime { get; set; }
     public static float HeroInvulnerabilityTime { get; set; }
