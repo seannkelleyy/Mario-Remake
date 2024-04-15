@@ -6,7 +6,7 @@ namespace Mario.Entities.Blocks.BlockStates
     {
         public HardBlockState() : base()
         {
-            sprite = spriteFactory.CreateSprite("stoneTile");
+            sprite = spriteFactory.CreateSprite("emptyBlockTile");
         }
     }
 }
