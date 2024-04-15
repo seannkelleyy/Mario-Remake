@@ -10,6 +10,7 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
@@ -116,16 +117,15 @@ public class Koopa : AbstractCollideable, IEnemy
     {
         if (item is FireFlower)
         {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (currentHealth != EnemyHealth.Fire)
             {
-                //bool wasSmall = currentHealth == EnemyHealth.Normal;
                 currentHealth = EnemyHealth.Fire;
-                //currentState.PowerUp(wasSmall);
             }
         }
         else if (item is Mushroom)
         {
-            // At the moment, one up will spawn another. If I have time I will try to make it let it respawn.
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
                 GameContentManager.Instance.AddEntity(this);
@@ -134,12 +134,12 @@ public class Koopa : AbstractCollideable, IEnemy
             if (currentHealth == EnemyHealth.Normal)
             {
                 currentHealth = EnemyHealth.Big;
-                position.Y += BlockHeightWidth;
-                //currentState.PowerUp(true);
             }
         }
         else if (item is Star)
         {
+            MediaPlayer.Pause();
+            MediaManager.Instance.PlayTheme(SongThemes.enemyStar, true);
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }

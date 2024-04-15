@@ -21,7 +21,7 @@ namespace Mario.Entities.Enemies
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
-        private bool isBig = true;
+        private bool isBig = false;
         public bool teamMario { get; }
         public ISprite starParticleSprite;
 
@@ -52,8 +52,10 @@ namespace Mario.Entities.Enemies
 
         private void RemoveStar()
         {
+            MediaPlayer.Stop();
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(decoratorEnemy);
+            MediaManager.Instance.PlayDefaultTheme();
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -50,7 +50,6 @@ namespace Mario.Entities.Character
 
         private void RemoveStar()
         {
-            //MediaManager.Instance.PlayDefaultTheme(); (need invincibility theme)
             MediaPlayer.Stop();
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(decoratorHero);

@@ -8,6 +8,7 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
@@ -83,6 +84,7 @@ public class Goomba : AbstractCollideable, IEnemy
     {
         if (item is FireFlower)
         {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (currentHealth != EnemyHealth.Fire)
             {
                 currentHealth = EnemyHealth.Fire;
@@ -91,6 +93,7 @@ public class Goomba : AbstractCollideable, IEnemy
         else if (item is Mushroom)
         {
             // Let it respawn?
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
                 GameContentManager.Instance.AddEntity(this);
@@ -103,6 +106,8 @@ public class Goomba : AbstractCollideable, IEnemy
         }
         else if (item is Star)
         {
+            MediaPlayer.Pause();
+            MediaManager.Instance.PlayTheme(SongThemes.enemyStar, true);
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }

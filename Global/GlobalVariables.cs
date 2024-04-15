@@ -78,6 +78,7 @@
             stomp,
             pause,
             powerup,
+            enemyPowerup,
             vine, // Most likely will be unused.
             pipe
         }
@@ -92,7 +93,8 @@
             castleComplete,
             lostLife,
             gameOver,
-            ending
+            ending,
+            enemyStar
         }
 
         #endregion MediaManagerVariables
