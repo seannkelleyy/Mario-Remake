@@ -2,12 +2,11 @@
 using Mario.Entities.Character;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
+using Mario.Entities.Pipes;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Pipes;
-using System;
 
 namespace Mario.Singletons
 {
@@ -49,6 +48,8 @@ namespace Mario.Singletons
                     return new BrickBlock(position, breakeable, collideable, item, true);
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
+                case "stone":
+                    return new StoneBlock(position, breakeable, collideable);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
