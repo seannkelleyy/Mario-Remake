@@ -1,9 +1,8 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Enemies;
-using Mario.Entities.Projectiles;
 using Mario.Entities.Items;
-using Mario.Global.Settings;
+using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -59,7 +58,7 @@ public class Goomba : AbstractCollideable, IEnemy
             currentState = new StompedGoombaState();
             position.Y += HalfBlockAdjustment;
             deadTimer = 1;
-        } 
+        }
         else if (currentHealth is EnemyHealth.Big)
         {
             currentHealth = EnemyHealth.Normal;
@@ -117,7 +116,7 @@ public class Goomba : AbstractCollideable, IEnemy
         if (currentHealth is EnemyHealth.Fire)
         {
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
-            GameContentManager.Instance.AddEntity(new Fireball(this.position, physics.currentHorizontalDirection));
+            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection));
         }
     }
 

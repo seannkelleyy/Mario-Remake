@@ -11,7 +11,7 @@ internal class AttackState : HeroState
     public AttackState(IHero mario, HeroState previousState) : base(mario)
     {
         this.previousState = previousState;
-        GameContentManager.Instance.AddEntity(new Fireball(mario.GetPosition(), mario.GetHorizontalDirection()));
+        GameContentManager.Instance.AddEntity(new Fireball(mario.GetPosition() + new Vector2(0, (mario.GetRectangle().Height / 2)), mario.GetHorizontalDirection()));
     }
     public override void Stand() { }
     public override void WalkRight() { }

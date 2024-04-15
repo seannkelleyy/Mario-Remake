@@ -11,12 +11,11 @@ namespace Mario.Physics
         {
             if (currentHorizontalDirection == HorizontalDirection.left)
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(0, BlockHeightWidth));
                 velocity = new Vector2(-PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             else
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(BlockHeightWidth, BlockHeightWidth));
+                entity.SetPosition(entity.GetPosition() + new Vector2(HalfBlockAdjustment, 0));
                 velocity = new Vector2(PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             this.entity = entity;
