@@ -33,6 +33,7 @@ public class Koopa : AbstractCollideable, IEnemy
 
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
+        Attack();
         HandleShellTime(gameTime);
     }
 
@@ -119,7 +120,7 @@ public class Koopa : AbstractCollideable, IEnemy
             // At the moment, one up will spawn another. If I have time I will try to make it let it respawn.
             if (((Mushroom)item).IsOneUp())
             {
-                //stats.AddLives(1);
+                GameContentManager.Instance.AddEntity(this);
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)
@@ -141,6 +142,7 @@ public class Koopa : AbstractCollideable, IEnemy
     {
         if (currentHealth is EnemyHealth.Fire)
         {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(this.position, physics.currentHorizontalDirection));
         }
     }

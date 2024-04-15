@@ -1,5 +1,6 @@
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -19,7 +20,8 @@ public class EnemyCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
         // Block stuff
@@ -78,6 +80,16 @@ public class EnemyCollisionHandler
         if (collisionDictionary[typeof(IPipe)].ContainsKey(direction))
         {
             collisionDictionary[typeof(IPipe)][direction].Invoke();
+        }
+    }
+
+    public void EnemyItemCollision(IItem item)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), item.GetRectangle(), mainEnemy.GetVelocity());
+        if (direction != CollisionDirection.None)
+        {
+            mainEnemy.Collect(item);
+            GameContentManager.Instance.RemoveEntity(item);
         }
     }
 

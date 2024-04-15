@@ -14,7 +14,7 @@ using static Mario.Global.GlobalVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth = EnemyHealth.Normal;
+    public EnemyHealth currentHealth = EnemyHealth.Fire;
     private double deadTimer = 0.0f;
 
     public Goomba(Vector2 position)
@@ -41,6 +41,7 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
+            Attack();
         }
     }
 
@@ -109,6 +110,7 @@ public class Goomba : AbstractCollideable, IEnemy
     {
         if (currentHealth is EnemyHealth.Fire)
         {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(this.position, physics.currentHorizontalDirection));
         }
     }
