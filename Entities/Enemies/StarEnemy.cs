@@ -22,6 +22,7 @@ namespace Mario.Entities.Enemies
         public EntityPhysics physics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = true;
+        public bool teamMario { get; }
         public ISprite starParticleSprite;
 
         //HeroState IHero.currentState { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -35,6 +36,7 @@ namespace Mario.Entities.Enemies
                 isBig = false;
             }
             starParticleSprite = SpriteFactory.Instance.CreateSprite(isBig.ToString() + GetType().Name);
+            teamMario = false;
         }
 
         public void Update(GameTime gameTime)

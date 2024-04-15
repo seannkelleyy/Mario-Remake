@@ -26,6 +26,7 @@ namespace Mario.Entities.Character
         private double invulnerabilityFrames = 0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
+        public bool teamMario { get; }
         public new HeroState currentState { get; set; }
         public HeroHealth currentHealth = HeroHealth.Mario;
 
@@ -45,6 +46,7 @@ namespace Mario.Entities.Character
             }
             this.position = position;
             this.stats = stats;
+            teamMario = true;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
             startingLives = stats.GetLives();

@@ -101,7 +101,7 @@ namespace Mario.Collisions
             {
                 if (enemy.GetRectangle().Intersects(item.GetRectangle()))
                 {
-                    //enemyHandler.EnemyItemCollision(item);
+                    enemyHandler.EnemyItemCollision(item);
                 }
             }
         }
@@ -159,6 +159,10 @@ namespace Mario.Collisions
                 {
                     projectileHandler.ProjectileEnemyCollision(enemy);
                 }
+            }
+            if (projectile.GetRectangle().Intersects(GameContentManager.Instance.GetHero().GetRectangle()))
+            {
+                projectileHandler.ProjectileHeroCollision(GameContentManager.Instance.GetHero());
             }
         }
     }

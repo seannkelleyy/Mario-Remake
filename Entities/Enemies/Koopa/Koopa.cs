@@ -20,10 +20,12 @@ public class Koopa : AbstractCollideable, IEnemy
     private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
+    public bool teamMario { get; }
 
     public Koopa(Vector2 position)
     {
         physics = new EntityPhysics(this);
+        teamMario = false;
         this.position = position;
         currentState = new RightMovingKoopaState();
     }
@@ -87,7 +89,7 @@ public class Koopa : AbstractCollideable, IEnemy
             {
                 isShell = true;
                 shellTimer = 1;
-                MediaManager.Instance.PlayEffect(EffectNames.stomp);
+                MediaManager.Instance.PlayEffect(EffectNames.stomp); // Play Effect outside of if statements.
                 previousState = currentState;
                 currentState = new StompedKoopaState();
                 position.Y += HalfBlockAdjustment;
@@ -149,7 +151,7 @@ public class Koopa : AbstractCollideable, IEnemy
         if (currentHealth is EnemyHealth.Fire)
         {
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
-            GameContentManager.Instance.AddEntity(new Fireball(this.position, physics.currentHorizontalDirection));
+            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
         }
     }
 

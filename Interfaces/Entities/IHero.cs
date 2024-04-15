@@ -10,6 +10,7 @@ namespace Mario.Interfaces.Entities
     public interface IHero : IEntityBase, ICollideable
     {
         public HeroState currentState { get; set; }
+        public bool teamMario { get; }
         public void WalkLeft();
         public void WalkRight();
         public void Jump();

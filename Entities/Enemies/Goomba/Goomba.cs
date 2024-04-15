@@ -13,13 +13,15 @@ using static Mario.Global.GlobalVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth = EnemyHealth.Fire;
+    public EnemyHealth currentHealth = EnemyHealth.Normal;
     private double deadTimer = 0.0f;
     private double attackCounter = 0.0f;
+    public bool teamMario { get; }
 
     public Goomba(Vector2 position)
     {
         physics = new EntityPhysics(this);
+        teamMario = false;
         this.position = position;
         currentState = new MovingGoombaState();
     }
@@ -83,9 +85,7 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             if (currentHealth != EnemyHealth.Fire)
             {
-                //bool wasSmall = currentHealth == EnemyHealth.Normal;
                 currentHealth = EnemyHealth.Fire;
-                //currentState.PowerUp(wasSmall);
             }
         }
         else if (item is Mushroom)
@@ -99,8 +99,6 @@ public class Goomba : AbstractCollideable, IEnemy
             if (currentHealth == EnemyHealth.Normal)
             {
                 currentHealth = EnemyHealth.Big;
-                position.Y += BlockHeightWidth;
-                //currentState.PowerUp(true);
             }
         }
         else if (item is Star)
@@ -116,7 +114,7 @@ public class Goomba : AbstractCollideable, IEnemy
         if (currentHealth is EnemyHealth.Fire)
         {
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
-            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection));
+            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
         }
     }
 

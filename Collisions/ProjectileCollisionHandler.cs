@@ -9,6 +9,7 @@ using static Mario.Global.GlobalVariables;
 public class ProjectileCollisionHandler
 {
     public IProjectile projectile { get; set; }
+    public IHero hero { get; set; }
     public IEnemy enemy { get; set; }
     public IBlock block { get; set; }
     public IPipe pipe { get; set; }
@@ -21,7 +22,8 @@ public class ProjectileCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IHero), new Dictionary<CollisionDirection, Action>() }
         };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
@@ -59,7 +61,7 @@ public class ProjectileCollisionHandler
             projectile.SetCollisionState(CollisionDirection.Bottom, true);
         }));
 
-
+        // Enemy Stuff
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(() =>
         {
             GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
@@ -88,16 +90,55 @@ public class ProjectileCollisionHandler
             projectile.Destroy();
 
         }));
+
+        // Hero stuff
+        collisionDictionary[typeof(IHero)].Add(CollisionDirection.Left, new Action(() =>
+        {
+            hero.TakeDamage();
+            projectile.Destroy();
+        }));
+        collisionDictionary[typeof(IHero)].Add(CollisionDirection.Right, new Action(() =>
+        {
+            hero.TakeDamage();
+            projectile.Destroy();
+
+        }));
+        collisionDictionary[typeof(IHero)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            hero.TakeDamage();
+            projectile.Destroy();
+
+        }));
+        collisionDictionary[typeof(IHero)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            hero.TakeDamage();
+            projectile.Destroy();
+
+        }));
     }
 
+    public void ProjectileHeroCollision(IHero hero)
+    {
+        this.hero = hero;
+        if (!(projectile.teamMario == hero.teamMario))
+        {
+            CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), hero.GetRectangle(), projectile.GetVelocity());
+            if (collisionDictionary[typeof(IHero)].ContainsKey(direction))
+            {
+                collisionDictionary[typeof(IHero)][direction].Invoke();
+            }
+        }
+    }
     public void ProjectileEnemyCollision(IEnemy enemy)
     {
         this.enemy = enemy;
-
-        CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), enemy.GetRectangle(), projectile.GetVelocity());
-        if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
+        if (!(projectile.teamMario == enemy.teamMario))
         {
-            collisionDictionary[typeof(IEnemy)][direction].Invoke();
+            CollisionDirection direction = CollisionDetector.DetectCollision(projectile.GetRectangle(), enemy.GetRectangle(), projectile.GetVelocity());
+            if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
+            {
+                collisionDictionary[typeof(IEnemy)][direction].Invoke();
+            }
         }
     }
 

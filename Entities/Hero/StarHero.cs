@@ -21,6 +21,7 @@ namespace Mario.Entities.Character
         private IHero decoratorHero;
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = true;
+        public bool teamMario { get; }
         public ISprite starParticleSprite;
 
         HeroState IHero.currentState { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -28,6 +29,7 @@ namespace Mario.Entities.Character
         public StarHero(IHero decoratorHero)
         {
             this.decoratorHero = decoratorHero;
+            teamMario = true;
             if (decoratorHero.ReportHealth() == GlobalVariables.HeroHealth.Mario)
             {
                 isBig = false;
