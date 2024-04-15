@@ -1,6 +1,6 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
-using Mario.Entities.Enemies.Goomba;
+using Mario.Entities.Enemies;
 using Mario.Entities.Projectiles;
 using Mario.Entities.Items;
 using Mario.Global.Settings;
@@ -9,7 +9,6 @@ using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
@@ -48,10 +47,21 @@ public class Goomba : AbstractCollideable, IEnemy
     public void Stomp()
     {
         if (deadTimer > 0) return;
+        else if (currentHealth is EnemyHealth.Normal)
+        {
+            currentState = new StompedGoombaState();
+            position.Y += HalfBlockAdjustment;
+            deadTimer = 1;
+        } 
+        else if (currentHealth is EnemyHealth.Big)
+        {
+            currentHealth = EnemyHealth.Normal;
+        }
+        else
+        {
+            currentHealth = EnemyHealth.Big;
+        }
         MediaManager.Instance.PlayEffect(EffectNames.stomp);
-        currentState = new StompedGoombaState();
-        position.Y += HalfBlockAdjustment;
-        deadTimer = 1;
     }
 
     public void Flip()
@@ -67,7 +77,7 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             if (currentHealth != EnemyHealth.Fire)
             {
-                bool wasSmall = currentHealth == EnemyHealth.Normal;
+                //bool wasSmall = currentHealth == EnemyHealth.Normal;
                 currentHealth = EnemyHealth.Fire;
                 //currentState.PowerUp(wasSmall);
             }
@@ -77,7 +87,7 @@ public class Goomba : AbstractCollideable, IEnemy
             // Let it respawn?
             if (((Mushroom)item).IsOneUp())
             {
-                //stats.AddLives(1);
+                GameContentManager.Instance.AddEntity(this);
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)
@@ -90,7 +100,7 @@ public class Goomba : AbstractCollideable, IEnemy
         else if (item is Star)
         {
             GameContentManager.Instance.RemoveEntity(this);
-            GameContentManager.Instance.AddEntity(new StarGoomba(this));
+            GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }
 
     }

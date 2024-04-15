@@ -2,7 +2,7 @@
 using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
-using Mario.Entities.Enemies.Goomba;
+using Mario.Entities.Enemies;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
@@ -76,12 +76,23 @@ public class Koopa : AbstractCollideable, IEnemy
         }
         else
         {
-            isShell = true;
-            shellTimer = 1;
-            MediaManager.Instance.PlayEffect(EffectNames.stomp);
-            previousState = currentState;
-            currentState = new StompedKoopaState();
-            position.Y += HalfBlockAdjustment;
+            if (currentHealth is EnemyHealth.Normal)
+            {
+                isShell = true;
+                shellTimer = 1;
+                MediaManager.Instance.PlayEffect(EffectNames.stomp);
+                previousState = currentState;
+                currentState = new StompedKoopaState();
+                position.Y += HalfBlockAdjustment;
+            }
+            else if (currentHealth is EnemyHealth.Big)
+            {
+                currentHealth = EnemyHealth.Normal;
+            }
+            else
+            {
+                currentHealth = EnemyHealth.Big;
+            }
         }
     }
 
@@ -98,14 +109,14 @@ public class Koopa : AbstractCollideable, IEnemy
         {
             if (currentHealth != EnemyHealth.Fire)
             {
-                bool wasSmall = currentHealth == EnemyHealth.Normal;
+                //bool wasSmall = currentHealth == EnemyHealth.Normal;
                 currentHealth = EnemyHealth.Fire;
                 //currentState.PowerUp(wasSmall);
             }
         }
         else if (item is Mushroom)
         {
-            // Let it respawn?
+            // At the moment, one up will spawn another. If I have time I will try to make it let it respawn.
             if (((Mushroom)item).IsOneUp())
             {
                 //stats.AddLives(1);
@@ -121,7 +132,7 @@ public class Koopa : AbstractCollideable, IEnemy
         else if (item is Star)
         {
             GameContentManager.Instance.RemoveEntity(this);
-            GameContentManager.Instance.AddEntity(new StarGoomba(this));
+            GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }
 
     }

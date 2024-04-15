@@ -14,9 +14,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
-namespace Mario.Entities.Enemies.Goomba
+namespace Mario.Entities.Enemies
 {
-    public class StarGoomba : IEnemy
+    public class StarEnemy : IEnemy
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
@@ -26,7 +26,7 @@ namespace Mario.Entities.Enemies.Goomba
 
         //HeroState IHero.currentState { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-        public StarGoomba(IEnemy decoratorEnemy)
+        public StarEnemy(IEnemy decoratorEnemy)
         {
             physics = new EntityPhysics(this);
             this.decoratorEnemy = decoratorEnemy;
@@ -63,13 +63,13 @@ namespace Mario.Entities.Enemies.Goomba
         {
             decoratorEnemy.ChangeDirection();
         }
-        public void Stomp() 
+        public void Stomp()
         {
-            // Star Goomba cannot be killed.
+            // Star Enemy cannot be killed.
         }
         public void Flip()
         {
-            // Star Goomba cannot be flipped.
+            // Star Enemy cannot be flipped.
         }
 
         public void Collect(IItem item)
@@ -91,7 +91,7 @@ namespace Mario.Entities.Enemies.Goomba
         }
         public void TakeDamage()
         {
-            // Star Goomba does not take damage
+            // Star Enemy does not take damage
         }
 
         public void Attack()
