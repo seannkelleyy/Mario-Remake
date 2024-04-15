@@ -15,7 +15,7 @@ namespace Mario.Physics
             }
             else
             {
-                entity.SetPosition(entity.GetPosition() + new Vector2(HalfBlockAdjustment, 0));
+                entity.SetPosition(entity.GetPosition() + new Vector2(BlockHeightWidth, 0));
                 velocity = new Vector2(PhysicsSettings.FireballHorizontalSpeed, 0);
             }
             this.entity = entity;
