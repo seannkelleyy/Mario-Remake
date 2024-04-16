@@ -23,7 +23,6 @@ public class HeroCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
-            // IItem is unneeded as it is never used.
             { typeof(IItem), new Dictionary<CollisionDirection, Action>() },
             { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
         };
