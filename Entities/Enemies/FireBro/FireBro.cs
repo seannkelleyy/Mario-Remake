@@ -1,0 +1,130 @@
+﻿using System;
+using Mario.Collisions;
+using Mario.Entities;
+using Mario.Entities.Abstract;
+using Mario.Entities.Projectiles;
+using Mario.Interfaces.Entities;
+using Mario.Physics;
+using Mario.Singletons;
+using Microsoft.Xna.Framework;
+using static Mario.Global.GlobalVariables;
+public class FireBro : AbstractCollideable, IEnemy
+{
+    public EntityPhysics physics { get; }
+    private double shellTimer = 0.0;
+    private double attackCounter = 0.0f;
+    private AbstractEntityState previousState;
+    public bool isShell = false;
+    public bool teamMario { get; }
+
+    public FireBro(Vector2 position)
+    {
+        physics = new EntityPhysics(this);
+        teamMario = false;
+        this.position = position;
+        currentState = new LeftFacingFireBroState();
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        ClearCollisions();
+
+        CollisionManager.Instance.Run(this);
+        currentState.Update(gameTime);
+        attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        if(attackCounter > EntitySettings.EnemyAttackCounter)
+        {
+            Attack();
+            attackCounter = 0.0f;
+        }
+        HandleShellTime(gameTime);
+    }
+
+    private void HandleShellTime(GameTime gameTime)
+    {
+        if (shellTimer > 0)
+        {
+            if (physics.GetVelocity().X == 0)
+            {
+                shellTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                physics.Update();
+                shellTimer = 0;
+            }
+            if (shellTimer > EntitySettings.KoopaShellTime)
+            {
+                currentState = previousState;
+                position.Y -= BlockHeightWidth / 2;
+                shellTimer = 0;
+                isShell = false;
+            }
+            else if (shellTimer > EntitySettings.KoopaShellTime / 2)
+            {
+                currentState = new ArmsOutOfShellKoopaState();
+            }
+        }
+        else
+        {
+            physics.Update();
+        }
+    }
+
+    public void Stomp()
+    {
+        if (isShell)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.kick);
+            physics.ToggleIsStationary();
+        }
+        else
+        {
+            isShell = true;
+            shellTimer = 1;
+            MediaManager.Instance.PlayEffect(EffectNames.stomp);
+            previousState = currentState;
+            currentState = new StompedKoopaState();
+            position.Y += HalfBlockAdjustment;
+        }
+    }
+
+    public void Flip()
+    {
+        MediaManager.Instance.PlayEffect(EffectNames.kick);
+        currentState = new FlippedKoopaState();
+        GameContentManager.Instance.RemoveEntity(this);
+    }
+
+    public void Attack()
+    {
+        MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
+        GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection));
+    }
+
+    public void ChangeDirection()
+    {
+        if (physics.currentHorizontalDirection == HorizontalDirection.right)
+        {
+            physics.currentHorizontalDirection = HorizontalDirection.left;
+            if (!isShell)
+                currentState = new LeftMovingKoopaState();
+        }
+        else
+        {
+            physics.currentHorizontalDirection = HorizontalDirection.right;
+            if (!isShell)
+                currentState = new RightMovingKoopaState();
+        }
+    }
+
+    public bool ReportIsAlive()
+    {
+        return true;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return physics.GetVelocity();
+    }
+}
