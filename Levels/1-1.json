@@ -431,7 +431,58 @@
             "collidable": true,
             "breakable": false,
             "item": "none"
+        },
+        {
+            "type": "floorUnderground",
+            "startingX": 144,
+            "startingY": 30,
+            "endingX": 161,
+            "endingY": 30,
+            "collidable": true,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "floorUnderground",
+            "startingX": 144,
+            "startingY": 31,
+            "endingX": 161,
+            "endingY": 32,
+            "collidable": false,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "brickUnderground",
+            "startingX": 144,
+            "startingY": 17,
+            "endingX": 144,
+            "endingY": 29,
+            "collidable": true,
+            "breakable": true,
+            "item": "none"
+        },
+        {
+            "type": "brickUnderground",
+            "startingX": 148,
+            "startingY": 26,
+            "endingX": 154,
+            "endingY": 29,
+            "collidable": true,
+            "breakable": true,
+            "item": "none"
         }
+        {
+            "type": "brickUnderground",
+            "startingX": 148,
+            "startingY": 17,
+            "endingX": 154,
+            "endingY": 17,
+            "collidable": true,
+            "breakable":true,
+            "item": "none"
+        }
+
     ],
   "blocks": [
     {
@@ -723,9 +774,17 @@
       "item": "none"
     },
     {
-        "type": "stone",
+      "type": "stone",
+      "x": 198,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+        "type": "flag",
         "x": 198,
-        "y": 11,
+        "y": 2,
         "collidable": true,
         "breakable": false,
         "item": "none"
@@ -733,15 +792,16 @@
   ],
   "pipes": [
     {
-      "type": "pipeTubeVertical",
-      "x": 10,
-      "startingY": 10,
-      "endingY": 12,
-      "transportable": false,
-      "transportDestinationX": -1,
-      "transportDestinationY": -1,
-      "collidable": true,
-      "breakable": false
-    }
+        "type": "pipeTubeVertical",
+        "x": 10,
+        "startingY": 10,
+        "endingY": 12,
+        "transportable": false,
+        "transportDestinationX": -1,
+        "transportDestinationY": -1,
+        "collidable": true,
+        "breakable": false
+    },
+
   ]
 }

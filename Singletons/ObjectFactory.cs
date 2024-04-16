@@ -50,6 +50,8 @@ namespace Mario.Singletons
                     return new MysteryBlock(position, collideable, item);
                 case "stone":
                     return new StoneBlock(position, breakeable, collideable);
+                case "flag":
+                    return new Flag(position, breakeable, collideable);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
