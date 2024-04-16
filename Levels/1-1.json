@@ -2,7 +2,7 @@
   "level": "1",
   "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 224,
-  "height": 30,
+  "height": 32,
   "timeLimit": 300,
   "song": "ground",
   "hero": {

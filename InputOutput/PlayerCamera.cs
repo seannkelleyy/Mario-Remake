@@ -23,11 +23,21 @@ namespace Mario.Input
         }
         public void UpdatePosition()
         {
-            if (target.GetPosition().X + (target.GetRectangle().Width / 2) > cameraX)
+            if (target.GetPosition().Y > GameSettings.LevelTopHeight * GlobalVariables.BlockHeightWidth)
+            {
+                var position = Matrix.CreateTranslation(-GameSettings.UndergroundCamera.X,
+                    -GameSettings.UndergroundCamera.Y,
+                    0);
+                var offSet = Matrix.CreateTranslation(GameSettings.ScreenSize.X / 2,
+                     GameSettings.ScreenSize.Y / 2,
+                    0);
+                Transform = position * offSet;
+            }
+            else if (target.GetPosition().X + (target.GetRectangle().Width / 2) > cameraX)
             {
                 cameraX = target.GetPosition().X + (target.GetRectangle().Width / 2);
                 var position = Matrix.CreateTranslation(-target.GetPosition().X - (target.GetRectangle().Width / 2),
-                    -48,
+                    -GameSettings.CameraStarting.Y,
                     0);
                 var offSet = Matrix.CreateTranslation(GameSettings.ScreenSize.X / 2,
                      GameSettings.ScreenSize.Y / 2,
