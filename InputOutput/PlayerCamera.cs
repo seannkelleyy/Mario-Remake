@@ -1,5 +1,6 @@
 ﻿using Mario.Global;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using Microsoft.Xna.Framework;
 
 namespace Mario.Input
@@ -50,6 +51,7 @@ namespace Mario.Input
 
         public void ResetCamera()
         {
+            target = GameContentManager.Instance.GetHero();
             cameraX = GameSettings.CameraStarting.X;
             var position = Matrix.CreateTranslation(-GameSettings.CameraStarting.X,
                                    -GameSettings.CameraStarting.Y,

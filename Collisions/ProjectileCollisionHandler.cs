@@ -1,4 +1,5 @@
-﻿using Mario.Global.Settings;
+﻿using Mario.Entities.Blocks;
+using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Interfaces.Entities.Projectiles;
@@ -38,7 +39,15 @@ public class ProjectileCollisionHandler
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            if (block is DeathBlock)
+            {
+                GameContentManager.Instance.RemoveEntity(projectile);
+
+            }
+            else
+            {
+                projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            }
         }));
 
         // Pipe stuff

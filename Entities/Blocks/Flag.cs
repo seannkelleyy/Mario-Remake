@@ -12,7 +12,7 @@ namespace Mario.Entities.Blocks
     {
         private ISprite flagSprite;
         private Vector2 flagPosition;
-        public Flag(Vector2 position, bool breakable, bool collidable, bool isUnderground = false)
+        public Flag(Vector2 position, bool breakable, bool collidable)
         {
             this.position = position;
             isCollidable = collidable;

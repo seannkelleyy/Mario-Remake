@@ -2,9 +2,7 @@ using Mario.Collisions;
 using Mario.Entities.Abstract;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
-using Mario.Global;
 using Mario.Global.Settings;
-using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -245,6 +243,7 @@ namespace Mario.Entities.Character
         public void Die()
         {
             stats.AddLives(-1);
+            currentHealth = HeroHealth.Mario;
             currentState.Die();
             LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
 

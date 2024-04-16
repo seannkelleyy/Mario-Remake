@@ -86,7 +86,7 @@ namespace Mario
                 }
                 else if (GameStateManager.Instance.resetTime >= GlobalVariables.MaxResetTime)
                 {
-                    GameStateManager.Instance.EndReset(camera);
+                    GameStateManager.Instance.EndReset(ref camera);
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this);
                     gamePadController = new GamePadController();

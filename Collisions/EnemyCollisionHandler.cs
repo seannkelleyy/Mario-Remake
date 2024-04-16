@@ -1,5 +1,7 @@
+using Mario.Entities.Blocks;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Singletons;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -8,6 +10,7 @@ public class EnemyCollisionHandler
 {
     public IEnemy mainEnemy { get; set; }
     public IEnemy collidingEnemy { get; set; }
+    public IBlock block { get; set; }
 
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
@@ -28,12 +31,23 @@ public class EnemyCollisionHandler
             mainEnemy.SetCollisionState(CollisionDirection.Left, true);
             mainEnemy.ChangeDirection();
         }));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() => {
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
+        {
             mainEnemy.SetCollisionState(CollisionDirection.Right, true);
             mainEnemy.ChangeDirection();
-            }));
+        }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            if (block is DeathBlock)
+            {
+                GameContentManager.Instance.RemoveEntity(mainEnemy);
+            }
+            else
+            {
+                mainEnemy.SetCollisionState(CollisionDirection.Bottom, true);
+            }
+        }));
 
         // Pipe stuff
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
@@ -41,7 +55,8 @@ public class EnemyCollisionHandler
             mainEnemy.SetCollisionState(CollisionDirection.Left, true);
             mainEnemy.ChangeDirection();
         }));
-        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() => {
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() =>
+        {
             mainEnemy.SetCollisionState(CollisionDirection.Right, true);
             mainEnemy.ChangeDirection();
         }));
@@ -68,6 +83,7 @@ public class EnemyCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), block.GetRectangle(), mainEnemy.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
+            this.block = block;
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

@@ -52,6 +52,8 @@ namespace Mario.Singletons
                     return new StoneBlock(position, breakeable, collideable);
                 case "flag":
                     return new Flag(position, breakeable, collideable);
+                case "deathBlock":
+                    return new DeathBlock(position, breakeable, collideable);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
