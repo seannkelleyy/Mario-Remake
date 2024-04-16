@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Row } from "./components/Row";
 
 export const LevelCreator = () => {
@@ -28,6 +28,13 @@ export const LevelCreator = () => {
       })
     ),
   });
+
+  const updateLevel = (property: any, value: any) => {
+    setLevel((prevState) => ({
+      ...prevState,
+      [property]: value,
+    }));
+  };
 
   const downloadLevel = () => {
     const a = document.createElement("a");
@@ -66,6 +73,13 @@ export const LevelCreator = () => {
           type, keep clicking to cycle through all blocks
         </p>
         <button onClick={downloadLevel}>Download Level</button>
+        <label>Level Name</label>
+        <input
+          type="text"
+          value={level.level}
+          onChange={(e) => updateLevel("level", e.target.value)}
+        />
+
         <label>Width in Blocks</label>
         <input type="number" value={rows} onChange={handleRowChange} />
       </section>

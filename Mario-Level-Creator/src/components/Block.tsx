@@ -55,10 +55,8 @@ export const Block = ({
     switch (blockType) {
       case "air":
         return <></>;
-      case "ground":
-        return (
-          <img src="groundBlock.jpeg" alt="ground" width={16} height={16} />
-        );
+      case "floor":
+        return <img src="floorBlock.jpeg" alt="floor" width={16} height={16} />;
       case "brick":
         return <img src="brick.jpeg" alt="brick" width={16} height={16} />;
       case "square-brick":
@@ -79,10 +77,8 @@ export const Block = ({
             height={16}
           />
         );
-      case "question":
-        return (
-          <img src="question.jpeg" alt="question" width={16} height={16} />
-        );
+      case "mystery":
+        return <img src="mystery.jpeg" alt="mystery" width={16} height={16} />;
       case "pipe":
         return <img src="pipe.jpeg" alt="pipe" width={12} height={16} />;
       case "pipe-top":
