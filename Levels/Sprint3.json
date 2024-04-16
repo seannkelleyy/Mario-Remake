@@ -14,10 +14,16 @@
   },
   "enemies": [
     {
-      "type": "goomba",
-      "startingX": 11,
-      "startingY": 12,
-      "isRight": false
+        "type": "goomba",
+        "startingX": 11,
+        "startingY": 12,
+        "isRight": false
+    },
+    {
+        "type": "koopa",
+        "startingX": 4,
+        "startingY": 12,
+        "isRight": false
     }
   ],
   "blockSections": [

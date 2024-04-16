@@ -84,7 +84,7 @@ public class EnemyCollisionHandler
     public void HandleEnemyEnemyCollision()
     {
         if (!mainEnemy.ReportIsAlive() || !collidingEnemy.ReportIsAlive()) return;
-        if (mainEnemy is Koopa mainKoopa && mainKoopa.isShell)
+        if ((mainEnemy is Koopa mainKoopa && mainKoopa.isShell))
         {
             if (collidingEnemy is not Koopa)
             {
@@ -92,6 +92,7 @@ public class EnemyCollisionHandler
                 return;
             }
         }
+
         mainEnemy.ChangeDirection();
         collidingEnemy.ChangeDirection();
     }
