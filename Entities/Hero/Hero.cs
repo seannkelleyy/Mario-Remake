@@ -246,10 +246,10 @@ namespace Mario.Entities.Character
         {
             stats.AddLives(-1);
             currentState.Die();
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives() - 1);
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
-            if (stats.GetLives() != 0)
+            if (stats.GetLives() >= 0)
             {
                 GameStateManager.Instance.BeginReset();
             }

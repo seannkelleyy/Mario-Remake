@@ -16,7 +16,7 @@ namespace Mario
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        private HeadsUpDisplay HUD;
+        public HeadsUpDisplay HUD;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -81,7 +81,7 @@ namespace Mario
                 }
                 else if (GameStateManager.Instance.resetTime >= GlobalVariables.MaxResetTime)
                 {
-                    GameStateManager.Instance.EndReset(camera);
+                    camera = GameStateManager.Instance.EndReset(camera);
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
                 }

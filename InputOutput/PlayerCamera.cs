@@ -47,6 +47,9 @@ namespace Mario.Input
                                GameSettings.ScreenSize.Y / 2,
                                               0);
             Transform = position * offSet;
+
+            GlobalVariables.CameraLeftEdge = GameSettings.CameraStarting.X;
+            GlobalVariables.CameraBottomEdge = target.GetPosition().Y + (target.GetRectangle().Height / 2);
         }
     }
 }
