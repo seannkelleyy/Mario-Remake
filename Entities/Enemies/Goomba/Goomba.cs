@@ -1,9 +1,11 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
@@ -15,6 +17,7 @@ public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
+    private IAI[] EnemyAI;
     private double deadTimer = 0.0f;
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
@@ -44,6 +47,10 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
+            foreach (IAI ai in EnemyAI)
+            {
+                ai.Seek(this);
+            }
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
             if (attackCounter > EntitySettings.EnemyAttackCounter)
             {
