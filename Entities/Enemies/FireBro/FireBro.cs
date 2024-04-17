@@ -16,6 +16,7 @@ public class FireBro : AbstractCollideable, IEnemy
     private AbstractEntityState previousState;
     public bool isShell = false;
     public bool teamMario { get; }
+    private float marioRelativePosition;
 
     public FireBro(Vector2 position)
     {
@@ -32,7 +33,8 @@ public class FireBro : AbstractCollideable, IEnemy
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-        if(attackCounter > EntitySettings.EnemyAttackCounter)
+        marioRelativePosition = GameContentManager.Instance.GetHero().GetPosition().X - this.position.X;
+        if (attackCounter > EntitySettings.EnemyAttackCounter && (marioRelativePosition < 100 && marioRelativePosition > -100))
         {
             Attack();
             attackCounter = 0.0f;
