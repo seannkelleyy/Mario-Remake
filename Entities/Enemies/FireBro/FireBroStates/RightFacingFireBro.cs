@@ -4,6 +4,6 @@ public class RightFacingFireBroState : AbstractEntityState
 {
     public RightFacingFireBroState() : base()
     {
-        sprite = spriteFactory.CreateSprite("rightFireBro");
+        sprite = spriteFactory.CreateSprite("rightAttackFireBro");
     }
 }
