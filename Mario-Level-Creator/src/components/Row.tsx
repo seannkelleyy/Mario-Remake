@@ -1,31 +1,49 @@
 import { Block } from "./Block";
 
-type RowProps = {
-  rowIndex: number;
+type ColumnProps = {
+  columnIndex: number;
   dragging: boolean;
   onDragStart: (blockType: string) => void;
   onDragEnd: () => void;
+  setSelectedCoordinates: (coordinates: { x: number; y: number }) => void;
+  updateBlock: (
+    x: number,
+    y: number,
+    blockType: string,
+    item: string,
+    collidable: boolean,
+    breakable: boolean
+  ) => void;
   nextBlockType: string;
+  isEditMode: boolean;
 };
 
-export const Row = ({
-  rowIndex,
+export const Column = ({
+  columnIndex,
   dragging,
   onDragStart,
   onDragEnd,
+  updateBlock,
+  setSelectedCoordinates,
   nextBlockType,
-}: RowProps) => {
+  isEditMode,
+}: ColumnProps) => {
   return (
-    <section id={rowIndex.toString()} className="row">
+    <section id={columnIndex.toString()} className="column">
       {Array(16)
         .fill(0)
-        .map((_, columnIndex) => (
+        .map((_, rowIndex) => (
           <Block
             nextBlockType={nextBlockType}
-            key={columnIndex}
+            key={rowIndex}
             dragging={dragging}
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
+            updateBlock={updateBlock}
+            setSelectedCoordinates={setSelectedCoordinates}
+            x={columnIndex}
+            y={rowIndex}
+            isEditMode={isEditMode}
           />
         ))}
     </section>

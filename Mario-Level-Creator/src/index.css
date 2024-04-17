@@ -37,7 +37,7 @@
   flex-wrap: nowrap;
 }
 
-.row {
+.column {
   display: flex;
   flex-direction: column;
 }

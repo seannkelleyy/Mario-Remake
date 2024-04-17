@@ -4,7 +4,19 @@ type BlockProps = {
   dragging: boolean;
   onDragStart: (blockType: string) => void;
   onDragEnd: () => void;
+  setSelectedCoordinates: (coordinates: { x: number; y: number }) => void;
+  updateBlock: (
+    x: number,
+    y: number,
+    blockType: string,
+    item: string,
+    collidable: boolean,
+    breakable: boolean
+  ) => void;
   nextBlockType: string;
+  x: number;
+  y: number;
+  isEditMode: boolean;
 };
 
 export const blockTypes = [
@@ -22,13 +34,29 @@ export const Block = ({
   dragging,
   onDragStart,
   onDragEnd,
+  updateBlock,
+  setSelectedCoordinates,
   nextBlockType,
+  x,
+  y,
+  isEditMode,
 }: BlockProps) => {
   const [blockType, setBlockType] = useState(blockTypes[0]);
+  const [item, setItem] = useState("none");
+  const [collidable, setCollidable] = useState(true);
+  const [breakable, setBreakable] = useState(true);
 
-  const handleMouseDown = () => {
-    changeBlockType();
-    onDragStart(blockType);
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (isEditMode) {
+      e.preventDefault();
+      setSelectedCoordinates({ x: x, y: y });
+      console.log(`x: ${x}, y: ${y}, blockType: ${blockType}`);
+    } else {
+      let newBlockType = changeBlockType();
+      onDragStart(newBlockType);
+      updateBlock(x, y, newBlockType, item, collidable, breakable);
+      console.log(`x: ${x}, y: ${y}, blockType: ${newBlockType}`);
+    }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -42,13 +70,17 @@ export const Block = ({
   };
 
   const changeBlockType = () => {
+    console.log("changeBlockType" + blockType);
     let currentIndex = blockTypes.indexOf(blockType);
     if (currentIndex === blockTypes.length - 1) {
       currentIndex = 0;
     } else {
       currentIndex++;
     }
-    setBlockType(blockTypes[currentIndex]);
+    let newBlockType = blockTypes[currentIndex];
+    setBlockType(newBlockType);
+    console.log("changedBlockType" + newBlockType);
+    return newBlockType;
   };
 
   const getBlockImage = (blockType: String) => {
