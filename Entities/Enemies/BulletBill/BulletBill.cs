@@ -63,6 +63,6 @@ public class BulletBill : AbstractCollideable, IEnemy
 
     public Vector2 GetVelocity()
     {
-        return new Vector2(position.X -= PhysicsSettings.BulletBillSpeed, position.Y);
+        return new Vector2(position.X - PhysicsSettings.BulletBillSpeed, position.Y);
     }
 }
