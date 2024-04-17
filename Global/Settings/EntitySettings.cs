@@ -8,5 +8,7 @@
     public static float HeroAttackTime { get; set; }
     public static float HeroAnimationLength { get; set; }
     public static float HeroStarTimer { get; set; }
+
+    public static float PiranhaCooldownTime { get; set; }
 }
 
