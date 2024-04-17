@@ -111,6 +111,30 @@
       "isRight": false
     }
   ],
+  "items": [],
+  "itemSections": [
+    {
+      "type": "coinUnderground",
+      "startingX": 148,
+      "startingY": 26,
+      "endingX": 154,
+      "endingY": 26
+    },
+    {
+      "type": "coinUnderground",
+      "startingX": 148,
+      "startingY": 24,
+      "endingX": 154,
+      "endingY": 24
+    },
+    {
+      "type": "coinUnderground",
+      "startingX": 149,
+      "startingY": 22,
+      "endingX": 153,
+      "endingY": 22
+    }
+  ],
   "blockSections": [
     {
       "type": "floor",

@@ -28,7 +28,7 @@ namespace Mario.Entities.Blocks
         {
             base.Draw(spriteBatch);
             flagSprite.Draw(spriteBatch, flagPosition);
-            castleSprite.Draw(spriteBatch, position + new Vector2(GlobalVariables.BlockHeightWidth * 4, +GetRectangle().Height - GlobalVariables.BlockHeightWidth));
+            castleSprite.Draw(spriteBatch, position + new Vector2(GlobalVariables.BlockHeightWidth * 4, +GetRectangle().Height - GlobalVariables.BlockHeightWidth * 4));
         }
         public void MoveFlag()
         {
