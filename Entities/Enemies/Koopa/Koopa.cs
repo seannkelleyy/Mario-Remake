@@ -2,22 +2,31 @@
 using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
+using Mario.Entities.Enemies;
+using Mario.Entities.Items;
+using Mario.Entities.Projectiles;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public EnemyHealth currentHealth = EnemyHealth.Normal;
     private double shellTimer = 0.0;
+    private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
+    public bool teamMario { get; }
 
     public Koopa(Vector2 position)
     {
         physics = new EntityPhysics(this);
+        teamMario = false;
         this.position = position;
         currentState = new RightMovingKoopaState();
     }
@@ -28,6 +37,12 @@ public class Koopa : AbstractCollideable, IEnemy
 
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
+        attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        if (attackCounter > EntitySettings.EnemyAttackCounter)
+        {
+            Attack();
+            attackCounter = 0.0f;
+        }
         HandleShellTime(gameTime);
     }
 
@@ -71,12 +86,23 @@ public class Koopa : AbstractCollideable, IEnemy
         }
         else
         {
-            isShell = true;
-            shellTimer = 1;
-            MediaManager.Instance.PlayEffect(EffectNames.stomp);
-            previousState = currentState;
-            currentState = new StompedKoopaState();
-            position.Y += HalfBlockAdjustment;
+            if (currentHealth is EnemyHealth.Normal)
+            {
+                isShell = true;
+                shellTimer = 1;
+                MediaManager.Instance.PlayEffect(EffectNames.stomp); // Play Effect outside of if statements.
+                previousState = currentState;
+                currentState = new StompedKoopaState();
+                position.Y += HalfBlockAdjustment;
+            }
+            else if (currentHealth is EnemyHealth.Big)
+            {
+                currentHealth = EnemyHealth.Normal;
+            }
+            else
+            {
+                currentHealth = EnemyHealth.Big;
+            }
         }
     }
 
@@ -85,6 +111,48 @@ public class Koopa : AbstractCollideable, IEnemy
         MediaManager.Instance.PlayEffect(EffectNames.kick);
         currentState = new FlippedKoopaState();
         GameContentManager.Instance.RemoveEntity(this);
+    }
+
+    public void Collect(IItem item)
+    {
+        if (item is FireFlower)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            if (currentHealth != EnemyHealth.Fire)
+            {
+                currentHealth = EnemyHealth.Fire;
+            }
+        }
+        else if (item is Mushroom)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            if (((Mushroom)item).IsOneUp())
+            {
+                GameContentManager.Instance.AddEntity(this);
+                return;
+            }
+            if (currentHealth == EnemyHealth.Normal)
+            {
+                currentHealth = EnemyHealth.Big;
+            }
+        }
+        else if (item is Star)
+        {
+            MediaPlayer.Pause();
+            MediaManager.Instance.PlayTheme(SongThemes.enemyStar, true);
+            GameContentManager.Instance.RemoveEntity(this);
+            GameContentManager.Instance.AddEntity(new StarEnemy(this));
+        }
+
+    }
+
+    public void Attack()
+    {
+        if (currentHealth is EnemyHealth.Fire)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
+            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
     }
 
     public void ChangeDirection()
@@ -101,6 +169,11 @@ public class Koopa : AbstractCollideable, IEnemy
             if (!isShell)
                 currentState = new RightMovingKoopaState();
         }
+    }
+
+    public EnemyHealth ReportHealth()
+    {
+        return currentHealth;
     }
 
     public bool ReportIsAlive()
