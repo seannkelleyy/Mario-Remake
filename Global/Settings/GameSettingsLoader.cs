@@ -22,6 +22,8 @@ public static class GameSettingsLoader
         GameSettings.IsDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
         GameSettings.LevelTopHeight = Convert.ToInt32(settings["GameSettings"]["levelTopHeight"]);
         GameSettings.UndergroundCamera = new Vector2(Convert.ToSingle(settings["GameSettings"]["UndergroundCameraX"]), Convert.ToSingle(settings["GameSettings"]["UndergroundCameraY"]));
+        GameSettings.LevelEnd = Convert.ToSingle(settings["GameSettings"]["levelEnd"]);
+
 
         // Load PhysicsSettings
         PhysicsSettings.Gravity = Convert.ToSingle(settings["Physics"]["gravity"]);

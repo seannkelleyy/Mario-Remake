@@ -12,13 +12,15 @@ namespace Mario.Entities.Blocks
     {
         private ISprite flagSprite;
         private Vector2 flagPosition;
+        private ISprite castleSprite;
         public Flag(Vector2 position, bool breakable, bool collidable)
         {
             this.position = position;
             isCollidable = collidable;
             isBreakable = breakable;
-            canBeCombined = true;
+            canBeCombined = false;
             currentState = new FlagState();
+            castleSprite = SpriteFactory.Instance.CreateSprite("Castle");
             flagSprite = SpriteFactory.Instance.CreateSprite("Flag");
             flagPosition = position + new Vector2(-GlobalVariables.HalfBlockAdjustment, GlobalVariables.BlockHeightWidth);
         }
@@ -26,6 +28,11 @@ namespace Mario.Entities.Blocks
         {
             base.Draw(spriteBatch);
             flagSprite.Draw(spriteBatch, flagPosition);
+            castleSprite.Draw(spriteBatch, position + new Vector2(GlobalVariables.BlockHeightWidth * 4, +GetRectangle().Height - GlobalVariables.BlockHeightWidth));
+        }
+        public void MoveFlag()
+        {
+            flagPosition = new Vector2(flagPosition.X, GameContentManager.Instance.GetHero().GetPosition().Y);
         }
         public override void GetHit()
         {

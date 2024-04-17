@@ -32,7 +32,11 @@ public class HeroCollisionHandler
         {
             if (block is Flag)
             {
-
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
             }
             else
             {
@@ -44,7 +48,11 @@ public class HeroCollisionHandler
         {
             if (block is Flag)
             {
-
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
             }
             else
             {
@@ -56,7 +64,11 @@ public class HeroCollisionHandler
         {
             if (block is Flag)
             {
-
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
             }
             else
             {
@@ -74,7 +86,11 @@ public class HeroCollisionHandler
             }
             else if (block is Flag)
             {
-
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
             }
             else
             {

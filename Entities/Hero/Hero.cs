@@ -51,12 +51,11 @@ namespace Mario.Entities.Character
         public override void Update(GameTime gameTime)
         {
             ClearCollisions();
+            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             currentState.Update(gameTime);
 
             stats.Update(gameTime);
-
-            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             if (position.X - GetVelocity().X <= CameraLeftEdge)
             {
@@ -64,10 +63,7 @@ namespace Mario.Entities.Character
                 SetCollisionState(CollisionDirection.Left, true);
                 position.X += HorizontalBlockCollisionAdjustment;
             }
-
             HandleInvulnerability(gameTime);
-
-            physics.Update();
         }
 
         public new virtual void Draw(SpriteBatch spriteBatch)
@@ -95,8 +91,6 @@ namespace Mario.Entities.Character
                     invulnerabilityFrames = 0.0;
                 }
             }
-
-            physics.Update();
         }
         public void WalkLeft()
         {
@@ -109,6 +103,12 @@ namespace Mario.Entities.Character
         public void Stand()
         {
             currentState.Stand();
+        }
+        public void Win()
+        {
+            this.StopHorizontal();
+            currentState.PoleSlide();
+            GameStateManager.Instance.Win();
         }
 
         public void StopHorizontal()

@@ -11,11 +11,17 @@ namespace Mario.Singletons
         public static GameStateManager Instance => instance;
         public bool isPaused { get; private set; } = false;
         public bool isResetting { get; private set; } = false;
+        public bool isWin { get; private set; } = false;
         public double resetTime { get; private set; } = 0.0;
 
         // Private constructor
         private GameStateManager() { }
-
+        //
+        public void Win()
+        {
+            Pause();
+            isWin = !isWin;
+        }
         // Restarts the game
         public void Restart()
         {
