@@ -16,9 +16,11 @@ using static Mario.Global.GlobalVariables;
 public class Koopa : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth = EnemyHealth.Normal;
+    public EnemyHealth currentHealth;
+    private Random rnd = new Random();
     private double shellTimer = 0.0;
     private double attackCounter = 0.0f;
+    private double attackTimer = EntitySettings.EnemyAttackCounter;
     private AbstractEntityState previousState;
     public bool isShell = false;
     public bool teamMario { get; }
@@ -29,6 +31,7 @@ public class Koopa : AbstractCollideable, IEnemy
         teamMario = false;
         this.position = position;
         currentState = new RightMovingKoopaState();
+        currentHealth = (EnemyHealth) rnd.Next(1, 3);
     }
 
     public override void Update(GameTime gameTime)
@@ -38,10 +41,12 @@ public class Koopa : AbstractCollideable, IEnemy
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-        if (attackCounter > EntitySettings.EnemyAttackCounter)
+        if (attackCounter > attackTimer)
         {
             Attack();
             attackCounter = 0.0f;
+            attackTimer = (rnd.NextDouble() + 1.00);
+
         }
         HandleShellTime(gameTime);
     }
@@ -128,7 +133,7 @@ public class Koopa : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
-                GameContentManager.Instance.AddEntity(this);
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreateEnemy("koopa", new Vector2(this.GetPosition().X + BlockHeightWidth, this.GetPosition().Y)));
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)

@@ -19,6 +19,12 @@
       "startingX": 23,
       "startingY": 12,
       "isRight": false
+    },
+    {
+      "type": "koopa",
+      "startingX": 18,
+      "startingY": 11,
+      "isRight": true
     }
   ],
   "blockSections": [
@@ -121,9 +127,41 @@
       "item": "star"
     },
     {
+      "type": "mystery",
+      "x": 15,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "oneUp"
+    },
+    {
       "type": "brick",
       "x": 30,
       "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 30,
+      "y": 11,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 30,
+      "y": 10,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 30,
+      "y": 9,
       "collidable": true,
       "breakable": false,
       "item": "none"

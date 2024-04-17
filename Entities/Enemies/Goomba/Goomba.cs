@@ -9,14 +9,17 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth = EnemyHealth.Normal;
+    public EnemyHealth currentHealth;
+    private Random rnd = new Random();
     private double deadTimer = 0.0f;
     private double attackCounter = 0.0f;
+    private double attackTimer = EntitySettings.EnemyAttackCounter;
     public bool teamMario { get; }
 
     public Goomba(Vector2 position)
@@ -25,6 +28,7 @@ public class Goomba : AbstractCollideable, IEnemy
         teamMario = false;
         this.position = position;
         currentState = new MovingGoombaState();
+        currentHealth = (EnemyHealth)rnd.Next(1, 3);
     }
 
     public override void Update(GameTime gameTime)
@@ -45,10 +49,11 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             physics.Update();
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            if (attackCounter > EntitySettings.EnemyAttackCounter)
+            if (attackCounter > attackTimer)
             {
                 Attack();
                 attackCounter = 0.0f;
+                attackTimer = rnd.NextDouble() + 1;
             }
         }
     }
@@ -92,11 +97,10 @@ public class Goomba : AbstractCollideable, IEnemy
         }
         else if (item is Mushroom)
         {
-            // Let it respawn?
             MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
-                GameContentManager.Instance.AddEntity(this);
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreateEnemy("goomba", new Vector2(this.GetPosition().X + BlockHeightWidth, this.GetPosition().Y)));
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)
