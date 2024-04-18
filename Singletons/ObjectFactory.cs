@@ -2,12 +2,11 @@
 using Mario.Entities.Character;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
+using Mario.Entities.Pipes;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Pipes;
-using System;
 
 namespace Mario.Singletons
 {
@@ -30,25 +29,35 @@ namespace Mario.Singletons
                     return new Goomba(position);
                 case "koopa":
                     return new Koopa(position);
+                case "bulletBill":
+                    return new BulletBill(position);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
         }
 
-        public IBlock CreateBlock(string type, Vector2 position, bool breakeable, bool collideable, string item)
+        public IBlock CreateBlock(string type, Vector2 position, bool breakable, bool collideable, string item)
         {
             switch (type)
             {
                 case "floor":
-                    return new FloorBlock(position, breakeable, collideable);
+                    return new FloorBlock(position, breakable, collideable);
                 case "floorUnderground":
-                    return new FloorBlock(position, breakeable, collideable, true);
+                    return new FloorBlock(position, breakable, collideable, true);
                 case "brick":
-                    return new BrickBlock(position, breakeable, collideable, item);
+                    return new BrickBlock(position, breakable, collideable, item);
                 case "brickUnderground":
-                    return new BrickBlock(position, breakeable, collideable, item, true);
+                    return new BrickBlock(position, breakable, collideable, item, true);
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
+                case "bulletBillLauncher":
+                    return new BulletBillLauncher(position, breakable, collideable);
+                case "stone":
+                    return new StoneBlock(position, breakable, collideable);
+                case "flag":
+                    return new Flag(position, breakable, collideable);
+                case "deathBlock":
+                    return new DeathBlock(position, breakable, collideable);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }

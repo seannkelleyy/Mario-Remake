@@ -1,47 +1,55 @@
 {
-  "level": "1",
-  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
-  "width": 26,
-  "height": 18,
-  "timeLimit": 300,
-  "song": "ground",
-  "hero": {
-    "type": "mario",
-    "startingX": 5,
-    "startingY": 1,
-    "lives": 1,
-    "startingPower": "fire"
-  },
-  "enemies": [
-    {
-      "type": "goomba",
-      "startingX": 11,
-      "startingY": 12,
-      "isRight": false
-    }
-  ],
-  "blockSections": [
-    {
-      "type": "floorUnderground",
-      "startingX": 0,
-      "startingY": 14,
-      "endingX": 60,
-      "endingY": 18,
-      "collidable": false,
-      "breakable": false,
-      "item": "none"
+    "level": "1",
+    "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
+    "width": 26,
+    "height": 18,
+    "timeLimit": 300,
+    "song": "ground",
+    "hero": {
+        "type": "mario",
+        "startingX": 5,
+        "startingY": 1,
+        "lives": 1,
+        "startingPower": "fire"
     },
-    {
-      "type": "floorUnderground",
-      "startingX": 0,
-      "startingY": 13,
-      "endingX": 60,
-      "endingY": 13,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
-    }
-  ],
+    "enemies": [
+        {
+            "type": "goomba",
+            "startingX": 11,
+            "startingY": 12,
+            "isRight": false
+        },
+        {
+            "type": "koopa",
+            "startingX": 4,
+            "startingY": 12,
+            "isRight": false
+        }
+    ],
+    "items": [],
+    "itemSections": [],
+    "blockSections": [
+        {
+            "type": "floorUnderground",
+            "startingX": 0,
+            "startingY": 14,
+            "endingX": 60,
+            "endingY": 18,
+            "collidable": false,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "floorUnderground",
+            "startingX": 0,
+            "startingY": 13,
+            "endingX": 60,
+            "endingY": 13,
+            "collidable": true,
+            "breakable": false,
+            "item": "none"
+        }
+    ],
     "pipes": [
         {
             "type": "pipeTubeVertical",
@@ -88,86 +96,86 @@
             "breakable": false
         }
     ],
-  "blocks": [
-    {
-      "type": "floor",
-      "x": 4,
-      "y": 12,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
-    },
-    {
-      "type": "floor",
-      "x": 13,
-      "y": 12,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
-    },
-    {
-      "type": "mystery",
-      "x": 17,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
-    },
-    {
-      "type": "brick",
-      "x": 14,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "oneUp"
-    },
-    {
-      "type": "brickUnderground",
-      "x": 10,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "oneUp"
-    },
-    {
-      "type": "mystery",
-      "x": 21,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "fireflower"
-    },
-    {
-      "type": "mystery",
-      "x": 22,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "star"
-    },
-    {
-      "type": "mystery",
-      "x": 23,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "redMushroom"
-    },
-    {
-      "type": "mystery",
-      "x": 24,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "coinUnderground"
-    },
-    {
-      "type": "mystery",
-      "x": 25,
-      "y": 9,
-      "collidable": true,
-      "breakable": false,
-      "item": "oneUp"
-    }
-  ]
+    "blocks": [
+        {
+            "type": "floor",
+            "x": 4,
+            "y": 12,
+            "collidable": true,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "floor",
+            "x": 13,
+            "y": 12,
+            "collidable": true,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "mystery",
+            "x": 17,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "none"
+        },
+        {
+            "type": "brick",
+            "x": 14,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "oneUp"
+        },
+        {
+            "type": "brickUnderground",
+            "x": 10,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "oneUp"
+        },
+        {
+            "type": "mystery",
+            "x": 21,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "fireflower"
+        },
+        {
+            "type": "mystery",
+            "x": 22,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "star"
+        },
+        {
+            "type": "mystery",
+            "x": 23,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "redMushroom"
+        },
+        {
+            "type": "mystery",
+            "x": 24,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "coinUnderground"
+        },
+        {
+            "type": "mystery",
+            "x": 25,
+            "y": 9,
+            "collidable": true,
+            "breakable": false,
+            "item": "oneUp"
+        }
+    ]
 }

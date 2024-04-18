@@ -5,6 +5,7 @@
     public static float EnemyDespawnTime { get; set; }
     public static float EnemyPhantomTimer { get; set; }
     public static float KoopaShellTime { get; set; }
+    public static float BulletBillSpawnTime { get; set; }
     public static float HeroInvulnerabilityTime { get; set; }
     public static float HeroFlashDuration { get; set; }
     public static float HeroAttackTime { get; set; }

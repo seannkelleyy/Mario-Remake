@@ -1,3 +1,4 @@
+using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Entities.Enemies;
 using Mario.Global;
@@ -5,6 +6,7 @@ using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -30,24 +32,74 @@ public class HeroCollisionHandler
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Left, true);
-            hero.StopHorizontal();
+            if (block is Flag)
+            {
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
+            }
+            else
+            {
+                hero.SetCollisionState(CollisionDirection.Left, true);
+                hero.StopHorizontal();
+            }
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Right, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Right, true);
-            hero.StopHorizontal();
+            if (block is Flag)
+            {
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
+            }
+            else
+            {
+                hero.SetCollisionState(CollisionDirection.Right, true);
+                hero.StopHorizontal();
+            }
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() =>
         {
-            if (block.isBreakable) GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.BreakBlockScore);
-            hero.SetCollisionState(CollisionDirection.Top, true);
-            hero.StopVertical();
-            block.GetHit();
+            if (block is Flag)
+            {
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                    hero.SetPosition(new Vector2(hero.GetPosition().Y, block.GetPosition().X + HalfBlockAdjustment));
+                }
+                ((Flag)block).MoveFlag();
+            }
+            else
+            {
+                if (block.isBreakable) GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.BreakBlockScore);
+                hero.SetCollisionState(CollisionDirection.Top, true);
+                hero.StopVertical();
+                block.GetHit();
+            }
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
+            if (block is DeathBlock)
+            {
+                hero.Die();
+            }
+            else if (block is Flag)
+            {
+                if (!GameStateManager.Instance.isWin)
+                {
+                    hero.Win();
+                }
+                ((Flag)block).MoveFlag();
+            }
+            else
+            {
+                hero.SetCollisionState(CollisionDirection.Bottom, true);
+
+            }
         }));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleHeroEnemySideCollision));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleHeroEnemySideCollision));
@@ -139,7 +191,8 @@ public class HeroCollisionHandler
         {
             koopa.physics.currentHorizontalDirection = hero.GetHorizontalDirection();
             koopa.physics.ToggleIsStationary();
-        } else
+        }
+        else
         {
             hero.TakeDamage();
         }
@@ -171,7 +224,7 @@ public class HeroCollisionHandler
     public void HeroPipeCollision(IPipe pipe)
     {
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), pipe.GetRectangle(), hero.GetVelocity());
-        if (collisionDictionary[typeof (IPipe)].ContainsKey(direction))
+        if (collisionDictionary[typeof(IPipe)].ContainsKey(direction))
         {
             this.pipe = pipe;
             collisionDictionary[typeof(IPipe)][direction].Invoke();

@@ -9,7 +9,6 @@ using Mario.Physics;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
@@ -183,6 +182,11 @@ namespace Mario.Entities.Character
         public HeroStatTracker GetStats()
         {
             return decoratorHero.GetStats();
+        }
+
+        public void Win()
+        {
+            decoratorHero.Win();
         }
     }
 }
