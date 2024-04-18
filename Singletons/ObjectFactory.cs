@@ -53,11 +53,11 @@ namespace Mario.Singletons
                 case "bulletBillLauncher":
                     return new BulletBillLauncher(position, breakable, collideable);
                 case "stone":
-                    return new StoneBlock(position, breakeable, collideable);
+                    return new StoneBlock(position, breakable, collideable);
                 case "flag":
-                    return new Flag(position, breakeable, collideable);
+                    return new Flag(position, breakable, collideable);
                 case "deathBlock":
-                    return new DeathBlock(position, breakeable, collideable);
+                    return new DeathBlock(position, breakable, collideable);
                 default:
                     throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
