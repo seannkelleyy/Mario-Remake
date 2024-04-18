@@ -5,6 +5,7 @@ using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -67,6 +68,7 @@ public class HeroCollisionHandler
                 if (!GameStateManager.Instance.isWin)
                 {
                     hero.Win();
+                    hero.SetPosition(new Vector2(hero.GetPosition().Y, block.GetPosition().X + HalfBlockAdjustment));
                 }
                 ((Flag)block).MoveFlag();
             }

@@ -1,6 +1,7 @@
 ﻿using Mario.Input;
 using System;
 using System.Diagnostics;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Singletons
 {
@@ -20,6 +21,10 @@ namespace Mario.Singletons
         public void Win()
         {
             Pause();
+            if (!isWin)
+            {
+                MediaManager.Instance.PlayTheme(SongThemes.levelComplete, false);
+            }
             isWin = !isWin;
         }
         // Restarts the game
@@ -52,6 +57,7 @@ namespace Mario.Singletons
             SetResetTime(0.0);
             LevelLoader.Instance.UnloadLevel();
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
+            MediaManager.Instance.PlayDefaultTheme();
             isResetting = false;
             camera.ResetCamera();
             Pause();

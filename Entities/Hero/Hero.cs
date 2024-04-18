@@ -109,8 +109,9 @@ namespace Mario.Entities.Character
         public void Win()
         {
             this.StopHorizontal();
-            currentState.PoleSlide();
             GameStateManager.Instance.Win();
+            currentState.PoleSlide();
+            this.StopHorizontal();
         }
 
         public void StopHorizontal()

@@ -32,7 +32,7 @@ namespace Mario
 
             LevelLoader.Instance.Initialize(Content);
 
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/test.json", graphics);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1-1.json", graphics);
             base.Initialize();
         }
 
@@ -82,6 +82,7 @@ namespace Mario
             {
                 if (GameContentManager.Instance.GetHero().GetPosition().X < GameSettings.LevelEnd * GlobalVariables.BlockHeightWidth)
                 {
+                    GameContentManager.Instance.GetHero().Update(gameTime);
                     GameContentManager.Instance.GetHero().WalkRight();
                 }
                 else
@@ -89,7 +90,6 @@ namespace Mario
                     GameStateManager.Instance.Win();
                     GameStateManager.Instance.BeginReset();
                 }
-                GameContentManager.Instance.GetHero().Update(gameTime);
                 base.Update(gameTime);
             }
             else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies

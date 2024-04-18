@@ -5,10 +5,8 @@ using Microsoft.Xna.Framework;
 public class PowerUpState : HeroState
 {
     private float elapsedSeconds = 0;
-    private HeroState previousState;
     public PowerUpState(IHero mario, HeroState previousState) : base(mario)
     {
-        this.previousState = previousState;
     }
     public override void Stand() { }
     public override void WalkRight() { }

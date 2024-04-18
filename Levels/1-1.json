@@ -21,12 +21,6 @@
       "isRight": false
     },
     {
-      "type": "bulletBill",
-      "startingX": 32,
-      "startingY": 12,
-      "isRight": false
-    },
-    {
       "type": "goomba",
       "startingX": 41,
       "startingY": 12,
@@ -541,6 +535,16 @@
       "collidable": true,
       "breakable": true,
       "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 197,
+      "startingY": 12,
+      "endingX": 199,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     }
   ],
   "blocks": [
@@ -551,14 +555,6 @@
       "collidable": true,
       "breakable": false,
       "item": "coin"
-    },
-    {
-      "type": "bulletBillLauncher",
-      "x": 28,
-      "y": 11,
-      "collidable": true,
-      "breakable": false,
-      "item": "none"
     },
     {
       "type": "brick",
@@ -870,14 +866,6 @@
       "y": 8,
       "collidable": true,
       "breakable": true,
-      "item": "none"
-    },
-    {
-      "type": "stone",
-      "x": 198,
-      "y": 12,
-      "collidable": true,
-      "breakable": false,
       "item": "none"
     },
     {
