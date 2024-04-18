@@ -46,7 +46,6 @@ namespace Mario.Entities.Sprites
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * size, height * size);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
-
         public Vector2 GetVector()
         {
             return new Vector2(width, height);

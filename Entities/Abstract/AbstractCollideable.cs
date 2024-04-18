@@ -32,7 +32,7 @@ namespace Mario.Entities
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             currentState.Draw(spriteBatch, position);
         }

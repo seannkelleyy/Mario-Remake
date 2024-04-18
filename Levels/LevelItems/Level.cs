@@ -13,6 +13,8 @@ namespace Mario.Levels.Level
         public string song { get; set; }
         public LevelHero hero { get; set; }
         public List<LevelEnemy> enemies { get; set; }
+        public List<LevelItem> items { get; set; }
+        public List<LevelItemSection> itemSections { get; set; }
         public List<LevelBlockSection> blockSections { get; set; }
         public List<LevelBlock> blocks { get; set; }
         public List<LevelPipe> pipes { get; set; }

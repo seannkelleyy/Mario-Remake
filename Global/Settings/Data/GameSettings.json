@@ -1,11 +1,15 @@
 ﻿{
-  "GameSettings": {
-    "frameRate": 60,
-    "cameraStartingX": 400,
-    "cameraStartingY":  48,
-    "isDevelopment": true,
-    "levelJsonFilePath": "../../../Levels/Sprint3.json"
-  },
+    "GameSettings": {
+        "frameRate": 60,
+        "cameraStartingX": 400,
+        "cameraStartingY": 48,
+        "isDevelopment": true,
+        "levelJsonFilePath": "../../../Levels/1-1.json",
+        "levelTopHeight": 16,
+        "UndergroundCameraX": 2416,
+        "UndergroundCameraY": 304,
+            "levelEnd": 205.5
+    },
   "Physics": {
     "gravity": 1.325,
     "friction": 0.025,
@@ -15,6 +19,7 @@
     "runAcceleration": 0.30,
     "enemySpeed": 0.5,
     "koopaShellSpeed": 1.5,
+    "bulletBillSpeed": 1.0,
     "regularJumpLimit": 55,
     "smallJumpLimit": 20,
     "minimumJumpLimit": 40,
@@ -31,9 +36,10 @@
   },
   "Entity": {
     "enemyAttackCounter": 1.5,
-    "enemyDespawnTime": 3,
+    "enemyDespawnTime": 2,
     "enemyInvulnerabilityTime": 3,
     "koopaShellTime": 8.0,
+    "bulletBillSpawnTime": 3.0,
     "heroInvulnerabilityTime": 3,
     "heroFlashDuration": 0.05,
     "heroAttackTime": 0.25,

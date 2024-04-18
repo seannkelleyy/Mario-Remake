@@ -12,6 +12,7 @@ For our project we chose to make a Mario clone.
 This project was completed in sprints that were completely designed and completed by the members in our group.
 
 ### CHECK OUT OUR WIKI FOR DOCUMENTATION
+### TICKETS FOR EACH SPRINT ARE CATEGORIZED IN MILESTONES
 
 ## Technical Details
 Languages and Frameworks Used:

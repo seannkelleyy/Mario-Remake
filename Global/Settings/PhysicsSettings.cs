@@ -9,6 +9,7 @@
     public static float RunAcceleration { get; set; }
     public static float EnemySpeed { get; set; }
     public static float KoopaShellSpeed { get; set; }
+    public static float BulletBillSpeed { get; set; }
     public static int RegularJumpLimit { get; set; }
     public static int SmallJumpLimit { get; set; }
     public static int MinimumJumpLimit { get; set; }

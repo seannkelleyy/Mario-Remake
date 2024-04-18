@@ -78,6 +78,20 @@ namespace Mario
                 camera.UpdatePosition();
                 base.Update(gameTime);
             }
+            else if (GameStateManager.Instance.isWin)
+            {
+                if (GameContentManager.Instance.GetHero().GetPosition().X < GameSettings.LevelEnd * GlobalVariables.BlockHeightWidth)
+                {
+                    GameContentManager.Instance.GetHero().Update(gameTime);
+                    GameContentManager.Instance.GetHero().WalkRight();
+                }
+                else
+                {
+                    GameStateManager.Instance.Win();
+                    GameStateManager.Instance.BeginReset();
+                }
+                base.Update(gameTime);
+            }
             else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
             {
                 if (GameStateManager.Instance.resetTime < GlobalVariables.MaxResetTime)
@@ -86,7 +100,7 @@ namespace Mario
                 }
                 else if (GameStateManager.Instance.resetTime >= GlobalVariables.MaxResetTime)
                 {
-                    GameStateManager.Instance.EndReset(camera);
+                    GameStateManager.Instance.EndReset(ref camera);
                     keyboardController = new KeyboardController();
                     keyboardController.LoadCommands(this);
                     gamePadController = new GamePadController();

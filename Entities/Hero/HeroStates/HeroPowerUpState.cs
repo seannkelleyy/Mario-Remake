@@ -5,10 +5,8 @@ using Microsoft.Xna.Framework;
 public class PowerUpState : HeroState
 {
     private float elapsedSeconds = 0;
-    private HeroState previousState;
     public PowerUpState(IHero mario, HeroState previousState) : base(mario)
     {
-        this.previousState = previousState;
     }
     public override void Stand() { }
     public override void WalkRight() { }
@@ -24,11 +22,11 @@ public class PowerUpState : HeroState
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
+        sprite.Update(gameTime);
         elapsedSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (elapsedSeconds >= EntitySettings.HeroAnimationLength)
         {
-            hero.currentState = previousState;
+            hero.currentState = new StandState(hero);
         }
     }
 }

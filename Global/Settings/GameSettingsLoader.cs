@@ -20,6 +20,10 @@ public static class GameSettingsLoader
         GameSettings.CameraStarting = new Vector2(Convert.ToSingle(settings["GameSettings"]["cameraStartingX"]), Convert.ToSingle(settings["GameSettings"]["cameraStartingY"]));
         GameSettings.ScreenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         GameSettings.IsDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
+        GameSettings.LevelTopHeight = Convert.ToInt32(settings["GameSettings"]["levelTopHeight"]);
+        GameSettings.UndergroundCamera = new Vector2(Convert.ToSingle(settings["GameSettings"]["UndergroundCameraX"]), Convert.ToSingle(settings["GameSettings"]["UndergroundCameraY"]));
+        GameSettings.LevelEnd = Convert.ToSingle(settings["GameSettings"]["levelEnd"]);
+
 
         // Load PhysicsSettings
         PhysicsSettings.Gravity = Convert.ToSingle(settings["Physics"]["gravity"]);
@@ -30,6 +34,7 @@ public static class GameSettingsLoader
         PhysicsSettings.RunAcceleration = Convert.ToSingle(settings["Physics"]["runAcceleration"]);
         PhysicsSettings.EnemySpeed = Convert.ToSingle(settings["Physics"]["enemySpeed"]);
         PhysicsSettings.KoopaShellSpeed = Convert.ToSingle(settings["Physics"]["koopaShellSpeed"]);
+        PhysicsSettings.BulletBillSpeed = Convert.ToSingle(settings["Physics"]["bulletBillSpeed"]);
         PhysicsSettings.RegularJumpLimit = Convert.ToInt32(settings["Physics"]["regularJumpLimit"]);
         PhysicsSettings.SmallJumpLimit = Convert.ToInt32(settings["Physics"]["smallJumpLimit"]);
         PhysicsSettings.MinimumJumpLimit = Convert.ToInt32(settings["Physics"]["minimumJumpLimit"]);
@@ -48,6 +53,7 @@ public static class GameSettingsLoader
         EntitySettings.EnemyAttackCounter = Convert.ToSingle(settings["Entity"]["enemyAttackCounter"]);
         EntitySettings.EnemyDespawnTime = Convert.ToSingle(settings["Entity"]["enemyDespawnTime"]);
         EntitySettings.KoopaShellTime = Convert.ToSingle(settings["Entity"]["koopaShellTime"]);
+        EntitySettings.BulletBillSpawnTime = Convert.ToSingle(settings["Entity"]["bulletBillSpawnTime"]);
         EntitySettings.HeroFlashDuration = Convert.ToSingle(settings["Entity"]["heroFlashDuration"]);
         EntitySettings.HeroInvulnerabilityTime = Convert.ToSingle(settings["Entity"]["heroInvulnerabilityTime"]);
         EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
