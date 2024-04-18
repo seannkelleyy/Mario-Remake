@@ -33,7 +33,7 @@ namespace Mario.Entities.Enemies
             {
                 isBig = false;
             }
-            phantomSprite = SpriteFactory.Instance.CreateSprite(isBig.ToString() + GetType().Name);
+            phantomSprite = SpriteFactory.Instance.CreateSprite("phantom" + GetType().Name);
             teamMario = false;
         }
 
