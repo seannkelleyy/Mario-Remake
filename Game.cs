@@ -22,7 +22,7 @@ namespace Mario
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferHeight = 90;
+            graphics.PreferredBackBufferHeight = GameSettings.WindowHeight;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -35,6 +35,7 @@ namespace Mario
             LevelLoader.Instance.Initialize(Content);
 
             GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/test.json", graphics);
+
             base.Initialize();
         }
 

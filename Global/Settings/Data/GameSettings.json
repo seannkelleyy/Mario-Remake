@@ -2,7 +2,7 @@
   "GameSettings": {
     "frameRate": 60,
     "cameraStartingX": 400,
-    "cameraStartingY":  48,
+    "cameraStartingY": 48,
     "isDevelopment": true,
     "levelJsonFilePath": "../../../Levels/Sprint3.json"
   },
