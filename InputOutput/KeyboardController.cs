@@ -31,6 +31,7 @@ namespace Mario.Input
             Commands.Add(Keys.R, actions[1]);
             Commands.Add(Keys.Escape, actions[7]);
             Commands.Add(Keys.P, actions[7]);
+            Commands.Add(Keys.F, actions[8]);
 
             // WASD commands
             Commands.Add(Keys.W, actions[2]);
@@ -94,6 +95,7 @@ namespace Mario.Input
                     MediaPlayer.Resume();
                 }
             });
+            actions[8] = new Action(game.ChangeFullScreenMode);
             return actions;
         }
 
