@@ -913,17 +913,6 @@
     },
     {
       "type": "pipeTubeVertical",
-      "x": 47,
-      "startingY": 9,
-      "endingY": 12,
-      "transportable": false,
-      "transportDestinationX": -1,
-      "transportDestinationY": -1,
-      "collidable": true,
-      "breakable": false
-    },
-    {
-      "type": "pipeTubeVertical",
       "x": 58,
       "startingY": 9,
       "endingY": 12,

@@ -128,7 +128,7 @@ namespace Mario.Singletons
                    pipe.transportable));
                 if (pipe.type.Equals("pipeTubeVertical"))
                 {
-                    for (int y = pipe.startingY + 1; y <= pipe.endingY; y++)
+                    for (int y = pipe.startingY + 2; y <= pipe.endingY; y++)
                     {
                         IPipe pipeObject = ObjectFactory.Instance.CreatePipe(
                             "pipeTile",
