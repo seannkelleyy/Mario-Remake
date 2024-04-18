@@ -9,6 +9,7 @@
     "emptyBlockTile": [ 16, 16, 16, 16, 1, 1, 1 ],
     "FalseStarHero": [ 0, 160, 16, 16, 3, 1, 3 ],
     "FalseStarEnemy": [ 0, 160, 16, 16, 3, 1, 3 ],
+    "FalsePhantomEnemy": [ 0, 160, 16, 16, 3, 1, 3 ],
     "fireball": [ 0, 0, 8, 8, 2, 1, 4 ],
     "fireballExplosion": [ 0, 8, 16, 16, 3, 1, 4 ],
     "fireFlower": [ 0, 0, 16, 16, 4, 1, 0 ],

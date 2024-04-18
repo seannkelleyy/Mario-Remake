@@ -1,4 +1,5 @@
 using Mario.Entities.Character;
+using Mario.Entities.Enemies;
 using Mario.Global;
 using Mario.Global.Settings;
 using Mario.Interfaces;
@@ -130,9 +131,13 @@ public class HeroCollisionHandler
 
     public void HandleHeroEnemySideCollision()
     {
-        if (hero is StarHero)
+        if (hero is StarHero && enemy is not PhantomEnemy)
         {
             enemy.Flip();
+        }
+        else if (hero is not StarHero && enemy is PhantomEnemy)
+        {
+
         }
         else if (enemy is Koopa koopa && koopa.isShell && koopa.physics.IsStationary())
         {

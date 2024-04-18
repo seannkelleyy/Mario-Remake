@@ -14,20 +14,15 @@ namespace Mario.Entities.Enemies.EnemyAI
 
         public void Jump(IEnemy enemy)
         {
-            if (enemy.GetCollisionState(CollisionDirection.Bottom))
-            {
-                isFalling = false;
-                velocity.Y = -PhysicsSettings.JumpForce;
-                jumpCounter = 1;
-            }
+            enemy.physics.Jump();
         }
 
-        public void Seek()
+        public void Seek(IEnemy enemy)
         {
             // For JumpAI, this does nothing.
         }
 
-        public void Scare()
+        public void Scare(IEnemy enemy)
         {
             // For JumpAI, this does nothing.
         }

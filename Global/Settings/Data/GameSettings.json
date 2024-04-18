@@ -32,6 +32,7 @@
   "Entity": {
     "enemyAttackCounter": 1.5,
     "enemyDespawnTime": 3,
+    "enemyPhantomTimer": 2,
     "enemyInvulnerabilityTime": 3,
     "koopaShellTime": 8.0,
     "heroInvulnerabilityTime": 3,

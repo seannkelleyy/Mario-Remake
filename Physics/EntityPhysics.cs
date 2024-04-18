@@ -29,6 +29,16 @@ namespace Mario.Physics
             return isStationary;
         }
 
+        public void Jump()
+        {
+            if (entity.GetCollisionState(CollisionDirection.Bottom))
+            {
+                isFalling = false;
+                velocity.Y = -PhysicsSettings.JumpForce;
+                jumpCounter = 1;
+            }
+        }
+
         internal override void UpdateHorizontal()
         {
             if (isStationary) return;
