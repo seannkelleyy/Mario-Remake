@@ -5,23 +5,20 @@ type EditBlockProps = {
 
 export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
   return (
-    <section>
+    <section className="edit-block-popup">
       <h2>Edit Block</h2>
-
       <label>Block Type:</label>
       <select
-        value={selectedBlock?.type}
+        value={selectedBlock?.type ? selectedBlock.type : "air"}
         onChange={(e) => {
-          if (selectedBlock) {
-            updateBlock(
-              selectedBlock.x,
-              selectedBlock.y,
-              e.target.value,
-              selectedBlock.item,
-              selectedBlock.collidable,
-              selectedBlock.breakable
-            );
-          }
+          updateBlock(
+            selectedBlock.x,
+            selectedBlock.y,
+            e.target.value,
+            selectedBlock.item,
+            selectedBlock.collidable,
+            selectedBlock.breakable
+          );
         }}
       >
         <option value="air">Air</option>
@@ -36,7 +33,7 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
       <label>Collideable:</label>
       <input
         type="checkbox"
-        checked={selectedBlock?.collidable}
+        checked={selectedBlock?.collidable ? selectedBlock.collidable : false}
         onChange={(e) =>
           updateBlock(
             selectedBlock.x,
@@ -51,7 +48,7 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
       <label>Breakable:</label>
       <input
         type="checkbox"
-        checked={selectedBlock?.breakable}
+        checked={selectedBlock?.breakable ? selectedBlock.breakable : false}
         onChange={(e) =>
           updateBlock(
             selectedBlock.x,
@@ -65,7 +62,7 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
       />
       <label>Item:</label>
       <select
-        value={selectedBlock?.item}
+        value={selectedBlock?.item ? selectedBlock.item : "none"}
         onChange={(e) => {
           if (selectedBlock) {
             updateBlock(

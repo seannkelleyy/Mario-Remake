@@ -52,3 +52,13 @@
   border: 1px solid #000000;
   box-shadow: 0 2px 4px rgba(253, 253, 253, 0.1);
 }
+
+.edit-block-popup {
+  width: 200px; /* adjust as needed */
+  height: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  z-index: 1;
+}

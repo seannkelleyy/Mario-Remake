@@ -2,19 +2,19 @@ import { Level } from "../../models/level";
 
 type EditLevelProps = {
   level: Level;
-  updateLevel: (property: any, value: any) => void;
   rows: number;
-  handleRowChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleColumnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateLevel: (property: any, value: any) => void;
 };
 
 export const EditLevel = ({
   level,
-  updateLevel,
   rows,
-  handleRowChange,
+  handleColumnChange: handleRowChange,
+  updateLevel,
 }: EditLevelProps) => {
   return (
-    <>
+    <section>
       <label>Level Name</label>
       <input
         type="text"
@@ -33,12 +33,6 @@ export const EditLevel = ({
           <option value="underground">Underground Theme</option>
           <option value="underwater">Underwater Theme</option>
           <option value="castle">Castle Theme</option>
-          <option value="enemyStar">Star Theme</option>
-          <option value="levelComplete">Level Complete</option>
-          <option value="castleComplete">Castle Complete</option>
-          <option value="lostLife">Lost Life</option>
-          <option value="gameOver">Game Over</option>
-          <option value="ending">Ending</option>
         </select>
         <label>Hero Type</label>
         <select
@@ -86,6 +80,6 @@ export const EditLevel = ({
           }
         />
       </section>
-    </>
+    </section>
   );
 };

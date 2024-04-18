@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Column } from "./components/Row";
 import { EditLevel } from "./components/MenuItems/EditLevel";
 import { Level } from "./models/level";
+import { BlockType } from "./models/block";
+import { BlockSection } from "./models/blockSection";
+import { Enemy } from "./models/enemy";
+import { Block } from "./components/Block";
 import { EditBlock } from "./components/MenuItems/EditBlock";
 
 export const LevelCreator = () => {
@@ -15,7 +18,7 @@ export const LevelCreator = () => {
   } | null>(null);
 
   const [level, setLevel] = useState<Level>({
-    level: "1",
+    level: "Level-1",
     song: "ground",
     width: columns,
     height: 15,
@@ -28,10 +31,11 @@ export const LevelCreator = () => {
       lives: 3,
       statingLives: 3,
     },
-    enemies: [],
-    blockSections: [],
-    blocks: [],
+    enemies: [] as Enemy[],
+    blockSections: [] as BlockSection[],
+    blocks: [] as BlockType[],
   });
+
   let selectedBlock = level.blocks.find(
     (block) =>
       block.x === selectedCoordinates?.x && block.y === selectedCoordinates?.y
@@ -54,31 +58,11 @@ export const LevelCreator = () => {
   ) => {
     setLevel((prevState) => {
       console.log("updateBlock", x, y, blockType, item, collidable, breakable);
-      if (blockType === "air") {
-        return {
-          ...prevState,
-          blocks: prevState.blocks.filter(
-            (block) => block.x !== x || block.y !== y
-          ),
-        };
-      }
-      // Copy the existing blocks array
-      let newBlocks = [...prevState.blocks];
-
-      // Find the block at the given coordinates
-      let blockIndex = newBlocks.findIndex(
-        (block) => block.x === x && block.y === y
+      let newBlocks = prevState.blocks.filter(
+        (block) => block.x !== x || block.y !== y
       );
 
-      // If a block exists at the coordinates, update it
-      if (blockIndex !== -1) {
-        newBlocks[blockIndex].type = blockType;
-        newBlocks[blockIndex].item = item;
-        newBlocks[blockIndex].collidable = collidable;
-        newBlocks[blockIndex].breakable = breakable;
-      }
-      // If no block exists at the coordinates, add a new block
-      else {
+      if (blockType !== "air") {
         newBlocks.push({
           type: blockType,
           x: x,
@@ -103,21 +87,22 @@ export const LevelCreator = () => {
     a.click();
   };
 
-  const handleRowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleColumnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (parseInt(e.target.value) < 1) {
       return setColumns(1);
     }
     setColumns(parseInt(e.target.value));
   };
 
-  const onDragStart = (blockType: string) => {
-    setDragging(true);
+  const handleDrag = (isDragging: boolean, blockType: string = "") => {
+    setDragging(isDragging);
     setNextBlockType(blockType);
   };
 
-  const onDragEnd = () => {
-    setDragging(false);
-    setNextBlockType("");
+  const getBlockTypeAt = (x: number, y: number) => {
+    const block = level.blocks.find((block) => block.x === x && block.y === y);
+    console.log("getBlockTypeAt", x, y, selectedBlock);
+    return block ? block.type : "air"; // return 'air' or any default type for no block
   };
 
   return (
@@ -137,29 +122,36 @@ export const LevelCreator = () => {
           level={level}
           updateLevel={updateLevel}
           rows={columns}
-          handleRowChange={handleRowChange}
+          handleColumnChange={handleColumnChange}
         />
-        {isEditMode && (
-          <EditBlock selectedBlock={selectedBlock} updateBlock={updateBlock} />
-        )}
+        <EditBlock
+          selectedBlock={selectedBlock ? selectedBlock : null}
+          updateBlock={updateBlock}
+        />
       </section>
       <section className="level">
-        {columns &&
-          Array(columns)
-            .fill(0)
-            .map((_, columnIndex) => (
-              <Column
-                key={columnIndex}
-                columnIndex={columnIndex}
-                setSelectedCoordinates={setSelectedCoordinates}
-                dragging={dragging}
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-                nextBlockType={nextBlockType}
-                updateBlock={updateBlock}
-                isEditMode={isEditMode}
-              />
-            ))}
+        {Array(columns)
+          .fill(0)
+          .map((_, columnIndex) => (
+            <section id={columnIndex.toString()} className="column">
+              {Array(15)
+                .fill(0)
+                .map((_, rowIndex) => (
+                  <Block
+                    key={`${columnIndex}-${rowIndex}`}
+                    nextBlockType={nextBlockType}
+                    dragging={dragging}
+                    handleDrag={handleDrag}
+                    isEditMode={isEditMode}
+                    existingBlockType={getBlockTypeAt(columnIndex, rowIndex)}
+                    x={columnIndex}
+                    y={rowIndex}
+                    updateBlock={updateBlock}
+                    setSelectedCoordinates={setSelectedCoordinates}
+                  />
+                ))}
+            </section>
+          ))}
       </section>
     </div>
   );

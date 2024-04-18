@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { blockImages, blockTypes } from "../models/block";
 
 type BlockProps = {
   dragging: boolean;
-  onDragStart: (blockType: string) => void;
-  onDragEnd: () => void;
+  nextBlockType: string;
+  isEditMode: boolean;
+  existingBlockType: string;
+  x: number;
+  y: number;
+  handleDrag: (isDragging: boolean, blockType: string) => void;
   setSelectedCoordinates: (coordinates: { x: number; y: number }) => void;
   updateBlock: (
     x: number,
@@ -13,64 +18,54 @@ type BlockProps = {
     collidable: boolean,
     breakable: boolean
   ) => void;
-  nextBlockType: string;
-  x: number;
-  y: number;
-  isEditMode: boolean;
 };
-
-export const blockTypes = [
-  "air",
-  "floor",
-  "brick",
-  "square-brick",
-  "smooth-brick",
-  "mystery",
-  "pipe",
-  "pipe-top",
-];
 
 export const Block = ({
   dragging,
-  onDragStart,
-  onDragEnd,
-  updateBlock,
-  setSelectedCoordinates,
   nextBlockType,
+  isEditMode,
+  existingBlockType,
   x,
   y,
-  isEditMode,
+  handleDrag,
+  setSelectedCoordinates,
+  updateBlock,
 }: BlockProps) => {
-  const [blockType, setBlockType] = useState(blockTypes[0]);
-  const [item, setItem] = useState("none");
-  const [collidable, setCollidable] = useState(true);
-  const [breakable, setBreakable] = useState(true);
+  const [blockType, setBlockType] = useState(
+    blockTypes[blockTypes.indexOf(existingBlockType)]
+  );
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (isEditMode) {
+  useEffect(() => {
+    setBlockType(blockTypes[blockTypes.indexOf(existingBlockType)]);
+  }, [existingBlockType]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (isEditMode) {
+        e.preventDefault();
+        console.log("handleMouseDown", x, y, blockType);
+        setSelectedCoordinates({ x: x, y: y });
+      } else {
+        let newBlockType = changeBlockType();
+        handleDrag(true, newBlockType);
+        updateBlock(x, y, newBlockType, "none", true, true);
+      }
+    },
+    [isEditMode, handleDrag]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
       e.preventDefault();
-      setSelectedCoordinates({ x: x, y: y });
-      console.log(`x: ${x}, y: ${y}, blockType: ${blockType}`);
-    } else {
-      let newBlockType = changeBlockType();
-      onDragStart(newBlockType);
-      updateBlock(x, y, newBlockType, item, collidable, breakable);
-      console.log(`x: ${x}, y: ${y}, blockType: ${newBlockType}`);
-    }
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (dragging && e.buttons === 1) {
-      setBlockType(nextBlockType);
-    }
-  };
-
-  const handleMouseUp = () => {
-    onDragEnd();
-  };
+      if (dragging && e.buttons === 1) {
+        setBlockType(nextBlockType);
+        updateBlock(x, y, nextBlockType, "none", true, true);
+      }
+    },
+    [dragging, setBlockType]
+  );
 
   const changeBlockType = () => {
-    console.log("changeBlockType" + blockType);
     let currentIndex = blockTypes.indexOf(blockType);
     if (currentIndex === blockTypes.length - 1) {
       currentIndex = 0;
@@ -79,45 +74,16 @@ export const Block = ({
     }
     let newBlockType = blockTypes[currentIndex];
     setBlockType(newBlockType);
-    console.log("changedBlockType" + newBlockType);
     return newBlockType;
   };
 
-  const getBlockImage = (blockType: String) => {
-    switch (blockType) {
-      case "air":
-        return <></>;
-      case "floor":
-        return <img src="floorBlock.jpeg" alt="floor" width={16} height={16} />;
-      case "brick":
-        return <img src="brick.jpeg" alt="brick" width={16} height={16} />;
-      case "square-brick":
-        return (
-          <img
-            src="squareBrick.jpeg"
-            alt="square-brick"
-            width={16}
-            height={16}
-          />
-        );
-      case "smooth-brick":
-        return (
-          <img
-            src="smoothBrick.jpeg"
-            alt="smooth-brick"
-            width={16}
-            height={16}
-          />
-        );
-      case "mystery":
-        return <img src="mystery.jpeg" alt="mystery" width={16} height={16} />;
-      case "pipe":
-        return <img src="pipe.jpeg" alt="pipe" width={12} height={16} />;
-      case "pipe-top":
-        return <img src="pipe-top.png" alt="pipe-top" width={16} height={16} />;
-      default:
-        return <></>;
-    }
+  const getBlockImage = (blockType: string) => {
+    const imageSrc = blockImages[blockType];
+    return imageSrc ? (
+      <img src={imageSrc} alt={blockType} width={16} height={16} />
+    ) : (
+      <></>
+    );
   };
 
   return (
@@ -125,7 +91,7 @@ export const Block = ({
       className="block"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
+      onMouseUp={() => handleDrag(false, "")}
     >
       {getBlockImage(blockType)}
     </button>

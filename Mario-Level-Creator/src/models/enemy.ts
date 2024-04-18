@@ -4,3 +4,11 @@ export type Enemy = {
   y: number;
   direction: boolean;
 };
+
+export type enemyTypes = [
+  "goomba",
+  "koopa",
+  "piranha",
+  "bullet-bill",
+  "fire-bro"
+];

@@ -1,4 +1,4 @@
-import { Block } from "./block";
+import { BlockType } from "./block";
 import { BlockSection } from "./blockSection";
 import { Enemy } from "./enemy";
 import { Hero } from "./hero";
@@ -11,5 +11,5 @@ export type Level = {
   hero: Hero;
   enemies: Enemy[];
   blockSections: BlockSection[];
-  blocks: Block[];
+  blocks: BlockType[];
 };
