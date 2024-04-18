@@ -20,6 +20,10 @@ public static class GameSettingsLoader
         GameSettings.CameraStarting = new Vector2(Convert.ToSingle(settings["GameSettings"]["cameraStartingX"]), Convert.ToSingle(settings["GameSettings"]["cameraStartingY"]));
         GameSettings.ScreenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         GameSettings.IsDevelopment = Convert.ToBoolean(settings["GameSettings"]["isDevelopment"]);
+        GameSettings.LevelTopHeight = Convert.ToInt32(settings["GameSettings"]["levelTopHeight"]);
+        GameSettings.UndergroundCamera = new Vector2(Convert.ToSingle(settings["GameSettings"]["UndergroundCameraX"]), Convert.ToSingle(settings["GameSettings"]["UndergroundCameraY"]));
+        GameSettings.LevelEnd = Convert.ToSingle(settings["GameSettings"]["levelEnd"]);
+
 
         // Load PhysicsSettings
         PhysicsSettings.Gravity = Convert.ToSingle(settings["Physics"]["gravity"]);
