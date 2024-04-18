@@ -22,7 +22,8 @@ public class EnemyCollisionHandler
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
             { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IEnemy), new Dictionary<CollisionDirection, Action>() },
+            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
         };
 
         // Block stuff
@@ -97,10 +98,20 @@ public class EnemyCollisionHandler
         }
     }
 
+    public void EnemyItemCollision(IItem item)
+    {
+        CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), item.GetRectangle(), mainEnemy.GetVelocity());
+        if (direction != CollisionDirection.None)
+        {
+            mainEnemy.Collect(item);
+            GameContentManager.Instance.RemoveEntity(item);
+        }
+    }
+
     public void HandleEnemyEnemyCollision()
     {
         if (!mainEnemy.ReportIsAlive() || !collidingEnemy.ReportIsAlive()) return;
-        if (mainEnemy is Koopa mainKoopa && mainKoopa.isShell)
+        if ((mainEnemy is Koopa mainKoopa && mainKoopa.isShell))
         {
             if (collidingEnemy is not Koopa)
             {
@@ -108,6 +119,7 @@ public class EnemyCollisionHandler
                 return;
             }
         }
+
         mainEnemy.ChangeDirection();
         collidingEnemy.ChangeDirection();
     }

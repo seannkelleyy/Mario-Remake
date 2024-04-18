@@ -21,6 +21,12 @@
       "isRight": false
     },
     {
+      "type": "bulletBill",
+      "startingX": 32,
+      "startingY": 12,
+      "isRight": false
+    },
+    {
       "type": "goomba",
       "startingX": 41,
       "startingY": 12,
@@ -545,6 +551,14 @@
       "collidable": true,
       "breakable": false,
       "item": "coin"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 28,
+      "y": 11,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     },
     {
       "type": "brick",

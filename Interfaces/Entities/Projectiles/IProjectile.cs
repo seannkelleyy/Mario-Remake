@@ -7,6 +7,7 @@ namespace Mario.Interfaces.Entities.Projectiles
     // this so we can keep track of them in the Game Content Manager
     public interface IProjectile : IEntityBase, ICollideable
     {
+        public bool teamMario { get; }
         public void Destroy();
         public Vector2 GetVelocity();
     }

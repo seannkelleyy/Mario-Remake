@@ -5,26 +5,22 @@ using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
-using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
-public class Goomba : AbstractCollideable, IEnemy
+public class BulletBill : AbstractCollideable, IEnemy
 {
-    public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth = EnemyHealth.Normal;
     private double deadTimer = 0.0f;
-    private double attackCounter = 0.0f;
-    public bool teamMario { get; }
+    private EnemyHealth currentHealth = EnemyHealth.Normal;
+    public bool teamMario;
 
-    public Goomba(Vector2 position)
+    public BulletBill(Vector2 position)
     {
-        physics = new EntityPhysics(this);
-        teamMario = false;
         this.position = position;
-        currentState = new MovingGoombaState();
+        teamMario = false;
+        currentState = new BulletBillLeftState();
     }
 
     public override void Update(GameTime gameTime)
@@ -43,41 +39,39 @@ public class Goomba : AbstractCollideable, IEnemy
         }
         else
         {
-            physics.Update();
-            attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            if (attackCounter > EntitySettings.EnemyAttackCounter)
-            {
-                Attack();
-                attackCounter = 0.0f;
-            }
+            position.X -= PhysicsSettings.BulletBillSpeed;
         }
     }
 
     public void Stomp()
     {
         if (deadTimer > 0) return;
-        else if (currentHealth is EnemyHealth.Normal)
-        {
-            currentState = new StompedGoombaState();
-            position.Y += HalfBlockAdjustment;
-            deadTimer = 1;
-        }
-        else if (currentHealth is EnemyHealth.Big)
-        {
-            currentHealth = EnemyHealth.Normal;
-        }
-        else
-        {
-            currentHealth = EnemyHealth.Big;
-        }
         MediaManager.Instance.PlayEffect(EffectNames.stomp);
+        currentState = new BulletBillLeftDeadState();
+        position.Y += HalfBlockAdjustment;
+        deadTimer = 1;
     }
 
     public void Flip()
     {
         MediaManager.Instance.PlayEffect(EffectNames.kick);
-        currentState = new FlippedGoombaState();
+        currentState = new BulletBillLeftDeadState();
         GameContentManager.Instance.RemoveEntity(this);
+    }
+
+    public void ChangeDirection()
+    {
+        // Bullet bills don't change directions
+    }
+
+    public bool ReportIsAlive()
+    {
+        return deadTimer < 1 ? true : false;
+    }
+
+    public EnemyHealth ReportHealth()
+    {
+        return currentHealth;
     }
 
     public void Collect(IItem item)
@@ -114,38 +108,17 @@ public class Goomba : AbstractCollideable, IEnemy
 
     }
 
+    public Vector2 GetVelocity()
+    {
+        return new Vector2(position.X - PhysicsSettings.BulletBillSpeed, position.Y);
+    }
+
     public void Attack()
     {
         if (currentHealth is EnemyHealth.Fire)
         {
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
-            GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+            GameContentManager.Instance.AddEntity(new Fireball(position + new Vector2(0, (this.GetRectangle().Height / 2)), HorizontalDirection.left, teamMario));
         }
-    }
-
-    public void ChangeDirection()
-    {
-        if (physics.currentHorizontalDirection == HorizontalDirection.right)
-        {
-            physics.currentHorizontalDirection = HorizontalDirection.left;
-        }
-        else
-        {
-            physics.currentHorizontalDirection = HorizontalDirection.right;
-        }
-    }
-
-    public bool ReportIsAlive()
-    {
-        return deadTimer < 1 ? true : false;
-    }
-    public EnemyHealth ReportHealth()
-    {
-        return currentHealth;
-    }
-
-    public Vector2 GetVelocity()
-    {
-        return physics.GetVelocity();
     }
 }

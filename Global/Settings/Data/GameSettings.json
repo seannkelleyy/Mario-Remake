@@ -19,6 +19,7 @@
     "runAcceleration": 0.30,
     "enemySpeed": 0.5,
     "koopaShellSpeed": 1.5,
+    "bulletBillSpeed": 1.0,
     "regularJumpLimit": 55,
     "smallJumpLimit": 20,
     "minimumJumpLimit": 40,
@@ -34,9 +35,11 @@
     "collisionPixelRadius": 48
   },
   "Entity": {
-    "enemyDespawnTime": 3,
+    "enemyAttackCounter": 1.5,
+    "enemyDespawnTime": 2,
     "enemyInvulnerabilityTime": 3,
     "koopaShellTime": 8.0,
+    "bulletBillSpawnTime": 3.0,
     "heroInvulnerabilityTime": 3,
     "heroFlashDuration": 0.05,
     "heroAttackTime": 0.25,
