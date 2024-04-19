@@ -12,6 +12,7 @@ using static Mario.Global.GlobalVariables;
 
 public class BulletBill : AbstractCollideable, IEnemy
 {
+
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;
     public bool teamMario { get; }

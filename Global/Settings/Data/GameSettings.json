@@ -1,11 +1,15 @@
 ﻿{
-  "GameSettings": {
-    "frameRate": 60,
-    "cameraStartingX": 400,
-    "cameraStartingY": 48,
-    "isDevelopment": true,
-    "levelJsonFilePath": "../../../Levels/Sprint3.json"
-  },
+    "GameSettings": {
+        "frameRate": 60,
+        "cameraStartingX": 400,
+        "cameraStartingY": 48,
+        "isDevelopment": true,
+        "levelJsonFilePath": "../../../Levels/1-1.json",
+        "levelTopHeight": 16,
+        "UndergroundCameraX": 2416,
+        "UndergroundCameraY": 304,
+            "levelEnd": 205.5
+    },
   "Physics": {
     "gravity": 1.325,
     "friction": 0.025,

@@ -50,7 +50,7 @@ namespace Mario.Entities.Blocks
         // Gives up its item and turns into a hard block
         public override void GetHit()
         {
-            if (currentState is not HardBlockState)
+            if (currentState is not EmptyBlockState)
             {
                 MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
                 GameContentManager.Instance.AddEntity(item);
@@ -58,7 +58,7 @@ namespace Mario.Entities.Blocks
                 {
                     item.MakeVisible();
                 }
-                currentState = new HardBlockState();
+                currentState = new EmptyBlockState();
             }
         }
     }

@@ -10,4 +10,7 @@ public static class GameSettings
     public static int InitialWindowHeight { get; set; } = 90;
     public static int WindowHeight { get; set; } = 470;
     public static bool IsDevelopment { get; set; }
+    public static int LevelTopHeight { get; set; }
+    public static Vector2 UndergroundCamera { get; set; }
+    public static float LevelEnd { get; set; }
 }
