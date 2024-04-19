@@ -2,9 +2,7 @@ using Mario.Collisions;
 using Mario.Entities.Abstract;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
-using Mario.Global;
 using Mario.Global.Settings;
-using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -26,6 +24,7 @@ namespace Mario.Entities.Character
         private double invulnerabilityFrames = 0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
+        public bool teamMario { get; }
         public new HeroState currentState { get; set; }
         public HeroHealth currentHealth = HeroHealth.Mario;
 
@@ -45,6 +44,7 @@ namespace Mario.Entities.Character
             }
             this.position = position;
             this.stats = stats;
+            teamMario = true;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
             startingLives = stats.GetLives();
@@ -53,12 +53,11 @@ namespace Mario.Entities.Character
         public override void Update(GameTime gameTime)
         {
             ClearCollisions();
+            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             currentState.Update(gameTime);
 
             stats.Update(gameTime);
-
-            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             if (position.X - GetVelocity().X <= CameraLeftEdge)
             {
@@ -66,10 +65,7 @@ namespace Mario.Entities.Character
                 SetCollisionState(CollisionDirection.Left, true);
                 position.X += HorizontalBlockCollisionAdjustment;
             }
-
             HandleInvulnerability(gameTime);
-
-            physics.Update();
         }
 
         public new virtual void Draw(SpriteBatch spriteBatch)
@@ -97,8 +93,6 @@ namespace Mario.Entities.Character
                     invulnerabilityFrames = 0.0;
                 }
             }
-
-            physics.Update();
         }
         public void WalkLeft()
         {
@@ -111,6 +105,13 @@ namespace Mario.Entities.Character
         public void Stand()
         {
             currentState.Stand();
+        }
+        public void Win()
+        {
+            this.StopHorizontal();
+            GameStateManager.Instance.Win();
+            currentState.PoleSlide();
+            this.StopHorizontal();
         }
 
         public void StopHorizontal()
@@ -201,7 +202,6 @@ namespace Mario.Entities.Character
             else if (item is Star)
             {
                 stats.AddScore(ScoreSettings.StarScore);
-                //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
                 MediaPlayer.Pause();
                 MediaManager.Instance.PlayTheme(SongThemes.invincibility, true);
                 GameContentManager.Instance.RemoveEntity(this);
@@ -245,6 +245,7 @@ namespace Mario.Entities.Character
         public void Die()
         {
             stats.AddLives(-1);
+            currentHealth = HeroHealth.Mario;
             currentState.Die();
             LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
 

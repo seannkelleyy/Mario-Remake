@@ -8,8 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Transactions;
 
 namespace Mario.Singletons
 {
@@ -18,10 +16,10 @@ namespace Mario.Singletons
         private static GameContentManager instance = new GameContentManager();
         private Dictionary<Type, IList> entities = new Dictionary<Type, IList>
         {
-            { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IItem), new List<IItem>() },
             { typeof(IBlock), new List<IBlock>() },
             { typeof(IPipe), new List<IPipe>() },
+            { typeof(IEnemy), new List<IEnemy>() },
             { typeof(IProjectile), new List<IProjectile>() },
             { typeof(IHero), new List<IHero>() }
         };
@@ -71,7 +69,6 @@ namespace Mario.Singletons
 
             return enemies;
         }
-
 
         public List<IItem> GetItems()
         {

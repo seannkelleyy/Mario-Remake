@@ -73,6 +73,12 @@
 /processorParam:Quality=Best
 /build:12-ending.mp3
 
+#begin 13-enemy-star-power.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:13-enemy-star-power.mp3
+
 #begin 1up.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -120,6 +126,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:enemyFire.mp3
+
+#begin enemyPowerUp.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:enemyPowerUp.mp3
 
 #begin enemySpriteSheet.png
 /importer:TextureImporter
