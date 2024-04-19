@@ -21,14 +21,14 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position)
+        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position);
+                    return new Goomba(position, isRight);
                 case "koopa":
-                    return new Koopa(position);
+                    return new Koopa(position, isRight);
                 case "bulletBill":
                     return new BulletBill(position);
                 default:

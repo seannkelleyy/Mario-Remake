@@ -23,11 +23,15 @@ public class Koopa : AbstractCollideable, IEnemy
     public bool isShell = false;
     public bool teamMario { get; }
 
-    public Koopa(Vector2 position)
+    public Koopa(Vector2 position, bool isRight)
     {
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
+        if (!isRight )
+        {
+            ChangeDirection();
+        }
         currentState = new RightMovingKoopaState();
     }
 

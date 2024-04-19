@@ -24,7 +24,7 @@
       "type": "goomba",
       "startingX": 41,
       "startingY": 12,
-      "isRight": false
+      "isRight": true
     },
     {
       "type": "goomba",
