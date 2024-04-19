@@ -1,26 +1,11 @@
 import { BlockType, blockTypes } from "./block";
 import { EnemyType, enemyTypes } from "./enemy";
+import { ItemType, itemTypes } from "./item";
 import { PipeType, pipeTypes } from "./pipe";
 
-// export type ObjectType = {
-//   type: string;
-//   x?: number;
-//   startingX: number;
-//   startingY: number;
-//   y?: number;
-//   endingY?: number;
-//   collidable?: boolean;
-//   breakable?: boolean;
-//   item?: string;
-//   direction?: boolean;
-//   transportable?: boolean;
-//   transportDestinationX?: number;
-//   transportDestinationY?: number;
-//   AI?: string[];
-// };
-export type ObjectType = PipeType & EnemyType & BlockType;
+export type ObjectType = PipeType & EnemyType & BlockType & ItemType;
 
-export const ObjectTypes = blockTypes.concat(pipeTypes, enemyTypes);
+export const ObjectTypes = blockTypes.concat(pipeTypes, enemyTypes, itemTypes);
 
 export const objectImages: { [key: string]: string } = {
   floor: "floorBlock.jpeg",
@@ -40,4 +25,10 @@ export const objectImages: { [key: string]: string } = {
   piranha: "piranha.png",
   bulletBillLauncher: "bullet.png",
   fireBro: "fireBro.png",
+  coin: "coin.png",
+  coinUnderground: "coinUnderground.png",
+  mushroom: "mushroom.png",
+  star: "star.png",
+  fireFlower: "fireFlower.png",
+  oneUp: "oneUp.png",
 };

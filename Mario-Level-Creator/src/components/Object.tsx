@@ -3,6 +3,7 @@ import { ObjectTypes, objectImages } from "../models/object";
 import { enemyTypes } from "../models/enemy";
 import { pipeTypes } from "../models/pipe";
 import { blockTypes } from "../models/block";
+import { itemTypes } from "../models/item";
 
 type ObjectProps = {
   dragging: boolean;
@@ -39,6 +40,7 @@ type ObjectProps = {
     collidable: boolean,
     breakable: boolean
   ) => void;
+  updateItem: (x: number, y: number, itemType: string) => void;
 };
 
 export const Object = ({
@@ -53,6 +55,7 @@ export const Object = ({
   updateBlock,
   updateEnemy,
   updatePipe,
+  updateItem,
 }: ObjectProps) => {
   const [objectType, setObjectType] = useState(
     ObjectTypes[ObjectTypes.indexOf(existingObjectType)]
@@ -62,14 +65,13 @@ export const Object = ({
     setObjectType(ObjectTypes[ObjectTypes.indexOf(existingObjectType)]);
   }, [existingObjectType]);
 
-  const handleMouseDown = useCallback(
+  const handleMouseDownLeft = useCallback(
     (e: React.MouseEvent) => {
       if (isEditMode) {
         e.preventDefault();
-        console.log("handleMouseDown", x, y, objectType);
         setSelectedCoordinates({ x: x, y: y });
       } else {
-        let newObjectType = changeObjectType();
+        let newObjectType = changeObjectTypeUp();
         handleDrag(true, newObjectType);
         if (pipeTypes.includes(newObjectType)) {
           updatePipe(x, y, y + 2, newObjectType, true, x, y + 2, true, false);
@@ -81,6 +83,39 @@ export const Object = ({
         }
         if (blockTypes.includes(newObjectType)) {
           updateBlock(x, y, newObjectType, "none", true, true);
+          return;
+        }
+        if (itemTypes.includes(newObjectType)) {
+          updateItem(x, y, newObjectType);
+          return;
+        }
+      }
+    },
+    [isEditMode, handleDrag]
+  );
+
+  const handleMouseDownRight = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      if (isEditMode) {
+        setSelectedCoordinates({ x: x, y: y });
+      } else {
+        let newObjectType = changeObjectTypeBack();
+        handleDrag(true, newObjectType);
+        if (pipeTypes.includes(newObjectType)) {
+          updatePipe(x, y, y + 2, newObjectType, true, x, y + 2, true, false);
+          return;
+        }
+        if (enemyTypes.includes(newObjectType)) {
+          updateEnemy(newObjectType, x, y, true, []);
+          return;
+        }
+        if (blockTypes.includes(newObjectType)) {
+          updateBlock(x, y, newObjectType, "none", true, true);
+          return;
+        }
+        if (itemTypes.includes(newObjectType)) {
+          updateItem(x, y, newObjectType);
           return;
         }
       }
@@ -102,12 +137,15 @@ export const Object = ({
         if (blockTypes.includes(nextObjectType)) {
           updateBlock(x, y, nextObjectType, "none", true, true);
         }
+        if (itemTypes.includes(nextObjectType)) {
+          updateItem(x, y, nextObjectType);
+        }
       }
     },
     [dragging, setObjectType]
   );
 
-  const changeObjectType = () => {
+  const changeObjectTypeUp = () => {
     let currentIndex = ObjectTypes.indexOf(objectType);
     if (currentIndex === ObjectTypes.length - 1) {
       currentIndex = 0;
@@ -115,6 +153,18 @@ export const Object = ({
       currentIndex++;
     }
     let newBlockType = ObjectTypes[currentIndex];
+    setObjectType(newBlockType);
+    return newBlockType;
+  };
+
+  const changeObjectTypeBack = () => {
+    let currentIndex = ObjectTypes.indexOf(objectType);
+    if (currentIndex === 0) {
+      currentIndex = ObjectTypes.length - 1;
+    } else {
+      currentIndex--;
+    }
+    let newBlockType = ObjectTypes[currentIndex - 1];
     setObjectType(newBlockType);
     return newBlockType;
   };
@@ -136,8 +186,9 @@ export const Object = ({
   return (
     <button
       className="block"
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleMouseDownLeft}
       onMouseMove={handleMouseMove}
+      onContextMenu={handleMouseDownRight}
       onMouseUp={() => handleDrag(false, "")}
     >
       {getObjectImage(objectType)}

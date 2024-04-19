@@ -8,6 +8,8 @@ import { Object } from "./Object";
 import { EditObject } from "./MenuItems/EditObject";
 import { PipeType, pipeTypes } from "../models/pipe";
 import { ObjectType } from "../models/object";
+import { ItemType } from "../models/item";
+import { ItemSectionType } from "../models/itemSection";
 
 export const LevelCreator = () => {
   const [columns, setColumns] = useState(40);
@@ -29,14 +31,16 @@ export const LevelCreator = () => {
     song: "ground",
     hero: {
       type: "mario",
-      startingX: 0,
-      startingY: 0,
+      startingX: 3,
+      startingY: 12,
       direction: true,
       startingPower: "small",
       lives: 3,
       statingLives: 3,
     },
     enemies: [] as EnemyType[],
+    items: [] as ItemType[],
+    itemSections: [] as ItemSectionType[],
     blockSections: [] as BlockSection[],
     blocks: [] as BlockType[],
     pipes: [] as PipeType[],
@@ -79,6 +83,9 @@ export const LevelCreator = () => {
         (enemy) =>
           enemy.startingX !== startingX || enemy.startingY !== startingY
       );
+      let newItems = prevState.items.filter(
+        (item) => item.x !== startingX || item.y !== startingY
+      );
 
       if (enemyTypes.includes(enemyType)) {
         if (AI.includes("none")) AI = [];
@@ -93,6 +100,40 @@ export const LevelCreator = () => {
 
       return {
         ...prevState,
+        blocks: newBlocks,
+        pipes: newPipes,
+        enemies: newEnemies,
+        items: newItems,
+      };
+    });
+  };
+
+  const updateItem = (x: number, y: number, itemType: string) => {
+    setLevel((prevState) => {
+      let newBlocks = prevState.blocks.filter(
+        (block) => block.x !== x || block.y !== y
+      );
+      let newPipes = prevState.pipes.filter(
+        (pipe) => pipe.x !== x || pipe.startingY !== y
+      );
+      let newEnemies = prevState.enemies.filter(
+        (enemy) => enemy.startingX !== x || enemy.startingY !== y
+      );
+      let newItems = prevState.items.filter(
+        (item) => item.x !== x || item.y !== y
+      );
+
+      if (itemType !== "none") {
+        newItems.push({
+          type: itemType,
+          x: x,
+          y: y,
+        });
+      }
+
+      return {
+        ...prevState,
+        items: newItems,
         blocks: newBlocks,
         pipes: newPipes,
         enemies: newEnemies,
@@ -121,6 +162,9 @@ export const LevelCreator = () => {
       let newEnemies = prevState.enemies.filter(
         (enemy) => enemy.startingX !== x || enemy.startingY !== startingY
       );
+      let newItems = prevState.items.filter(
+        (item) => item.x !== x || item.y !== startingY
+      );
 
       if (pipeTypes.includes(pipeType)) {
         newPipes.push({
@@ -145,6 +189,7 @@ export const LevelCreator = () => {
         blocks: newBlocks,
         pipes: newPipes,
         enemies: newEnemies,
+        items: newItems,
       };
     });
   };
@@ -167,6 +212,9 @@ export const LevelCreator = () => {
       let newEnemies = prevState.enemies.filter(
         (enemy) => enemy.startingX !== x || enemy.startingY !== y
       );
+      let newItems = prevState.items.filter(
+        (item) => item.x !== x || item.y !== y
+      );
 
       if (blockType !== "air") {
         newBlocks.push({
@@ -184,6 +232,7 @@ export const LevelCreator = () => {
         blocks: newBlocks,
         pipes: newPipes,
         enemies: newEnemies,
+        items: newItems,
       };
     });
   };
@@ -225,6 +274,7 @@ export const LevelCreator = () => {
     const pipe = level.pipes.find(
       (pipe) => pipe.x === x && pipe.startingY === y
     );
+    const item = level.items.find((item) => item.x === x && item.y === y);
 
     if (block) {
       return block.type;
@@ -232,6 +282,8 @@ export const LevelCreator = () => {
       return enemy.type;
     } else if (pipe) {
       return pipe.type;
+    } else if (item) {
+      return item.type;
     } else {
       return "air";
     }
@@ -292,6 +344,7 @@ export const LevelCreator = () => {
                     updateBlock={updateBlock}
                     updateEnemy={updateEnemy}
                     updatePipe={updatePipe}
+                    updateItem={updateItem}
                     setSelectedCoordinates={setSelectedCoordinates}
                   />
                 ))}
