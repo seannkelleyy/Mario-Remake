@@ -17,9 +17,9 @@ type EditObjectProps = {
     breakable: boolean
   ) => void;
   updateEnemy: (
+    enemyType: string,
     startingX: number,
     startingY: number,
-    blockType: string,
     direction: boolean,
     AI: string[]
   ) => void;
@@ -42,14 +42,15 @@ export const EditObject = ({
   updateEnemy,
   updatePipe,
 }: EditObjectProps) => {
+  if (!selectedObject) return null;
   return (
     <section>
       {enemyTypes.includes(selectedObject?.type) && (
         <EditEnemy
           selectedEnemy={{
             type: selectedObject?.type,
-            startingX: selectedObject?.x,
-            startingY: selectedObject?.y,
+            startingX: selectedObject?.startingX || selectedObject?.x,
+            startingY: selectedObject?.startingY || selectedObject?.y,
             direction: selectedObject?.direction
               ? selectedObject.direction
               : false,
@@ -80,7 +81,7 @@ export const EditObject = ({
           selectedPipe={{
             type: selectedObject?.type,
             x: selectedObject?.x,
-            startingY: selectedObject?.y,
+            startingY: selectedObject?.startingY || selectedObject?.y,
             endingY: selectedObject?.endingY ? selectedObject.endingY : 0,
             transportable: selectedObject?.transportable
               ? selectedObject.transportable

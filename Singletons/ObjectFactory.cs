@@ -5,9 +5,7 @@ using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Mario.Entities.Pipes;
-using System;
 
 namespace Mario.Singletons
 {
@@ -31,9 +29,8 @@ namespace Mario.Singletons
                 case "koopa":
                     return new Koopa(position);
                 default:
-                    return new Koopa(position);
-
-                    //throw new KeyNotFoundException($"Entity type {type} not recognized.");
+                    Logger.Instance.LogError($"Entity type {type} not recognized.");
+                    return null;
             }
         }
 
@@ -52,9 +49,8 @@ namespace Mario.Singletons
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
                 default:
-                    return new MysteryBlock(position, collideable, item);
-
-                    //throw new KeyNotFoundException($"Block type {type} not recognized.");
+                    Logger.Instance.LogError($"Block type {type} not recognized.");
+                    return null;
             }
         }
 

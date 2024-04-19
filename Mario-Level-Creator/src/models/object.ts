@@ -1,21 +1,24 @@
-import { blockTypes } from "./block";
-import { enemyTypes } from "./enemy";
-import { pipeTypes } from "./pipe";
+import { BlockType, blockTypes } from "./block";
+import { EnemyType, enemyTypes } from "./enemy";
+import { PipeType, pipeTypes } from "./pipe";
 
-export type ObjectType = {
-  type: string;
-  x: number;
-  y: number;
-  endingY?: number;
-  collidable?: boolean;
-  breakable?: boolean;
-  item?: string;
-  direction?: boolean;
-  transportable?: boolean;
-  transportDestinationX?: number;
-  transportDestinationY?: number;
-  AI?: string[];
-};
+// export type ObjectType = {
+//   type: string;
+//   x?: number;
+//   startingX: number;
+//   startingY: number;
+//   y?: number;
+//   endingY?: number;
+//   collidable?: boolean;
+//   breakable?: boolean;
+//   item?: string;
+//   direction?: boolean;
+//   transportable?: boolean;
+//   transportDestinationX?: number;
+//   transportDestinationY?: number;
+//   AI?: string[];
+// };
+export type ObjectType = PipeType & EnemyType & BlockType;
 
 export const ObjectTypes = blockTypes.concat(pipeTypes, enemyTypes);
 

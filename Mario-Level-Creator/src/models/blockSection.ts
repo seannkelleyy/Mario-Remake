@@ -1,5 +1,3 @@
-import { Item } from "./item";
-
 export type BlockSection = {
   type: string;
   startingX: number;
@@ -8,5 +6,5 @@ export type BlockSection = {
   endingY: number;
   collidable: boolean;
   breakable: boolean;
-  item: Item;
+  item: string;
 };

@@ -3,9 +3,9 @@ import { EnemyType } from "../../models/enemy";
 type EditEnemyProps = {
   selectedEnemy: EnemyType;
   updateEnemy: (
-    startingX: number,
-    startingy: number,
     enemeyType: string,
+    startingX: number,
+    startingY: number,
     direction: boolean,
     AI: string[]
   ) => void;
@@ -13,15 +13,16 @@ type EditEnemyProps = {
 
 export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
   return (
-    <section className="edit-block">
-      <label>Enemy</label>
+    <section className="edit-popup">
+      <h2>Edit Enemy</h2>
+      <label>Enemy Type:</label>
       <select
         value={selectedEnemy?.type ? selectedEnemy.type : "goomba"}
         onChange={(e) => {
           updateEnemy(
+            e.target.value,
             selectedEnemy.startingX,
             selectedEnemy.startingY,
-            e.target.value,
             selectedEnemy.direction ? selectedEnemy.direction : false,
             selectedEnemy.AI
           );
@@ -30,7 +31,7 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
         <option value="goomba">Goomba</option>
         <option value="koopa">Koopa</option>
         <option value="piranha">Piranha</option>
-        <option value="bulletBill">Bullet Bill</option>
+        <option value="bulletBillLauncher">Bullet Bill</option>
         <option value="fireBro">Fire Bro</option>
       </select>
       <label>Direction:</label>
@@ -38,10 +39,10 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
         value={selectedEnemy?.direction ? "true" : "false"}
         onChange={(e) =>
           updateEnemy(
+            selectedEnemy.type,
             selectedEnemy.startingX,
             selectedEnemy.startingY,
-            e.target.value,
-            selectedEnemy.direction ? selectedEnemy.direction : false,
+            e.target.value === "true" ? true : false,
             selectedEnemy.AI
           )
         }
@@ -51,12 +52,13 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
       </select>
       <label>AI:</label>
       <select
+        multiple
         value={selectedEnemy?.AI ? selectedEnemy.AI : []}
         onChange={(e) =>
           updateEnemy(
+            selectedEnemy.type,
             selectedEnemy.startingX,
             selectedEnemy.startingY,
-            selectedEnemy.type,
             selectedEnemy.direction,
             e.target.value.split(",").filter((ai) => ai !== "")
           )

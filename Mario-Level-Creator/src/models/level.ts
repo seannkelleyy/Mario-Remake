@@ -1,8 +1,8 @@
 import { BlockType } from "./block";
 import { BlockSection } from "./blockSection";
-import { Enemy } from "./enemy";
+import { EnemyType } from "./enemy";
 import { Hero } from "./hero";
-import { Pipe } from "./pipe";
+import { PipeType } from "./pipe";
 
 export type Level = {
   level: string;
@@ -12,8 +12,8 @@ export type Level = {
   timeLimit: number;
   song: string;
   hero: Hero;
-  enemies: Enemy[];
+  enemies: EnemyType[];
   blockSections: BlockSection[];
   blocks: BlockType[];
-  pipes: Pipe[];
+  pipes: PipeType[];
 };

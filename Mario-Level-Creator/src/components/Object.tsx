@@ -22,9 +22,9 @@ type ObjectProps = {
     breakable: boolean
   ) => void;
   updateEnemy: (
+    enemyType: string,
     startingX: number,
     startingY: number,
-    enemyType: string,
     direction: boolean,
     AI: string[]
   ) => void;
@@ -69,16 +69,19 @@ export const Object = ({
         console.log("handleMouseDown", x, y, objectType);
         setSelectedCoordinates({ x: x, y: y });
       } else {
-        let newBlockType = changeObjectType();
-        handleDrag(true, newBlockType);
-        if (pipeTypes.includes(newBlockType)) {
-          updatePipe(x, y, y + 2, newBlockType, true, x, y + 2, true, false);
+        let newObjectType = changeObjectType();
+        handleDrag(true, newObjectType);
+        if (pipeTypes.includes(newObjectType)) {
+          updatePipe(x, y, y + 2, newObjectType, true, x, y + 2, true, false);
+          return;
         }
-        if (enemyTypes.includes(newBlockType)) {
-          updateEnemy(x, y, newBlockType, true, []);
+        if (enemyTypes.includes(newObjectType)) {
+          updateEnemy(newObjectType, x, y, true, []);
+          return;
         }
-        if (blockTypes.includes(newBlockType)) {
-          updateBlock(x, y, newBlockType, "none", true, true);
+        if (blockTypes.includes(newObjectType)) {
+          updateBlock(x, y, newObjectType, "none", true, true);
+          return;
         }
       }
     },
@@ -94,7 +97,7 @@ export const Object = ({
           updatePipe(x, y, y + 2, nextObjectType, true, x, y + 2, true, false);
         }
         if (enemyTypes.includes(nextObjectType)) {
-          updateEnemy(x, y, nextObjectType, true, []);
+          updateEnemy(nextObjectType, x, y, true, []);
         }
         if (blockTypes.includes(nextObjectType)) {
           updateBlock(x, y, nextObjectType, "none", true, true);

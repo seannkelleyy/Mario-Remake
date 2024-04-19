@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { EditLevel } from "./components/MenuItems/EditLevel";
-import { Level } from "./models/level";
-import { BlockType } from "./models/block";
-import { BlockSection } from "./models/blockSection";
-import { EnemyType, enemyTypes } from "./models/enemy";
-import { Object } from "./components/Object";
-import { EditObject } from "./components/MenuItems/EditObject";
-import { PipeType, pipeTypes } from "./models/pipe";
+import { EditLevel } from "./MenuItems/EditLevel";
+import { Level } from "../models/level";
+import { BlockType } from "../models/block";
+import { BlockSection } from "../models/blockSection";
+import { EnemyType, enemyTypes } from "../models/enemy";
+import { Object } from "./Object";
+import { EditObject } from "./MenuItems/EditObject";
+import { PipeType, pipeTypes } from "../models/pipe";
+import { ObjectType } from "../models/object";
 
 export const LevelCreator = () => {
   const [columns, setColumns] = useState(40);
@@ -41,21 +42,17 @@ export const LevelCreator = () => {
     pipes: [] as PipeType[],
   });
 
+  const isAtSelectedCoordinates = (object: { x: number; y: number }) =>
+    object.x === selectedCoordinates?.x && object.y === selectedCoordinates?.y;
+
   let selectedObject =
-    level.blocks.find(
-      (block) =>
-        block.x === selectedCoordinates?.x && block.y === selectedCoordinates?.y
-    ) ||
-    level.enemies.find(
-      (enemy) =>
-        enemy.startingX === selectedCoordinates?.x &&
-        enemy.startingY === selectedCoordinates?.y
-    ) ||
-    level.pipes.find(
-      (pipe) =>
-        pipe.x === selectedCoordinates?.x &&
-        pipe.startingY === selectedCoordinates?.y
-    );
+    (level.blocks.find(isAtSelectedCoordinates) as ObjectType) ||
+    (level.enemies.find((enemy) =>
+      isAtSelectedCoordinates({ x: enemy.startingX, y: enemy.startingY })
+    ) as ObjectType) ||
+    (level.pipes.find((pipe) =>
+      isAtSelectedCoordinates({ x: pipe.x, y: pipe.startingY })
+    ) as ObjectType);
 
   const updateLevel = (property: any, value: any) => {
     setLevel((prevState) => ({
@@ -65,13 +62,19 @@ export const LevelCreator = () => {
   };
 
   const updateEnemy = (
+    enemyType: string,
     startingX: number,
     startingY: number,
-    enemyType: string,
     direction: boolean,
     AI: string[]
   ) => {
     setLevel((prevState) => {
+      let newBlocks = prevState.blocks.filter(
+        (block) => block.x !== startingX || block.y !== startingY
+      );
+      let newPipes = prevState.pipes.filter(
+        (pipe) => pipe.x !== startingX || pipe.startingY !== startingY
+      );
       let newEnemies = prevState.enemies.filter(
         (enemy) =>
           enemy.startingX !== startingX || enemy.startingY !== startingY
@@ -90,6 +93,8 @@ export const LevelCreator = () => {
 
       return {
         ...prevState,
+        blocks: newBlocks,
+        pipes: newPipes,
         enemies: newEnemies,
       };
     });
@@ -107,8 +112,14 @@ export const LevelCreator = () => {
     breakable: boolean
   ) => {
     setLevel((prevState) => {
+      let newBlocks = prevState.blocks.filter(
+        (block) => block.x !== x || block.y !== startingY
+      );
       let newPipes = prevState.pipes.filter(
         (pipe) => pipe.x !== x || pipe.startingY !== startingY
+      );
+      let newEnemies = prevState.enemies.filter(
+        (enemy) => enemy.startingX !== x || enemy.startingY !== startingY
       );
 
       if (pipeTypes.includes(pipeType)) {
@@ -131,7 +142,9 @@ export const LevelCreator = () => {
 
       return {
         ...prevState,
+        blocks: newBlocks,
         pipes: newPipes,
+        enemies: newEnemies,
       };
     });
   };
@@ -148,6 +161,12 @@ export const LevelCreator = () => {
       let newBlocks = prevState.blocks.filter(
         (block) => block.x !== x || block.y !== y
       );
+      let newPipes = prevState.pipes.filter(
+        (pipe) => pipe.x !== x || pipe.startingY !== y
+      );
+      let newEnemies = prevState.enemies.filter(
+        (enemy) => enemy.startingX !== x || enemy.startingY !== y
+      );
 
       if (blockType !== "air") {
         newBlocks.push({
@@ -163,6 +182,8 @@ export const LevelCreator = () => {
       return {
         ...prevState,
         blocks: newBlocks,
+        pipes: newPipes,
+        enemies: newEnemies,
       };
     });
   };
@@ -196,10 +217,24 @@ export const LevelCreator = () => {
     setNextBlockType(blockType);
   };
 
-  const getBlockTypeAt = (x: number, y: number) => {
+  const getObjectTypeAt = (x: number, y: number) => {
     const block = level.blocks.find((block) => block.x === x && block.y === y);
-    console.log("getBlockTypeAt", x, y, selectedObject);
-    return block ? block.type : "air";
+    const enemy = level.enemies.find(
+      (enemy) => enemy.startingX === x && enemy.startingY === y
+    );
+    const pipe = level.pipes.find(
+      (pipe) => pipe.x === x && pipe.startingY === y
+    );
+
+    if (block) {
+      return block.type;
+    } else if (enemy) {
+      return enemy.type;
+    } else if (pipe) {
+      return pipe.type;
+    } else {
+      return "air";
+    }
   };
 
   return (
@@ -207,9 +242,11 @@ export const LevelCreator = () => {
       <section className="control">
         <h1>Mario Level Creator</h1>
         <p>
-          How to use: To begin, set the value for your width. By default, all
-          blocks are set to an air block. Simply click a block to change its
-          type, keep clicking to cycle through all blocks
+          How to use: To begin, set the value for your width and height. By
+          default, all blocks are set to an air block, which don't get added to
+          the json. Simply click a block to change its type, keep clicking to
+          cycle through all blocks. To edit a block, use the 'edit mode' button
+          to turn on edit mode.
         </p>
         <button onClick={downloadLevel}>Download Level</button>
         <button onClick={() => setIsEditMode(!isEditMode)}>
@@ -222,18 +259,24 @@ export const LevelCreator = () => {
           handleColumnChange={handleColumnChange}
           handleRowChange={handleRowChange}
         />
-        <EditObject
-          selectedObject={selectedObject ? selectedObject : null}
-          updateBlock={updateBlock}
-          updateEnemy={updateEnemy}
-          updatePipe={updatePipe}
-        />
+        {selectedObject && (
+          <EditObject
+            selectedObject={selectedObject}
+            updateBlock={updateBlock}
+            updateEnemy={updateEnemy}
+            updatePipe={updatePipe}
+          />
+        )}
       </section>
       <section className="level">
         {Array(columns)
           .fill(0)
           .map((_, columnIndex) => (
-            <section id={columnIndex.toString()} className="column">
+            <section
+              key={columnIndex}
+              id={columnIndex.toString()}
+              className="column"
+            >
               {Array(rows)
                 .fill(0)
                 .map((_, rowIndex) => (
@@ -243,7 +286,7 @@ export const LevelCreator = () => {
                     dragging={dragging}
                     handleDrag={handleDrag}
                     isEditMode={isEditMode}
-                    existingObjectType={getBlockTypeAt(columnIndex, rowIndex)}
+                    existingObjectType={getObjectTypeAt(columnIndex, rowIndex)}
                     x={columnIndex}
                     y={rowIndex}
                     updateBlock={updateBlock}
