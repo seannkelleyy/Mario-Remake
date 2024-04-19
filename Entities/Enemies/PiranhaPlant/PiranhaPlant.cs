@@ -64,7 +64,7 @@ public class PiranhaPlant : AbstractCollideable, IPiranhaPlant
     public void Bite()
     {
         if (isInPipe) return;
-        MediaManager.Instance.PlayEffect(EffectNames.bite);
+        //MediaManager.Instance.PlayEffect(EffectNames.bite);
         currentState = new BitingPiranhaState();
     }
 

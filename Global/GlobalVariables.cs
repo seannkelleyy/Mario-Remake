@@ -78,7 +78,8 @@
             pause,
             powerup,
             vine, // Most likely will be unused.
-            pipe
+            pipe,
+            bite
         }
         public enum SongThemes
         {

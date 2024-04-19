@@ -6,5 +6,6 @@ public class HiddenPiranhaState : AbstractEntityState
 {
     public HiddenPiranhaState() : base()
     {
-        sprite = spriteFactory.CreateSprite("hiddenPiranha");  
+        sprite = spriteFactory.CreateSprite("hiddenPiranha");
+    }
 }

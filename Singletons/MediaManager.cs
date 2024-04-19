@@ -47,8 +47,8 @@ namespace Mario.Singletons
                 { GlobalVariables.EffectNames.powerup, content.Load< SoundEffect >("powerUp").CreateInstance() },
                 { GlobalVariables.EffectNames.smallJump, content.Load<SoundEffect>("smallJump").CreateInstance() },
                 { GlobalVariables.EffectNames.stomp, content.Load<SoundEffect>("stomp").CreateInstance() },
-                { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() },
-                { GlobalVariables.EffectNames.bite, content.Load<SoundEffect>("Bite").CreateInstance() }
+                { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() }
+                //{ GlobalVariables.EffectNames.bite, content.Load<SoundEffect>("Bite").CreateInstance() }
             };
 
             // Initialize dictionary containing all songs.

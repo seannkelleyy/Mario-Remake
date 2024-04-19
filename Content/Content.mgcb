@@ -97,6 +97,12 @@
 /processorParam:Quality=Best
 /build:bigJump.mp3
 
+#begin Bite.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Bite.mp3
+
 #begin blockbreak.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -132,6 +138,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
+
+#begin File.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:File.fx
 
 #begin File.spritefont
 /importer:FontDescriptionImporter
