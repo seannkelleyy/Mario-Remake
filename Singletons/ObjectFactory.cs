@@ -31,7 +31,9 @@ namespace Mario.Singletons
                 case "koopa":
                     return new Koopa(position);
                 default:
-                    throw new KeyNotFoundException($"Entity type {type} not recognized.");
+                    return new Koopa(position);
+
+                    //throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
         }
 
@@ -50,7 +52,9 @@ namespace Mario.Singletons
                 case "mystery":
                     return new MysteryBlock(position, collideable, item);
                 default:
-                    throw new KeyNotFoundException($"Block type {type} not recognized.");
+                    return new MysteryBlock(position, collideable, item);
+
+                    //throw new KeyNotFoundException($"Block type {type} not recognized.");
             }
         }
 
@@ -73,7 +77,9 @@ namespace Mario.Singletons
                 case "oneUp":
                     return new Mushroom(position, "oneUp");
                 default:
-                    throw new KeyNotFoundException($"Item type `{type}` not recognized.");
+                    return new Mushroom(position, "oneUp");
+
+                    //throw new KeyNotFoundException($"Item type `{type}` not recognized.");
             }
         }
 
@@ -90,7 +96,9 @@ namespace Mario.Singletons
                 case "pipeTile":
                     return new PipeTile(position, isCollidable);
                 default:
-                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
+                    return new PipeTile(position, isCollidable);
+
+                    //throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
             }
         }
     }

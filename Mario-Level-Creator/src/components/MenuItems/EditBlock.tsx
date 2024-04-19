@@ -27,8 +27,9 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
         <option value="square-brick">Square Brick</option>
         <option value="smooth-brick">Smooth Brick</option>
         <option value="mystery">Mystery</option>
-        <option value="pipe">Pipe</option>
-        <option value="pipe-top">Pipe Top</option>
+        <option value="pipeTubeVeritcal">Pipe Vertical</option>
+        <option value="pipeTubeUpsideDown">Pipe Upside Down</option>
+        <option value="pipeTubeHorizontal">Pipe Horizontal</option>
       </select>
       <label>Collideable:</label>
       <input

@@ -6,9 +6,11 @@ import { BlockSection } from "./models/blockSection";
 import { Enemy } from "./models/enemy";
 import { Block } from "./components/Block";
 import { EditBlock } from "./components/MenuItems/EditBlock";
+import { Pipe } from "./models/pipe";
 
 export const LevelCreator = () => {
   const [columns, setColumns] = useState(40);
+  const [rows, setRows] = useState(15);
   const [dragging, setDragging] = useState(false);
   const [nextBlockType, setNextBlockType] = useState<string>("");
   const [isEditMode, setIsEditMode] = useState(false);
@@ -18,10 +20,12 @@ export const LevelCreator = () => {
   } | null>(null);
 
   const [level, setLevel] = useState<Level>({
-    level: "Level-1",
-    song: "ground",
+    level: "1",
+    pathToSpriteJson: "../../../Levels/Data/SpriteData.json",
     width: columns,
     height: 15,
+    timeLimit: 400,
+    song: "ground",
     hero: {
       type: "mario",
       startingX: 0,
@@ -34,6 +38,7 @@ export const LevelCreator = () => {
     enemies: [] as Enemy[],
     blockSections: [] as BlockSection[],
     blocks: [] as BlockType[],
+    pipes: [] as Pipe[],
   });
 
   let selectedBlock = level.blocks.find(
@@ -57,10 +62,51 @@ export const LevelCreator = () => {
     breakable: boolean
   ) => {
     setLevel((prevState) => {
-      console.log("updateBlock", x, y, blockType, item, collidable, breakable);
       let newBlocks = prevState.blocks.filter(
         (block) => block.x !== x || block.y !== y
       );
+
+      let newEnemies = prevState.enemies.filter(
+        (enemy) => enemy.startingX !== x || enemy.startingY !== y
+      );
+
+      let newPipes = prevState.pipes.filter(
+        (pipe) => pipe.x !== x || pipe.startingY !== y
+      );
+
+      // add to enemies if goomba, koopa, piranha, or bulletBill or fire bro
+      if (
+        blockType === "goomba" ||
+        blockType === "koopa" ||
+        blockType === "piranha" ||
+        blockType === "bulletBill" ||
+        blockType === "fireBro"
+      ) {
+        newEnemies.push({
+          type: blockType,
+          startingX: x,
+          startingY: y,
+          direction: true,
+        });
+      }
+
+      if (
+        blockType === "pipeTubeVertical" ||
+        blockType === "pipeTubeUpsideDown" ||
+        blockType === "pipeTubeHorizontal"
+      ) {
+        newPipes.push({
+          type: blockType,
+          x: x,
+          startingY: y,
+          endingY: y + 2,
+          transportable: true,
+          transportDestinationX: x,
+          transportDestinationY: y + 2,
+          collidable: collidable,
+          breakable: breakable,
+        });
+      }
 
       if (blockType !== "air") {
         newBlocks.push({
@@ -73,7 +119,12 @@ export const LevelCreator = () => {
         });
       }
 
-      return { ...prevState, blocks: newBlocks };
+      return {
+        ...prevState,
+        blocks: newBlocks,
+        enemies: newEnemies,
+        pipes: newPipes,
+      };
     });
   };
 
@@ -83,7 +134,7 @@ export const LevelCreator = () => {
       type: "application/json",
     });
     a.href = URL.createObjectURL(file);
-    a.download = "level.json";
+    a.download = level.level + ".json";
     a.click();
   };
 
@@ -94,6 +145,13 @@ export const LevelCreator = () => {
     setColumns(parseInt(e.target.value));
   };
 
+  const handleRowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (parseInt(e.target.value) < 1) {
+      return setRows(1);
+    }
+    setRows(parseInt(e.target.value));
+  };
+
   const handleDrag = (isDragging: boolean, blockType: string = "") => {
     setDragging(isDragging);
     setNextBlockType(blockType);
@@ -102,7 +160,7 @@ export const LevelCreator = () => {
   const getBlockTypeAt = (x: number, y: number) => {
     const block = level.blocks.find((block) => block.x === x && block.y === y);
     console.log("getBlockTypeAt", x, y, selectedBlock);
-    return block ? block.type : "air"; // return 'air' or any default type for no block
+    return block ? block.type : "air";
   };
 
   return (
@@ -123,6 +181,7 @@ export const LevelCreator = () => {
           updateLevel={updateLevel}
           rows={columns}
           handleColumnChange={handleColumnChange}
+          handleRowChange={handleRowChange}
         />
         <EditBlock
           selectedBlock={selectedBlock ? selectedBlock : null}
@@ -134,7 +193,7 @@ export const LevelCreator = () => {
           .fill(0)
           .map((_, columnIndex) => (
             <section id={columnIndex.toString()} className="column">
-              {Array(15)
+              {Array(rows)
                 .fill(0)
                 .map((_, rowIndex) => (
                   <Block

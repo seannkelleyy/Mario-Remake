@@ -80,7 +80,12 @@ export const Block = ({
   const getBlockImage = (blockType: string) => {
     const imageSrc = blockImages[blockType];
     return imageSrc ? (
-      <img src={imageSrc} alt={blockType} width={16} height={16} />
+      <img
+        src={blockImages[blockType]}
+        alt={blockType}
+        width={16}
+        height={16}
+      />
     ) : (
       <></>
     );

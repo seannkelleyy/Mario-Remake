@@ -1,7 +1,7 @@
 export type Enemy = {
   type: string;
-  x: number;
-  y: number;
+  startingX: number;
+  startingY: number;
   direction: boolean;
 };
 
@@ -9,6 +9,6 @@ export type enemyTypes = [
   "goomba",
   "koopa",
   "piranha",
-  "bullet-bill",
-  "fire-bro"
+  "bulletBill",
+  "fireBro"
 ];

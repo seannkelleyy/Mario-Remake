@@ -4,13 +4,15 @@ type EditLevelProps = {
   level: Level;
   rows: number;
   handleColumnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleRowChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateLevel: (property: any, value: any) => void;
 };
 
 export const EditLevel = ({
   level,
   rows,
-  handleColumnChange: handleRowChange,
+  handleColumnChange,
+  handleRowChange,
   updateLevel,
 }: EditLevelProps) => {
   return (
@@ -22,7 +24,15 @@ export const EditLevel = ({
         onChange={(e) => updateLevel("level", e.target.value)}
       />
       <label>Width in Blocks</label>
-      <input type="number" value={rows} onChange={handleRowChange} />
+      <input type="number" value={rows} onChange={handleColumnChange} />
+      <label>Height in Blocks</label>
+      <input type="number" value={level.height} onChange={handleRowChange} />
+      <label>Time Limit</label>
+      <input
+        type="number"
+        value={level.timeLimit}
+        onChange={(e) => updateLevel("timeLimit", parseInt(e.target.value))}
+      />
       <section>
         <label>Song</label>
         <select
@@ -57,6 +67,18 @@ export const EditLevel = ({
           <option value="big">Big</option>
           <option value="fire">Fire</option>
         </select>
+        <label>Starting Lives</label>
+        <input
+          type="number"
+          value={level.hero.statingLives}
+          onChange={(e) =>
+            updateLevel("hero", {
+              ...level.hero,
+              statingLives: parseInt(e.target.value),
+              lives: parseInt(e.target.value),
+            })
+          }
+        />
         <label>Starting X</label>
         <input
           type="number"
