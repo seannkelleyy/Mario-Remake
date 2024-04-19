@@ -11,19 +11,23 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
-    private IAI[] EnemyAI;
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
     private double deadTimer = 0.0f;
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
 
-    public Goomba(Vector2 position)
+    public Goomba(Vector2 position, string[] ais)
     {
+        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
@@ -47,15 +51,33 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
-            foreach (IAI ai in EnemyAI)
-            {
-                ai.Seek(this);
-            }
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
             if (attackCounter > EntitySettings.EnemyAttackCounter)
             {
                 Attack();
                 attackCounter = 0.0f;
+            }
+        }
+    }
+
+    public void parseAIs(Dictionary<string, IAI> enemyAI, string[] ais)
+    {
+        if (!(ais == null))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
             }
         }
     }

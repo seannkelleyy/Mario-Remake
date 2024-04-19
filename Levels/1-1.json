@@ -16,6 +16,17 @@
   "enemies": [
     {
       "type": "goomba",
+      "ai": [
+        {
+            "type": "seek"
+        },
+        {
+            "type": "scare"
+        },
+        {
+            "type": "jump"
+        }
+      ],
       "startingX": 23,
       "startingY": 12,
       "isRight": false

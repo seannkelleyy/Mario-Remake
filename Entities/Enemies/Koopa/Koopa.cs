@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
@@ -17,14 +20,18 @@ public class Koopa : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
     private double shellTimer = 0.0;
     private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
     public bool teamMario { get; }
 
-    public Koopa(Vector2 position)
+    public Koopa(Vector2 position, string[] ais)
     {
+        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
@@ -44,6 +51,28 @@ public class Koopa : AbstractCollideable, IEnemy
             attackCounter = 0.0f;
         }
         HandleShellTime(gameTime);
+    }
+
+    public void parseAIs(Dictionary<string, IAI> enemyAI, string[] ais)
+    {
+        if (!(ais == null))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
+            }
+        }
     }
 
     private void HandleShellTime(GameTime gameTime)

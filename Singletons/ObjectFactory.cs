@@ -4,6 +4,7 @@ using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Entities.Pipes;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -21,16 +22,16 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position)
+        public IEnemy CreateEnemy(string type, Vector2 position, string[] ais)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position);
+                    return new Goomba(position, ais);
                 case "koopa":
-                    return new Koopa(position);
+                    return new Koopa(position, ais);
                 case "bulletBill":
-                    return new BulletBill(position);
+                    return new BulletBill(position, ais);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }

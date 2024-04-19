@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Enemies
@@ -20,6 +21,9 @@ namespace Mario.Entities.Enemies
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
+#nullable enable
+        public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = false;
         public bool teamMario { get; }
