@@ -1,14 +1,15 @@
-export type Enemy = {
+export type EnemyType = {
   type: string;
   startingX: number;
   startingY: number;
   direction: boolean;
+  AI: string[];
 };
 
-export type enemyTypes = [
+export const enemyTypes = [
   "goomba",
   "koopa",
   "piranha",
-  "bulletBill",
-  "fireBro"
+  "bulletBillLauncher",
+  "fireBro",
 ];

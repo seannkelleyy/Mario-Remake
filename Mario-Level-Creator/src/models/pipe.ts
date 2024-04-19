@@ -4,7 +4,7 @@ export const pipeTypes = [
   "pipeTubeHorizontal",
 ];
 
-export type Pipe = {
+export type PipeType = {
   type: string;
   x: number;
   startingY: number;

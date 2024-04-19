@@ -3,10 +3,10 @@ import { EditLevel } from "./components/MenuItems/EditLevel";
 import { Level } from "./models/level";
 import { BlockType } from "./models/block";
 import { BlockSection } from "./models/blockSection";
-import { Enemy } from "./models/enemy";
-import { Block } from "./components/Block";
-import { EditBlock } from "./components/MenuItems/EditBlock";
-import { Pipe } from "./models/pipe";
+import { EnemyType, enemyTypes } from "./models/enemy";
+import { Object } from "./components/Object";
+import { EditObject } from "./components/MenuItems/EditObject";
+import { PipeType, pipeTypes } from "./models/pipe";
 
 export const LevelCreator = () => {
   const [columns, setColumns] = useState(40);
@@ -35,22 +35,105 @@ export const LevelCreator = () => {
       lives: 3,
       statingLives: 3,
     },
-    enemies: [] as Enemy[],
+    enemies: [] as EnemyType[],
     blockSections: [] as BlockSection[],
     blocks: [] as BlockType[],
-    pipes: [] as Pipe[],
+    pipes: [] as PipeType[],
   });
 
-  let selectedBlock = level.blocks.find(
-    (block) =>
-      block.x === selectedCoordinates?.x && block.y === selectedCoordinates?.y
-  );
+  let selectedObject =
+    level.blocks.find(
+      (block) =>
+        block.x === selectedCoordinates?.x && block.y === selectedCoordinates?.y
+    ) ||
+    level.enemies.find(
+      (enemy) =>
+        enemy.startingX === selectedCoordinates?.x &&
+        enemy.startingY === selectedCoordinates?.y
+    ) ||
+    level.pipes.find(
+      (pipe) =>
+        pipe.x === selectedCoordinates?.x &&
+        pipe.startingY === selectedCoordinates?.y
+    );
 
   const updateLevel = (property: any, value: any) => {
     setLevel((prevState) => ({
       ...prevState,
       [property]: value,
     }));
+  };
+
+  const updateEnemy = (
+    startingX: number,
+    startingY: number,
+    enemyType: string,
+    direction: boolean,
+    AI: string[]
+  ) => {
+    setLevel((prevState) => {
+      let newEnemies = prevState.enemies.filter(
+        (enemy) =>
+          enemy.startingX !== startingX || enemy.startingY !== startingY
+      );
+
+      if (enemyTypes.includes(enemyType)) {
+        if (AI.includes("none")) AI = [];
+        newEnemies.push({
+          type: enemyType,
+          startingX: startingX,
+          startingY: startingY,
+          direction: direction ? direction : true,
+          AI: AI ? AI : [],
+        });
+      }
+
+      return {
+        ...prevState,
+        enemies: newEnemies,
+      };
+    });
+  };
+
+  const updatePipe = (
+    x: number,
+    startingY: number,
+    endingY: number,
+    pipeType: string,
+    transportable: boolean,
+    transportDestinationX: number,
+    transportDestinationY: number,
+    collidable: boolean,
+    breakable: boolean
+  ) => {
+    setLevel((prevState) => {
+      let newPipes = prevState.pipes.filter(
+        (pipe) => pipe.x !== x || pipe.startingY !== startingY
+      );
+
+      if (pipeTypes.includes(pipeType)) {
+        newPipes.push({
+          type: pipeType,
+          x: x,
+          startingY: startingY,
+          endingY: endingY,
+          transportable: transportable ? true : false,
+          transportDestinationX: transportDestinationX
+            ? transportDestinationX
+            : x,
+          transportDestinationY: transportDestinationY
+            ? transportDestinationY
+            : endingY,
+          collidable: collidable ? collidable : true,
+          breakable: breakable ? breakable : false,
+        });
+      }
+
+      return {
+        ...prevState,
+        pipes: newPipes,
+      };
+    });
   };
 
   const updateBlock = (
@@ -66,48 +149,6 @@ export const LevelCreator = () => {
         (block) => block.x !== x || block.y !== y
       );
 
-      let newEnemies = prevState.enemies.filter(
-        (enemy) => enemy.startingX !== x || enemy.startingY !== y
-      );
-
-      let newPipes = prevState.pipes.filter(
-        (pipe) => pipe.x !== x || pipe.startingY !== y
-      );
-
-      // add to enemies if goomba, koopa, piranha, or bulletBill or fire bro
-      if (
-        blockType === "goomba" ||
-        blockType === "koopa" ||
-        blockType === "piranha" ||
-        blockType === "bulletBill" ||
-        blockType === "fireBro"
-      ) {
-        newEnemies.push({
-          type: blockType,
-          startingX: x,
-          startingY: y,
-          direction: true,
-        });
-      }
-
-      if (
-        blockType === "pipeTubeVertical" ||
-        blockType === "pipeTubeUpsideDown" ||
-        blockType === "pipeTubeHorizontal"
-      ) {
-        newPipes.push({
-          type: blockType,
-          x: x,
-          startingY: y,
-          endingY: y + 2,
-          transportable: true,
-          transportDestinationX: x,
-          transportDestinationY: y + 2,
-          collidable: collidable,
-          breakable: breakable,
-        });
-      }
-
       if (blockType !== "air") {
         newBlocks.push({
           type: blockType,
@@ -122,8 +163,6 @@ export const LevelCreator = () => {
       return {
         ...prevState,
         blocks: newBlocks,
-        enemies: newEnemies,
-        pipes: newPipes,
       };
     });
   };
@@ -159,7 +198,7 @@ export const LevelCreator = () => {
 
   const getBlockTypeAt = (x: number, y: number) => {
     const block = level.blocks.find((block) => block.x === x && block.y === y);
-    console.log("getBlockTypeAt", x, y, selectedBlock);
+    console.log("getBlockTypeAt", x, y, selectedObject);
     return block ? block.type : "air";
   };
 
@@ -183,9 +222,11 @@ export const LevelCreator = () => {
           handleColumnChange={handleColumnChange}
           handleRowChange={handleRowChange}
         />
-        <EditBlock
-          selectedBlock={selectedBlock ? selectedBlock : null}
+        <EditObject
+          selectedObject={selectedObject ? selectedObject : null}
           updateBlock={updateBlock}
+          updateEnemy={updateEnemy}
+          updatePipe={updatePipe}
         />
       </section>
       <section className="level">
@@ -196,16 +237,18 @@ export const LevelCreator = () => {
               {Array(rows)
                 .fill(0)
                 .map((_, rowIndex) => (
-                  <Block
+                  <Object
                     key={`${columnIndex}-${rowIndex}`}
-                    nextBlockType={nextBlockType}
+                    nextObjectType={nextBlockType}
                     dragging={dragging}
                     handleDrag={handleDrag}
                     isEditMode={isEditMode}
-                    existingBlockType={getBlockTypeAt(columnIndex, rowIndex)}
+                    existingObjectType={getBlockTypeAt(columnIndex, rowIndex)}
                     x={columnIndex}
                     y={rowIndex}
                     updateBlock={updateBlock}
+                    updateEnemy={updateEnemy}
+                    updatePipe={updatePipe}
                     setSelectedCoordinates={setSelectedCoordinates}
                   />
                 ))}

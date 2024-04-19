@@ -1,11 +1,20 @@
+import { BlockType } from "../../models/block";
+
 type EditBlockProps = {
-  selectedBlock: any;
-  updateBlock: any;
+  selectedBlock: BlockType;
+  updateBlock: (
+    x: number,
+    y: number,
+    blockType: string,
+    item: string,
+    collidable: boolean,
+    breakable: boolean
+  ) => void;
 };
 
 export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
   return (
-    <section className="edit-block-popup">
+    <section className="edit-popup">
       <h2>Edit Block</h2>
       <label>Block Type:</label>
       <select
@@ -24,12 +33,10 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
         <option value="air">Air</option>
         <option value="floor">Floor</option>
         <option value="brick">Brick</option>
-        <option value="square-brick">Square Brick</option>
-        <option value="smooth-brick">Smooth Brick</option>
         <option value="mystery">Mystery</option>
-        <option value="pipeTubeVeritcal">Pipe Vertical</option>
-        <option value="pipeTubeUpsideDown">Pipe Upside Down</option>
-        <option value="pipeTubeHorizontal">Pipe Horizontal</option>
+        <option value="flag">Flag</option>
+        <option value="deathBlock">Death Block</option>
+        <option value="stone">Stone</option>
       </select>
       <label>Collideable:</label>
       <input
