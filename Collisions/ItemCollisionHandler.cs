@@ -1,4 +1,6 @@
-﻿using Mario.Interfaces;
+﻿using Mario.Entities.Blocks;
+using Mario.Interfaces;
+using Mario.Singletons;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -7,6 +9,7 @@ public class ItemCollisionHandler
 {
     public IItem mainItem { get; set; }
     public IItem collidingItem { get; set; }
+    public IBlock block { get; set; }
 
     private Dictionary<Type, Dictionary<CollisionDirection, Action>> collisionDictionary;
 
@@ -32,7 +35,18 @@ public class ItemCollisionHandler
             mainItem.ChangeDirection();
         }));
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Top, new Action(() => mainItem.SetCollisionState(CollisionDirection.Top, true)));
-        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() => mainItem.SetCollisionState(CollisionDirection.Bottom, true)));
+        collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Bottom, new Action(() =>
+        {
+            if (block is DeathBlock)
+            {
+                GameContentManager.Instance.RemoveEntity(mainItem);
+
+            }
+            else
+            {
+                mainItem.SetCollisionState(CollisionDirection.Bottom, true);
+            }
+        }));
 
         // Pipe stuff
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
@@ -67,6 +81,7 @@ public class ItemCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(mainItem.GetRectangle(), block.GetRectangle(), mainItem.GetVelocity());
         if (collisionDictionary[typeof(IBlock)].ContainsKey(direction))
         {
+            this.block = block;
             collisionDictionary[typeof(IBlock)][direction].Invoke();
         }
     }

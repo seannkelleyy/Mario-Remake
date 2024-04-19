@@ -16,17 +16,23 @@ namespace Mario
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
+        private IController gamePadController;
         private HeadsUpDisplay HUD;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferHeight = GameSettings.InitialWindowHeight;
+            graphics.IsFullScreen = true;
+
             keyboardController = new KeyboardController();
+            gamePadController = new GamePadController();
 
             LevelLoader.Instance.Initialize(Content);
 
@@ -46,7 +52,9 @@ namespace Mario
 
             HUD = new HeadsUpDisplay();
 
-            keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+            keyboardController.LoadCommands(this);
+            gamePadController.LoadCommands(this);
+
             MediaManager.Instance.PlayDefaultTheme();
             camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
@@ -70,7 +78,22 @@ namespace Mario
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
+                gamePadController.Update(gameTime);
                 camera.UpdatePosition();
+                base.Update(gameTime);
+            }
+            else if (GameStateManager.Instance.isWin)
+            {
+                if (GameContentManager.Instance.GetHero().GetPosition().X < GameSettings.LevelEnd * GlobalVariables.BlockHeightWidth)
+                {
+                    GameContentManager.Instance.GetHero().Update(gameTime);
+                    GameContentManager.Instance.GetHero().WalkRight();
+                }
+                else
+                {
+                    GameStateManager.Instance.Win();
+                    GameStateManager.Instance.BeginReset();
+                }
                 base.Update(gameTime);
             }
             else if (GameStateManager.Instance.isResetting) // Updating when the level is resetting after the player dies
@@ -81,20 +104,23 @@ namespace Mario
                 }
                 else if (GameStateManager.Instance.resetTime >= GlobalVariables.MaxResetTime)
                 {
-                    GameStateManager.Instance.EndReset(camera);
+                    GameStateManager.Instance.EndReset(ref camera);
                     keyboardController = new KeyboardController();
-                    keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+                    keyboardController.LoadCommands(this);
+                    gamePadController = new GamePadController();
+                    gamePadController.LoadCommands(this);
                 }
             }
             else
             { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
+                gamePadController.UpdatePause(gameTime);
             }
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
             MediaManager.Instance.Draw(spriteBatch);
@@ -106,6 +132,13 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ChangeFullScreenMode()
+        {
+            graphics.ToggleFullScreen();
+            graphics.PreferredBackBufferHeight = GameSettings.WindowHeight;
+            graphics.ApplyChanges();
         }
     }
 }

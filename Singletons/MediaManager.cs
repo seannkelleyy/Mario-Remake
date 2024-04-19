@@ -45,7 +45,8 @@ namespace Mario.Singletons
                 { GlobalVariables.EffectNames.kick, content.Load<SoundEffect>("kick").CreateInstance() },
                 { GlobalVariables.EffectNames.pause, content.Load<SoundEffect>("pause").CreateInstance() },
                 { GlobalVariables.EffectNames.pipe, content.Load<SoundEffect>("pipe").CreateInstance() },
-                { GlobalVariables.EffectNames.powerup, content.Load< SoundEffect >("powerUp").CreateInstance() },
+                { GlobalVariables.EffectNames.powerup, content.Load<SoundEffect>("powerUp").CreateInstance() },
+                { GlobalVariables.EffectNames.enemyPowerup, content.Load<SoundEffect>("enemyPowerUp").CreateInstance() },
                 { GlobalVariables.EffectNames.smallJump, content.Load<SoundEffect>("smallJump").CreateInstance() },
                 { GlobalVariables.EffectNames.stomp, content.Load<SoundEffect>("stomp").CreateInstance() },
                 { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() }
@@ -63,7 +64,8 @@ namespace Mario.Singletons
                 { GlobalVariables.SongThemes.castleComplete, content.Load<Song>("07-castle-complete") },
                 { GlobalVariables.SongThemes.lostLife, content.Load<Song>("08-you-re-dead") },
                 { GlobalVariables.SongThemes.gameOver, content.Load<Song>("09-game-over") },
-                { GlobalVariables.SongThemes.ending, content.Load<Song>("12-ending") }
+                { GlobalVariables.SongThemes.ending, content.Load<Song>("12-ending") },
+                { GlobalVariables.SongThemes.enemyStar, content.Load<Song>("13-enemy-star-power") }
             };
         }
 

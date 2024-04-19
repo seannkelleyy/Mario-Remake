@@ -2,9 +2,9 @@
 
 namespace Mario.Entities.Blocks.BlockStates
 {
-    public class HardBlockState : AbstractEntityState
+    public class StoneBlockState : AbstractEntityState
     {
-        public HardBlockState() : base()
+        public StoneBlockState() : base()
         {
             sprite = spriteFactory.CreateSprite("stoneTile");
         }
