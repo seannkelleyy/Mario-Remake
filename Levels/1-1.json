@@ -32,13 +32,15 @@
       "isRight": false
     },
     {
-      "type": "goomba",
+        "type": "goomba",
+        "ai": [],
       "startingX": 41,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+        "ai": [],
       "startingX": 52,
       "startingY": 12,
       "isRight": false
