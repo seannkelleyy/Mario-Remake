@@ -25,22 +25,36 @@ namespace Mario.Entities.Enemies.EnemyAI
                 {
                     if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
                     {
-                        enemy.ChangeDirection();
+                        if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
+                        {
+                            enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
+                        }
+                        else
+                        {
+                            enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
+                        }
                     }
                 }
                 else
                 {
                     if (enemy.physics.currentHorizontalDirection == HorizontalDirection.left)
                     {
-                        enemy.ChangeDirection();
+                        if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
+                        {
+                            enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
+                        }
+                        else
+                        {
+                            enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
+                        }
                     }
                 }
             }
         }
 
-        public void Scare(IEnemy enemy)
+        public bool Scare(IEnemy enemy, double scareCD, double scareCounter)
         {
-            // Does nothing in seek.
+            return false;
         }
     }
 }

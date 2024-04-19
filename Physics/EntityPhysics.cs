@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Character;
+using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
@@ -68,21 +69,70 @@ namespace Mario.Physics
             entity.SetPosition(entity.GetPosition() + new Vector2(velocity.X, 0));
         }
 
-        internal override void UpdateVertical()
+        private void HandleDownwardMovement()
         {
-
             if (!entity.GetCollisionState(CollisionDirection.Bottom))
             {
-                isFalling = true;
                 velocity.Y += ApplyGravity();
             }
-            else if (entity.GetCollisionState(CollisionDirection.Bottom))
+            else
             {
-                velocity.Y = 0;
-                isFalling = false;
+                smallJumpCounter = 0;
+                jumpCounter = 0;
+                StopVertical();
+            }
+        }
+
+        private void HandleUpwardMovement()
+        {
+            if (entity.GetCollisionState(CollisionDirection.Top) || isMininumJump && jumpCounter >= PhysicsSettings.MinimumJumpLimit)
+            {
+                jumpCounter = PhysicsSettings.RegularJumpLimit;
+                smallJumpCounter = PhysicsSettings.SmallJumpLimit;
+                isFalling = true;
+                isMininumJump = false;
+                isDecelerating = true;
+            }
+            else if (smallJumpCounter > 0 && smallJumpCounter < PhysicsSettings.SmallJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            {
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - smallJumpCounter / PhysicsSettings.SmallJumpLimit);
+                smallJumpCounter++;
+            }
+            else if (jumpCounter > 0 && jumpCounter < PhysicsSettings.RegularJumpLimit && !entity.GetCollisionState(CollisionDirection.Top))
+            {
+                velocity.Y = -PhysicsSettings.JumpForce * (1 - jumpCounter / PhysicsSettings.RegularJumpLimit);
+                jumpCounter++;
+            }
+            else
+            {
+                isFalling = true;
+            }
+        }
+
+        internal override void UpdateVertical()
+        {
+            if (isFalling)
+            {
+                HandleDownwardMovement();
+            }
+            else
+            {
+                HandleUpwardMovement();
+            }
+
+            if (isDecelerating)
+            {
+                velocity.Y += PhysicsSettings.DecelerationFactor;
+                if (velocity.Y >= 0)
+                {
+                    // Once upward velocity reaches 0, start falling and stop decelerating
+                    velocity.Y = 0;
+                    isFalling = true;
+                    isDecelerating = false;
+                }
             }
             entity.SetPosition(entity.GetPosition() + new Vector2(0, velocity.Y));
-            velocity.Y = 0;
+            StopVertical();
         }
     }
 }

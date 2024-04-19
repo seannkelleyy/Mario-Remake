@@ -22,11 +22,14 @@ public class Goomba : AbstractCollideable, IEnemy
     public Dictionary<string, IAI>? EnemyAI { get; set; }
 #nullable disable
     private double deadTimer = 0.0f;
+    public double scareCD = 30.0f;
+    public double scareCounter = 30.0f;
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
 
-    public Goomba(Vector2 position, string[] ais)
+    public Goomba(Vector2 position, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
         parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
@@ -51,6 +54,15 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
+            scareCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (IAI ai in EnemyAI.Values)
+            {
+                ai.Seek(this);
+                if(ai.Scare(this, scareCD, scareCounter))
+                {
+                    scareCounter = 0;
+                }
+            }
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
             if (attackCounter > EntitySettings.EnemyAttackCounter)
             {
@@ -60,9 +72,9 @@ public class Goomba : AbstractCollideable, IEnemy
         }
     }
 
-    public void parseAIs(Dictionary<string, IAI> enemyAI, string[] ais)
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
     {
-        if (!(ais == null))
+        if (!(ais.Count == 0))
         {
             foreach (string ai in ais)
             {
@@ -154,13 +166,20 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == HorizontalDirection.right)
+        if (EnemyAI.ContainsKey("jump"))
         {
-            physics.currentHorizontalDirection = HorizontalDirection.left;
+            EnemyAI["jump"].Jump(this);
         }
         else
         {
-            physics.currentHorizontalDirection = HorizontalDirection.right;
+            if (physics.currentHorizontalDirection == HorizontalDirection.right)
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.left;
+            }
+            else
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.right;
+            }
         }
     }
 

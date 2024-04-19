@@ -8,6 +8,7 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Mario.Singletons
 {
@@ -22,7 +23,7 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position, string[] ais)
+        public IEnemy CreateEnemy(string type, Vector2 position, List<string> ais)
         {
             switch (type)
             {

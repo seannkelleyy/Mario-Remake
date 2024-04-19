@@ -23,8 +23,9 @@ public class BulletBill : AbstractCollideable, IEnemy
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;
     public bool teamMario { get; }
-    public BulletBill(Vector2 position, string[] ais)
+    public BulletBill(Vector2 position, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
         parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         this.position = position;
@@ -52,9 +53,9 @@ public class BulletBill : AbstractCollideable, IEnemy
         }
     }
 
-    public void parseAIs(Dictionary<string, IAI> enemyAI, string[] ais)
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
     {
-        if (!(ais == null))
+        if (!(ais.Count == 0))
         {
             foreach (string ai in ais)
             {

@@ -29,8 +29,9 @@ public class Koopa : AbstractCollideable, IEnemy
     public bool isShell = false;
     public bool teamMario { get; }
 
-    public Koopa(Vector2 position, string[] ais)
+    public Koopa(Vector2 position, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
         parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
@@ -53,9 +54,9 @@ public class Koopa : AbstractCollideable, IEnemy
         HandleShellTime(gameTime);
     }
 
-    public void parseAIs(Dictionary<string, IAI> enemyAI, string[] ais)
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
     {
-        if (!(ais == null))
+        if (!(ais.Count == 0))
         {
             foreach (string ai in ais)
             {

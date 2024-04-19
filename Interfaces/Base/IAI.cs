@@ -11,6 +11,6 @@ namespace Mario.Interfaces.Base
     {
         public void Jump(IEnemy enemy);
         public void Seek(IEnemy enemy);
-        public void Scare(IEnemy enemy);
+        public bool Scare(IEnemy enemy, double scareCD, double scareCounter);
     }
 }

@@ -61,7 +61,7 @@ public class EnemyCollisionHandler
             mainEnemy.SetCollisionState(CollisionDirection.Right, true);
             mainEnemy.ChangeDirection();
         }));
-        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Top, true)));
+        collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() => { }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() => mainEnemy.SetCollisionState(CollisionDirection.Bottom, true)));
 
         // Enemy stuff

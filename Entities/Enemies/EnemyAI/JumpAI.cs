@@ -22,9 +22,9 @@ namespace Mario.Entities.Enemies.EnemyAI
             // For JumpAI, this does nothing.
         }
 
-        public void Scare(IEnemy enemy)
+        public bool Scare(IEnemy enemy, double scareCD, double scareCounter)
         {
-            // For JumpAI, this does nothing.
+            return false;
         }
     }
 }

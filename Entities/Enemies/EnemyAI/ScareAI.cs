@@ -13,8 +13,6 @@ namespace Mario.Entities.Enemies.EnemyAI
 {
     public class ScareAI : IAI
     {
-        private int scareCD = 0;
-        private int scareCounter = 0;
         public void Jump(IEnemy enemy)
         {
             // Does nothing in the scare AI.
@@ -25,18 +23,19 @@ namespace Mario.Entities.Enemies.EnemyAI
             // Does nothing in the scare AI.
         }
 
-        public void Scare(IEnemy enemy)
+        public bool Scare(IEnemy enemy, double scareCD, double scareCounter)
         {
+            bool triggered = false;
             // No game time to increase time with. Must be done somewhere else.
             if (scareCounter > scareCD)
             {
                 if (Math.Abs(GameContentManager.Instance.GetHero().GetPosition().X - enemy.GetPosition().X) < 4 * BlockHeightWidth)
                 {
                     GameContentManager.Instance.AddEntity(new PhantomEnemy(enemy));
-                    scareCD = 30;
-                    scareCounter = 0;
+                    triggered = true;
                 }
             }
+            return triggered;
         }
     }
 }
