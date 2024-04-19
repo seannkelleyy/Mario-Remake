@@ -21,6 +21,7 @@ public class Koopa : AbstractCollideable, IEnemy
     private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
+
     public bool teamMario { get; }
 
     public Koopa(Vector2 position)
