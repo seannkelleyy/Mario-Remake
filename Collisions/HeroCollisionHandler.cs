@@ -120,13 +120,7 @@ public class HeroCollisionHandler
         // Pipe stuff
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            // Check if Mario is ontop of a vertical pipe and is crouching. If so, transport Mario
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical && (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down)))
-            {
-                pipe.Transport(hero);
-            }
+            HandlePipeTransportation(hero, pipe);
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
         {
@@ -224,6 +218,22 @@ public class HeroCollisionHandler
         {
             this.pipe = pipe;
             collisionDictionary[typeof(IPipe)][direction].Invoke();
+        }
+    }
+
+    private void HandlePipeTransportation(IHero hero, IPipe pipe)
+    {
+        hero.SetCollisionState(CollisionDirection.Bottom, true);
+        // Check if Mario is ontop of a vertical pipe and is crouching. If so, transport Mario
+        if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical)
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down) ||
+            gamePadState.IsButtonDown(Buttons.LeftThumbstickDown) || gamePadState.IsButtonDown(Buttons.DPadDown))
+            {
+                pipe.Transport(hero);
+            }
         }
     }
 }
