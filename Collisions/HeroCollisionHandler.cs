@@ -1,6 +1,7 @@
 using Mario.Entities.Abstract;
 using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Enemies;
 using Mario.Global;
 using Mario.Global.Settings;
 using Mario.Interfaces;
@@ -180,7 +181,7 @@ public class HeroCollisionHandler
 
     public void HandleHeroEnemySideCollision()
     {
-        if (hero is StarHero)
+        if (hero is StarHero && enemy is not PhantomEnemy)
         {
             enemy.Flip();
         }
@@ -197,17 +198,24 @@ public class HeroCollisionHandler
 
     public void HandleHeroEnemyBottomCollision()
     {
-        if (hero is StarHero)
+        if (hero is StarHero && enemy is not PhantomEnemy)
         {
             enemy.Flip();
         }
         else if (hero.GetPhysics().isFalling)
         {
-            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.SmallJump();
-            hero.SetCollisionState(CollisionDirection.Bottom, false);
-            enemy.Stomp();
+            if (enemy is not PhantomEnemy)
+            {
+                GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
+                hero.SetCollisionState(CollisionDirection.Bottom, true);
+                hero.SmallJump();
+                hero.SetCollisionState(CollisionDirection.Bottom, false);
+                enemy.Stomp();
+            }
+            else
+            {
+                hero.TakeDamage();
+            }
         }
     }
 

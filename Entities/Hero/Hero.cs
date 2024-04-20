@@ -175,6 +175,7 @@ namespace Mario.Entities.Character
         {
             if (item is Pistol && currentHealth != HeroHealth.PistolMario)
             {
+                MediaManager.Instance.PlayTheme(SongThemes.guns, false);
                 MediaManager.Instance.PlayEffect(EffectNames.powerup);
                 bool wasSmall = currentHealth == HeroHealth.Mario;
                 currentHealth = HeroHealth.PistolMario;
@@ -183,6 +184,7 @@ namespace Mario.Entities.Character
             }
             else if (item is Shotgun && currentHealth != HeroHealth.ShotgunMario)
             {
+                MediaManager.Instance.PlayTheme(SongThemes.guns, false);
                 MediaManager.Instance.PlayEffect(EffectNames.powerup);
                 bool wasSmall = currentHealth == HeroHealth.Mario;
                 currentHealth = HeroHealth.ShotgunMario;
@@ -191,6 +193,7 @@ namespace Mario.Entities.Character
             }
             else if (item is RocketLauncher && currentHealth != HeroHealth.RocketLauncherMario)
             {
+                MediaManager.Instance.PlayTheme(SongThemes.guns, false);
                 MediaManager.Instance.PlayEffect(EffectNames.powerup);
                 bool wasSmall = currentHealth == HeroHealth.Mario;
                 currentHealth = HeroHealth.RocketLauncherMario;

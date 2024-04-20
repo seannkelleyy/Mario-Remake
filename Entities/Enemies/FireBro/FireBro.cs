@@ -1,26 +1,34 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 public class FireBro : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
     private double attackCounter = 0.0f;
     private double deadTimer = 0;
     public bool teamMario { get; }
     private float marioRelativePosition;
 
-    public FireBro(Vector2 position, bool isRight)
+    public FireBro(Vector2 position, bool isRight, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
+        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
@@ -65,6 +73,28 @@ public class FireBro : AbstractCollideable, IEnemy
             {
                 Attack();
                 attackCounter = 0.0f;
+            }
+        }
+    }
+
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
+    {
+        if (!(ais.Count == 0))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
             }
         }
     }
@@ -149,6 +179,11 @@ public class FireBro : AbstractCollideable, IEnemy
     public bool ReportIsAlive()
     {
         return true;
+    }
+
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 
     public EnemyHealth ReportHealth()

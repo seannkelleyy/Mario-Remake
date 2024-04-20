@@ -4,8 +4,10 @@ using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Entities.Pipes;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Mario.Singletons
 {
@@ -20,18 +22,18 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight)
+        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight, List<string> ais)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position, isRight);
+                    return new Goomba(position, isRight, ais);
                 case "koopa":
-                    return new Koopa(position, isRight);
+                    return new Koopa(position, isRight, ais);
                 case "bulletBill":
                     return new BulletBill(position);
                 case "firebro":
-                    return new FireBro(position, isRight);
+                    return new FireBro(position, isRight, ais);
                 default:
                     Logger.Instance.LogError($"Entity type {type} not recognized.");
                     return null;

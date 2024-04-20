@@ -3,7 +3,7 @@ export type EnemyType = {
   startingX: number;
   startingY: number;
   direction: boolean;
-  AI: string[];
+  ai: string[];
 };
 
 export const enemyTypes = ["goomba", "koopa", "piranha", "fireBro"];

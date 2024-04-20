@@ -15,97 +15,121 @@
   },
   "enemies": [
     {
-      "type": "koopa",
+      "type": "goomba",
+      "ai": [
+        "seek",
+        "scare",
+        "jump"
+      ],
       "startingX": 23,
       "startingY": 11,
       "isRight": false
     },
     {
-      "type": "goomba",
-      "startingX": 41,
-      "startingY": 12,
-      "isRight": true
+      "type": "koopa",
+      "ai": [
+        "seek",
+        "scare",
+        "jump"
+      ],
+      "startingX": 20,
+      "startingY": 11,
+      "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 52,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 54,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 81,
       "startingY": 4,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 83,
       "startingY": 5,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 98,
       "startingY": 5,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 100,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 112,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 116,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 124,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 128,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 130,
       "startingY": 9,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 160,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 162,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "koopa",
+      "ai": [],
       "startingX": 108,
       "startingY": 12,
       "isRight": false

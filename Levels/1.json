@@ -20,21 +20,21 @@
       "startingX": 32,
       "startingY": 9,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 30,
       "startingY": 9,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "fireBro",
       "startingX": 35,
       "startingY": 12,
       "direction": true,
-      "AI": []
+      "ai": []
     }
   ],
   "items": [
