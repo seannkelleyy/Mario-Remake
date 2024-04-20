@@ -19,6 +19,7 @@ export const objectImages: { [key: string]: string } = {
   pipeTubeVertical: "pipeVertical.png",
   pipeTubeUpsideDown: "pipeUpsideDown.png",
   pipeTubeHorizontal: "pipeRight.png",
+  pipeTile: "pipe.jpeg",
   deathBlock: "deathBlock.png",
   goomba: "goomba.png",
   koopa: "koopa.png",
@@ -31,4 +32,7 @@ export const objectImages: { [key: string]: string } = {
   star: "star.png",
   fireflower: "fireFlower.png",
   oneUp: "oneUp.png",
+  pistol: "pistol.png",
+  shotgun: "shotgun.png",
+  rocketLauncher: "rocketLauncher.png",
 };

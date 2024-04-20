@@ -17,4 +17,5 @@ export const blockTypes = [
   "flag",
   "deathBlock",
   "stone",
+  "bulletBillLauncher",
 ];

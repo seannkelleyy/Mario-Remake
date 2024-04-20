@@ -6,10 +6,4 @@ export type EnemyType = {
   AI: string[];
 };
 
-export const enemyTypes = [
-  "goomba",
-  "koopa",
-  "piranha",
-  "bulletBillLauncher",
-  "fireBro",
-];
+export const enemyTypes = ["goomba", "koopa", "piranha", "fireBro"];
