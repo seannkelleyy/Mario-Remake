@@ -1,0 +1,172 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.25;
+  font-weight: 400;
+  background-image: url("/mario-background.gif");
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: visible;
+}
+
+.level-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: medium;
+}
+
+.control {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 60vw;
+  margin: 1em;
+  height: 60%;
+  padding: 1em;
+  gap: 0.25em;
+  background-color: #f2f2f2;
+  border: 1px solid #000000;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5em;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.level {
+  position: relative;
+  bottom: -70vh;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0 2px 4px rgba(253, 253, 253, 0.1);
+}
+
+.edit-popup {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.edit-level {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  border: 1px solid #aeaeae;
+  border-radius: 1.5em;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.std-button {
+  background-color: #d2d2d2;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.on-button {
+  background-color: #7cbd80;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.on-button-disabled {
+  background-color: #d28181;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.std-button:hover {
+  background-color: #c2c2c2;
+}
+
+select {
+  padding: 0.25em;
+  margin: 0.25em;
+  border-radius: 0.5em;
+  border: 1px solid #000000;
+  margin: none;
+}
+
+section {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  max-width: 20%;
+  padding: 0.25em;
+  margin: 0.25em;
+  border-radius: 0.5em;
+  border: 1px solid #000000;
+}
+
+label {
+  font-size: 0.9em;
+}
