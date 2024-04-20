@@ -50,6 +50,7 @@ namespace Mario.Entities
         public void Stomp()
         {
             if (deadTimer > 0) return;
+            // Not sure what sound to use here
             MediaManager.Instance.PlayEffect(EffectNames.stomp);
             currentState = new DefaultPiranhaState();
             deadTimer = 1;
@@ -57,6 +58,7 @@ namespace Mario.Entities
 
         public void Flip()
         {
+            // Not sure what sound to use here
             MediaManager.Instance.PlayEffect(EffectNames.kick);
             GameContentManager.Instance.RemoveEntity(this);
         }
