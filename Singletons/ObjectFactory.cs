@@ -20,16 +20,18 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position)
+        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position);
+                    return new Goomba(position, isRight);
                 case "koopa":
-                    return new Koopa(position);
+                    return new Koopa(position, isRight);
                 case "bulletBill":
                     return new BulletBill(position);
+                case "firebro":
+                    return new FireBro(position, isRight);
                 default:
                     Logger.Instance.LogError($"Entity type {type} not recognized.");
                     return null;
@@ -82,6 +84,12 @@ namespace Mario.Singletons
                     return new Mushroom(position, "red");
                 case "oneUp":
                     return new Mushroom(position, "oneUp");
+                case "pistol":
+                    return new Pistol(position);
+                case "shotgun":
+                    return new Shotgun(position);
+                case "rocketLauncher":
+                    return new RocketLauncher(position);
                 default:
                     Logger.Instance.LogError($"Item type `{type}` not recognized.");
                     return null;

@@ -41,6 +41,16 @@ namespace Mario.Entities.Character
                 case "fire":
                     currentHealth = HeroHealth.FireMario;
                     break;
+                case "pistol":
+                    currentHealth = HeroHealth.PistolMario;
+                    break;
+                case "rocketLauncher":
+                    currentHealth = HeroHealth.RocketLauncherMario;
+                    break;
+                case "shotgun":
+                    currentHealth = HeroHealth.ShotgunMario;
+                    break;
+
             }
             this.position = position;
             this.stats = stats;
@@ -163,15 +173,36 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item is FireFlower)
+            if (item is Pistol && currentHealth != HeroHealth.PistolMario)
             {
-                if (currentHealth != HeroHealth.FireMario)
-                {
-                    MediaManager.Instance.PlayEffect(EffectNames.powerup);
-                    bool wasSmall = currentHealth == HeroHealth.Mario;
-                    currentHealth = HeroHealth.FireMario;
-                    currentState.PowerUp(wasSmall);
-                }
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.PistolMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is Shotgun && currentHealth != HeroHealth.ShotgunMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.ShotgunMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is RocketLauncher && currentHealth != HeroHealth.RocketLauncherMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.RocketLauncherMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is FireFlower && currentHealth != HeroHealth.FireMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.FireMario;
+                currentState.PowerUp(wasSmall);
             }
             else if (item is Mushroom)
             {
@@ -183,11 +214,11 @@ namespace Mario.Entities.Character
                 }
                 else if (currentHealth == HeroHealth.Mario)
                 {
+                    MediaManager.Instance.PlayEffect(EffectNames.powerup);
                     currentHealth = HeroHealth.BigMario;
                     position.Y += BlockHeightWidth;
                     currentState.PowerUp(true);
                 }
-                MediaManager.Instance.PlayEffect(EffectNames.powerup);
             }
             else if (item is Coin)
             {
