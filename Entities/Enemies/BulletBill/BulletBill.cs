@@ -16,7 +16,7 @@ using static Mario.Global.GlobalVariables;
 
 public class BulletBill : AbstractCollideable, IEnemy
 {
-    public EntityPhysics physics {  get; }
+    public EntityPhysics physics { get; }
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }
 #nullable disable
@@ -151,5 +151,9 @@ public class BulletBill : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(position + new Vector2(0, (this.GetRectangle().Height / 2)), HorizontalDirection.left, teamMario));
         }
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }

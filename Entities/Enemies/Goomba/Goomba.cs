@@ -58,7 +58,7 @@ public class Goomba : AbstractCollideable, IEnemy
             foreach (IAI ai in EnemyAI.Values)
             {
                 ai.Seek(this);
-                if(ai.Scare(this, scareCD, scareCounter))
+                if (ai.Scare(this, scareCD, scareCounter))
                 {
                     scareCounter = 0;
                 }
@@ -195,5 +195,9 @@ public class Goomba : AbstractCollideable, IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }

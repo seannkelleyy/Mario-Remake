@@ -21,5 +21,6 @@ namespace Mario.Interfaces.Entities
         public bool ReportIsAlive();
         public EnemyHealth ReportHealth();
         public Vector2 GetVelocity();
+        public HorizontalDirection GetCurrentDirection();
     }
 }

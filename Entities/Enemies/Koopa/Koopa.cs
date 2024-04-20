@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Mario.Collisions;
+﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
 using Mario.Entities.Enemies;
@@ -14,6 +12,7 @@ using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
@@ -214,5 +213,9 @@ public class Koopa : AbstractCollideable, IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }
