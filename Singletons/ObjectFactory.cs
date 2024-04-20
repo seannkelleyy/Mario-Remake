@@ -7,7 +7,6 @@ using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Mario.Entities.Pipes;
 using System;
 using Mario.Entities;
 
@@ -36,7 +35,6 @@ namespace Mario.Singletons
                     return new BulletBill(position);
                 case "firebro":
                     return new FireBro(position, isRight);
-                    return new Koopa(position);
                 case "piranha":
                     return new PiranhaPlant(position);
                 default:

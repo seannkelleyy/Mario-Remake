@@ -20,6 +20,7 @@ namespace Mario.Entities.Enemies
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
+        public VerticalEntityPhysics verticalPhysics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = false;
         public bool teamMario { get; }

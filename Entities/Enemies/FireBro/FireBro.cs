@@ -13,6 +13,7 @@ using static Mario.Global.GlobalVariables;
 public class FireBro : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
     private double attackCounter = 0.0f;
     private double deadTimer = 0;

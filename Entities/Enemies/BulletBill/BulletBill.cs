@@ -5,6 +5,7 @@ using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
+using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
@@ -12,7 +13,8 @@ using static Mario.Global.GlobalVariables;
 
 public class BulletBill : AbstractCollideable, IEnemy
 {
-
+    public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;
     public bool teamMario { get; }

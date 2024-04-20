@@ -1,4 +1,5 @@
 ﻿using Mario.Collisions;
+using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
@@ -11,6 +12,8 @@ namespace Mario.Entities
     {
         public EntityPhysics physics { get; }
         public VerticalEntityPhysics verticalPhysics { get; }
+        public bool teamMario { get; }
+        public EnemyHealth currentHealth = EnemyHealth.Normal;
         private double deadTimer = 0.0f;
 
         public PiranhaPlant(Vector2 position)
@@ -40,7 +43,11 @@ namespace Mario.Entities
             }
         }
 
-        public void Bite()
+        public void Collect(IItem item)
+        { 
+        }
+
+            public void Attack()
         {
             if (deadTimer > 0) return;
             MediaManager.Instance.PlayEffect(EffectNames.bite);
@@ -78,6 +85,11 @@ namespace Mario.Entities
         public bool ReportIsAlive()
         {
             return deadTimer < 1;
+        }
+
+        public EnemyHealth ReportHealth()
+        {
+            return currentHealth;
         }
 
         public Vector2 GetVelocity()
