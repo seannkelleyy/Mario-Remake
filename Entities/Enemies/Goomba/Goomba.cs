@@ -4,12 +4,15 @@ using Mario.Entities.Enemies;
 using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
+using Mario.Entities.Projectiles.Rocket;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
+using Mario.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -17,6 +20,7 @@ using static Mario.Global.GlobalVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public ISprite WeaponSprite;
     public EnemyHealth currentHealth = EnemyHealth.Normal;
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }
@@ -27,14 +31,19 @@ public class Goomba : AbstractCollideable, IEnemy
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
 
-    public Goomba(Vector2 position, List<string> ais)
+    public Goomba(Vector2 position, bool isRight, List<string> ais)
     {
         EnemyAI = new Dictionary<string, IAI>();
         parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
+        if (!isRight)
+        {
+            ChangeDirection();
+        }
         currentState = new MovingGoombaState();
+        WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
     }
 
     public override void Update(GameTime gameTime)
@@ -98,6 +107,12 @@ public class Goomba : AbstractCollideable, IEnemy
         }
     }
 
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        base.Draw(spriteBatch);
+        WeaponSprite.Draw(spriteBatch, position);
+    }
+
     public void Stomp()
     {
         if (deadTimer > 0) return;
@@ -115,6 +130,7 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             currentHealth = EnemyHealth.Big;
         }
+        WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
         MediaManager.Instance.PlayEffect(EffectNames.stomp);
     }
 
@@ -133,6 +149,7 @@ public class Goomba : AbstractCollideable, IEnemy
             if (currentHealth != EnemyHealth.Fire)
             {
                 currentHealth = EnemyHealth.Fire;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
             }
         }
         else if (item is Mushroom)
@@ -156,6 +173,26 @@ public class Goomba : AbstractCollideable, IEnemy
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }
+        else if (item is Pistol)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.Pistol;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+
+        }
+        else if (item is Shotgun)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.Shotgun;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+
+        }
+        else if (item is RocketLauncher)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.RocketLauncher;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+        }
 
     }
 
@@ -165,6 +202,18 @@ public class Goomba : AbstractCollideable, IEnemy
         {
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
+        else if (currentHealth is EnemyHealth.Pistol)
+        {
+            GameContentManager.Instance.AddEntity(new BulletObject(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
+        else if (currentHealth is EnemyHealth.RocketLauncher)
+        {
+            GameContentManager.Instance.AddEntity(new RocketProjectile(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
+        else if (currentHealth is EnemyHealth.Shotgun)
+        {
+            new ShotgunBurst(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario);
         }
     }
 
@@ -179,10 +228,12 @@ public class Goomba : AbstractCollideable, IEnemy
             if (physics.currentHorizontalDirection == HorizontalDirection.right)
             {
                 physics.currentHorizontalDirection = HorizontalDirection.left;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
             }
             else
             {
                 physics.currentHorizontalDirection = HorizontalDirection.right;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
             }
         }
     }
@@ -195,7 +246,6 @@ public class Goomba : AbstractCollideable, IEnemy
     {
         return currentHealth;
     }
-
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();

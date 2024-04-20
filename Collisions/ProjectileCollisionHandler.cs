@@ -1,4 +1,5 @@
 ﻿using Mario.Entities.Blocks;
+using Mario.Entities.Projectiles;
 using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
@@ -46,9 +47,13 @@ public class ProjectileCollisionHandler
                 GameContentManager.Instance.RemoveEntity(projectile);
 
             }
-            else
+            else if (projectile is Fireball)
             {
                 projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            }
+            else
+            {
+                projectile.Destroy();
             }
         }));
 
@@ -67,7 +72,14 @@ public class ProjectileCollisionHandler
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            if (projectile is Fireball)
+            {
+                projectile.SetCollisionState(CollisionDirection.Bottom, true);
+            }
+            else
+            {
+                projectile.Destroy();
+            }
         }));
 
         // Enemy Stuff

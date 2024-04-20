@@ -33,7 +33,7 @@ namespace Mario.Entities.Blocks
             // Check to see if a new bullet bill needs to be launched
             if (shootTimer > maxNoShootTime)
             {
-                bulletBill = ObjectFactory.Instance.CreateEnemy("bulletBill", position, null);
+                bulletBill = ObjectFactory.Instance.CreateEnemy("bulletBill", position, false);
                 GameContentManager.Instance.AddEntity(bulletBill);
                 shootTimer = 0;
             } else

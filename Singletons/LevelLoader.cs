@@ -56,7 +56,8 @@ namespace Mario.Singletons
                 IEnemy enemyObject = ObjectFactory.Instance.CreateEnemy(
                     enemy.type,
                     new Vector2(enemy.startingX * GlobalVariables.BlockHeightWidth,
-                    enemy.startingY * GlobalVariables.BlockHeightWidth), enemy.ai);
+                    enemy.startingY * GlobalVariables.BlockHeightWidth),
+                    enemy.isRight, enemy.ai);
                 GameContentManager.Instance.AddEntity(enemyObject);
             }
 

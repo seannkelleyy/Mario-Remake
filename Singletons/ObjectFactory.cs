@@ -23,16 +23,18 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position, List<string> ais)
+        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight, List<string> ais)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position, ais);
+                    return new Goomba(position, isRight, ais);
                 case "koopa":
-                    return new Koopa(position, ais);
+                    return new Koopa(position, isRight, ais);
                 case "bulletBill":
-                    return new BulletBill(position, ais);
+                    return new BulletBill(position);
+                case "firebro":
+                    return new FireBro(position, isRight, ais);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
@@ -83,6 +85,12 @@ namespace Mario.Singletons
                     return new Mushroom(position, "red");
                 case "oneUp":
                     return new Mushroom(position, "oneUp");
+                case "pistol":
+                    return new Pistol(position);
+                case "shotgun":
+                    return new Shotgun(position);
+                case "rocketLauncher":
+                    return new RocketLauncher(position);
                 default:
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
             }
