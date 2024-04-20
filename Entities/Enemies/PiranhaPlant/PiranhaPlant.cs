@@ -18,7 +18,7 @@ namespace Mario.Entities
         {
             verticalPhysics = new VerticalEntityPhysics(this);
             this.position = position;
-            currentState = new HiddenPiranhaState();
+            currentState = new DefaultPiranhaState();
         }
 
         public override void Update(GameTime gameTime)
@@ -45,15 +45,15 @@ namespace Mario.Entities
         {
             if (deadTimer > 0) return;
             MediaManager.Instance.PlayEffect(EffectNames.bite);
-            currentState = new HiddenPiranhaState();
+            currentState = new BitingPiranhaState();
         }
 
-        public void Stomp()
+        public void Stomp()//Here it stands for the piranha plant is killed
         {
             if (deadTimer > 0) return;
             isAlive = false;
             MediaManager.Instance.PlayEffect(EffectNames.stomp);
-            currentState = new DeadPiranhaState();
+            currentState = new DefaultPiranhaState();
             deadTimer = 1;
         }
 
