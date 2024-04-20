@@ -23,6 +23,7 @@ namespace Mario.Singletons
         public static MediaManager Instance => instance;
         public void LoadContent(ContentManager content)
         {
+
             // Initialize dictionary containing level backgrounds.
             backgrounds = new Dictionary<GlobalVariables.Levels, Texture2D>
             {
