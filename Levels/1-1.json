@@ -26,10 +26,14 @@
       "isRight": false
     },
     {
-      "type": "goomba",
-      "ai": [],
-      "startingX": 41,
-      "startingY": 12,
+      "type": "koopa",
+      "ai": [
+        "seek",
+        "scare",
+        "jump"
+      ],
+      "startingX": 20,
+      "startingY": 11,
       "isRight": false
     },
     {

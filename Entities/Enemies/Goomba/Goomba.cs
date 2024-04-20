@@ -57,10 +57,14 @@ public class Goomba : AbstractCollideable, IEnemy
             scareCounter += gameTime.ElapsedGameTime.TotalSeconds;
             foreach (IAI ai in EnemyAI.Values)
             {
-                ai.Seek(this);
+                if (scareCounter > 3)
+                {
+                    ai.Seek(this);
+                }
                 if (ai.Scare(this, scareCD, scareCounter))
                 {
                     scareCounter = 0;
+                    
                 }
             }
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;

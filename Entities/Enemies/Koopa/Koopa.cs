@@ -24,6 +24,8 @@ public class Koopa : AbstractCollideable, IEnemy
 #nullable disable
     private double shellTimer = 0.0;
     private double attackCounter = 0.0f;
+    public double scareCounter = 30.0f;
+    public double scareCD = 30.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
     public bool teamMario { get; }
@@ -45,6 +47,19 @@ public class Koopa : AbstractCollideable, IEnemy
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        scareCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        foreach (IAI ai in EnemyAI.Values)
+        {
+            if (scareCounter > 3)
+            {
+                ai.Seek(this);
+            }
+            if (ai.Scare(this, scareCD, scareCounter))
+            {
+                scareCounter = 0;
+
+            }
+        }
         if (attackCounter > EntitySettings.EnemyAttackCounter)
         {
             Attack();
@@ -186,20 +201,31 @@ public class Koopa : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == HorizontalDirection.right)
+        if (EnemyAI.ContainsKey("jump"))
         {
-            physics.currentHorizontalDirection = HorizontalDirection.left;
-            if (!isShell)
-                currentState = new LeftMovingKoopaState();
+            EnemyAI["jump"].Jump(this);
         }
         else
         {
-            physics.currentHorizontalDirection = HorizontalDirection.right;
-            if (!isShell)
-                currentState = new RightMovingKoopaState();
+            if (physics.currentHorizontalDirection == HorizontalDirection.right)
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.left;
+                if (!isShell)
+                    currentState = new LeftMovingKoopaState();
+            }
+            else
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.right;
+                if (!isShell)
+                    currentState = new RightMovingKoopaState();
+            }
         }
     }
 
+    public void ChangeCurrentState(AbstractEntityState state)
+    {
+        currentState = state;
+    }
     public EnemyHealth ReportHealth()
     {
         return currentHealth;

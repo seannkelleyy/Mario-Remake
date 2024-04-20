@@ -1,4 +1,5 @@
-﻿using Mario.Interfaces.Base;
+﻿using Mario.Entities.Abstract;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using System;
@@ -28,10 +29,20 @@ namespace Mario.Entities.Enemies.EnemyAI
                         if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
                         {
                             enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
+                            if (enemy.GetType().ToString().CompareTo("Koopa") == 0)
+                            {
+                                Koopa kEnemy = (Koopa)enemy;
+                                kEnemy.ChangeCurrentState(new LeftMovingKoopaState());
+                            }
                         }
                         else
                         {
                             enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
+                            if (enemy.GetType().ToString().CompareTo("Koopa") == 0)
+                            {
+                                Koopa kEnemy = (Koopa)enemy;
+                                kEnemy.ChangeCurrentState(new RightMovingKoopaState());
+                            }
                         }
                     }
                 }
