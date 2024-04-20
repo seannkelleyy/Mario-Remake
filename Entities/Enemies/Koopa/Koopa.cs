@@ -34,21 +34,20 @@ public class Koopa : AbstractCollideable, IEnemy
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
-        currentState = new RightMovingKoopaState();
+        if (!isRight)
+        {
+            ChangeDirection();
+        }
+        else
+        {
+            currentState = new RightMovingKoopaState();
+        }
         WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
     }
     public override void Draw(SpriteBatch spriteBatch)
     {
         base.Draw(spriteBatch);
         WeaponSprite.Draw(spriteBatch, position);
-    }
-        if (!isRight )
-        {
-            ChangeDirection();
-        } else
-        {
-            currentState = new RightMovingKoopaState();
-        }
     }
 
     public override void Update(GameTime gameTime)
