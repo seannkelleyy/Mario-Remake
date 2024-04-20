@@ -1,4 +1,4 @@
-using Mario.Entities.Abstract;
+using Mario.Entities;
 using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Global;
@@ -207,7 +207,14 @@ public class HeroCollisionHandler
             hero.SetCollisionState(CollisionDirection.Bottom, true);
             hero.SmallJump();
             hero.SetCollisionState(CollisionDirection.Bottom, false);
-            enemy.Stomp();
+            if (enemy is PiranhaPlant)
+            {
+                hero.TakeDamage();
+            }
+            else
+            {
+                enemy.Stomp();
+            }
         }
     }
 
