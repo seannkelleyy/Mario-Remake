@@ -15,7 +15,6 @@ type EditBlockProps = {
 export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
   return (
     <section className="edit-popup">
-      <h2>Edit Block</h2>
       <label>Block Type:</label>
       <select
         value={selectedBlock?.type ? selectedBlock.type : "air"}

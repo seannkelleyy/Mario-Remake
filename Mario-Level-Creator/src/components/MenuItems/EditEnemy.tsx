@@ -14,7 +14,6 @@ type EditEnemyProps = {
 export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
   return (
     <section className="edit-popup">
-      <h2>Edit Enemy</h2>
       <label>Enemy Type:</label>
       <select
         value={selectedEnemy?.type ? selectedEnemy.type : "goomba"}

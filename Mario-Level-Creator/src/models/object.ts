@@ -27,8 +27,8 @@ export const objectImages: { [key: string]: string } = {
   fireBro: "fireBro.png",
   coin: "coin.png",
   coinUnderground: "coinUnderground.png",
-  mushroom: "mushroom.png",
+  redMushroom: "mushroom.png",
   star: "star.png",
-  fireFlower: "fireFlower.png",
+  fireflower: "fireFlower.png",
   oneUp: "oneUp.png",
 };

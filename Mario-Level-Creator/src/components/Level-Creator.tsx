@@ -300,10 +300,6 @@ export const LevelCreator = () => {
           cycle through all blocks. To edit a block, use the 'edit mode' button
           to turn on edit mode.
         </p>
-        <button onClick={downloadLevel}>Download Level</button>
-        <button onClick={() => setIsEditMode(!isEditMode)}>
-          {isEditMode ? "Edit Mode On" : "Edit Mode Off"}
-        </button>
         <EditLevel
           level={level}
           updateLevel={updateLevel}
@@ -311,14 +307,23 @@ export const LevelCreator = () => {
           handleColumnChange={handleColumnChange}
           handleRowChange={handleRowChange}
         />
-        {selectedObject && (
-          <EditObject
-            selectedObject={selectedObject}
-            updateBlock={updateBlock}
-            updateEnemy={updateEnemy}
-            updatePipe={updatePipe}
-          />
-        )}
+        <EditObject
+          selectedObject={selectedObject}
+          updateBlock={updateBlock}
+          updateEnemy={updateEnemy}
+          updatePipe={updatePipe}
+        />
+        <section className="buttons">
+          <button className="std-button" onClick={downloadLevel}>
+            Download Level
+          </button>
+          <button
+            className={isEditMode ? "on-button" : "on-button-disabled"}
+            onClick={() => setIsEditMode(!isEditMode)}
+          >
+            {isEditMode ? "Edit Mode On" : "Edit Mode Off"}
+          </button>
+        </section>
       </section>
       <section className="level">
         {Array(columns)

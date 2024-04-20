@@ -5,8 +5,8 @@ export type ItemType = {
 };
 
 export const itemTypes: string[] = [
-  "mushroom",
-  "fireFlower",
+  "redMushroom",
+  "fireflower",
   "star",
   "coin",
   "coinUnderground",

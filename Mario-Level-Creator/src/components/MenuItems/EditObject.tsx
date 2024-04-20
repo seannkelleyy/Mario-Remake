@@ -42,9 +42,10 @@ export const EditObject = ({
   updateEnemy,
   updatePipe,
 }: EditObjectProps) => {
-  if (!selectedObject) return null;
   return (
-    <section>
+    <section className="edit">
+      <h3>Edit Object</h3>
+      {!selectedObject && <p>Select an object to edit</p>}
       {enemyTypes.includes(selectedObject?.type) && (
         <EditEnemy
           selectedEnemy={{
