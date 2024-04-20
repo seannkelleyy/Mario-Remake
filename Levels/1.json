@@ -35,13 +35,6 @@
       "startingY": 12,
       "direction": true,
       "AI": []
-    },
-    {
-      "type": "bulletBillLauncher",
-      "startingX": 34,
-      "startingY": 12,
-      "direction": true,
-      "AI": []
     }
   ],
   "items": [
@@ -863,6 +856,14 @@
       "collidable": true,
       "breakable": true,
       "item": "rocketLauncher"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 34,
+      "y": 12,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
     }
   ],
   "pipes": [
