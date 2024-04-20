@@ -14,7 +14,7 @@ namespace Mario.Entities.Hero
         public HeroStatTracker(int time, int lives)
         {
             SetTime(time);
-            SetLives(1);
+            SetLives(lives);
         }
 
         public void Update(GameTime gameTime)

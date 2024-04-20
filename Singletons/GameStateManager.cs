@@ -45,7 +45,6 @@ namespace Mario.Singletons
         public PlayerCamera EndReset(PlayerCamera camera)
         {
             SetResetTime(0.0);
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStats().GetLives() - 1);
             LevelLoader.Instance.UnloadLevel();
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
             isResetting = false;
