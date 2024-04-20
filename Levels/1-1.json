@@ -9,7 +9,7 @@
     "type": "mario",
     "startingX": 4,
     "startingY": 10,
-    "lives": 0,
+    "lives": -4,
     "statingLives": 3,
     "startingPower": "fire"
   },

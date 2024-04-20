@@ -21,7 +21,7 @@ namespace Mario
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+           // graphics.IsFullScreen = true;
             
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -122,15 +122,26 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            
 
-            spriteBatch.Begin(transformMatrix: camera.Transform);
-            MediaManager.Instance.Draw(spriteBatch);
-            foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
+            if (!GameStateManager.Instance.isResetting) // Normal draw
             {
-                entity.Draw(spriteBatch);
+                spriteBatch.Begin(transformMatrix: camera.Transform);
+                MediaManager.Instance.Draw(spriteBatch);
+                foreach (IEntityBase entity in GameContentManager.Instance.GetEntities())
+                {
+                    entity.Draw(spriteBatch);
+                }
+                HUD.Draw(spriteBatch, SpriteFactory.Instance.GetMainFont());
+                spriteBatch.End();
+            } else 
+            {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(), 
+                    "YOU DIED: Lives Left:" + GameContentManager.Instance.GetHero().GetStats().GetLives(), new Vector2(320, 225), Color.White);
+                spriteBatch.End();
             }
-            HUD.Draw(spriteBatch, SpriteFactory.Instance.GetMainFont());
-            spriteBatch.End();
+            
 
             base.Draw(gameTime);
         }
