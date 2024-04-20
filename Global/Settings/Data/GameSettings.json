@@ -3,7 +3,7 @@
         "frameRate": 60,
         "cameraStartingX": 400,
         "cameraStartingY": 48,
-        "isDevelopment": true,
+        "isDevelopment": false,
         "levelJsonFilePath": "../../../Levels/1-1.json",
         "levelTopHeight": 16,
         "UndergroundCameraX": 2416,

@@ -43,7 +43,7 @@ public class Logger
     public void LogError(string message)
     {
 
-        //_logger.Error(message);
+        _logger.Error(message);
     }
 
     // This is called when the game is closed

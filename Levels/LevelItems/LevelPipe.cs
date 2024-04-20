@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Mario.Levels.Level
+﻿namespace Mario.Levels.Level
 {
     public class LevelPipe
     {

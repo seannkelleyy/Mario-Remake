@@ -13,7 +13,7 @@ namespace Mario.Entities.Blocks
         public MysteryBlock(Vector2 position, bool collidable, string itemName)
         {
             this.position = position;
-            isCollidable = collidable;
+            isCollideable = collidable;
             currentState = new GoldenBlockState();
             canBeCombined = false;
 
@@ -40,6 +40,15 @@ namespace Mario.Entities.Blocks
                     break;
                 case "star":
                     item = ObjectFactory.Instance.CreateItem("star", position);
+                    break;
+                case "pistol":
+                    item = ObjectFactory.Instance.CreateItem("pistol", position);
+                    break;
+                case "shotgun":
+                    item = ObjectFactory.Instance.CreateItem("shotgun", position);
+                    break;
+                case "rocketLauncher":
+                    item = ObjectFactory.Instance.CreateItem("rocketLauncher", position);
                     break;
                 default:
                     Logger.Instance.LogError($"Item type `{itemName}` not recognized.");

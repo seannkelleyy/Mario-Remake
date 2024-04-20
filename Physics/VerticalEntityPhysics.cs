@@ -1,6 +1,5 @@
 ﻿using Mario.Interfaces.Base;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace Mario.Physics
 {

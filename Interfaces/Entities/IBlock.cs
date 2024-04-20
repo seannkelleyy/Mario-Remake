@@ -4,7 +4,7 @@ namespace Mario.Interfaces
 {
     public interface IBlock : IEntityBase, ICollideable
     {
-        public bool isCollidable { get; set; }
+        public bool isCollideable { get; set; }
         public bool isBreakable { get; set; }
         public bool canBeCombined { get; set; }
         public void GetHit();

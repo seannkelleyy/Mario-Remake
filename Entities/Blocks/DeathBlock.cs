@@ -9,7 +9,7 @@ namespace Mario.Entities.Blocks
         public DeathBlock(Vector2 position, bool breakable, bool collidable)
         {
             this.position = position;
-            isCollidable = collidable;
+            isCollideable = collidable;
             isBreakable = breakable;
             canBeCombined = false;
             currentState = new InvisibleBlockState();

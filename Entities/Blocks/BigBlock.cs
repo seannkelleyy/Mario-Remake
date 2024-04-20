@@ -13,7 +13,7 @@ public class Block : AbstractBlock
         this.width = width;
         this.height = height;
         this.isBreakable = isBreakable;
-        isCollidable = true;
+        isCollideable = true;
         canBeCombined = true;
     }
 

@@ -8,12 +8,9 @@ namespace Mario.Interfaces.Entities
 {
     public interface IEnemy : IEntityBase, ICollideable
     {
-#nullable enable
         public Dictionary<string, IAI>? EnemyAI { get; set; }
-#nullable disable
         public EntityPhysics physics { get; }
         public bool teamMario { get; }
-
         public VerticalEntityPhysics verticalPhysics { get; }
         public void ChangeDirection();
         public void Stomp();

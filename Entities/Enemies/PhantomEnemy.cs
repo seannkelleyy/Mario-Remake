@@ -15,9 +15,7 @@ namespace Mario.Entities.Enemies
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
-#nullable enable
         public Dictionary<string, IAI>? EnemyAI { get; set; }
-#nullable disable
         private float phantomTimer = EntitySettings.EnemyPhantomTimer;
         private bool isBig = false;
         public bool teamMario { get; }

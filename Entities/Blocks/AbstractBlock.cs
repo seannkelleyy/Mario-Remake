@@ -7,7 +7,7 @@ namespace Mario.Entities.Blocks
 {
     public abstract class AbstractBlock : AbstractCollideable, IBlock
     {
-        public bool isCollidable { get; set; }
+        public bool isCollideable { get; set; }
         public bool isBreakable { get; set; }
         public bool canBeCombined { get; set; }
 

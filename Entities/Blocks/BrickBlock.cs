@@ -12,7 +12,7 @@ namespace Mario.Entities.Blocks
         public BrickBlock(Vector2 position, bool breakable, bool collidable, string itemName, bool isUnderground = false)
         {
             this.position = position;
-            isCollidable = collidable;
+            isCollideable = collidable;
             isBreakable = breakable;
             canBeCombined = false;
 
@@ -64,7 +64,7 @@ namespace Mario.Entities.Blocks
                 }
                 MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
                 currentState = new BrickBlockBrokenState();
-                isCollidable = false;
+                isCollideable = false;
             }
         }
     }

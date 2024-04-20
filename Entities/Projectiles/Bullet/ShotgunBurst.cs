@@ -17,8 +17,6 @@ namespace Mario.Entities.Projectiles
             GameContentManager.Instance.AddEntity(new BulletObject(position, currentHorizontalDirection, teamMario, -10));
             GameContentManager.Instance.AddEntity(new BulletObject(position, currentHorizontalDirection, teamMario, -15));
             GameContentManager.Instance.AddEntity(new BulletObject(position, currentHorizontalDirection, teamMario, -20));
-
-
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Mario.Entities.Blocks
         public FloorBlock(Vector2 position, bool breakable, bool collidable, bool isUnderground = false)
         {
             this.position = position;
-            isCollidable = collidable;
+            isCollideable = collidable;
             isBreakable = breakable;
             canBeCombined = true;
 

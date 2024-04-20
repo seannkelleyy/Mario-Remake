@@ -17,9 +17,7 @@ namespace Mario.Entities.Enemies
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
-#nullable enable
         public Dictionary<string, IAI>? EnemyAI { get; set; }
-#nullable disable
         public VerticalEntityPhysics verticalPhysics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = false;

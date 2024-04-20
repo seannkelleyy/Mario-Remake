@@ -24,11 +24,8 @@ namespace Mario.Singletons
             { typeof(IHero), new List<IHero>() }
         };
 
-        // This code follows the singleton pattern
-        // When you need a GCM, you call GameContentManager.Instance
         public static GameContentManager Instance => instance;
 
-        // This is a private constructor, so no one can create a new GameContentManager
         private GameContentManager() { }
 
         public List<IEntityBase> GetEntities()
@@ -114,7 +111,7 @@ namespace Mario.Singletons
             foreach (IBlock block in entities[typeof(IBlock)])
             {
                 if (block.GetPosition().X <= position.X + CollisionSettings.CollisionPixelRadius
-                    && block.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && block.isCollidable)
+                    && block.GetPosition().X >= position.X - CollisionSettings.CollisionPixelRadius && block.isCollideable)
                 {
                     blocks.Add(block);
                 }

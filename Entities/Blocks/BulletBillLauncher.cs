@@ -17,7 +17,7 @@ namespace Mario.Entities.Blocks
         public BulletBillLauncher(Vector2 position, bool breakable, bool collidable)
         {
             this.position = position;
-            isCollidable = collidable;
+            isCollideable = collidable;
             isBreakable = breakable;
             canBeCombined = true;
             currentState = new BulletBillLauncherState();
