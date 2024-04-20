@@ -15,9 +15,9 @@
   },
   "enemies": [
     {
-      "type": "goomba",
+      "type": "koopa",
       "startingX": 23,
-      "startingY": 12,
+      "startingY": 11,
       "isRight": false
     },
     {
@@ -115,17 +115,22 @@
     {
       "type": "pistol",
       "startingX": 6,
-      "startingY": 10
+      "startingY": 13
     },
     {
       "type": "shotgun",
       "startingX": 8,
-      "startingY": 10
+      "startingY": 13
     },
     {
       "type": "rocketLauncher",
       "startingX": 10,
-      "startingY": 10
+      "startingY": 13
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 24,
+      "startingY": 13
     }
   ],
   "itemSections": [
