@@ -283,12 +283,12 @@ namespace Mario.Entities.Character
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
             if (stats.GetLives() > 0)
             {
-                GameStateManager.Instance.BeginReset();
+                GameStateManager.Instance.BeginReset(false);
             }
             else
             {
                 stats.SetLives(startingLives);
-                GameStateManager.Instance.Restart();
+                GameStateManager.Instance.BeginReset(true);
             }
         }
         public HeroHealth ReportHealth()

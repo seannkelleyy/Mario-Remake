@@ -15,6 +15,7 @@ namespace Mario.Singletons
         public bool isPaused { get; private set; } = false;
         public bool isResetting { get; private set; } = false;
         public bool isWin { get; private set; } = false;
+        public bool gameOver { get; private set;}
         public double resetTime { get; private set; } = 0.0;
 
         // Private constructor
@@ -46,23 +47,31 @@ namespace Mario.Singletons
         }
 
         // Starts to reset the level after the player dies
-        public void BeginReset()
+        public void BeginReset(bool gameOver)
         {
             Pause();
             isResetting = true;
+            this.gameOver = gameOver;
         }
 
         // Finishes resetting the level after the death animation plays
         public void EndReset(ref PlayerCamera camera)
         {
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
-            SetResetTime(0.0);
-            LevelLoader.Instance.UnloadLevel();
-            LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
-            MediaManager.Instance.PlayDefaultTheme();
-            isResetting = false;
-            camera.ResetCamera();
-            Pause();
+            if (!gameOver)
+            {
+                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
+                SetResetTime(0.0);
+                LevelLoader.Instance.UnloadLevel();
+                LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
+                MediaManager.Instance.PlayDefaultTheme();
+                isResetting = false;
+                camera.ResetCamera();
+                Pause();
+            } else
+            {
+                Restart();
+            }
+            
         }
 
         public void SetResetTime(double time)
