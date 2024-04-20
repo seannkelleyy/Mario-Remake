@@ -11,7 +11,7 @@
     "startingY": 10,
     "lives": 3,
     "statingLives": 3,
-    "startingPower": "fire"
+    "startingPower": "small"
   },
   "enemies": [
     {
