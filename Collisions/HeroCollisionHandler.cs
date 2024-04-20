@@ -1,3 +1,4 @@
+using Mario.Entities;
 using Mario.Entities.Character;
 using Mario.Global;
 using Mario.Global.Settings;
@@ -103,6 +104,10 @@ public class HeroCollisionHandler
         CollisionDirection direction = CollisionDetector.DetectCollision(hero.GetRectangle(), enemy.GetRectangle(), hero.GetVelocity());
         if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
         {
+            if(enemy is PiranhaPlant)
+            {
+                collisionDictionary[typeof(IEnemy)][CollisionDirection.Left].Invoke();
+            }
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
         }
     }
