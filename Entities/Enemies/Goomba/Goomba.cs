@@ -1,6 +1,7 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Entities.Projectiles.Rocket;
@@ -13,6 +14,7 @@ using Mario.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 public class Goomba : AbstractCollideable, IEnemy
@@ -20,12 +22,19 @@ public class Goomba : AbstractCollideable, IEnemy
     public EntityPhysics physics { get; }
     public ISprite WeaponSprite;
     public EnemyHealth currentHealth = EnemyHealth.Normal;
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
     private double deadTimer = 0.0f;
+    public double scareCD = 30.0f;
+    public double scareCounter = 30.0f;
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
 
-    public Goomba(Vector2 position, bool isRight)
+    public Goomba(Vector2 position, bool isRight, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
+        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
@@ -54,6 +63,19 @@ public class Goomba : AbstractCollideable, IEnemy
         else
         {
             physics.Update();
+            scareCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (IAI ai in EnemyAI.Values)
+            {
+                if (scareCounter > 3)
+                {
+                    ai.Seek(this);
+                }
+                if (ai.Scare(this, scareCD, scareCounter))
+                {
+                    scareCounter = 0;
+                    
+                }
+            }
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
             if (attackCounter > EntitySettings.EnemyAttackCounter)
             {
@@ -62,6 +84,29 @@ public class Goomba : AbstractCollideable, IEnemy
             }
         }
     }
+
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
+    {
+        if (!(ais.Count == 0))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
+            }
+        }
+    }
+
     public override void Draw(SpriteBatch spriteBatch)
     {
         base.Draw(spriteBatch);
@@ -174,15 +219,22 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == HorizontalDirection.right)
+        if (EnemyAI.ContainsKey("jump"))
         {
-            physics.currentHorizontalDirection = HorizontalDirection.left;
-            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+            EnemyAI["jump"].Jump(this);
         }
         else
         {
-            physics.currentHorizontalDirection = HorizontalDirection.right;
-            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+            if (physics.currentHorizontalDirection == HorizontalDirection.right)
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.left;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+            }
+            else
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.right;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+            }
         }
     }
 
@@ -197,5 +249,9 @@ public class Goomba : AbstractCollideable, IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }

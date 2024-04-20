@@ -16,6 +16,7 @@
   "enemies": [
     {
       "type": "firebro",
+      "ais": [],
       "startingX": 23,
       "startingY": 11,
       "isRight": false

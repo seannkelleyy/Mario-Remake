@@ -23,7 +23,7 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
             selectedEnemy.startingX,
             selectedEnemy.startingY,
             selectedEnemy.direction ? selectedEnemy.direction : false,
-            selectedEnemy.AI
+            selectedEnemy.ai
           );
         }}
       >
@@ -42,7 +42,7 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
             selectedEnemy.startingX,
             selectedEnemy.startingY,
             e.target.value === "true" ? true : false,
-            selectedEnemy.AI
+            selectedEnemy.ai
           )
         }
       >
@@ -52,7 +52,7 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
       <label>AI:</label>
       <select
         multiple
-        value={selectedEnemy?.AI ? selectedEnemy.AI : []}
+        value={selectedEnemy?.ai ? selectedEnemy.ai : []}
         onChange={(e) => {
           const options = e.target.options;
           const value = [];

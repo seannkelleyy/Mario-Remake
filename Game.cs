@@ -21,7 +21,7 @@ namespace Mario
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
