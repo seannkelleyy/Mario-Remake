@@ -12,6 +12,8 @@ import { ItemType } from "../models/item";
 import { ItemSectionType } from "../models/itemSection";
 
 export const LevelCreator = () => {
+  const [openLevel, setOpenLevel] = useState(true);
+  const [openObject, setOpenObject] = useState(true);
   const [columns, setColumns] = useState(40);
   const [rows, setRows] = useState(15);
   const [dragging, setDragging] = useState(false);
@@ -300,19 +302,33 @@ export const LevelCreator = () => {
           cycle through all blocks. To edit a block, use the 'edit mode' button
           to turn on edit mode.
         </p>
-        <EditLevel
-          level={level}
-          updateLevel={updateLevel}
-          rows={columns}
-          handleColumnChange={handleColumnChange}
-          handleRowChange={handleRowChange}
-        />
-        <EditObject
-          selectedObject={selectedObject}
-          updateBlock={updateBlock}
-          updateEnemy={updateEnemy}
-          updatePipe={updatePipe}
-        />
+        <button className="std-button" onClick={() => setOpenLevel(!openLevel)}>
+          {openLevel ? "Close Edit Level" : "Open Edit Level"}
+        </button>
+        {openLevel && (
+          <EditLevel
+            level={level}
+            updateLevel={updateLevel}
+            rows={rows}
+            columns={columns}
+            handleColumnChange={handleColumnChange}
+            handleRowChange={handleRowChange}
+          />
+        )}
+        <button
+          className="std-button"
+          onClick={() => setOpenObject(!openObject)}
+        >
+          {openObject ? "Close Edit Object" : "Open Edit Object"}
+        </button>
+        {openObject && (
+          <EditObject
+            selectedObject={selectedObject}
+            updateBlock={updateBlock}
+            updateEnemy={updateEnemy}
+            updatePipe={updatePipe}
+          />
+        )}
         <section className="buttons">
           <button className="std-button" onClick={downloadLevel}>
             Download Level
@@ -326,7 +342,7 @@ export const LevelCreator = () => {
         </section>
       </section>
       <section className="level">
-        {Array(columns)
+        {Array(columns > 0 ? columns : 1)
           .fill(0)
           .map((_, columnIndex) => (
             <section
@@ -334,7 +350,7 @@ export const LevelCreator = () => {
               id={columnIndex.toString()}
               className="column"
             >
-              {Array(rows)
+              {Array(rows > 0 ? rows : 1)
                 .fill(0)
                 .map((_, rowIndex) => (
                   <Object

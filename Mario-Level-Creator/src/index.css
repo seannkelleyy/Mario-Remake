@@ -28,10 +28,13 @@
   margin: 1em;
   height: 60%;
   padding: 1em;
+  gap: 0.25em;
   background-color: #f2f2f2;
   border: 1px solid #000000;
   box-shadow: 0 6px 4px rgba(0, 0, 0, 0.1);
   border-radius: 0.5em;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .level {
@@ -87,6 +90,8 @@
   align-items: center;
   flex-wrap: wrap;
   width: 90%;
+  border: 1px solid #aeaeae;
+  border-radius: 1.5em;
 }
 
 .buttons {

@@ -3,6 +3,7 @@ import { Level } from "../../models/level";
 type EditLevelProps = {
   level: Level;
   rows: number;
+  columns: number;
   handleColumnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRowChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateLevel: (property: any, value: any) => void;
@@ -11,6 +12,7 @@ type EditLevelProps = {
 export const EditLevel = ({
   level,
   rows,
+  columns,
   handleColumnChange,
   handleRowChange,
   updateLevel,
@@ -29,15 +31,11 @@ export const EditLevel = ({
         </section>
         <section>
           <label>Width in Blocks</label>
-          <input type="number" value={rows} onChange={handleColumnChange} />
+          <input type="number" value={columns} onChange={handleColumnChange} />
         </section>
         <section>
           <label>Height in Blocks</label>
-          <input
-            type="number"
-            value={level.height}
-            onChange={handleRowChange}
-          />
+          <input type="number" value={rows} onChange={handleRowChange} />
         </section>
         <section>
           <label>Time Limit</label>
