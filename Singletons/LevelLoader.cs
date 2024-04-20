@@ -47,7 +47,7 @@ namespace Mario.Singletons
                 level.hero.startingPower,
                 new Vector2(level.hero.startingX * GlobalVariables.BlockHeightWidth,
                 level.hero.startingY * GlobalVariables.BlockHeightWidth),
-                new HeroStatTracker(level.timeLimit, EntitySettings.StartingHeroLives));
+                new HeroStatTracker(level.timeLimit, level.hero.lives));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies
@@ -174,6 +174,8 @@ namespace Mario.Singletons
             // Change the number of lives in the JSON string
             var jsonLives = JsonNode.Parse(jsonString);
             jsonLives["hero"]["lives"] = lives;
+
+            Logger.Instance.LogInformation("Livessss:" + jsonLives + " " + lives);
 
             // Save the new number of lives to the JSON file
             jsonString = jsonLives.ToString();
