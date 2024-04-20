@@ -21,7 +21,8 @@ namespace Mario
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
-
+            graphics.IsFullScreen = true;
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -29,7 +30,7 @@ namespace Mario
         protected override void Initialize()
         {
             graphics.PreferredBackBufferHeight = GameSettings.InitialWindowHeight;
-            graphics.IsFullScreen = true;
+            
 
             keyboardController = new KeyboardController();
             gamePadController = new GamePadController();

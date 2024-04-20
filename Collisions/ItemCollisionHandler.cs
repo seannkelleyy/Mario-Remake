@@ -20,8 +20,7 @@ public class ItemCollisionHandler
         collisionDictionary = new Dictionary<Type, Dictionary<CollisionDirection, Action>>
         {
             { typeof(IBlock), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IPipe), new Dictionary<CollisionDirection, Action>() },
-            { typeof(IItem), new Dictionary<CollisionDirection, Action>() }
+            { typeof(IPipe), new Dictionary<CollisionDirection, Action>() }
         };
 
         collisionDictionary[typeof(IBlock)].Add(CollisionDirection.Left, new Action(() =>
@@ -61,19 +60,6 @@ public class ItemCollisionHandler
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Top, new Action(() => mainItem.SetCollisionState(CollisionDirection.Top, true)));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() => mainItem.SetCollisionState(CollisionDirection.Bottom, true)));
-
-        collisionDictionary[typeof(IItem)].Add(CollisionDirection.Left, new Action(HandleItemItemCollision));
-        collisionDictionary[typeof(IItem)].Add(CollisionDirection.Right, new Action(HandleItemItemCollision));
-    }
-
-    public void ItemItemCollision(IItem item)
-    {
-        collidingItem = item;
-        CollisionDirection direction = CollisionDetector.DetectCollision(mainItem.GetRectangle(), item.GetRectangle(), mainItem.GetVelocity());
-        if (collisionDictionary[typeof(IItem)].ContainsKey(direction))
-        {
-            collisionDictionary[typeof(IItem)][direction].Invoke();
-        }
     }
 
     public void ItemBlockCollision(IBlock block)
@@ -93,11 +79,5 @@ public class ItemCollisionHandler
         {
             collisionDictionary[typeof(IPipe)][direction].Invoke();
         }
-    }
-
-    public void HandleItemItemCollision()
-    {
-        mainItem.ChangeDirection();
-        collidingItem.ChangeDirection();
     }
 }
