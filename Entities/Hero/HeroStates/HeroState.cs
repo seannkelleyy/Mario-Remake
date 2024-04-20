@@ -60,7 +60,7 @@ namespace Mario.Entities.Abstract
         }
         public virtual void Attack()
         {
-            if (hero.ReportHealth() == GlobalVariables.HeroHealth.FireMario)
+            if (hero.ReportHealth() != GlobalVariables.HeroHealth.Mario && hero.ReportHealth() != GlobalVariables.HeroHealth.BigMario)
             {
                 hero.currentState = new AttackState(hero, hero.currentState);
             }
