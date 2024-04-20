@@ -1,11 +1,14 @@
+using Mario.Entities.Abstract;
 using Mario.Entities.Blocks;
 using Mario.Entities.Character;
+using Mario.Entities.Enemies;
 using Mario.Global;
 using Mario.Global.Settings;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
@@ -103,15 +106,22 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Left, new Action(HandleHeroEnemySideCollision));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Right, new Action(HandleHeroEnemySideCollision));
         collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Bottom, new Action(HandleHeroEnemyBottomCollision));
+        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
+        {
+            if (hero is StarHero)
+            {
+                enemy.Flip();
+            }
+            else
+            {
+                hero.TakeDamage();
+            }
+        }));
 
         // Pipe stuff
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Bottom, new Action(() =>
         {
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical)
-            {
-                pipe.Transport(hero);
-            }
+            HandlePipeTransportation(hero, pipe);
         }));
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Left, new Action(() =>
         {
@@ -134,17 +144,6 @@ public class HeroCollisionHandler
         {
             hero.SetCollisionState(CollisionDirection.Top, true);
             hero.StopVertical();
-        }));
-        collisionDictionary[typeof(IEnemy)].Add(CollisionDirection.Top, new Action(() =>
-        {
-            if (hero is StarHero)
-            {
-                enemy.Flip();
-            }
-            else
-            {
-                hero.TakeDamage();
-            }
         }));
     }
 
@@ -182,7 +181,7 @@ public class HeroCollisionHandler
 
     public void HandleHeroEnemySideCollision()
     {
-        if (hero is StarHero)
+        if (hero is StarHero && enemy is not PhantomEnemy)
         {
             enemy.Flip();
         }
@@ -199,17 +198,24 @@ public class HeroCollisionHandler
 
     public void HandleHeroEnemyBottomCollision()
     {
-        if (hero is StarHero)
+        if (hero is StarHero && enemy is not PhantomEnemy)
         {
             enemy.Flip();
         }
         else if (hero.GetPhysics().isFalling)
         {
-            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.SmallJump();
-            hero.SetCollisionState(CollisionDirection.Bottom, false);
-            enemy.Stomp();
+            if (enemy is not PhantomEnemy)
+            {
+                GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
+                hero.SetCollisionState(CollisionDirection.Bottom, true);
+                hero.SmallJump();
+                hero.SetCollisionState(CollisionDirection.Bottom, false);
+                enemy.Stomp();
+            }
+            else
+            {
+                hero.TakeDamage();
+            }
         }
     }
 
@@ -220,6 +226,22 @@ public class HeroCollisionHandler
         {
             this.pipe = pipe;
             collisionDictionary[typeof(IPipe)][direction].Invoke();
+        }
+    }
+
+    private void HandlePipeTransportation(IHero hero, IPipe pipe)
+    {
+        hero.SetCollisionState(CollisionDirection.Bottom, true);
+        // Check if Mario is ontop of a vertical pipe and is crouching. If so, transport Mario
+        if (pipe.GetPipeType() == GlobalVariables.PipeType.vertical)
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down) ||
+            gamePadState.IsButtonDown(Buttons.LeftThumbstickDown) || gamePadState.IsButtonDown(Buttons.DPadDown))
+            {
+                pipe.Transport(hero);
+            }
         }
     }
 }

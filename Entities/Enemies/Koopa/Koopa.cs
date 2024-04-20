@@ -1,37 +1,63 @@
-﻿using System;
-using Mario.Collisions;
+﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
+using Mario.Entities.Projectiles.Rocket;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
+using Mario.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
+
 {
+    public ISprite WeaponSprite;
     public EntityPhysics physics { get; }
-    public EnemyHealth currentHealth;
-    private Random rnd = new Random();
+    public EnemyHealth currentHealth = EnemyHealth.Normal;
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
     private double shellTimer = 0.0;
     private double attackCounter = 0.0f;
-    private double attackTimer = EntitySettings.EnemyAttackCounter;
+    public double scareCounter = 30.0f;
+    public double scareCD = 30.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
+
     public bool teamMario { get; }
 
-    public Koopa(Vector2 position)
+    public Koopa(Vector2 position, bool isRight, List<string> ais)
     {
+        EnemyAI = new Dictionary<string, IAI>();
+        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
-        currentState = new RightMovingKoopaState();
-        currentHealth = (EnemyHealth) rnd.Next(1, 3);
+        if (!isRight)
+        {
+            currentState = new LeftMovingKoopaState();
+            physics.currentHorizontalDirection = HorizontalDirection.left;
+        }
+        else
+        {
+            currentState = new RightMovingKoopaState();
+        }
+        WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+    }
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        base.Draw(spriteBatch);
+        WeaponSprite.Draw(spriteBatch, position);
     }
 
     public override void Update(GameTime gameTime)
@@ -41,7 +67,20 @@ public class Koopa : AbstractCollideable, IEnemy
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
         attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-        if (attackCounter > attackTimer)
+        scareCounter += gameTime.ElapsedGameTime.TotalSeconds;
+        foreach (IAI ai in EnemyAI.Values)
+        {
+            if (scareCounter > 3)
+            {
+                ai.Seek(this);
+            }
+            if (ai.Scare(this, scareCD, scareCounter))
+            {
+                scareCounter = 0;
+
+            }
+        }
+        if (attackCounter > EntitySettings.EnemyAttackCounter)
         {
             Attack();
             attackCounter = 0.0f;
@@ -49,6 +88,28 @@ public class Koopa : AbstractCollideable, IEnemy
 
         }
         HandleShellTime(gameTime);
+    }
+
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
+    {
+        if (!(ais.Count == 0))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
+            }
+        }
     }
 
     private void HandleShellTime(GameTime gameTime)
@@ -107,6 +168,7 @@ public class Koopa : AbstractCollideable, IEnemy
             else
             {
                 currentHealth = EnemyHealth.Big;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
             }
         }
     }
@@ -126,6 +188,7 @@ public class Koopa : AbstractCollideable, IEnemy
             if (currentHealth != EnemyHealth.Fire)
             {
                 currentHealth = EnemyHealth.Fire;
+                WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
             }
         }
         else if (item is Mushroom)
@@ -148,6 +211,26 @@ public class Koopa : AbstractCollideable, IEnemy
             GameContentManager.Instance.RemoveEntity(this);
             GameContentManager.Instance.AddEntity(new StarEnemy(this));
         }
+        else if (item is Pistol)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.Pistol;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+
+        }
+        else if (item is Shotgun)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.Shotgun;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+
+        }
+        else if (item is RocketLauncher)
+        {
+            MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
+            currentHealth = EnemyHealth.RocketLauncher;
+            WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+        }
 
     }
 
@@ -158,24 +241,59 @@ public class Koopa : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
         }
+        else if (currentHealth is EnemyHealth.Pistol)
+        {
+            GameContentManager.Instance.AddEntity(new BulletObject(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
+        else if (currentHealth is EnemyHealth.RocketLauncher)
+        {
+            GameContentManager.Instance.AddEntity(new RocketProjectile(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario));
+        }
+        else if (currentHealth is EnemyHealth.Shotgun)
+        {
+            new ShotgunBurst(this.GetPosition() + new Vector2(0, (this.GetRectangle().Height / 2)), physics.currentHorizontalDirection, teamMario);
+        }
     }
 
     public void ChangeDirection()
     {
-        if (physics.currentHorizontalDirection == HorizontalDirection.right)
+        if (EnemyAI.ContainsKey("jump"))
         {
-            physics.currentHorizontalDirection = HorizontalDirection.left;
-            if (!isShell)
-                currentState = new LeftMovingKoopaState();
+            EnemyAI["jump"].Jump(this);
         }
         else
         {
-            physics.currentHorizontalDirection = HorizontalDirection.right;
-            if (!isShell)
-                currentState = new RightMovingKoopaState();
+            if (physics.currentHorizontalDirection == HorizontalDirection.right)
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.left;
+                if (!isShell)
+                {
+                    currentState = new LeftMovingKoopaState();
+                    WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+                }
+                
+            }
+            else
+            {
+                physics.currentHorizontalDirection = HorizontalDirection.right;
+                if (!isShell)
+                {
+                    currentState = new RightMovingKoopaState();
+                    WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
+                }
+
+            }
         }
     }
 
+    public bool GetIsShell()
+    {
+        return isShell;
+    }
+    public void ChangeCurrentState(AbstractEntityState state)
+    {
+        currentState = state;
+    }
     public EnemyHealth ReportHealth()
     {
         return currentHealth;
@@ -189,5 +307,9 @@ public class Koopa : AbstractCollideable, IEnemy
     public Vector2 GetVelocity()
     {
         return physics.GetVelocity();
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }

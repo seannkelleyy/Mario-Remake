@@ -9,109 +9,154 @@
     "type": "mario",
     "startingX": 4,
     "startingY": 10,
-    "lives": 0,
+    "lives": -1,
     "statingLives": 3,
     "startingPower": "fire"
   },
   "enemies": [
     {
       "type": "goomba",
+      "ai": [
+        "seek",
+        "scare",
+        "jump"
+      ],
       "startingX": 23,
-      "startingY": 12,
+      "startingY": 11,
+      "isRight": false
+    },
+    {
+      "type": "koopa",
+      "ai": [
+        "seek",
+        "scare",
+        "jump"
+      ],
+      "startingX": 20,
+      "startingY": 11,
       "isRight": false
     },
     {
       "type": "goomba",
-      "startingX": 41,
-      "startingY": 12,
-      "isRight": false
-    },
-    {
-      "type": "goomba",
+      "ai": [],
       "startingX": 52,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 54,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 81,
       "startingY": 4,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 83,
       "startingY": 5,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 98,
       "startingY": 5,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 100,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 112,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 116,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 124,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 128,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 130,
       "startingY": 9,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 160,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "goomba",
+      "ai": [],
       "startingX": 162,
       "startingY": 12,
       "isRight": false
     },
     {
       "type": "koopa",
+      "ai": [],
       "startingX": 108,
       "startingY": 12,
       "isRight": false
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "type": "pistol",
+      "startingX": 6,
+      "startingY": 13
+    },
+    {
+      "type": "shotgun",
+      "startingX": 8,
+      "startingY": 13
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 10,
+      "startingY": 13
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 24,
+      "startingY": 13
+    }
+  ],
   "itemSections": [
     {
       "type": "coinUnderground",

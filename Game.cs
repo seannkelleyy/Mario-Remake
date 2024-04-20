@@ -21,18 +21,23 @@ namespace Mario
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferHeight = GameSettings.InitialWindowHeight;
+            
+
             keyboardController = new KeyboardController();
             gamePadController = new GamePadController();
 
             LevelLoader.Instance.Initialize(Content);
 
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/test.json", graphics);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1.json", graphics);
             base.Initialize();
         }
 
@@ -116,7 +121,7 @@ namespace Mario
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
             MediaManager.Instance.Draw(spriteBatch);
@@ -128,6 +133,13 @@ namespace Mario
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ChangeFullScreenMode()
+        {
+            graphics.ToggleFullScreen();
+            graphics.PreferredBackBufferHeight = GameSettings.WindowHeight;
+            graphics.ApplyChanges();
         }
     }
 }
