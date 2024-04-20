@@ -81,6 +81,12 @@ namespace Mario.Singletons
                     return new Mushroom(position, "red");
                 case "oneUp":
                     return new Mushroom(position, "oneUp");
+                case "pistol":
+                    return new Pistol(position);
+                case "shotgun":
+                    return new Shotgun(position);
+                case "rocketLauncher":
+                    return new RocketLauncher(position);
                 default:
                     throw new KeyNotFoundException($"Item type `{type}` not recognized.");
             }
