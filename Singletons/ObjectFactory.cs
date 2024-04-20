@@ -8,7 +8,6 @@ using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Mario.Singletons
 {
@@ -36,7 +35,8 @@ namespace Mario.Singletons
                 case "firebro":
                     return new FireBro(position, isRight, ais);
                 default:
-                    throw new KeyNotFoundException($"Entity type {type} not recognized.");
+                    Logger.Instance.LogError($"Entity type {type} not recognized.");
+                    return null;
             }
         }
 
@@ -63,7 +63,8 @@ namespace Mario.Singletons
                 case "deathBlock":
                     return new DeathBlock(position, breakable, collideable);
                 default:
-                    throw new KeyNotFoundException($"Block type {type} not recognized.");
+                    Logger.Instance.LogError($"Block type {type} not recognized.");
+                    return null;
             }
         }
 
@@ -92,7 +93,8 @@ namespace Mario.Singletons
                 case "rocketLauncher":
                     return new RocketLauncher(position);
                 default:
-                    throw new KeyNotFoundException($"Item type `{type}` not recognized.");
+                    Logger.Instance.LogError($"Item type `{type}` not recognized.");
+                    return null;
             }
         }
 
@@ -109,7 +111,8 @@ namespace Mario.Singletons
                 case "pipeTile":
                     return new PipeTile(position, isCollidable);
                 default:
-                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
+                    Logger.Instance.LogError($"Pipe type '{type}' not recognized.");
+                    return null;
             }
         }
     }
