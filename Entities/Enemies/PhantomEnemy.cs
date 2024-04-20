@@ -21,6 +21,9 @@ namespace Mario.Entities.Enemies
         private float phantomTimer = EntitySettings.EnemyPhantomTimer;
         private bool isBig = false;
         public bool teamMario { get; }
+
+        public VerticalEntityPhysics verticalPhysics { get; }
+
         public ISprite phantomSprite;
 
         public PhantomEnemy(IEnemy decoratorEnemy)

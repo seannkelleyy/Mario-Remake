@@ -20,7 +20,6 @@ public class BulletBill : AbstractCollideable, IEnemy
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }
 #nullable disable
-    public EntityPhysics physics { get; }
     public VerticalEntityPhysics verticalPhysics { get; }
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;

@@ -13,7 +13,6 @@ namespace Mario.Interfaces.Entities
 #nullable disable
         public EntityPhysics physics { get; }
         public bool teamMario { get; }
-        public EntityPhysics physics { get; }
 
         public VerticalEntityPhysics verticalPhysics { get; }
         public void ChangeDirection();

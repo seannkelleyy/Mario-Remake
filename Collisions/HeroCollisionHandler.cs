@@ -204,7 +204,7 @@ public class HeroCollisionHandler
         }
         else if (hero.GetPhysics().isFalling)
         {
-            if (enemy is not PhantomEnemy)
+            if (enemy is not PhantomEnemy && enemy is not PiranhaPlant)
             {
                 GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
                 hero.SetCollisionState(CollisionDirection.Bottom, true);
@@ -215,20 +215,6 @@ public class HeroCollisionHandler
             else
             {
                 hero.TakeDamage();
-            }
-        }
-    }
-            GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
-            hero.SetCollisionState(CollisionDirection.Bottom, true);
-            hero.SmallJump();
-            hero.SetCollisionState(CollisionDirection.Bottom, false);
-            if (enemy is PiranhaPlant)
-            {
-                hero.TakeDamage();
-            }
-            else
-            {
-                enemy.Stomp();
             }
         }
     }

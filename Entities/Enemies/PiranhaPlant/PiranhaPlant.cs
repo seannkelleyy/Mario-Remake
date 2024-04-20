@@ -1,9 +1,11 @@
 ﻿using Mario.Collisions;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities
@@ -11,6 +13,8 @@ namespace Mario.Entities
     public class PiranhaPlant : AbstractCollideable, IEnemy
     {
         public EntityPhysics physics { get; }
+        public Dictionary<string, IAI>? EnemyAI { get; set; }
+
         public VerticalEntityPhysics verticalPhysics { get; }
         public bool teamMario { get; }
         public EnemyHealth currentHealth = EnemyHealth.Normal;
@@ -50,7 +54,6 @@ namespace Mario.Entities
         public void Attack()
         {
             if (deadTimer > 0) return;
-            MediaManager.Instance.PlayEffect(EffectNames.bite);
             currentState = new BitingPiranhaState();
         }
 
@@ -90,6 +93,10 @@ namespace Mario.Entities
         public Vector2 GetVelocity()
         {
             return verticalPhysics.GetVelocity();
+        }
+        public HorizontalDirection GetCurrentDirection()
+        {
+            return physics.GetHorizontalDirection();
         }
     }
 }
