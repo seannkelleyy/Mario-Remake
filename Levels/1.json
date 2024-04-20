@@ -17,7 +17,7 @@
   "enemies": [
     {
       "type": "goomba",
-      "startingX": 32,
+      "startingX": 20,
       "startingY": 9,
       "direction": true,
       "ai": []

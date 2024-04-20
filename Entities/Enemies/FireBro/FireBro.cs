@@ -158,7 +158,7 @@ public class FireBro : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
-                GameContentManager.Instance.AddEntity(this);
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreateEnemy("firebro", new Vector2(this.GetPosition().X + BlockHeightWidth, this.GetPosition().Y), !(this.physics.currentHorizontalDirection == HorizontalDirection.right), new List<string>()));
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)

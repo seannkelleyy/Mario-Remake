@@ -84,7 +84,7 @@ public class Koopa : AbstractCollideable, IEnemy
         {
             Attack();
             attackCounter = 0.0f;
-            attackTimer = (rnd.NextDouble() + 1.00);
+            //attackTimer = (rnd.NextDouble() + 1.00);
 
         }
         HandleShellTime(gameTime);
@@ -196,7 +196,7 @@ public class Koopa : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyPowerup);
             if (((Mushroom)item).IsOneUp())
             {
-                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreateEnemy("koopa", new Vector2(this.GetPosition().X + BlockHeightWidth, this.GetPosition().Y)));
+                GameContentManager.Instance.AddEntity(ObjectFactory.Instance.CreateEnemy("koopa", new Vector2(this.GetPosition().X + BlockHeightWidth, this.GetPosition().Y), !(this.physics.currentHorizontalDirection == HorizontalDirection.right), new List<string>()));
                 return;
             }
             if (currentHealth == EnemyHealth.Normal)
