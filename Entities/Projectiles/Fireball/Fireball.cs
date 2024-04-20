@@ -10,11 +10,13 @@ namespace Mario.Entities.Projectiles
     {
         private FireballPhysics physics { get; }
         private bool isExploded = false;
-        public Fireball(Vector2 position, HorizontalDirection currentHorizontalDirection)
+        public bool teamMario { get; }
+        public Fireball(Vector2 position, HorizontalDirection currentHorizontalDirection, bool teamMario)
         {
             currentState = new FireballMovingState(this);
             this.position = position;
             physics = new FireballPhysics(this, currentHorizontalDirection);
+            this.teamMario = teamMario;
         }
 
         public override void Update(GameTime gameTime)

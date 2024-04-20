@@ -2,7 +2,7 @@
   "level": "1",
   "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
   "width": 224,
-  "height": 30,
+  "height": 32,
   "timeLimit": 300,
   "song": "ground",
   "hero": {
@@ -15,16 +15,16 @@
   },
   "enemies": [
     {
-      "type": "goomba",
+      "type": "koopa",
       "startingX": 23,
-      "startingY": 12,
+      "startingY": 11,
       "isRight": false
     },
     {
       "type": "goomba",
       "startingX": 41,
       "startingY": 12,
-      "isRight": false
+      "isRight": true
     },
     {
       "type": "goomba",
@@ -111,13 +111,58 @@
       "isRight": false
     }
   ],
+  "items": [
+    {
+      "type": "pistol",
+      "startingX": 6,
+      "startingY": 13
+    },
+    {
+      "type": "shotgun",
+      "startingX": 8,
+      "startingY": 13
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 10,
+      "startingY": 13
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 24,
+      "startingY": 13
+    }
+  ],
+  "itemSections": [
+    {
+      "type": "coinUnderground",
+      "startingX": 148,
+      "startingY": 26,
+      "endingX": 154,
+      "endingY": 26
+    },
+    {
+      "type": "coinUnderground",
+      "startingX": 148,
+      "startingY": 24,
+      "endingX": 154,
+      "endingY": 24
+    },
+    {
+      "type": "coinUnderground",
+      "startingX": 149,
+      "startingY": 22,
+      "endingX": 153,
+      "endingY": 22
+    }
+  ],
   "blockSections": [
     {
       "type": "floor",
       "startingX": 0,
       "startingY": 14,
       "endingX": 68,
-      "endingY": 14,
+      "endingY": 15,
       "collidable": false,
       "breakable": false,
       "item": "none"
@@ -133,11 +178,21 @@
       "item": "none"
     },
     {
+      "type": "deathBlock",
+      "startingX": 69,
+      "startingY": 15,
+      "endingX": 70,
+      "endingY": 15,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
       "type": "floor",
       "startingX": 71,
       "startingY": 14,
       "endingX": 85,
-      "endingY": 14,
+      "endingY": 15,
       "collidable": false,
       "breakable": false,
       "item": "none"
@@ -153,11 +208,21 @@
       "item": "none"
     },
     {
+      "type": "deathBlock",
+      "startingX": 86,
+      "startingY": 15,
+      "endingX": 88,
+      "endingY": 15,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
       "type": "floor",
       "startingX": 89,
       "startingY": 14,
       "endingX": 152,
-      "endingY": 14,
+      "endingY": 15,
       "collidable": false,
       "breakable": false,
       "item": "none"
@@ -173,11 +238,21 @@
       "item": "none"
     },
     {
+      "type": "deathBlock",
+      "startingX": 153,
+      "startingY": 15,
+      "endingX": 154,
+      "endingY": 15,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
       "type": "floor",
       "startingX": 155,
       "startingY": 14,
       "endingX": 223,
-      "endingY": 14,
+      "endingY": 15,
       "collidable": false,
       "breakable": false,
       "item": "none"
@@ -188,6 +263,306 @@
       "startingY": 13,
       "endingX": 223,
       "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 135,
+      "startingY": 12,
+      "endingX": 135,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 136,
+      "startingY": 11,
+      "endingX": 136,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 137,
+      "startingY": 10,
+      "endingX": 137,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 138,
+      "startingY": 9,
+      "endingX": 138,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 144,
+      "startingY": 12,
+      "endingX": 144,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 143,
+      "startingY": 11,
+      "endingX": 143,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 142,
+      "startingY": 10,
+      "endingX": 142,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 141,
+      "startingY": 9,
+      "endingX": 141,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 148,
+      "startingY": 12,
+      "endingX": 148,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 149,
+      "startingY": 11,
+      "endingX": 149,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 150,
+      "startingY": 10,
+      "endingX": 150,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 151,
+      "startingY": 9,
+      "endingX": 152,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 155,
+      "startingY": 9,
+      "endingX": 155,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 156,
+      "startingY": 10,
+      "endingX": 156,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 157,
+      "startingY": 11,
+      "endingX": 157,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 158,
+      "startingY": 12,
+      "endingX": 158,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 181,
+      "startingY": 12,
+      "endingX": 181,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 182,
+      "startingY": 11,
+      "endingX": 182,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 183,
+      "startingY": 10,
+      "endingX": 183,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 184,
+      "startingY": 9,
+      "endingX": 184,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 185,
+      "startingY": 8,
+      "endingX": 185,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 186,
+      "startingY": 7,
+      "endingX": 186,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 187,
+      "startingY": 6,
+      "endingX": 187,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 188,
+      "startingY": 5,
+      "endingX": 189,
+      "endingY": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floorUnderground",
+      "startingX": 144,
+      "startingY": 30,
+      "endingX": 161,
+      "endingY": 30,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floorUnderground",
+      "startingX": 144,
+      "startingY": 31,
+      "endingX": 161,
+      "endingY": 32,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "startingX": 144,
+      "startingY": 17,
+      "endingX": 144,
+      "endingY": 29,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "startingX": 148,
+      "startingY": 26,
+      "endingX": 154,
+      "endingY": 29,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "startingX": 148,
+      "startingY": 17,
+      "endingX": 154,
+      "endingY": 17,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "startingX": 197,
+      "startingY": 12,
+      "endingX": 199,
+      "endingY": 12,
       "collidable": true,
       "breakable": false,
       "item": "none"
@@ -245,7 +620,7 @@
     {
       "type": "mystery",
       "x": 23,
-      "y": 9,
+      "y": 5,
       "collidable": true,
       "breakable": false,
       "item": "coin"
@@ -481,13 +856,130 @@
       "collidable": true,
       "breakable": true,
       "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 164,
+      "y": 8,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 165,
+      "y": 8,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 166,
+      "y": 8,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 167,
+      "y": 8,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "flag",
+      "x": 198,
+      "y": 2,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
     }
   ],
   "pipes": [
     {
       "type": "pipeTubeVertical",
-      "x": 10,
+      "x": 29,
+      "startingY": 11,
+      "endingY": 12,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 39,
       "startingY": 10,
+      "endingY": 12,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 47,
+      "startingY": 9,
+      "endingY": 12,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 58,
+      "startingY": 9,
+      "endingY": 12,
+      "transportable": true,
+      "transportDestinationX": 146,
+      "transportDestinationY": 19,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeUpsideDown",
+      "x": 145,
+      "startingY": 17,
+      "endingY": 18,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeHorizontal",
+      "x": 157,
+      "startingY": 28,
+      "endingY": 17,
+      "transportable": true,
+      "transportDestinationX": 160,
+      "transportDestinationY": 8,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 159,
+      "startingY": 11,
+      "endingY": 12,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    },
+    {
+      "type": "pipeTubeVertical",
+      "x": 179,
+      "startingY": 11,
       "endingY": 12,
       "transportable": false,
       "transportDestinationX": -1,

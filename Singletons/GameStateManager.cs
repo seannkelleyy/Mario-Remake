@@ -1,6 +1,8 @@
 ﻿using Mario.Input;
+using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Singletons
 {
@@ -11,11 +13,21 @@ namespace Mario.Singletons
         public static GameStateManager Instance => instance;
         public bool isPaused { get; private set; } = false;
         public bool isResetting { get; private set; } = false;
+        public bool isWin { get; private set; } = false;
         public double resetTime { get; private set; } = 0.0;
 
         // Private constructor
         private GameStateManager() { }
-
+        //
+        public void Win()
+        {
+            Pause();
+            if (!isWin)
+            {
+                MediaManager.Instance.PlayTheme(SongThemes.levelComplete, false);
+            }
+            isWin = !isWin;
+        }
         // Restarts the game
         public void Restart()
         {
@@ -40,12 +52,13 @@ namespace Mario.Singletons
         }
 
         // Finishes resetting the level after the death animation plays
-        public void EndReset(PlayerCamera camera)
+        public void EndReset(ref PlayerCamera camera)
         {
             LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
             SetResetTime(0.0);
             LevelLoader.Instance.UnloadLevel();
             LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);
+            MediaManager.Instance.PlayDefaultTheme();
             isResetting = false;
             camera.ResetCamera();
             Pause();

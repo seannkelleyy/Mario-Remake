@@ -1,4 +1,5 @@
-﻿using Mario.Global;
+﻿using Mario.Entities.Hero.HeroStates;
+using Mario.Global;
 using Mario.Interfaces.Entities;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
@@ -59,7 +60,7 @@ namespace Mario.Entities.Abstract
         }
         public virtual void Attack()
         {
-            if (hero.ReportHealth() == GlobalVariables.HeroHealth.FireMario)
+            if (hero.ReportHealth() != GlobalVariables.HeroHealth.Mario && hero.ReportHealth() != GlobalVariables.HeroHealth.BigMario)
             {
                 hero.currentState = new AttackState(hero, hero.currentState);
             }
@@ -72,11 +73,16 @@ namespace Mario.Entities.Abstract
         {
             hero.currentState = new DeadState(hero);
         }
+        public void PoleSlide()
+        {
+            hero.currentState = new PoleSlideState(hero);
+        }
         public override void Update(GameTime gameTime)
         {
             sprite.Update(gameTime);
+            hero.GetPhysics().Update();
+            hero.GetPhysics().Update();
         }
-
         public override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             sprite.Draw(spriteBatch, position);

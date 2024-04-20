@@ -2,9 +2,7 @@ using Mario.Collisions;
 using Mario.Entities.Abstract;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
-using Mario.Global;
 using Mario.Global.Settings;
-using Mario.Entities.Projectiles;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
@@ -26,6 +24,7 @@ namespace Mario.Entities.Character
         private double invulnerabilityFrames = 0;
         private bool isFlashing = false;
         private double flashIntervalTimer = 0.0;
+        public bool teamMario { get; }
         public new HeroState currentState { get; set; }
         public HeroHealth currentHealth = HeroHealth.Mario;
 
@@ -42,9 +41,20 @@ namespace Mario.Entities.Character
                 case "fire":
                     currentHealth = HeroHealth.FireMario;
                     break;
+                case "pistol":
+                    currentHealth = HeroHealth.PistolMario;
+                    break;
+                case "rocketLauncher":
+                    currentHealth = HeroHealth.RocketLauncherMario;
+                    break;
+                case "shotgun":
+                    currentHealth = HeroHealth.ShotgunMario;
+                    break;
+
             }
             this.position = position;
             this.stats = stats;
+            teamMario = true;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
             startingLives = stats.GetLives();
@@ -53,12 +63,11 @@ namespace Mario.Entities.Character
         public override void Update(GameTime gameTime)
         {
             ClearCollisions();
+            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             currentState.Update(gameTime);
 
             stats.Update(gameTime);
-
-            CollisionManager.Instance.Run(GameContentManager.Instance.GetHero());
 
             if (position.X - GetVelocity().X <= CameraLeftEdge)
             {
@@ -66,10 +75,7 @@ namespace Mario.Entities.Character
                 SetCollisionState(CollisionDirection.Left, true);
                 position.X += HorizontalBlockCollisionAdjustment;
             }
-
             HandleInvulnerability(gameTime);
-
-            physics.Update();
         }
 
         public new virtual void Draw(SpriteBatch spriteBatch)
@@ -97,8 +103,6 @@ namespace Mario.Entities.Character
                     invulnerabilityFrames = 0.0;
                 }
             }
-
-            physics.Update();
         }
         public void WalkLeft()
         {
@@ -111,6 +115,13 @@ namespace Mario.Entities.Character
         public void Stand()
         {
             currentState.Stand();
+        }
+        public void Win()
+        {
+            this.StopHorizontal();
+            GameStateManager.Instance.Win();
+            currentState.PoleSlide();
+            this.StopHorizontal();
         }
 
         public void StopHorizontal()
@@ -162,15 +173,36 @@ namespace Mario.Entities.Character
         }
         public void Collect(IItem item)
         {
-            if (item is FireFlower)
+            if (item is Pistol && currentHealth != HeroHealth.PistolMario)
             {
-                if (currentHealth != HeroHealth.FireMario)
-                {
-                    MediaManager.Instance.PlayEffect(EffectNames.powerup);
-                    bool wasSmall = currentHealth == HeroHealth.Mario;
-                    currentHealth = HeroHealth.FireMario;
-                    currentState.PowerUp(wasSmall);
-                }
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.PistolMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is Shotgun && currentHealth != HeroHealth.ShotgunMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.ShotgunMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is RocketLauncher && currentHealth != HeroHealth.RocketLauncherMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.RocketLauncherMario;
+                currentState.PowerUp(wasSmall);
+
+            }
+            else if (item is FireFlower && currentHealth != HeroHealth.FireMario)
+            {
+                MediaManager.Instance.PlayEffect(EffectNames.powerup);
+                bool wasSmall = currentHealth == HeroHealth.Mario;
+                currentHealth = HeroHealth.FireMario;
+                currentState.PowerUp(wasSmall);
             }
             else if (item is Mushroom)
             {
@@ -182,11 +214,11 @@ namespace Mario.Entities.Character
                 }
                 else if (currentHealth == HeroHealth.Mario)
                 {
+                    MediaManager.Instance.PlayEffect(EffectNames.powerup);
                     currentHealth = HeroHealth.BigMario;
                     position.Y += BlockHeightWidth;
                     currentState.PowerUp(true);
                 }
-                MediaManager.Instance.PlayEffect(EffectNames.powerup);
             }
             else if (item is Coin)
             {
@@ -201,7 +233,6 @@ namespace Mario.Entities.Character
             else if (item is Star)
             {
                 stats.AddScore(ScoreSettings.StarScore);
-                //MediaManager.Instance.PlayTheme(GlobalVariables.SongThemes.invincibility, true); (need invincibility theme)
                 MediaPlayer.Pause();
                 MediaManager.Instance.PlayTheme(SongThemes.invincibility, true);
                 GameContentManager.Instance.RemoveEntity(this);
@@ -245,6 +276,7 @@ namespace Mario.Entities.Character
         public void Die()
         {
             stats.AddLives(-1);
+            currentHealth = HeroHealth.Mario;
             currentState.Die();
             LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
 
