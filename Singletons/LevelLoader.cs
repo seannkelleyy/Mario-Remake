@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using static Mario.Global.GlobalVariables;
 
 namespace Mario.Singletons
 {
@@ -149,6 +150,17 @@ namespace Mario.Singletons
             // Save the new number of lives to the JSON file
             jsonString = jsonLives.ToString();
             File.WriteAllText(levelName, jsonString);
+        }
+
+        public int GetStartingLives(string levelName)
+        {
+            string jsonString = File.ReadAllText(levelName);
+
+            // Change the number of lives in the JSON string
+            var jsonLives = JsonNode.Parse(jsonString);
+            int lives = (int)jsonLives["hero"]["statingLives"];
+
+            return lives;
         }
     }
 }

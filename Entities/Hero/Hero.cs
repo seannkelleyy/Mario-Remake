@@ -47,7 +47,7 @@ namespace Mario.Entities.Character
             this.stats = stats;
             physics = new HeroPhysics(this);
             currentState = new StandState(this);
-            startingLives = stats.GetLives();
+            startingLives = LevelLoader.Instance.GetStartingLives(GameSettingsLoader.LevelJsonFilePath);
         }
 
         public override void Update(GameTime gameTime)
@@ -255,8 +255,8 @@ namespace Mario.Entities.Character
             }
             else
             {
-                stats.SetLives(startingLives);
                 GameStateManager.Instance.Restart();
+                stats.SetLives(startingLives);
             }
         }
         public HeroHealth ReportHealth()
