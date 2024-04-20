@@ -9,6 +9,7 @@ using static Mario.Global.GlobalVariables;
 public class Goomba : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     private double deadTimer = 0.0f;
 
     public Goomba(Vector2 position)

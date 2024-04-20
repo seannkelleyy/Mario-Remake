@@ -1,102 +1,58 @@
 ﻿using Mario.Collisions;
-using Mario.Entities;
-using Mario.Entities.Abstract;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 
-public class PiranhaPlant : AbstractCollideable, IPiranhaPlant
+namespace Mario.Entities
 {
-    public EntityPhysics physics { get; }
-    private double attackCooldown = 0.0f;
-    private bool isInPipe = true;
-
-    public PiranhaPlant(Vector2 position)
+    public class PiranhaPlant : AbstractCollideable, IEnemy
     {
-        physics = new EntityPhysics(this);
-        this.position = position;
-        currentState = new HiddenPiranhaState();
-    }
+        public EntityPhysics physics { get; }
+        public VerticalEntityPhysics verticalPhysics { get; }
+        private bool isAlive = true;
 
-    public override void Update(GameTime gameTime)
-    {
-        ClearCollisions();
-
-        CollisionManager.Instance.Run(this);
-        currentState.Update(gameTime);
-
-        if (attackCooldown > 0)
+        public PiranhaPlant(Vector2 position)
         {
-            attackCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
+            verticalPhysics = new VerticalEntityPhysics(this);
+            this.position = position;
         }
-        else
+
+        public override void Update(GameTime gameTime)
         {
-            if (isInPipe)
+            if (isAlive)
             {
-                // Condition to check if Mario is not too close
-                if (!MarioIsAbove())
-                {
-                    Emerge();
-                }
-            }
-            else
-            {
-                Retract();
+                verticalPhysics.Update(gameTime); // Ensure GameTime is passed here
             }
         }
-    }
 
-    public void Emerge()
-    {
-        currentState = new EmergingPiranhaState();
-        isInPipe = false;
-        attackCooldown = EntitySettings.PiranhaCooldownTime; // Reset cooldown timer
-    }
+        public void Stomp()
+        {
+            isAlive = false;
+            MediaManager.Instance.PlayEffect(EffectNames.stomp);
+        }
 
-    public void Retract()
-    {
-        currentState = new RetractingPiranhaState();
-        isInPipe = true;
-    }
+        public void Flip()
+        {
+            isAlive = false;
+            MediaManager.Instance.PlayEffect(EffectNames.kick);
+            GameContentManager.Instance.RemoveEntity(this);
+        }
 
-    public void Bite()
-    {
-        if (isInPipe) return;
-        //MediaManager.Instance.PlayEffect(EffectNames.bite);
-        currentState = new BitingPiranhaState();
-    }
+        public void ChangeDirection()
+        {
+            verticalPhysics.velocity.Y = -verticalPhysics.velocity.Y; // Reverse the direction
+        }
 
-    public bool IsHidden()
-    {
-        return isInPipe;
-    }
+        public bool ReportIsAlive()
+        {
+            return isAlive;
+        }
 
-    public AbstractEntityState CurrentState
-    {
-        get { return currentState; }
-    }
-
-    private bool MarioIsAbove()
-    {
-        // Retrieve the hero (Mario) using the GameContentManager
-        IHero mario = GameContentManager.Instance.GetHero();
-        Vector2 marioPosition = mario.GetPosition();
-
-        // Check if Mario's X position aligns with the Piranha Plant's X position
-        // and Mario is directly above the Piranha Plant
-        return marioPosition.X == this.position.X && marioPosition.Y < this.position.Y;
-    }
-
-    public bool ReportIsAlive()
-    {
-        // Piranha Plant doesn't have a death state in traditional sense, always returns true unless removed from game
-        return true;
-    }
-
-    public Vector2 GetVelocity()
-    {
-        return physics.GetVelocity(); // Generally zero since Piranha Plants don't move horizontally
+        public Vector2 GetVelocity()
+        {
+            return verticalPhysics.GetVelocity();
+        }
     }
 }

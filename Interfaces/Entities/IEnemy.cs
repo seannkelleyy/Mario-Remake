@@ -7,6 +7,8 @@ namespace Mario.Interfaces.Entities
     public interface IEnemy : IEntityBase, ICollideable
     {
         public EntityPhysics physics { get; }
+
+        public VerticalEntityPhysics verticalPhysics { get; }
         public void ChangeDirection();
         public void Stomp();
         public void Flip();

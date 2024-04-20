@@ -11,6 +11,7 @@ using static Mario.Global.GlobalVariables;
 public class Koopa : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     private double shellTimer = 0.0;
     private AbstractEntityState previousState;
     public bool isShell = false;
