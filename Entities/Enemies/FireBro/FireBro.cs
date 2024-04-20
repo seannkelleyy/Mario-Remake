@@ -40,7 +40,7 @@ public class FireBro : AbstractCollideable, IEnemy
 
         CollisionManager.Instance.Run(this);
         currentState.Update(gameTime);
-        marioRelativePosition = GameContentManager.Instance.GetHero().GetPosition().X - this.position.X;
+        marioRelativePosition = GameContentManager.Instance.GetHero().GetPosition().X - position.X;
         if (deadTimer > 0)
         {
             deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -53,7 +53,15 @@ public class FireBro : AbstractCollideable, IEnemy
         {
             physics.Update();
             attackCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            if (attackCounter > EntitySettings.EnemyAttackCounter && (marioRelativePosition < 200 && marioRelativePosition > -200))
+            if (marioRelativePosition < 0 && (physics.currentHorizontalDirection == HorizontalDirection.right))
+            {
+                ChangeDirection();
+            }
+            else if (marioRelativePosition > 0 && (physics.currentHorizontalDirection == HorizontalDirection.left))
+            {
+                ChangeDirection();
+            }
+            if (attackCounter > EntitySettings.EnemyAttackCounter && (marioRelativePosition < 200 || marioRelativePosition > 200)) 
             {
                 Attack();
                 attackCounter = 0.0f;
