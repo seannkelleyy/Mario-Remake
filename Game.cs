@@ -22,7 +22,7 @@ namespace Mario
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = false;
-            
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -30,14 +30,14 @@ namespace Mario
         protected override void Initialize()
         {
             graphics.PreferredBackBufferHeight = GameSettings.InitialWindowHeight;
-            
+
 
             keyboardController = new KeyboardController();
             gamePadController = new GamePadController();
 
             LevelLoader.Instance.Initialize(Content);
 
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1.json", graphics);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1-1.json", graphics);
             base.Initialize();
         }
 
