@@ -43,7 +43,7 @@
   "pipeTubeUpsideDown": [ 96, 0, 32, 32, 1, 1, 1 ],
   "pipeTube": [ 16, 32, 32, 32, 1, 1, 1 ],
   "bitingPiranha": [ 0, 112, 16, 23, 2, 1, 2 ],
-  "defaultpiranha": [ 0, 112, 16, 23, 1, 0, 2 ],
+  "defaultPiranha": [ 0, 112, 16, 23, 1, 1, 1 ],
   "questionMarkTile": [ 0, 0, 16, 16, 3, 1, 1 ],
   "rightAttackStateFireMario": [ 16, 96, 16, 32, 1, 1, 3 ],
   "rightBullet": [ 16, 80, 16, 14, 1, 1, 2 ],

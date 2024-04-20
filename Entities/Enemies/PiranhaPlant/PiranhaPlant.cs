@@ -11,7 +11,6 @@ namespace Mario.Entities
     {
         public EntityPhysics physics { get; }
         public VerticalEntityPhysics verticalPhysics { get; }
-        private bool isAlive = true;
         private double deadTimer = 0.0f;
 
         public PiranhaPlant(Vector2 position)
@@ -48,10 +47,9 @@ namespace Mario.Entities
             currentState = new BitingPiranhaState();
         }
 
-        public void Stomp()//Here it stands for the piranha plant is killed
+        public void Stomp()
         {
             if (deadTimer > 0) return;
-            isAlive = false;
             MediaManager.Instance.PlayEffect(EffectNames.stomp);
             currentState = new DefaultPiranhaState();
             deadTimer = 1;
@@ -59,7 +57,8 @@ namespace Mario.Entities
 
         public void Flip()
         {
-            //Nothing to do here
+            MediaManager.Instance.PlayEffect(EffectNames.kick);
+            GameContentManager.Instance.RemoveEntity(this);
         }
 
         public void ChangeDirection()
@@ -76,7 +75,7 @@ namespace Mario.Entities
 
         public bool ReportIsAlive()
         {
-            return deadTimer < 1 && isAlive;
+            return deadTimer < 1;
         }
 
         public Vector2 GetVelocity()
