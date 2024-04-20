@@ -88,10 +88,12 @@ public class FireBro : AbstractCollideable, IEnemy
         if (physics.currentHorizontalDirection == HorizontalDirection.right)
         {
             physics.currentHorizontalDirection = HorizontalDirection.left;
+            currentState = new LeftFacingFireBroState();
         }
         else
         {
             physics.currentHorizontalDirection = HorizontalDirection.right;
+            currentState = new RightFacingFireBroState();
         }
     }
 
