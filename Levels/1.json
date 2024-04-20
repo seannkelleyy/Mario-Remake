@@ -20,119 +20,119 @@
       "startingX": 71,
       "startingY": 9,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 65,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 68,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 69,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 70,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 71,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "koopa",
       "startingX": 72,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 64,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 63,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 62,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 61,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 60,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 59,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 55,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 56,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 57,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     },
     {
       "type": "goomba",
       "startingX": 58,
       "startingY": 11,
       "direction": true,
-      "AI": []
+      "ai": []
     }
   ],
   "items": [
