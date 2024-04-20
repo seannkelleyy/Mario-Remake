@@ -111,23 +111,23 @@
       "isRight": false
     }
   ],
-    "items": [
-        {
-            "type": "pistol",
-            "startingX": 6,
-            "startingY": 10
-        },
-        {
-            "type": "shotgun",
-            "startingX": 8,
-            "startingY": 10
-        },
-        {
-            "type": "rocketLauncher",
-            "startingX": 10,
-            "startingY": 10
-        }
-    ],
+  "items": [
+    {
+      "type": "pistol",
+      "startingX": 6,
+      "startingY": 10
+    },
+    {
+      "type": "shotgun",
+      "startingX": 8,
+      "startingY": 10
+    },
+    {
+      "type": "rocketLauncher",
+      "startingX": 10,
+      "startingY": 10
+    }
+  ],
   "itemSections": [
     {
       "type": "coinUnderground",

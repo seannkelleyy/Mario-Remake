@@ -1,5 +1,4 @@
-﻿using System;
-using Mario.Collisions;
+﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Abstract;
 using Mario.Entities.Enemies;
@@ -14,6 +13,7 @@ using Microsoft.Xna.Framework.Media;
 using static Mario.Global.GlobalVariables;
 
 public class Koopa : AbstractCollideable, IEnemy
+
 {
     public EntityPhysics physics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
