@@ -53,15 +53,22 @@ export const EditEnemy = ({ selectedEnemy, updateEnemy }: EditEnemyProps) => {
       <select
         multiple
         value={selectedEnemy?.AI ? selectedEnemy.AI : []}
-        onChange={(e) =>
+        onChange={(e) => {
+          const options = e.target.options;
+          const value = [];
+          for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+              value.push(options[i].value);
+            }
+          }
           updateEnemy(
             selectedEnemy.type,
             selectedEnemy.startingX,
             selectedEnemy.startingY,
             selectedEnemy.direction,
-            e.target.value.split(",").filter((ai) => ai !== "")
-          )
-        }
+            value
+          );
+        }}
       >
         <option value="none">None</option>
         <option value="seek">Seek</option>

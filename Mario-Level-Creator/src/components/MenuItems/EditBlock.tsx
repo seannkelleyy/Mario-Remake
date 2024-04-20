@@ -88,6 +88,11 @@ export const EditBlock = ({ selectedBlock, updateBlock }: EditBlockProps) => {
         <option value="flower">Flower</option>
         <option value="star">Star</option>
         <option value="oneUp">1-Up</option>
+        <option value="coin">Coin</option>
+        <option value="coinUnderground">Coin Underground</option>
+        <option value="pistol">Pistol</option>
+        <option value="shotgun">Shotgun</option>
+        <option value="rocketLauncher">Rocket Launcher</option>
       </select>
     </section>
   );

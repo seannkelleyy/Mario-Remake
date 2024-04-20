@@ -9,6 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: visible;
+  overflow-y: visible;
 }
 
 .level-loader {
@@ -42,7 +43,7 @@
   bottom: -70vh;
   display: flex;
   flex-wrap: nowrap;
-  margin: auto;
+  margin: 1em;
 }
 
 .column {

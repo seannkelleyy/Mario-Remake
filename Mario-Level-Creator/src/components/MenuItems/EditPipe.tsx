@@ -39,6 +39,7 @@ export const EditPipe = ({ selectedPipe, updatePipe }: EditPipeProps) => {
           <option value="pipeTubeVertical">Pipe Vertical</option>
           <option value="pipeTubeUpsideDown">Pipe Upside Down</option>
           <option value="pipeTubeHorizontal">Pipe Horizontal</option>
+          <option value="pipeTile">Pipe Tile</option>
         </select>
       </section>
       <section>
