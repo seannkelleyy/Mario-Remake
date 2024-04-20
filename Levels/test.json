@@ -1,427 +1,427 @@
 {
-    "level": "1",
-    "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
-    "width": 224,
-    "height": 30,
-    "timeLimit": 300,
-    "song": "ground",
-    "hero": {
-        "type": "mario",
-        "startingX": 4,
-        "startingY": 10,
-        "lives": 0,
-        "statingLives": 3,
-        "startingPower": "fire"
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
+  "width": 224,
+  "height": 30,
+  "timeLimit": 300,
+  "song": "ground",
+  "hero": {
+    "type": "mario",
+    "startingX": 4,
+    "startingY": 10,
+    "lives": 0,
+    "statingLives": 3,
+    "startingPower": "fire"
+  },
+  "enemies": [
+    {
+      "type": "firebro",
+      "startingX": 23,
+      "startingY": 11,
+      "isRight": false
+    }
+  ],
+  "items": [],
+  "itemSections": [],
+  "blockSections": [
+    {
+      "type": "floor",
+      "startingX": 0,
+      "startingY": 14,
+      "endingX": 68,
+      "endingY": 14,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
     },
-    "enemies": [
-        {
-            "type": "goomba",
-            "startingX": 23,
-            "startingY": 12,
-            "isRight": false
-        }
-    ],
-    "items": [],
-    "itemSections": [],
-    "blockSections": [
-        {
-            "type": "floor",
-            "startingX": 0,
-            "startingY": 14,
-            "endingX": 68,
-            "endingY": 14,
-            "collidable": false,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 0,
-            "startingY": 13,
-            "endingX": 68,
-            "endingY": 13,
-            "collidable": true,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 71,
-            "startingY": 14,
-            "endingX": 85,
-            "endingY": 14,
-            "collidable": false,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 71,
-            "startingY": 13,
-            "endingX": 85,
-            "endingY": 13,
-            "collidable": true,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 89,
-            "startingY": 14,
-            "endingX": 152,
-            "endingY": 14,
-            "collidable": false,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 89,
-            "startingY": 13,
-            "endingX": 152,
-            "endingY": 13,
-            "collidable": true,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 155,
-            "startingY": 14,
-            "endingX": 223,
-            "endingY": 14,
-            "collidable": false,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "floor",
-            "startingX": 155,
-            "startingY": 13,
-            "endingX": 223,
-            "endingY": 13,
-            "collidable": true,
-            "breakable": false,
-            "item": "none"
-        }
-    ],
-    "blocks": [
-        {
-            "type": "mystery",
-            "x": 17,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "mystery",
-            "x": 16,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "star"
-        },
-        {
-            "type": "brick",
-            "x": 30,
-            "y": 12,
-            "collidable": true,
-            "breakable": false,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 21,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 22,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "redMushroom"
-        },
-        {
-            "type": "brick",
-            "x": 23,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 24,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 25,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 23,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 78,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 79,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "redMushroom"
-        },
-        {
-            "type": "brick",
-            "x": 80,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 81,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 82,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 83,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 84,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 85,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 86,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 87,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 88,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 92,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 93,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 94,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 95,
-            "y": 5,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 95,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 101,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 102,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "star"
-        },
-        {
-            "type": "mystery",
-            "x": 107,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "coin"
-        },
-        {
-            "type": "mystery",
-            "x": 109,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "mystery",
-            "x": 109,
-            "y": 5,
-            "collidable": true,
-            "breakable": false,
-            "item": "redMushroom"
-        },
-        {
-            "type": "mystery",
-            "x": 112,
-            "y": 9,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 118,
-            "y": 9,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 121,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 123,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "brick",
-            "x": 128,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        },
-        {
-            "type": "mystery",
-            "x": 129,
-            "y": 5,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "mystery",
-            "x": 130,
-            "y": 5,
-            "collidable": true,
-            "breakable": false,
-            "item": "coin"
-        },
-        {
-            "type": "brick",
-            "x": 131,
-            "y": 5,
-            "collidable": true,
-            "breakable": true,
-            "item": "none"
-        }
-    ],
-    "pipes": [
-        {
-            "type": "pipeTubeVertical",
-            "x": 10,
-            "startingY": 10,
-            "endingY": 12,
-            "transportable": false,
-            "transportDestinationX": -1,
-            "transportDestinationY": -1,
-            "collidable": true,
-            "breakable": false
-        }
-    ]
+    {
+      "type": "floor",
+      "startingX": 0,
+      "startingY": 13,
+      "endingX": 68,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 71,
+      "startingY": 14,
+      "endingX": 85,
+      "endingY": 14,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 71,
+      "startingY": 13,
+      "endingX": 85,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 89,
+      "startingY": 14,
+      "endingX": 152,
+      "endingY": 14,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 89,
+      "startingY": 13,
+      "endingX": 152,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 155,
+      "startingY": 14,
+      "endingX": 223,
+      "endingY": 14,
+      "collidable": false,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "floor",
+      "startingX": 155,
+      "startingY": 13,
+      "endingX": 223,
+      "endingY": 13,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mystery",
+      "x": 17,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 16,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "star"
+    },
+    {
+      "type": "brick",
+      "x": 30,
+      "y": 12,
+      "collidable": true,
+      "breakable": false,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 21,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 22,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "redMushroom"
+    },
+    {
+      "type": "brick",
+      "x": 23,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 24,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 25,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 23,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 78,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 79,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "redMushroom"
+    },
+    {
+      "type": "brick",
+      "x": 80,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 81,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 82,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 83,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 84,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 85,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 86,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 87,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 88,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 92,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 93,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 94,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 95,
+      "y": 5,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 95,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 101,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 102,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "star"
+    },
+    {
+      "type": "mystery",
+      "x": 107,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 109,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 109,
+      "y": 5,
+      "collidable": true,
+      "breakable": false,
+      "item": "redMushroom"
+    },
+    {
+      "type": "mystery",
+      "x": 112,
+      "y": 9,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 118,
+      "y": 9,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 121,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 123,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brick",
+      "x": 128,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 129,
+      "y": 5,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "mystery",
+      "x": 130,
+      "y": 5,
+      "collidable": true,
+      "breakable": false,
+      "item": "coin"
+    },
+    {
+      "type": "brick",
+      "x": 131,
+      "y": 5,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    }
+  ],
+  "pipes": [
+    {
+      "type": "pipeTubeVertical",
+      "x": 10,
+      "startingY": 10,
+      "endingY": 12,
+      "transportable": false,
+      "transportDestinationX": -1,
+      "transportDestinationY": -1,
+      "collidable": true,
+      "breakable": false
+    }
+  ]
 }

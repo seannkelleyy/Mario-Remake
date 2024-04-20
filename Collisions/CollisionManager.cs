@@ -125,15 +125,6 @@ namespace Mario.Collisions
                     itemHandler.ItemPipeCollision(pipe);
                 }
             }
-
-            foreach (IItem collidingItem in GameContentManager.Instance.GetItems())
-            {
-                if (item != collidingItem && item.GetRectangle().Intersects(collidingItem.GetRectangle()))
-                {
-                    itemHandler.ItemItemCollision(collidingItem);
-                }
-            }
-
         }
 
         private void ManageProjectileCollisions(IProjectile projectile)

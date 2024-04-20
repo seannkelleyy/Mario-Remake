@@ -26,9 +26,10 @@ public class Koopa : AbstractCollideable, IEnemy
     private double attackCounter = 0.0f;
     private AbstractEntityState previousState;
     public bool isShell = false;
+
     public bool teamMario { get; }
 
-    public Koopa(Vector2 position)
+    public Koopa(Vector2 position, bool isRight)
     {
         physics = new EntityPhysics(this);
         teamMario = false;
@@ -40,6 +41,14 @@ public class Koopa : AbstractCollideable, IEnemy
     {
         base.Draw(spriteBatch);
         WeaponSprite.Draw(spriteBatch, position);
+    }
+        if (!isRight )
+        {
+            ChangeDirection();
+        } else
+        {
+            currentState = new RightMovingKoopaState();
+        }
     }
 
     public override void Update(GameTime gameTime)

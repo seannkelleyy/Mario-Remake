@@ -24,11 +24,15 @@ public class Goomba : AbstractCollideable, IEnemy
     private double attackCounter = 0.0f;
     public bool teamMario { get; }
 
-    public Goomba(Vector2 position)
+    public Goomba(Vector2 position, bool isRight)
     {
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
+        if (!isRight)
+        {
+            ChangeDirection();
+        }
         currentState = new MovingGoombaState();
         WeaponSprite = SpriteFactory.Instance.CreateSprite(physics.currentHorizontalDirection.ToString() + currentHealth.ToString());
     }
