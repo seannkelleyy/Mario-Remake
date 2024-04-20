@@ -2,6 +2,7 @@ export const pipeTypes = [
   "pipeTubeVertical",
   "pipeTubeUpsideDown",
   "pipeTubeHorizontal",
+  "pipeTile",
 ];
 
 export type PipeType = {
