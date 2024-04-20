@@ -44,6 +44,7 @@ public static class GameSettingsLoader
         PhysicsSettings.FireballVerticalAcceleration = Convert.ToSingle(settings["Physics"]["fireballVerticalAcceleration"]);
         PhysicsSettings.FireballBounceForce = Convert.ToSingle(settings["Physics"]["fireballBounceForce"]);
         PhysicsSettings.FireballDeleteInterval = Convert.ToSingle(settings["Physics"]["fireballDeleteInterval"]);
+        PhysicsSettings.InitialVerticalSpeed = Convert.ToSingle(settings["Physics"]["initialVerticalSpeed"]);
 
         // Load CollisionSettings
         CollisionSettings.Buffer = Convert.ToInt32(settings["Collisions"]["buffer"]);

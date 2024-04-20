@@ -19,4 +19,6 @@
     public static float FireballVerticalAcceleration { get; set; }
     public static float FireballBounceForce { get; set; }
     public static float FireballDeleteInterval { get; set; }
+
+    public static float InitialVerticalSpeed { get; set; }
 }

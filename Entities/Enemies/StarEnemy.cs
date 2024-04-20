@@ -20,6 +20,7 @@ namespace Mario.Entities.Enemies
 #nullable enable
         public Dictionary<string, IAI>? EnemyAI { get; set; }
 #nullable disable
+        public VerticalEntityPhysics verticalPhysics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = false;
         public bool teamMario { get; }

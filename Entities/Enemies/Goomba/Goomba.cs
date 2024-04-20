@@ -25,6 +25,7 @@ public class Goomba : AbstractCollideable, IEnemy
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }
 #nullable disable
+    public VerticalEntityPhysics verticalPhysics { get; }
     private double deadTimer = 0.0f;
     public double scareCD = 30.0f;
     public double scareCounter = 30.0f;
