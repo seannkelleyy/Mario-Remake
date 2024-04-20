@@ -281,17 +281,17 @@ namespace Mario.Entities.Character
             stats.AddLives(-1);
             currentHealth = HeroHealth.Mario;
             currentState.Die();
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, stats.GetLives());
 
             // Check if the player still has lives. If so, reset the game but with one less life. Else, game over
-            if (stats.GetLives() != 0)
+            if (stats.GetLives() > 0)
             {
-                GameStateManager.Instance.BeginReset();
+                stats.SetLives(startingLives - 1);
+                GameStateManager.Instance.BeginReset(false);
             }
             else
             {
-                stats.SetLives(startingLives);
-                GameStateManager.Instance.Restart();
+                stats.SetLives(startingLives - 1);
+                GameStateManager.Instance.BeginReset(true);
             }
         }
         public HeroHealth ReportHealth()

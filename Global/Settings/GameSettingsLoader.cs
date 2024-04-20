@@ -60,6 +60,7 @@ public static class GameSettingsLoader
         EntitySettings.HeroAttackTime = Convert.ToSingle(settings["Entity"]["heroAttackTime"]);
         EntitySettings.HeroAnimationLength = Convert.ToSingle(settings["Entity"]["heroAnimationLength"]);
         EntitySettings.HeroStarTimer = Convert.ToSingle(settings["Entity"]["heroStarTimer"]);
+        EntitySettings.StartingHeroLives = Convert.ToInt32(settings["Entity"]["startingHeroLives"]);
 
         //Scores
         ScoreSettings.KoopaScore = Convert.ToInt32(settings["Scores"]["koopaScore"]);

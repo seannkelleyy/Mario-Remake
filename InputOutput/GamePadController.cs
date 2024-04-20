@@ -50,7 +50,7 @@ namespace Mario.Input
             Action[] actions = new Action[9];
             actions[0] = new Action(() =>
             {
-                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
+                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, EntitySettings.StartingHeroLives);
                 game.Exit();
             });
             actions[1] = new Action(GameStateManager.Instance.Restart);
