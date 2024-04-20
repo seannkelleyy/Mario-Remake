@@ -17,6 +17,7 @@ namespace Mario.Entities
         {
             verticalPhysics = new VerticalEntityPhysics(this);
             this.position = position;
+            currentState = new HiddenPiranhaState();
         }
 
         public override void Update(GameTime gameTime)
