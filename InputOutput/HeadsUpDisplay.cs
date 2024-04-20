@@ -46,10 +46,6 @@ public class HeadsUpDisplay
                 currentX += headerSize.X + GlobalVariables.HUDBuffer;
             }
         }
-        else
-        {
-            spriteBatch.DrawString(font, "Game Over", new Vector2(GlobalVariables.CameraLeftEdge + 370, 0), Color.White);
-        }
     }
 
 }
