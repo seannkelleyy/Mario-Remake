@@ -31,6 +31,8 @@ namespace Mario.Singletons
                     return new Koopa(position, isRight);
                 case "bulletBill":
                     return new BulletBill(position);
+                case "firebro":
+                    return new FireBro(position, isRight);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }
