@@ -287,7 +287,7 @@ namespace Mario.Entities.Character
             }
             else
             {
-                stats.SetLives(startingLives);
+                stats.SetLives(startingLives - 1);
                 GameStateManager.Instance.BeginReset(true);
             }
         }

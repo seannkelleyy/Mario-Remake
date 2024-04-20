@@ -33,7 +33,7 @@ namespace Mario.Singletons
         // Restarts the game
         public void Restart()
         {
-            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
+            LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, 10);
             string currentApplication = Process.GetCurrentProcess().MainModule.FileName;
 
             Process.Start(currentApplication);
@@ -59,7 +59,7 @@ namespace Mario.Singletons
         {
             if (!gameOver)
             {
-                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStartingLives());
+                LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStats().GetLives());
                 SetResetTime(0.0);
                 LevelLoader.Instance.UnloadLevel();
                 LevelLoader.Instance.LoadLevel(GameSettingsLoader.LevelJsonFilePath);

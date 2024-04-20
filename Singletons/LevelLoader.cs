@@ -47,7 +47,7 @@ namespace Mario.Singletons
                 level.hero.startingPower,
                 new Vector2(level.hero.startingX * GlobalVariables.BlockHeightWidth,
                 level.hero.startingY * GlobalVariables.BlockHeightWidth),
-                new HeroStatTracker(level.timeLimit, level.hero.lives));
+                new HeroStatTracker(level.timeLimit, EntitySettings.StartingHeroLives));
             GameContentManager.Instance.AddEntity(hero);
 
             // Create the enemies

@@ -11,6 +11,7 @@ namespace Mario.Entities.Hero
         public static int Coins { get; set; }
         public static int Lives { get; set; }
         public static int Time { get; set; }
+
         public HeroStatTracker(int time, int lives)
         {
             SetTime(time);
