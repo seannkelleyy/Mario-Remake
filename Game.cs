@@ -21,7 +21,7 @@ namespace Mario
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -37,7 +37,7 @@ namespace Mario
 
             LevelLoader.Instance.Initialize(Content);
 
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1-1.json", graphics);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1.json", graphics);
             base.Initialize();
         }
 

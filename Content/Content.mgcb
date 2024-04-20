@@ -176,6 +176,12 @@
 /processorParam:Quality=Best
 /build:flag.mp3
 
+#begin ghostsounds.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ghostsounds.mp3
+
 #begin item.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -211,6 +217,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:marioSpriteSheet.png
+
+#begin Of the Abyss.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Of the Abyss.mp3
 
 #begin pause.mp3
 /importer:Mp3Importer

@@ -1,26 +1,34 @@
 ﻿using Mario.Collisions;
 using Mario.Entities;
 using Mario.Entities.Enemies;
+using Mario.Entities.Enemies.EnemyAI;
 using Mario.Entities.Items;
 using Mario.Entities.Projectiles;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Mario.Physics;
 using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 public class BulletBill : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+#nullable enable
+    public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
+    public EntityPhysics physics { get; }
     public VerticalEntityPhysics verticalPhysics { get; }
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;
     public bool teamMario { get; }
-
     public BulletBill(Vector2 position)
     {
+        EnemyAI = new Dictionary<string, IAI>();
+        physics = new EntityPhysics(this);
         this.position = position;
         teamMario = false;
         currentState = new BulletBillLeftState();
@@ -46,6 +54,27 @@ public class BulletBill : AbstractCollideable, IEnemy
         }
     }
 
+    public void parseAIs(Dictionary<string, IAI> enemyAI, List<string> ais)
+    {
+        if (!(ais.Count == 0))
+        {
+            foreach (string ai in ais)
+            {
+                if (ai == "seek")
+                {
+                    enemyAI.Add("seek", new SeekAI());
+                }
+                if (ai == "scare")
+                {
+                    enemyAI.Add("scare", new ScareAI());
+                }
+                if (ai == "jump")
+                {
+                    enemyAI.Add("jump", new JumpAI());
+                }
+            }
+        }
+    }
     public void Stomp()
     {
         if (deadTimer > 0) return;
@@ -123,5 +152,9 @@ public class BulletBill : AbstractCollideable, IEnemy
             MediaManager.Instance.PlayEffect(EffectNames.enemyFire);
             GameContentManager.Instance.AddEntity(new Fireball(position + new Vector2(0, (this.GetRectangle().Height / 2)), HorizontalDirection.left, teamMario));
         }
+    }
+    public HorizontalDirection GetCurrentDirection()
+    {
+        return physics.GetHorizontalDirection();
     }
 }

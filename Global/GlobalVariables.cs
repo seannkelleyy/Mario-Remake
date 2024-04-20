@@ -82,7 +82,7 @@
             enemyPowerup,
             vine, // Most likely will be unused.
             pipe,
-            bite
+            ghost
         }
         public enum SongThemes
         {
@@ -96,7 +96,8 @@
             lostLife,
             gameOver,
             ending,
-            enemyStar
+            enemyStar,
+            guns
         }
 
         #endregion MediaManagerVariables

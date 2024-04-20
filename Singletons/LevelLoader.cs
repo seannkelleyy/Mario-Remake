@@ -57,7 +57,7 @@ namespace Mario.Singletons
                     enemy.type,
                     new Vector2(enemy.startingX * GlobalVariables.BlockHeightWidth,
                     enemy.startingY * GlobalVariables.BlockHeightWidth),
-                    enemy.isRight);
+                    enemy.isRight, enemy.ai);
                 GameContentManager.Instance.AddEntity(enemyObject);
             }
 
@@ -66,8 +66,8 @@ namespace Mario.Singletons
             {
                 IItem itemObject = ObjectFactory.Instance.CreateItem(
                     item.type,
-                    new Vector2(item.startingX * GlobalVariables.BlockHeightWidth,
-                    item.startingY * GlobalVariables.BlockHeightWidth));
+                    new Vector2(item.x * GlobalVariables.BlockHeightWidth,
+                    item.y * GlobalVariables.BlockHeightWidth));
                 itemObject.MakeVisible();
                 GameContentManager.Instance.AddEntity(itemObject);
             }

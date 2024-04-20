@@ -4,6 +4,7 @@ using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Entities.Pipes;
 using Mario.Interfaces;
+using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -23,14 +24,14 @@ namespace Mario.Singletons
             return new Hero(startingPower, position, stats);
         }
 
-        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight)
+        public IEnemy CreateEnemy(string type, Vector2 position, bool isRight, List<string> ais)
         {
             switch (type)
             {
                 case "goomba":
-                    return new Goomba(position, isRight);
+                    return new Goomba(position, isRight, ais);
                 case "koopa":
-                    return new Koopa(position, isRight);
+                    return new Koopa(position, isRight, ais);
                 case "bulletBill":
                     return new BulletBill(position);
                 case "firebro":
@@ -38,7 +39,8 @@ namespace Mario.Singletons
                 case "piranha":
                     return new PiranhaPlant(position);
                 default:
-                    throw new KeyNotFoundException($"Entity type {type} not recognized.");
+                    Logger.Instance.LogError($"Entity type {type} not recognized.");
+                    return null;
             }
         }
 
@@ -65,7 +67,8 @@ namespace Mario.Singletons
                 case "deathBlock":
                     return new DeathBlock(position, breakable, collideable);
                 default:
-                    throw new KeyNotFoundException($"Block type {type} not recognized.");
+                    Logger.Instance.LogError($"Block type {type} not recognized.");
+                    return null;
             }
         }
 
@@ -94,7 +97,8 @@ namespace Mario.Singletons
                 case "rocketLauncher":
                     return new RocketLauncher(position);
                 default:
-                    throw new KeyNotFoundException($"Item type `{type}` not recognized.");
+                    Logger.Instance.LogError($"Item type `{type}` not recognized.");
+                    return null;
             }
         }
 
@@ -111,7 +115,8 @@ namespace Mario.Singletons
                 case "pipeTile":
                     return new PipeTile(position, isCollidable);
                 default:
-                    throw new KeyNotFoundException($"Pipe type '{type}' not recognized.");
+                    Logger.Instance.LogError($"Pipe type '{type}' not recognized.");
+                    return null;
             }
         }
     }

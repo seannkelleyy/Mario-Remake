@@ -1,7 +1,4 @@
-﻿using Mario.Entities.Abstract;
-using Mario.Entities.Hero;
-using Mario.Entities.Items;
-using Mario.Global;
+﻿using Mario.Entities.Items;
 using Mario.Interfaces;
 using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
@@ -9,9 +6,9 @@ using Mario.Physics;
 using Mario.Singletons;
 using Mario.Sprites;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using static Mario.Global.GlobalVariables;
 
 namespace Mario.Entities.Enemies
@@ -20,6 +17,9 @@ namespace Mario.Entities.Enemies
     {
         private IEnemy decoratorEnemy;
         public EntityPhysics physics { get; }
+#nullable enable
+        public Dictionary<string, IAI>? EnemyAI { get; set; }
+#nullable disable
         public VerticalEntityPhysics verticalPhysics { get; }
         private float starTimer = EntitySettings.HeroStarTimer;
         private bool isBig = false;
@@ -140,6 +140,11 @@ namespace Mario.Entities.Enemies
         public void SetCollisionState(CollisionDirection direction, bool state)
         {
             decoratorEnemy.SetCollisionState(direction, state);
+        }
+
+        public HorizontalDirection GetCurrentDirection()
+        {
+            return decoratorEnemy.GetCurrentDirection();
         }
     }
 }
