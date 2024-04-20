@@ -11,7 +11,7 @@
     "startingY": 12,
     "direction": true,
     "startingPower": "small",
-    "lives": 3,
+    "lives": 10,
     "statingLives": 3
   },
   "enemies": [

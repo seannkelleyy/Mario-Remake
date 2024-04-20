@@ -46,7 +46,8 @@
     "heroFlashDuration": 0.05,
     "heroAttackTime": 0.25,
     "heroAnimationLength": 1.3,
-    "heroStarTimer": 10.6
+    "heroStarTimer": 10.6,
+    "startingHeroLives": 3
   },
   "Scores": {
     "koopaScore": 1000,
