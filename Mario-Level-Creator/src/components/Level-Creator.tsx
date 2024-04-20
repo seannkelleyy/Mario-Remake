@@ -96,7 +96,7 @@ export const LevelCreator = () => {
           startingX: startingX,
           startingY: startingY,
           direction: direction ? direction : true,
-          AI: AI ? AI : [],
+          ai: AI ? AI : [],
         });
       }
 

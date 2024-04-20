@@ -55,7 +55,7 @@ export const EditObject = ({
             direction: selectedObject?.direction
               ? selectedObject.direction
               : false,
-            AI: selectedObject?.AI ? selectedObject.AI : [],
+            ai: selectedObject?.ai ? selectedObject.ai : [],
           }}
           updateEnemy={updateEnemy}
         />
