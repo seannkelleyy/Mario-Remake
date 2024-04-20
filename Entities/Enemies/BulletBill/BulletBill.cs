@@ -23,10 +23,9 @@ public class BulletBill : AbstractCollideable, IEnemy
     private double deadTimer = 0.0f;
     private EnemyHealth currentHealth = EnemyHealth.Normal;
     public bool teamMario { get; }
-    public BulletBill(Vector2 position, List<string> ais)
+    public BulletBill(Vector2 position)
     {
         EnemyAI = new Dictionary<string, IAI>();
-        parseAIs(EnemyAI, ais);
         physics = new EntityPhysics(this);
         this.position = position;
         teamMario = false;

@@ -45,7 +45,8 @@ public class Koopa : AbstractCollideable, IEnemy
         this.position = position;
         if (!isRight)
         {
-            ChangeDirection();
+            currentState = new LeftMovingKoopaState();
+            physics.currentHorizontalDirection = HorizontalDirection.left;
         }
         else
         {
@@ -283,6 +284,10 @@ public class Koopa : AbstractCollideable, IEnemy
         }
     }
 
+    public bool GetIsShell()
+    {
+        return isShell;
+    }
     public void ChangeCurrentState(AbstractEntityState state)
     {
         currentState = state;

@@ -1,4 +1,5 @@
 using Mario.Entities.Blocks;
+using Mario.Entities.Enemies;
 using Mario.Interfaces;
 using Mario.Interfaces.Entities;
 using Mario.Singletons;
@@ -73,7 +74,7 @@ public class EnemyCollisionHandler
     {
         collidingEnemy = enemy;
         CollisionDirection direction = CollisionDetector.DetectCollision(mainEnemy.GetRectangle(), enemy.GetRectangle(), mainEnemy.GetVelocity());
-        if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction))
+        if (collisionDictionary[typeof(IEnemy)].ContainsKey(direction) && !(collidingEnemy is PhantomEnemy) && !(mainEnemy is PhantomEnemy))
         {
             collisionDictionary[typeof(IEnemy)][direction].Invoke();
         }

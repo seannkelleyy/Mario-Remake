@@ -29,7 +29,7 @@ namespace Mario.Entities.Enemies.EnemyAI
                         if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
                         {
                             enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
-                            if (enemy.GetType().ToString().CompareTo("Koopa") == 0)
+                            if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
                             {
                                 Koopa kEnemy = (Koopa)enemy;
                                 kEnemy.ChangeCurrentState(new LeftMovingKoopaState());
@@ -38,7 +38,7 @@ namespace Mario.Entities.Enemies.EnemyAI
                         else
                         {
                             enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
-                            if (enemy.GetType().ToString().CompareTo("Koopa") == 0)
+                            if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
                             {
                                 Koopa kEnemy = (Koopa)enemy;
                                 kEnemy.ChangeCurrentState(new RightMovingKoopaState());

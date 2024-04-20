@@ -3,6 +3,7 @@ using Mario.Singletons;
 using Microsoft.Xna.Framework;
 using static Mario.Global.GlobalVariables;
 using System;
+using System.Collections.Generic;
 using Mario.Interfaces.Entities;
 
 namespace Mario.Entities.Blocks
@@ -33,7 +34,7 @@ namespace Mario.Entities.Blocks
             // Check to see if a new bullet bill needs to be launched
             if (shootTimer > maxNoShootTime)
             {
-                bulletBill = ObjectFactory.Instance.CreateEnemy("bulletBill", position, false);
+                bulletBill = ObjectFactory.Instance.CreateEnemy("bulletBill", position, false, new List<string>());
                 GameContentManager.Instance.AddEntity(bulletBill);
                 shootTimer = 0;
             } else

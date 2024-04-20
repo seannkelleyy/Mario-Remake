@@ -48,7 +48,8 @@ namespace Mario.Singletons
                 { GlobalVariables.EffectNames.enemyPowerup, content.Load<SoundEffect>("enemyPowerUp").CreateInstance() },
                 { GlobalVariables.EffectNames.smallJump, content.Load<SoundEffect>("smallJump").CreateInstance() },
                 { GlobalVariables.EffectNames.stomp, content.Load<SoundEffect>("stomp").CreateInstance() },
-                { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() }
+                { GlobalVariables.EffectNames.vine, content.Load<SoundEffect>("Vine").CreateInstance() },
+                { GlobalVariables.EffectNames.ghost, content.Load<SoundEffect>("ghostsounds").CreateInstance() }
             };
 
             // Initialize dictionary containing all songs.
@@ -64,7 +65,8 @@ namespace Mario.Singletons
                 { GlobalVariables.SongThemes.lostLife, content.Load<Song>("08-you-re-dead") },
                 { GlobalVariables.SongThemes.gameOver, content.Load<Song>("09-game-over") },
                 { GlobalVariables.SongThemes.ending, content.Load<Song>("12-ending") },
-                { GlobalVariables.SongThemes.enemyStar, content.Load<Song>("13-enemy-star-power") }
+                { GlobalVariables.SongThemes.enemyStar, content.Load<Song>("13-enemy-star-power") },
+                { GlobalVariables.SongThemes.guns, content.Load<Song>("Of the Abyss") }
             };
         }
 

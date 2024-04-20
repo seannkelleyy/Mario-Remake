@@ -34,15 +34,15 @@ namespace Mario.Entities.Enemies.EnemyAI
                     IEnemy phantom;
                     if (enemy.GetType().ToString().CompareTo("Goomba") == 0)
                     {
-                        phantom = ObjectFactory.Instance.CreateEnemy("goomba", enemy.GetPosition(), new List<string>());
+                        phantom = ObjectFactory.Instance.CreateEnemy("goomba", enemy.GetPosition(), enemy.GetCurrentDirection() != HorizontalDirection.right, new List<string>());
                     }
                     else
                     {
-                        phantom = ObjectFactory.Instance.CreateEnemy("koopa", enemy.GetPosition(), new List<string>());
+                        phantom = ObjectFactory.Instance.CreateEnemy("koopa", enemy.GetPosition(), enemy.GetCurrentDirection() != HorizontalDirection.right, new List<string>());
                     }
-
+                    MediaManager.Instance.PlayEffect(EffectNames.ghost);
                     GameContentManager.Instance.AddEntity(new PhantomEnemy(phantom));
-
+                    
                     if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
                     {
                         enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
@@ -61,6 +61,7 @@ namespace Mario.Entities.Enemies.EnemyAI
                             kEnemy.ChangeCurrentState(new RightMovingKoopaState());
                         }
                     }
+                    
                     triggered = true;
                 }
             }

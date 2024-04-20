@@ -59,6 +59,7 @@ namespace Mario.Entities.Enemies
         public void ChangeDirection()
         {
             decoratorEnemy.ChangeDirection();
+            phantomSprite = SpriteFactory.Instance.CreateSprite(decoratorEnemy.GetCurrentDirection() + "Phantom" + decoratorEnemy.GetType().Name);
         }
         public void Stomp()
         {
