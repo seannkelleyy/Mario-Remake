@@ -10,6 +10,7 @@ namespace Mario.Physics
 
         public Vector2 velocity;
         public HorizontalDirection currentHorizontalDirection = HorizontalDirection.right;
+        public VerticalDirection currentVerticalDirection = VerticalDirection.up;
         public bool isFalling = true;
         public bool isMininumJump = false;
         public bool isDecelerating = false;
@@ -38,10 +39,19 @@ namespace Mario.Physics
         {
             return currentHorizontalDirection;
         }
+        public VerticalDirection GetVerticalDirection()
+        {
+            return currentVerticalDirection;
+        }
 
         public void SetHorizontalDirection(HorizontalDirection currentHorizontalDirection)
         {
             this.currentHorizontalDirection = currentHorizontalDirection;
+        }
+
+        public void SetVerticalDirection(VerticalDirection currentVerticalDirection)
+        {
+            this.currentVerticalDirection = currentVerticalDirection;
         }
 
         public float ApplyGravity()

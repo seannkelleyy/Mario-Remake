@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Mario.Entities.Pipes;
 using System;
+using Mario.Entities;
 
 namespace Mario.Singletons
 {
@@ -30,6 +31,8 @@ namespace Mario.Singletons
                     return new Goomba(position);
                 case "koopa":
                     return new Koopa(position);
+                case "piranha":
+                    return new PiranhaPlant(position);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }

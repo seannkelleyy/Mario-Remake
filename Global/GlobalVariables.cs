@@ -25,6 +25,7 @@
         public static int HUDBuffer = 50;
         public enum CollisionDirection { Top, Bottom, Left, Right, None }
         public enum HorizontalDirection { left, right };
+        public enum VerticalDirection { up, down };
         public enum HeroHealth { Mario, BigMario, FireMario };
 
         public enum BlockType

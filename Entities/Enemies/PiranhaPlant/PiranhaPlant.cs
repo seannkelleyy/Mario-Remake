@@ -12,6 +12,7 @@ namespace Mario.Entities
         public EntityPhysics physics { get; }
         public VerticalEntityPhysics verticalPhysics { get; }
         private bool isAlive = true;
+        private double deadTimer = 0.0f;
 
         public PiranhaPlant(Vector2 position)
         {
@@ -22,33 +23,60 @@ namespace Mario.Entities
 
         public override void Update(GameTime gameTime)
         {
-            if (isAlive)
+            ClearCollisions();
+
+            CollisionManager.Instance.Run(this);
+            currentState.Update(gameTime);
+            if (deadTimer > 0)
             {
-                verticalPhysics.Update(gameTime); // Ensure GameTime is passed here
+                deadTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (deadTimer > EntitySettings.EnemyDespawnTime)
+                {
+                    GameContentManager.Instance.RemoveEntity(this);
+                }
             }
+            else
+            {
+                verticalPhysics.Update(gameTime);
+            }
+        }
+
+        public void Bite()
+        {
+            if (deadTimer > 0) return;
+            MediaManager.Instance.PlayEffect(EffectNames.bite);
+            currentState = new HiddenPiranhaState();
         }
 
         public void Stomp()
         {
+            if (deadTimer > 0) return;
             isAlive = false;
             MediaManager.Instance.PlayEffect(EffectNames.stomp);
+            currentState = new DeadPiranhaState();
+            deadTimer = 1;
         }
 
         public void Flip()
         {
-            isAlive = false;
-            MediaManager.Instance.PlayEffect(EffectNames.kick);
-            GameContentManager.Instance.RemoveEntity(this);
+            //Nothing to do here
         }
 
         public void ChangeDirection()
         {
-            verticalPhysics.velocity.Y = -verticalPhysics.velocity.Y; // Reverse the direction
+            if (verticalPhysics.currentVerticalDirection == VerticalDirection.up)
+            {
+                verticalPhysics.currentVerticalDirection = VerticalDirection.down;
+            }
+            else
+            {
+                verticalPhysics.currentVerticalDirection = VerticalDirection.up;
+            }
         }
 
         public bool ReportIsAlive()
         {
-            return isAlive;
+            return deadTimer < 1 && isAlive;
         }
 
         public Vector2 GetVelocity()
