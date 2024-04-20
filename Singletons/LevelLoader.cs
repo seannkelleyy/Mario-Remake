@@ -175,8 +175,6 @@ namespace Mario.Singletons
             var jsonLives = JsonNode.Parse(jsonString);
             jsonLives["hero"]["lives"] = lives;
 
-            Logger.Instance.LogInformation("Livessss:" + jsonLives + " " + lives);
-
             // Save the new number of lives to the JSON file
             jsonString = jsonLives.ToString();
             File.WriteAllText(levelName, jsonString);

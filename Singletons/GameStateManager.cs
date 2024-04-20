@@ -59,7 +59,6 @@ namespace Mario.Singletons
         {
             if (!gameOver)
             {
-                Logger.Instance.LogInformation("Lives;" + GameContentManager.Instance.GetHero().GetStats().GetLives());
                 LevelLoader.Instance.ChangeMarioLives(GameSettingsLoader.LevelJsonFilePath, GameContentManager.Instance.GetHero().GetStats().GetLives());
                 SetResetTime(0.0);
                 LevelLoader.Instance.UnloadLevel();
