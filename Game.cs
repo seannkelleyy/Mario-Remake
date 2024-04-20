@@ -16,7 +16,8 @@ namespace Mario
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private IController keyboardController;
-        public HeadsUpDisplay HUD;
+        private IController gamePadController;
+        private HeadsUpDisplay HUD;
         public MarioRemake()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,6 +28,7 @@ namespace Mario
         protected override void Initialize()
         {
             keyboardController = new KeyboardController();
+            gamePadController = new GamePadController();
 
             LevelLoader.Instance.Initialize(Content);
 
@@ -46,7 +48,9 @@ namespace Mario
 
             HUD = new HeadsUpDisplay();
 
-            keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+            keyboardController.LoadCommands(this);
+            gamePadController.LoadCommands(this);
+
             MediaManager.Instance.PlayDefaultTheme();
             camera = new PlayerCamera(GameContentManager.Instance.GetHero());
 
@@ -70,6 +74,7 @@ namespace Mario
                     entity.Update(gameTime);
                 }
                 keyboardController.Update(gameTime);
+                gamePadController.Update(gameTime);
                 camera.UpdatePosition();
                 base.Update(gameTime);
             }
@@ -83,12 +88,15 @@ namespace Mario
                 {
                     camera = GameStateManager.Instance.EndReset(camera);
                     keyboardController = new KeyboardController();
-                    keyboardController.LoadCommands(this, GameContentManager.Instance.GetHero());
+                    keyboardController.LoadCommands(this);
+                    gamePadController = new GamePadController();
+                    gamePadController.LoadCommands(this);
                 }
             }
             else
             { // Update during a pause
                 keyboardController.UpdatePause(gameTime);
+                gamePadController.UpdatePause(gameTime);
             }
         }
 

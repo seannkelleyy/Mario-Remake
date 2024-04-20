@@ -6,20 +6,18 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 namespace Mario.Input
 {
-    public class KeyboardController : IController
+    public class GamePadController : IController
     {
-        private Dictionary<Keys, Action> Commands;
-        private KeyboardState previousKeyboardState;
-        private Keys[] keysPressed;
+        private Dictionary<Buttons, Action> Commands;
+        private GamePadState previousGamePadState;
         float elapsedSeconds = 0;
 
 
-        public KeyboardController()
+        public GamePadController()
         {
-            Commands = new Dictionary<Keys, Action>();
+            Commands = new Dictionary<Buttons, Action>();
         }
 
         public void LoadCommands(MarioRemake game)
@@ -27,26 +25,24 @@ namespace Mario.Input
             Action[] actions = LoadActions(game);
 
             // System commands
-            Commands.Add(Keys.Q, actions[0]);
-            Commands.Add(Keys.R, actions[1]);
-            Commands.Add(Keys.Escape, actions[7]);
-            Commands.Add(Keys.P, actions[7]);
+            Commands.Add(Buttons.Start, actions[0]);
+            Commands.Add(Buttons.Back, actions[1]);
+            Commands.Add(Buttons.Y, actions[7]);
 
-            // WASD commands
-            Commands.Add(Keys.W, actions[2]);
-            Commands.Add(Keys.A, actions[3]);
-            Commands.Add(Keys.S, actions[4]);
-            Commands.Add(Keys.D, actions[5]);
-            Commands.Add(Keys.E, actions[6]);
-            Commands.Add(Keys.LeftShift, actions[6]);
+            // Movement commands
+            Commands.Add(Buttons.LeftThumbstickUp, actions[2]);
+            Commands.Add(Buttons.LeftThumbstickLeft, actions[3]);
+            Commands.Add(Buttons.LeftThumbstickDown, actions[4]);
+            Commands.Add(Buttons.LeftThumbstickRight, actions[5]);
+            Commands.Add(Buttons.DPadLeft, actions[3]);
+            Commands.Add(Buttons.DPadRight, actions[5]);
+            Commands.Add(Buttons.DPadUp, actions[2]);
+            Commands.Add(Buttons.DPadDown, actions[4]);
+            Commands.Add(Buttons.A, actions[2]);
 
-            // Arrow commands
-            Commands.Add(Keys.Left, actions[3]);
-            Commands.Add(Keys.Right, actions[5]);
-            Commands.Add(Keys.Up, actions[2]);
-            Commands.Add(Keys.Down, actions[4]);
-            Commands.Add(Keys.Space, actions[2]);
-            Commands.Add(Keys.RightControl, actions[6]);
+            // Mario commands
+            Commands.Add(Buttons.X, actions[6]);
+            Commands.Add(Buttons.RightShoulder, actions[6]);
         }
 
         private Action[] LoadActions(MarioRemake game)
@@ -94,6 +90,7 @@ namespace Mario.Input
                     MediaPlayer.Resume();
                 }
             });
+
             return actions;
         }
 
@@ -103,19 +100,23 @@ namespace Mario.Input
             if (elapsedSeconds >= GlobalVariables.InputControllerUpdateInterval)
             {
                 elapsedSeconds = 0;
-                KeyboardState currentKeyboardState = Keyboard.GetState();
-                keysPressed = currentKeyboardState.GetPressedKeys();
-                foreach (Keys key in keysPressed)
+                // Handle controller input if the controller is connected
+                GamePadState currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
+                if (currentGamePadState.IsConnected)
                 {
-                    if (Commands.ContainsKey(key))
+                    List<Buttons> buttonsPressed = new List<Buttons>();
+                    foreach (Buttons button in Enum.GetValues(typeof(Buttons)))
                     {
-                        Commands[key].Invoke();
+                        if (currentGamePadState.IsButtonDown(button) && Commands.ContainsKey(button))
+                        {
+                            Commands[button].Invoke();
+                        }
                     }
+
+                    CheckForStopJump(currentGamePadState);
+                    previousGamePadState = currentGamePadState; // Save the current state for the next frame
                 }
-
-                CheckForStopJump(currentKeyboardState);
-
-                previousKeyboardState = currentKeyboardState; // Save the current state for the next frame
             }
         }
 
@@ -125,20 +126,19 @@ namespace Mario.Input
             if (elapsedSeconds >= GlobalVariables.InputControllerUpdateInterval)
             {
                 elapsedSeconds = 0;
-                keysPressed = Keyboard.GetState().GetPressedKeys();
-                if (keysPressed.Contains(Keys.P) || keysPressed.Contains(Keys.Escape))
+                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Y))
                 {
-                    Commands[Keys.P].Invoke();
+                    Commands[Buttons.Y].Invoke();
                 }
             }
         }
 
-        public void CheckForStopJump(KeyboardState currentKeyboardState)
+        public void CheckForStopJump(GamePadState currentGamePadState)
         {
-            // Check if the jump key was released
-            if ((previousKeyboardState.IsKeyDown(Keys.W) && currentKeyboardState.IsKeyUp(Keys.W))
-                || (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space))
-                || (previousKeyboardState.IsKeyDown(Keys.Up) && currentKeyboardState.IsKeyUp(Keys.Up)))
+            // Check if the jump button was released
+            if ((previousGamePadState.IsButtonDown(Buttons.LeftThumbstickUp) && currentGamePadState.IsButtonUp(Buttons.LeftThumbstickUp))
+                || (previousGamePadState.IsButtonDown(Buttons.DPadUp) && currentGamePadState.IsButtonUp(Buttons.DPadUp))
+                || (previousGamePadState.IsButtonDown(Buttons.X) && currentGamePadState.IsButtonUp(Buttons.X)))
             {
                 GameContentManager.Instance.GetHero().StopJump();
             }
