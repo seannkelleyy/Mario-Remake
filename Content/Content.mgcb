@@ -164,12 +164,6 @@
 /processorParam:Quality=Best
 /build:flag.mp3
 
-#begin ghostsounds.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:ghostsounds.mp3
-
 #begin item.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
