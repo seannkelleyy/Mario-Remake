@@ -32,7 +32,7 @@ namespace Mario.Singletons
                 case "bulletBill":
                     return new BulletBill(position);
                 case "firebro":
-                    return new FireBro(position);
+                    return new FireBro(position, isRight);
                 default:
                     throw new KeyNotFoundException($"Entity type {type} not recognized.");
             }

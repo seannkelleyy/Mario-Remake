@@ -19,12 +19,19 @@ public class FireBro : AbstractCollideable, IEnemy
     public bool teamMario { get; }
     private float marioRelativePosition;
 
-    public FireBro(Vector2 position)
+    public FireBro(Vector2 position, bool isRight)
     {
         physics = new EntityPhysics(this);
         teamMario = false;
         this.position = position;
-        currentState = new LeftFacingFireBroState();
+        if (!isRight)
+        {
+            ChangeDirection();
+        } else
+        {
+            currentState = new RightFacingFireBroState();
+        }
+        
     }
 
     public override void Update(GameTime gameTime)

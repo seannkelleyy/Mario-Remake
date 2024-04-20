@@ -32,8 +32,10 @@ public class Koopa : AbstractCollideable, IEnemy
         if (!isRight )
         {
             ChangeDirection();
+        } else
+        {
+            currentState = new RightMovingKoopaState();
         }
-        currentState = new RightMovingKoopaState();
     }
 
     public override void Update(GameTime gameTime)
