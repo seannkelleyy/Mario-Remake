@@ -300,7 +300,9 @@ export const LevelCreator = () => {
           default, all blocks are set to an air block, which don't get added to
           the json. Simply click a block to change its type, keep clicking to
           cycle through all blocks. To edit a block, use the 'edit mode' button
-          to turn on edit mode.
+          to turn on edit mode. Once finished, download the level, and add it to
+          `/Levels` in the game. Also make sure to change the path to be your
+          new level in `game.cs`.
         </p>
         <button className="std-button" onClick={() => setOpenLevel(!openLevel)}>
           {openLevel ? "Close Edit Level" : "Open Edit Level"}
