@@ -40,6 +40,8 @@ namespace Mario.Singletons
             // Set default theme
             MediaManager.Instance.SetDefaultTheme(level.song);
 
+            GameSettings.LevelEnd = level.width - 5;
+
             SpriteFactory.Instance.LoadAllTextures(content, level.pathToSpriteJson);
 
             // Create the hero

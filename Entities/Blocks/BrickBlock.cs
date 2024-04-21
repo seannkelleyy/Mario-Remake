@@ -63,8 +63,6 @@ namespace Mario.Entities.Blocks
                     item.MakeVisible();
                 }
                 MediaManager.Instance.PlayEffect(GlobalVariables.EffectNames.bumpBlock);
-                currentState = new BrickBlockBrokenState();
-                isCollidable = false;
             }
         }
     }

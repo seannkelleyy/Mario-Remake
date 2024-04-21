@@ -37,7 +37,7 @@ namespace Mario
 
             LevelLoader.Instance.Initialize(Content);
 
-            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1-1.json", graphics);
+            GameSettingsLoader.LoadGameSettings("../../../Global/Settings/Data/GameSettings.json", "../../../Levels/1.json", graphics);
             base.Initialize();
         }
 
@@ -140,7 +140,14 @@ namespace Mario
                 spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(), 
                     "YOU DIED: Lives Left: " + GameContentManager.Instance.GetHero().GetStats().GetLives(), new Vector2(320, 225), Color.White);
                 spriteBatch.End();
-            } else // Game over screen
+            } else if (GameStateManager.Instance.winScreen)
+            {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(),
+                    "YOU Won!", new Vector2(320, 225), Color.White);
+                spriteBatch.End();
+            }
+                else // Game over screen
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(), "GAME OVER", new Vector2(350, 225), Color.White);

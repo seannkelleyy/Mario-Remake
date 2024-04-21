@@ -8,7 +8,7 @@
         "levelTopHeight": 16,
         "UndergroundCameraX": 2416,
         "UndergroundCameraY": 304,
-            "levelEnd": 205.5
+            "levelEnd": 120
     },
   "Physics": {
     "gravity": 1.325,

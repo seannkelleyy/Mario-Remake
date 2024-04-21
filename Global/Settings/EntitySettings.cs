@@ -12,7 +12,6 @@
     public static float HeroAnimationLength { get; set; }
     public static float HeroStarTimer { get; set; }
     public static int StartingHeroLives { get; set; }
-
     public static float PiranhaCooldownTime { get; set; }
 }
 

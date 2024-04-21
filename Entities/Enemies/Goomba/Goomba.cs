@@ -220,7 +220,7 @@ public class Goomba : AbstractCollideable, IEnemy
 
     public void ChangeDirection()
     {
-        if (EnemyAI.ContainsKey("jump"))
+        if (EnemyAI.ContainsKey("jump") && physics.isFalling)
         {
             EnemyAI["jump"].Jump(this);
         }

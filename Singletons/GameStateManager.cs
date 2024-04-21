@@ -15,6 +15,7 @@ namespace Mario.Singletons
         public bool isPaused { get; private set; } = false;
         public bool isResetting { get; private set; } = false;
         public bool isWin { get; private set; } = false;
+        public bool winScreen { get; set; } = false;
         public bool gameOver { get; private set;}
         public double resetTime { get; private set; } = 0.0;
 
@@ -29,6 +30,7 @@ namespace Mario.Singletons
                 MediaManager.Instance.PlayTheme(SongThemes.levelComplete, false);
             }
             isWin = !isWin;
+            winScreen = true;
         }
         // Restarts the game
         public void Restart()

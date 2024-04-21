@@ -131,7 +131,7 @@ public class HeroCollisionHandler
         collisionDictionary[typeof(IPipe)].Add(CollisionDirection.Right, new Action(() =>
         {
             hero.SetCollisionState(CollisionDirection.Right, true);
-            if (pipe.GetPipeType() == GlobalVariables.PipeType.horizontal)
+            if (pipe.GetPipeType() == PipeType.horizontal)
             {
                 pipe.Transport(hero);
             }
