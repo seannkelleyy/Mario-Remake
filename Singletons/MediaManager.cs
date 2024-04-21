@@ -73,23 +73,23 @@ namespace Mario.Singletons
 
         public void SetDefaultTheme(string theme)
         {
-            //GlobalVariables.SongThemes check = (GlobalVariables.SongThemes)Enum.Parse(typeof(GlobalVariables.SongThemes), theme);
-            //defaultTheme = themes[check];
+            GlobalVariables.SongThemes check = (GlobalVariables.SongThemes)Enum.Parse(typeof(GlobalVariables.SongThemes), theme);
+            defaultTheme = themes[check];
         }
         public void PlayDefaultTheme()
         {
-            //MediaPlayer.Play(defaultTheme);
-            //MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(defaultTheme);
+            MediaPlayer.IsRepeating = true;
         }
         public void PlayTheme(GlobalVariables.SongThemes theme, bool repeat)
         {
-            //MediaPlayer.Play(themes[theme]);
-            //MediaPlayer.IsRepeating = repeat;
+            MediaPlayer.Play(themes[theme]);
+            MediaPlayer.IsRepeating = repeat;
         }
 
         public void PlayEffect(GlobalVariables.EffectNames name)
         {
-            //soundEffects[name].Play();
+            soundEffects[name].Play();
         }
 
         public void SetCurrentBackground(string level)
