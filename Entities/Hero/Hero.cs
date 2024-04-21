@@ -312,6 +312,7 @@ namespace Mario.Entities.Character
         {
             return physics.GetVelocity();
         }
+
         public HorizontalDirection GetHorizontalDirection()
         {
             return physics.GetHorizontalDirection();

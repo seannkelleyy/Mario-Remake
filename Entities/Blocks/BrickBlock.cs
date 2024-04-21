@@ -42,6 +42,15 @@ namespace Mario.Entities.Blocks
                 case "star":
                     item = ObjectFactory.Instance.CreateItem("star", position);
                     break;
+                case "pistol":
+                    item = ObjectFactory.Instance.CreateItem("pistol", position);
+                    break;
+                case "shotgun":
+                    item = ObjectFactory.Instance.CreateItem("shotgun", position);
+                    break;
+                case "rocketLauncher":
+                    item = ObjectFactory.Instance.CreateItem("rocketLauncher", position);
+                    break;
                 default:
                     Logger.Instance.LogError($"Item type `{itemName}` not recognized.");
                     break;

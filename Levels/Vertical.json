@@ -1,0 +1,5469 @@
+{
+  "level": "1",
+  "pathToSpriteJson": "../../../Levels/Data/SpriteData.json",
+  "width": 40,
+  "height": 150,
+  "timeLimit": 400,
+  "song": "castle",
+  "hero": {
+    "type": "mario",
+    "startingX": 10,
+    "startingY": 90,
+    "direction": true,
+    "startingPower": "small",
+    "lives": 2,
+    "statingLives": 3
+  },
+  "enemies": [
+    {
+      "type": "goomba",
+      "startingX": 23,
+      "startingY": 96,
+      "direction": true,
+      "ai": []
+    },
+    {
+      "type": "koopa",
+      "startingX": 16,
+      "startingY": 81,
+      "direction": true,
+      "ai": []
+    },
+    {
+      "type": "goomba",
+      "startingX": 18,
+      "startingY": 91,
+      "direction": true,
+      "ai": []
+    },
+    {
+      "type": "goomba",
+      "startingX": 30,
+      "startingY": 67,
+      "direction": true,
+      "ai": []
+    },
+    {
+      "type": "fireBro",
+      "startingX": 13,
+      "startingY": 72,
+      "direction": true,
+      "ai": []
+    },
+    {
+      "type": "piranha",
+      "startingX": 10,
+      "startingY": 84,
+      "direction": true,
+      "ai": []
+    }
+  ],
+  "items": [
+    {
+      "type": "shotgun",
+      "x": 27,
+      "y": 93
+    },
+    {
+      "type": "coinUnderground",
+      "x": 16,
+      "y": 78
+    },
+    {
+      "type": "coinUnderground",
+      "x": 27,
+      "y": 76
+    },
+    {
+      "type": "coinUnderground",
+      "x": 19,
+      "y": 88
+    },
+    {
+      "type": "coin",
+      "x": 7,
+      "y": 70
+    }
+  ],
+  "itemSections": [],
+  "blockSections": [],
+  "blocks": [
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 18,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 18,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 18,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 99,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 98,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 97,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 96,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 95,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 86,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 89,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 90,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 91,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 94,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 18,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 92,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 27,
+      "y": 87,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 7,
+      "y": 93,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 54,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 53,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 52,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 52,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 53,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 54,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 0,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 1,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 80,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 81,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 30,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 71,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 72,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 31,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 64,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 63,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 32,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 57,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 56,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 54,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 53,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 33,
+      "y": 52,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 52,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 53,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 54,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 34,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 10,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 11,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 12,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 13,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 14,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 15,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 16,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 17,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 18,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 19,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 20,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 21,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 22,
+      "y": 82,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 22,
+      "y": 83,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 22,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 23,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "stone",
+      "x": 24,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 85,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 13,
+      "y": 84,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 29,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 78,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 5,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 5,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 4,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 62,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 60,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 3,
+      "y": 59,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 54,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 53,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 2,
+      "y": 52,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 30,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 4,
+      "y": 65,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 31,
+      "y": 61,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 3,
+      "y": 58,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "bulletBillLauncher",
+      "x": 32,
+      "y": 55,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 18,
+      "y": 88,
+      "collidable": true,
+      "breakable": true,
+      "item": "coin"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 6,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 27,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 76,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 77,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 79,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 75,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 24,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 25,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 26,
+      "y": 74,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 28,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 29,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 23,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 22,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 21,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 20,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 70,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 19,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 18,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 17,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 16,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 15,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 14,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 13,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 12,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 11,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 10,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 69,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 9,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 68,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 8,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 67,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "brickUnderground",
+      "x": 7,
+      "y": 66,
+      "collidable": true,
+      "breakable": true,
+      "item": "none"
+    },
+    {
+      "type": "mystery",
+      "x": 29,
+      "y": 73,
+      "collidable": true,
+      "breakable": true,
+      "item": "rocketLauncher"
+    }
+  ],
+  "pipes": []
+}
