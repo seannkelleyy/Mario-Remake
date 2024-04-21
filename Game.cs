@@ -122,7 +122,7 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            
+
 
             if (!GameStateManager.Instance.isResetting) // Normal draw
             {
@@ -134,20 +134,24 @@ namespace Mario
                 }
                 HUD.Draw(spriteBatch, SpriteFactory.Instance.GetMainFont());
                 spriteBatch.End();
-            } else if (!GameStateManager.Instance.gameOver) // Normal death screen
-            {
-                spriteBatch.Begin();
-                spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(), 
-                    "YOU DIED: Lives Left: " + GameContentManager.Instance.GetHero().GetStats().GetLives(), new Vector2(320, 225), Color.White);
-                spriteBatch.End();
-            } else if (GameStateManager.Instance.winScreen)
+            }
+            else if (GameStateManager.Instance.winScreen)
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(),
                     "YOU Won!", new Vector2(320, 225), Color.White);
                 spriteBatch.End();
+
             }
-                else // Game over screen
+            else if (!GameStateManager.Instance.gameOver) // Normal death screen
+            {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(),
+                    "YOU DIED: Lives Left: " + GameContentManager.Instance.GetHero().GetStats().GetLives(), new Vector2(320, 225), Color.White);
+                spriteBatch.End();
+            }
+            else // Game over screen
+
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(), "GAME OVER", new Vector2(350, 225), Color.White);
