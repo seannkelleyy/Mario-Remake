@@ -139,7 +139,7 @@ namespace Mario
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(SpriteFactory.Instance.GetMainFont(),
-                    "YOU Won!", new Vector2(320, 225), Color.White);
+                    "YOU WON!", new Vector2(350, 225), Color.White);
                 spriteBatch.End();
 
             }
