@@ -28,6 +28,7 @@ namespace Mario.Input
             Commands.Add(Buttons.Start, actions[0]);
             Commands.Add(Buttons.Back, actions[1]);
             Commands.Add(Buttons.Y, actions[7]);
+            Commands.Add(Buttons.B, actions[8]);
 
             // Movement commands
             Commands.Add(Buttons.LeftThumbstickUp, actions[2]);
@@ -90,6 +91,7 @@ namespace Mario.Input
                     MediaPlayer.Resume();
                 }
             });
+            actions[8] = new Action(game.ChangeFullScreenMode);
 
             return actions;
         }
