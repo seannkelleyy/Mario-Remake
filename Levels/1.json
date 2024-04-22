@@ -11,7 +11,7 @@
     "startingY": 9,
     "direction": true,
     "startingPower": "big",
-    "lives": 3,
+    "lives": 2,
     "statingLives": 5
   },
   "enemies": [
@@ -44,9 +44,23 @@
       "ai": []
     },
     {
+      "type": "piranha",
+      "startingX": 90,
+      "startingY": 11,
+      "isRight": false,
+      "ai": []
+    },
+    {
       "type": "goomba",
       "startingX": 50,
       "startingY": 8,
+      "isRight": false,
+      "ai": []
+    },
+    {
+      "type": "firebro",
+      "startingX": 30,
+      "startingY": 1,
       "isRight": false,
       "ai": []
     },
@@ -134,7 +148,7 @@
   ],
   "items": [
     {
-      "type": "pistol",
+      "type": "shotgun",
       "x": 2,
       "y": 13
     },
@@ -239,9 +253,14 @@
       "y": 13
     },
     {
-      "type": "shotgun",
+      "type": "pistol",
       "x": 45,
       "y": 11
+    },
+    {
+      "type": "shotgun",
+      "x": 50,
+      "y": 13
     }
   ],
   "itemSections": [],
@@ -3419,7 +3438,7 @@
     },
     {
       "type": "pipeTubeVertical",
-      "x": 39,
+      "x": 40,
       "startingY": 11,
       "endingY": 12,
       "transportable": true,
