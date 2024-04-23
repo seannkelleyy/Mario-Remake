@@ -364,3 +364,65 @@ FodyWeavers.xsd
 
 # ignore logs
 /logging/logs/*
+# Logs - Prevent clutter and sensitive info exposure
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules - Avoid repo bloat, can be regenerated
+node_modules/
+dist
+dist-ssr
+*.local
+
+# Editor directories and files - Maintain environment independence, avoid imposing settings
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build output - Contains generated code, can be rebuilt
+/build
+/dist
+/dist-ssr
+
+# Environment files - Protect sensitive settings and secrets
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files (Repeated section, consider removing or merging)
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sw?
+
+# Dependency directories - Leverage Yarn efficiency while avoiding binary file clutter
+.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Misc - Keep local configurations out of version control
+*.local
+
+# Cache files - Environment-specific, can be regenerated
+*.cache
+*.tsbuildinfo
