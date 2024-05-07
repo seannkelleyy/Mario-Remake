@@ -16,6 +16,7 @@ using static Mario.Global.GlobalVariables;
 public class FireBro : AbstractCollideable, IEnemy
 {
     public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }

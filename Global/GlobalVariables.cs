@@ -27,6 +27,7 @@
         public enum HorizontalDirection { left, right };
         public enum HeroHealth { Mario, BigMario, FireMario, PistolMario, ShotgunMario, RocketLauncherMario };
         public enum EnemyHealth { Normal, Big, Fire, Pistol, Shotgun, RocketLauncher };
+        public enum VerticalDirection { up, down };
 
         public enum BlockType
         {

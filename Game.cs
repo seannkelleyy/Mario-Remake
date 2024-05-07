@@ -30,7 +30,7 @@ namespace Mario
         protected override void Initialize()
         {
             graphics.PreferredBackBufferHeight = GameSettings.InitialWindowHeight;
-            
+
 
             keyboardController = new KeyboardController();
             gamePadController = new GamePadController();

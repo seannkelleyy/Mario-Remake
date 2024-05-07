@@ -133,6 +133,12 @@
       "startingX": 108,
       "startingY": 12,
       "isRight": false
+    },
+    {
+      "type": "piranha",
+      "startingX": 10,
+      "startingY": 10,
+      "isRight": false
     }
   ],
   "items": [

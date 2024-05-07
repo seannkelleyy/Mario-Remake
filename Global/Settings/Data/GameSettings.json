@@ -28,7 +28,8 @@
     "fireballHorizontalSpeed": 6.25,
     "fireballVerticalAcceleration": 0.975,
     "fireballBounceForce": 3.125,
-    "fireballDeleteInterval": 0.6
+    "fireballDeleteInterval": 0.6,
+    "initialVerticalSpeed": 1.0
   },
   "Collisions": {
     "buffer": 4,

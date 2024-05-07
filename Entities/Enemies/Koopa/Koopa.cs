@@ -23,6 +23,7 @@ public class Koopa : AbstractCollideable, IEnemy
 {
     public ISprite WeaponSprite;
     public EntityPhysics physics { get; }
+    public VerticalEntityPhysics verticalPhysics { get; }
     public EnemyHealth currentHealth = EnemyHealth.Normal;
 #nullable enable
     public Dictionary<string, IAI>? EnemyAI { get; set; }

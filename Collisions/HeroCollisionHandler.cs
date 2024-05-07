@@ -1,4 +1,4 @@
-using Mario.Entities.Abstract;
+using Mario.Entities;
 using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Entities.Enemies;
@@ -204,7 +204,7 @@ public class HeroCollisionHandler
         }
         else if (hero.GetPhysics().isFalling)
         {
-            if (enemy is not PhantomEnemy)
+            if (enemy is not PhantomEnemy && enemy is not PiranhaPlant)
             {
                 GameContentManager.Instance.GetHero().GetStats().AddScore(ScoreSettings.GetScore(enemy));
                 hero.SetCollisionState(CollisionDirection.Bottom, true);

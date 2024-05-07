@@ -33,6 +33,7 @@ Languages and Frameworks Used:
 - `E` or Right CTRL - Attack
 - `R` - Restart Level
 - `Q` - Quit Game
+- `F` - Toggle Full Screen
 
 ## Getting Started
 

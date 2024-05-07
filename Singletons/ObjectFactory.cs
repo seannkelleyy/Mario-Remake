@@ -1,10 +1,10 @@
-﻿using Mario.Entities.Blocks;
+﻿using Mario.Entities;
+using Mario.Entities.Blocks;
 using Mario.Entities.Character;
 using Mario.Entities.Hero;
 using Mario.Entities.Items;
 using Mario.Entities.Pipes;
 using Mario.Interfaces;
-using Mario.Interfaces.Base;
 using Mario.Interfaces.Entities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -34,6 +34,8 @@ namespace Mario.Singletons
                     return new BulletBill(position);
                 case "firebro":
                     return new FireBro(position, isRight, ais);
+                case "piranha":
+                    return new PiranhaPlant(position);
                 default:
                     Logger.Instance.LogError($"Entity type {type} not recognized.");
                     return null;
