@@ -20,43 +20,33 @@ namespace Mario.Entities.Enemies.EnemyAI
         }
         public void Seek(IEnemy enemy)
         {
+            // Seek activation range is set by the BlockHeightWidth * 12, so 12 block activation range. 
             if (Math.Abs(GameContentManager.Instance.GetHero().GetPosition().X - enemy.GetPosition().X) < (BlockHeightWidth * 12)) 
-            { 
+            {
+                // Checks if the enemy is to the left or to the right of the enemy.
                 if (GameContentManager.Instance.GetHero().GetPosition().X < enemy.GetPosition().X)
                 {
+                    // Checks to see if the enemy needs to change directions, and if it does, koopa also changes state.
                     if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
                     {
-                        if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
+                        enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
+                        if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
                         {
-                            enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
-                            if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
-                            {
-                                Koopa kEnemy = (Koopa)enemy;
-                                kEnemy.ChangeCurrentState(new LeftMovingKoopaState());
-                            }
-                        }
-                        else
-                        {
-                            enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
-                            if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
-                            {
-                                Koopa kEnemy = (Koopa)enemy;
-                                kEnemy.ChangeCurrentState(new RightMovingKoopaState());
-                            }
+                            Koopa kEnemy = (Koopa)enemy;
+                            kEnemy.ChangeCurrentState(new LeftMovingKoopaState());
                         }
                     }
                 }
+                // This is if the enemy is on the other side of the hero, and will adjust accordingly.
                 else
                 {
                     if (enemy.physics.currentHorizontalDirection == HorizontalDirection.left)
                     {
-                        if (enemy.physics.currentHorizontalDirection == HorizontalDirection.right)
+                        enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
+                        if (enemy is Koopa && (!((Koopa)enemy).GetIsShell()))
                         {
-                            enemy.physics.currentHorizontalDirection = HorizontalDirection.left;
-                        }
-                        else
-                        {
-                            enemy.physics.currentHorizontalDirection = HorizontalDirection.right;
+                            Koopa kEnemy = (Koopa)enemy;
+                            kEnemy.ChangeCurrentState(new RightMovingKoopaState());
                         }
                     }
                 }
